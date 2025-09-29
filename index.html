@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAMET SOYSAL - AI/ML Engineer & Full-Stack Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Language Switcher */
+        .lang-switcher {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.1);
+            padding: 6px;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .lang-btn {
+            padding: 6px 16px;
+            border: none;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Header & Hero */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            animation: fadeIn 1.2s ease;
+            font-weight: 600;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            animation: slideInFromLeft 0.8s ease;
+            font-weight: 800;
+            letter-spacing: -2px;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+            animation: slideInFromRight 0.8s ease;
+            font-weight: 300;
+        }
+
+        .hero-content .description {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeIn 1.3s ease;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .btn-success {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Section */
+        .section {
+            padding: 100px 20px;
+            background: white;
+        }
+
+        .section:nth-child(even) {
+            background: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 4rem;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--gray);
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.15);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline-item {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.15);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .timeline-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-company {
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .timeline-date {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .timeline-description {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-achievements {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .timeline-achievements li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .timeline-achievements li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 900;
+        }
+
+        /* Skills */
+        .skills-categories {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.15);
+        }
+
+        .skill-category-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .skill-category-icon {
+            font-size: 1.8rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            color: var(--primary);
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .project-card.featured {
+            border: 3px solid var(--accent);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(99, 102, 241, 0.25);
+            border-color: var(--primary);
+        }
+
+        .project-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            z-index: 3;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .project-header p {
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+
+        .project-body {
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-body p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: var(--secondary);
+            gap: 12px;
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .contact-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.2);
+            border-color: var(--primary);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .contact-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .contact-card .contact-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .contact-card:hover .contact-link {
+            color: var(--secondary);
+        }
+
+        .contact-card p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .footer-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Floating particles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-100px) translateX(50px) rotate(90deg);
+            }
+            50% {
+                transform: translateY(-200px) translateX(-50px) rotate(180deg);
+            }
+            75% {
+                transform: translateY(-100px) translateX(50px) rotate(270deg);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-content .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-content .description {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+
+            .timeline-header {
+                flex-direction: column;
+            }
+
+            .lang-switcher {
+                order: 2;
+            }
+
+            .nav-content {
+                gap: 1rem;
+            }
+        }
+
+        /* Hidden class for language switching */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#" class="nav-brand">
+                <i class="fas fa-brain"></i> <span data-tr="nav.brand">SAMET SOYSAL</span>
+            </a>
+            <div class="nav-content">
+                <ul class="nav-links">
+                    <li><a href="#about" data-tr="nav.about">Hakkımda</a></li>
+                    <li><a href="#experience" data-tr="nav.experience">Deneyim</a></li>
+                    <li><a href="#skills" data-tr="nav.skills">Yetenekler</a></li>
+                    <li><a href="#projects" data-tr="nav.projects">Projeler</a></li>
+                    <li><a href="#contact" data-tr="nav.contact">İletişim</a></li>
+                </ul>
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="tr">🇹🇷 TR</button>
+                    <button class="lang-btn active" data-lang="en">🇺🇸 EN</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header>
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-robot"></i> <span data-tr="hero.badge">AI/ML Mühendisi & Full-Stack Developer</span>
+            </div>
+            <h1>SAMET SOYSAL</h1>
+            <p class="subtitle" data-tr="hero.subtitle">Artificial Intelligence | Machine Learning | NLP Specialist</p>
+            <p class="description" data-tr="hero.description">
+                RAG sistemleri, OCR teknolojileri ve çok modelli AI çözümleri geliştiriyorum. 
+                Kurumsal projelerde yapay zeka entegrasyonu ve otomasyon konularında uzmanım.
+            </p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">
+                    <i class="fas fa-folder-open"></i> <span data-tr="hero.btn.projects">Projelerim</span>
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <i class="fas fa-envelope"></i> <span data-tr="hero.btn.contact">İletişim</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title scroll-reveal" data-tr="about.title">Hakkımda</h2>
+            <div class="about-content scroll-reveal">
+                <p data-tr="about.description">
+                    Eskişehir Osmangazi Üniversitesi Bilgisayar Mühendisliği son sınıf öğrencisiyim (Mezuniyet: Şubat 2026). 
+                    Yapay Zeka, Makine Öğrenmesi ve Doğal Dil İşleme alanlarında güçlü teknik uzmanlığa sahibim. 
+                    RAG sistemleri, embedding teknolojileri, vektör veritabanları ve OCR tabanlı çözümler geliştirdim. 
+                    Python, RESTful API entegrasyonları ve çok modelli orkestrasyon konularında production-ready 
+                    AI çözümleri geliştirme deneyimim bulunmaktadır. Kurumsal projelerde verimliliği artıran 
+                    ölçeklenebilir ve yenilikçi yapay zeka sistemleri tasarlama konusunda uzmanlaştım.
+                </p>
+            </div>
+            <div class="stats-grid scroll-reveal">
+                <div class="stat-card">
+                    <div class="stat-number">2+</div>
+                    <div class="stat-label" data-tr="about.stats.years">Yıl Deneyim</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label" data-tr="about.stats.projects">Tamamlanan Proje</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label" data-tr="about.stats.technologies">Teknoloji</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section" id="experience">
+        <div class="container">
+            <h2 class="section-title scroll-reveal" data-tr="experience.title">Deneyim</h2>
+            <div class="experience-timeline">
+                <div class="timeline-item scroll-reveal">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="timeline-title" data-tr="experience.tei.title">Yapay Zeka Stajyeri</div>
+                            <div class="timeline-company" data-tr="experience.tei.company">TEI - TUSAŞ Motor Sanayii A.Ş. | IT - Data Analytics & AI</div>
+                        </div>
+                        <div class="timeline-date" data-tr="experience.tei.date">Ağustos 2025 - Eylül 2025</div>
+                    </div>
+                    <ul class="timeline-achievements">
+                        <li data-tr="experience.tei.achievement1">Çok modelli destekli chatbot altyapıları tasarladım (LibreChat entegrasyonu)</li>
+                        <li data-tr="experience.tei.achievement2">CV analiz ve değerlendirme sistemlerinin geliştirilmesine katkı sağladım</li>
+                        <li data-tr="experience.tei.achievement3">Qwen2.5-VL modeli kullanarak tablolardan ve formlardan veri çıkarabilen OCR sistemi geliştirdim</li>
+                        <li data-tr="experience.tei.achievement4">Bilgi erişim süreçlerini hızlandırmak için RAG tabanlı doküman sorgulama prototipi oluşturdum</li>
+                        <li data-tr="experience.tei.achievement5">n8n gibi otomasyon araçları kullanarak IT süreç akışlarını hızlandırdım ve manuel görevleri minimize ettim</li>
+                        <li data-tr="experience.tei.achievement6">Playwright kullanarak Trendyol Yemek üzerinden otomatik yemek sipariş veren web scraping tabanlı uygulama geliştirdim</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <div class="container">
+            <h2 class="section-title scroll-reveal" data-tr="skills.title">Yetenekler</h2>
+            <div class="skills-categories">
+                <div class="skill-category scroll-reveal">
+                    <div class="skill-category-title">
+                        <span class="skill-category-icon">🤖</span>
+                        <span data-tr="skills.ai.title">Yapay Zeka & Makine Öğrenmesi</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">Keras</span>
+                        <span class="skill-tag">scikit-learn</span>
+                        <span class="skill-tag">Hugging Face Transformers</span>
+                        <span class="skill-tag">XGBoost</span>
+                        <span class="skill-tag">LightGBM</span>
+                    </div>
+                </div>
+
+                <div class="skill-category scroll-reveal">
+                    <div class="skill-category-title">
+                        <span class="skill-category-icon">💬</span>
+                        <span data-tr="skills.nlp.title">NLP & Semantik Teknolojiler</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">BERT</span>
+                        <span class="skill-tag">GPT</span>
+                        <span class="skill-tag">Sentence-Transformers</span>
+                        <span class="skill-tag">spaCy</span>
+                        <span class="skill-tag">NLTK</span>
+                        <span class="skill-tag">OpenAI API</span>
+                        <span class="skill-tag">OpenRouter API</span>
+                        <span class="skill-tag">LangChain</span>
+                        <span class="skill-tag">LlamaIndex</span>
+                    </div>
+                </div>
+
+                <div class="skill-category scroll-reveal">
+                    <div class="skill-category-title">
+                        <span class="skill-category-icon">🔍</span>
+                        <span data-tr="skills.rag.title">RAG & Vektör Veritabanları</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">ChromaDB</span>
+                        <span class="skill-tag">Pinecone</span>
+                        <span class="skill-tag">Qdrant</span>
+                        <span class="skill-tag">Weaviate</span>
+                        <span class="skill-tag">FAISS</span>
+                        <span class="skill-tag">OpenAI Embeddings</span>
+                        <span class="skill-tag">all-MiniLM-L6-v2</span>
+                    </div>
+                </div>
+
+                <div class="skill-category scroll-reveal">
+                    <div class="skill-category-title">
+                        <span class="skill-category-icon">👁️</span>
+                        <span data-tr="skills.ocr.title">Görüntü İşleme & OCR</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Qwen2.5-VL</span>
+                        <span class="skill-tag">Surya</span>
+                        <span class="skill-tag">GOT-OCR2</span>
+                        <span class="skill-tag">Donut</span>
+                        <span class="skill-tag">OpenCV</span>
+                        <span class="skill-tag">Tesseract</span>
+                        <span class="skill-tag">pdf2image</span>
+                    </div>
+                </div>
+
+                <div class="skill-category scroll-reveal">
+                    <div class="skill-category-title">
+                        <span class="skill-category-icon">⚙️</span>
+                        <span data-tr="skills.backend.title">Backend & API Geliştirme</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">Flask-RESTX</span>
+                        <span class="skill-tag">Express.js</span>
+                        <span class="skill-tag">ASP.NET Core Web API</span>
+                        <span class="skill-tag">LibreChat Framework</span>
+                        <span class="skill-tag">RESTful Services</span>
+                    </div>
+                </div>
+
+                <div class="skill-category scroll-reveal">
+                    <div class="skill-category-title">
+                        <span class="skill-category-icon">🎨</span>
+                        <span data-tr="skills.frontend.title">Frontend Geliştirme</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">React.js</span>
+                        <span class="skill-tag">Next.js</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">TailwindCSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Flutter (Dart)</span>
+                        <span class="skill-tag">React Native</span>
+                    </div>
+                </div>
+
+                <div class="skill-category scroll-reveal">
+                    <div class="skill-category-title">
+                        <span class="skill-category-icon">💾</span>
+                        <span data-tr="skills.database.title">Veritabanı Teknolojileri</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">MongoDB (Vector Search)</span>
+                        <span class="skill-tag">SQL Server</span>
+                        <span class="skill-tag">Redis</span>
+                        <span class="skill-tag">Entity Framework Core</span>
+                    </div>
+                </div>
+
+                <div class="skill-category scroll-reveal">
+                    <div class="skill-category-title">
+                        <span class="skill-category-icon">🔧</span>
+                        <span data-tr="skills.tools.title">Araçlar & DevOps</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Git LFS</span>
+                        <span class="skill-tag">Playwright</span>
+                        <span class="skill-tag">Selenium</span>
+                        <span class="skill-tag">n8n Automation</span>
+                        <span class="skill-tag">Swagger/OpenAPI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <div class="container">
+            <h2 class="section-title scroll-reveal" data-tr="projects.title">Projeler</h2>
+            <div class="projects-grid">
+                <!-- SAMETEI -->
+                <div class="project-card featured scroll-reveal">
+                    <div class="project-badge" data-tr="projects.badge.corporate">KURUMSAL</div>
+                    <div class="project-header">
+                        <h3>🏢 SAMETEI</h3>
+                        <p data-tr="projects.sametei.subtitle">AI Destekli İK Doküman Yönetim Platformu</p>
+                    </div>
+                    <div class="project-body">
+                        <p data-tr="projects.sametei.description">
+                            LibreChat çerçevesi üzerine inşa edilmiş, insan kaynakları doküman yönetimini yapay zeka ile otomatikleştiren kurumsal ölçekte platform. 
+                            İK ekiplerinin doküman işleme süresini %70 azalttı.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">LibreChat</span>
+                            <span class="tag">RAG</span>
+                            <span class="tag">ChromaDB</span>
+                            <span class="tag">Qwen2.5-VL OCR</span>
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">MongoDB</span>
+                            <span class="tag">OpenRouter</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HIREAI -->
+                <div class="project-card featured scroll-reveal">
+                    <div class="project-badge" data-tr="projects.badge.graduation">MEZUN. PROJESİ</div>
+                    <div class="project-header">
+                        <h3>📝 HIREAI</h3>
+                        <p data-tr="projects.hireai.subtitle">AI Destekli CV & Portföy Analiz Platformu</p>
+                    </div>
+                    <div class="project-body">
+                        <p data-tr="projects.hireai.description">
+                            ATS tabanlı CV analiz ve optimizasyon platformu. CV'leri iş tanımlarına göre analiz eder, ATS uyumlu skorlar ve iyileştirme önerileri sunar. 
+                            İK ekiplerinin ön eleme süresini %50 azalttı.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Flask-RESTX</span>
+                            <span class="tag">Sentence Transformers</span>
+                            <span class="tag">PostgreSQL</span>
+                            <span class="tag">React.js</span>
+                            <span class="tag">TailwindCSS</span>
+                            <span class="tag">NLP</span>
+                            <span class="tag">ATS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trendyol Automation -->
+                <div class="project-card scroll-reveal">
+                    <div class="project-header">
+                        <h3>🛒 Trendyol Otomasyon</h3>
+                        <p data-tr="projects.trendyol.subtitle">E-ticaret Sipariş Otomasyonu</p>
+                    </div>
+                    <div class="project-body">
+                        <p data-tr="projects.trendyol.description">
+                            Playwright kullanarak Trendyol Yemek platformu için geliştirilmiş otomatik sipariş sistemi. 
+                            Süreçleri hızlandıran ve hata oranını minimize eden akıllı otomasyon çözümü.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Playwright</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Automation</span>
+                            <span class="tag">Web Scraping</span>
+                        </div>
+                        <a href="https://github.com/last-26/Trendyol-Automotion-Order" target="_blank" class="project-link">
+                            <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Fruit Ripeness Detection -->
+                <div class="project-card scroll-reveal">
+                    <div class="project-header">
+                        <h3>🍎 Meyve Olgunluk Tespiti</h3>
+                        <p data-tr="projects.fruit.subtitle">Makine Öğrenmesi & Computer Vision</p>
+                    </div>
+                    <div class="project-body">
+                        <p data-tr="projects.fruit.description">
+                            Görüntü işleme ve 5 farklı ML algoritması (SVM, Random Forest, Gradient Boosting, Logistic Regression, Ensemble) 
+                            kullanarak meyve olgunluğunu tespit eden pattern recognition projesi.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Machine Learning</span>
+                            <span class="tag">Computer Vision</span>
+                            <span class="tag">scikit-learn</span>
+                            <span class="tag">OpenCV</span>
+                        </div>
+                        <a href="https://github.com/last-26/fruit-ripeness-detection" target="_blank" class="project-link">
+                            <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Global News Hub -->
+                <div class="project-card scroll-reveal">
+                    <div class="project-header">
+                        <h3>📰 Global News Hub</h3>
+                        <p data-tr="projects.news.subtitle">Modern Haber Toplayıcı Platform</p>
+                    </div>
+                    <div class="project-body">
+                        <p data-tr="projects.news.description">
+                            ASP.NET ile geliştirilmiş modern haber toplayıcı. RSS feed'lerini akıllı kategorizasyon ile çeker 
+                            ve düzenli bir şekilde kullanıcılara sunar.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">ASP.NET</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">RSS</span>
+                            <span class="tag">NewsAPI</span>
+                        </div>
+                        <a href="https://github.com/last-26/Global-News-Hub" target="_blank" class="project-link">
+                            <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Student Management System -->
+                <div class="project-card scroll-reveal">
+                    <div class="project-header">
+                        <h3>🎓 Öğrenci Yönetim Sistemi</h3>
+                        <p data-tr="projects.student.subtitle">Advanced Programming Projesi</p>
+                    </div>
+                    <div class="project-body">
+                        <p data-tr="projects.student.description">
+                            C# Windows Forms ve SQL Server ile geliştirilmiş kapsamlı öğrenci bilgi yönetim sistemi. 
+                            CRUD işlemleri ve tam veritabanı entegrasyonu.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">SQL Server</span>
+                            <span class="tag">Windows Forms</span>
+                            <span class="tag">CRUD</span>
+                        </div>
+                        <a href="https://github.com/last-26/Advanced-Programming-Student-Management-System" target="_blank" class="project-link">
+                            <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Smart Home App V2 -->
+                <div class="project-card scroll-reveal">
+                    <div class="project-header">
+                        <h3>📱 Smart Home App V2</h3>
+                        <p data-tr="projects.smarthome.subtitle">Akıllı Ev Kontrol Uygulaması</p>
+                    </div>
+                    <div class="project-body">
+                        <p data-tr="projects.smarthome.description">
+                            Flutter ve Dart kullanılarak geliştirilmiş akıllı ev kontrol mobil uygulaması. 
+                            Modern UI ve kullanıcı dostu arayüz tasarımı.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Flutter</span>
+                            <span class="tag">Dart</span>
+                            <span class="tag">IoT</span>
+                            <span class="tag">Mobile</span>
+                        </div>
+                        <a href="https://github.com/last-26/SmartHome-App-V2" target="_blank" class="project-link">
+                            <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Discord Music Bot -->
+                <div class="project-card scroll-reveal">
+                    <div class="project-header">
+                        <h3>🎵 Discord Music Bot</h3>
+                        <p data-tr="projects.discord.subtitle">Basit ve Etkili Müzik Botu</p>
+                    </div>
+                    <div class="project-body">
+                        <p data-tr="projects.discord.description">
+                            Discord için Python ile geliştirilmiş kullanımı kolay müzik botu. 
+                            Temiz kod yapısı ve kullanıcı dostu komutlar.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Discord API</span>
+                            <span class="tag">Music Bot</span>
+                        </div>
+                        <a href="https://github.com/last-26/Discord-MusicBot" target="_blank" class="project-link">
+                            <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="section-title scroll-reveal" data-tr="contact.title">İletişim</h2>
+            <div class="contact-grid">
+                <a href="mailto:a.sametsoysal@gmail.com" class="contact-card scroll-reveal">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <span class="contact-link">a.sametsoysal@gmail.com</span>
+                </a>
+
+                <a href="https://www.linkedin.com/in/samet-soysal/" target="_blank" class="contact-card scroll-reveal">
+                    <div class="contact-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <h3>LinkedIn</h3>
+                    <span class="contact-link">samet-soysal</span>
+                </a>
+                
+                <a href="https://github.com/last-26" target="_blank" class="contact-card scroll-reveal">
+                    <div class="contact-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <h3>GitHub</h3>
+                    <span class="contact-link">@last-26</span>
+                </a>
+                
+                <div class="contact-card scroll-reveal" style="cursor: default;">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 data-tr="contact.location">Konum</h3>
+                    <p data-tr="contact.location.value">Eskişehir, Türkiye</p>
+                </div>
+
+                <div class="contact-card scroll-reveal" style="cursor: default;">
+                    <div class="contact-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 data-tr="contact.education">Eğitim</h3>
+                    <p data-tr="contact.education.value">ESOGU - Bilgisayar Mühendisliği</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p data-tr="footer.copyright">&copy; 2025 Samet Soysal. Tüm hakları saklıdır.</p>
+            <div class="footer-links">
+                <a href="mailto:a.sametsoysal@gmail.com" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/samet-soysal/" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/last-26" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <p style="margin-top: 15px; opacity: 0.8;" data-tr="footer.made">Tutkuyla kodlanmıştır ❤️</p>
+        </div>
+    </footer>
+
+    <script>
+        // Translations
+        const translations = {
+            tr: {
+                "nav.brand": "SAMET SOYSAL",
+                "nav.about": "Hakkımda",
+                "nav.experience": "Deneyim",
+                "nav.skills": "Yetenekler",
+                "nav.projects": "Projeler",
+                "nav.contact": "İletişim",
+                "hero.badge": "AI/ML Mühendisi & Full-Stack Developer",
+                "hero.subtitle": "Artificial Intelligence | Machine Learning | NLP Specialist",
+                "hero.description": "RAG sistemleri, OCR teknolojileri ve çok modelli AI çözümleri geliştiriyorum. Kurumsal projelerde yapay zeka entegrasyonu ve otomasyon konularında uzmanım.",
+                "hero.btn.projects": "Projelerim",
+                "hero.btn.contact": "İletişim",
+                "about.title": "Hakkımda",
+                "about.description": "Eskişehir Osmangazi Üniversitesi Bilgisayar Mühendisliği son sınıf öğrencisiyim (Mezuniyet: Şubat 2026). Yapay Zeka, Makine Öğrenmesi ve Doğal Dil İşleme alanlarında güçlü teknik uzmanlığa sahibim. RAG sistemleri, embedding teknolojileri, vektör veritabanları ve OCR tabanlı çözümler geliştirdim. Python, RESTful API entegrasyonları ve çok modelli orkestrasyon konularında production-ready AI çözümleri geliştirme deneyimim bulunmaktadır. Kurumsal projelerde verimliliği artıran ölçeklenebilir ve yenilikçi yapay zeka sistemleri tasarlama konusunda uzmanlaştım.",
+                "about.stats.years": "Yıl Deneyim",
+                "about.stats.projects": "Tamamlanan Proje",
+                "about.stats.technologies": "Teknoloji",
+                "experience.title": "Deneyim",
+                "experience.tei.title": "Yapay Zeka Stajyeri",
+                "experience.tei.company": "TEI - TUSAŞ Motor Sanayii A.Ş. | IT - Data Analytics & AI",
+                "experience.tei.date": "Ağustos 2025 - Eylül 2025",
+                "experience.tei.achievement1": "Çok modelli destekli chatbot altyapıları tasarladım (LibreChat entegrasyonu)",
+                "experience.tei.achievement2": "CV analiz ve değerlendirme sistemlerinin geliştirilmesine katkı sağladım",
+                "experience.tei.achievement3": "Qwen2.5-VL modeli kullanarak tablolardan ve formlardan veri çıkarabilen OCR sistemi geliştirdim",
+                "experience.tei.achievement4": "Bilgi erişim süreçlerini hızlandırmak için RAG tabanlı doküman sorgulama prototipi oluşturdum",
+                "experience.tei.achievement5": "n8n gibi otomasyon araçları kullanarak IT süreç akışlarını hızlandırdım ve manuel görevleri minimize ettim",
+                "experience.tei.achievement6": "Playwright kullanarak Trendyol Yemek üzerinden otomatik yemek sipariş veren web scraping tabanlı uygulama geliştirdim",
+                "skills.title": "Yetenekler",
+                "skills.ai.title": "Yapay Zeka & Makine Öğrenmesi",
+                "skills.nlp.title": "NLP & Semantik Teknolojiler",
+                "skills.rag.title": "RAG & Vektör Veritabanları",
+                "skills.ocr.title": "Görüntü İşleme & OCR",
+                "skills.backend.title": "Backend & API Geliştirme",
+                "skills.frontend.title": "Frontend Geliştirme",
+                "skills.database.title": "Veritabanı Teknolojileri",
+                "skills.tools.title": "Araçlar & DevOps",
+                "projects.title": "Projeler",
+                "projects.badge.corporate": "KURUMSAL",
+                "projects.badge.graduation": "MEZUN. PROJESİ",
+                "projects.sametei.subtitle": "AI Destekli İK Doküman Yönetim Platformu",
+                "projects.sametei.description": "LibreChat çerçevesi üzerine inşa edilmiş, insan kaynakları doküman yönetimini yapay zeka ile otomatikleştiren kurumsal ölçekte platform. İK ekiplerinin doküman işleme süresini %70 azalttı.",
+                "projects.hireai.subtitle": "AI Destekli CV & Portföy Analiz Platformu",
+                "projects.hireai.description": "ATS tabanlı CV analiz ve optimizasyon platformu. CV'leri iş tanımlarına göre analiz eder, ATS uyumlu skorlar ve iyileştirme önerileri sunar. İK ekiplerinin ön eleme süresini %50 azalttı.",
+                "projects.trendyol.subtitle": "E-ticaret Sipariş Otomasyonu",
+                "projects.trendyol.description": "Playwright kullanarak Trendyol Yemek platformu için geliştirilmiş otomatik sipariş sistemi. Süreçleri hızlandıran ve hata oranını minimize eden akıllı otomasyon çözümü.",
+                "projects.fruit.subtitle": "Makine Öğrenmesi & Computer Vision",
+                "projects.fruit.description": "Görüntü işleme ve 5 farklı ML algoritması (SVM, Random Forest, Gradient Boosting, Logistic Regression, Ensemble) kullanarak meyve olgunluğunu tespit eden pattern recognition projesi.",
+                "projects.news.subtitle": "Modern Haber Toplayıcı Platform",
+                "projects.news.description": "ASP.NET ile geliştirilmiş modern haber toplayıcı. RSS feed'lerini akıllı kategorizasyon ile çeker ve düzenli bir şekilde kullanıcılara sunar.",
+                "projects.student.subtitle": "Advanced Programming Projesi",
+                "projects.student.description": "C# Windows Forms ve SQL Server ile geliştirilmiş kapsamlı öğrenci bilgi yönetim sistemi. CRUD işlemleri ve tam veritabanı entegrasyonu.",
+                "projects.smarthome.subtitle": "Akıllı Ev Kontrol Uygulaması",
+                "projects.smarthome.description": "Flutter ve Dart kullanılarak geliştirilmiş akıllı ev kontrol mobil uygulaması. Modern UI ve kullanıcı dostu arayüz tasarımı.",
+                "projects.discord.subtitle": "Basit ve Etkili Müzik Botu",
+                "projects.discord.description": "Discord için Python ile geliştirilmiş kullanımı kolay müzik botu. Temiz kod yapısı ve kullanıcı dostu komutlar.",
+                "projects.link": "GitHub'da Görüntüle",
+                "contact.title": "İletişim",
+                "contact.location": "Konum",
+                "contact.location.value": "Eskişehir, Türkiye",
+                "contact.education": "Eğitim",
+                "contact.education.value": "ESOGU - Bilgisayar Mühendisliği",
+                "footer.copyright": "© 2025 Samet Soysal. Tüm hakları saklıdır.",
+                "footer.made": "Tutkuyla kodlanmıştır ❤️"
+            },
+            en: {
+                "nav.brand": "SAMET SOYSAL",
+                "nav.about": "About",
+                "nav.experience": "Experience",
+                "nav.skills": "Skills",
+                "nav.projects": "Projects",
+                "nav.contact": "Contact",
+                "hero.badge": "AI/ML Engineer & Full-Stack Developer",
+                "hero.subtitle": "Artificial Intelligence | Machine Learning | NLP Specialist",
+                "hero.description": "I develop RAG systems, OCR technologies, and multi-model AI solutions. I specialize in artificial intelligence integration and automation in corporate projects.",
+                "hero.btn.projects": "My Projects",
+                "hero.btn.contact": "Contact",
+                "about.title": "About Me",
+                "about.description": "I am currently pursuing my Bachelor's degree in Computer Engineering at Eskişehir Osmangazi University (Expected graduation: February 2026). I have strong technical expertise in Artificial Intelligence, Machine Learning, and Natural Language Processing. I have developed RAG systems, embedding technologies, vector databases, and OCR-based solutions. I have experience in developing production-ready AI solutions in Python, RESTful API integrations, and multi-model orchestration. I specialize in designing scalable and innovative AI systems that increase efficiency in corporate projects.",
+                "about.stats.years": "Years of Experience",
+                "about.stats.projects": "Completed Projects",
+                "about.stats.technologies": "Technologies",
+                "experience.title": "Experience",
+                "experience.tei.title": "Artificial Intelligence Intern",
+                "experience.tei.company": "TEI - TUSAŞ Motor Sanayii A.Ş. | IT - Data Analytics & AI",
+                "experience.tei.date": "August 2025 - September 2025",
+                "experience.tei.achievement1": "Designed multi-model supported chatbot infrastructures (LibreChat integration)",
+                "experience.tei.achievement2": "Contributed to the development of CV analysis and evaluation systems",
+                "experience.tei.achievement3": "Developed OCR system capable of extracting data from tables and forms using Qwen2.5-VL model",
+                "experience.tei.achievement4": "Created RAG-based document querying prototype to accelerate information access processes",
+                "experience.tei.achievement5": "Accelerated IT process workflows and minimized manual tasks using automation tools like n8n",
+                "experience.tei.achievement6": "Developed a web scraping-based application using Playwright that autonomously orders food through Trendyol Yemek",
+                "skills.title": "Skills",
+                "skills.ai.title": "Artificial Intelligence & Machine Learning",
+                "skills.nlp.title": "NLP & Semantic Technologies",
+                "skills.rag.title": "RAG & Vector Databases",
+                "skills.ocr.title": "Image Processing & OCR",
+                "skills.backend.title": "Backend & API Development",
+                "skills.frontend.title": "Frontend Development",
+                "skills.database.title": "Database Technologies",
+                "skills.tools.title": "Tools & DevOps",
+                "projects.title": "Projects",
+                "projects.badge.corporate": "CORPORATE",
+                "projects.badge.graduation": "CAPSTONE",
+                "projects.sametei.subtitle": "AI-Powered HR Document Management Platform",
+                "projects.sametei.description": "Built on LibreChat framework, a corporate-scale platform that automates human resources document management with artificial intelligence. Reduced HR teams' document processing time by 70%.",
+                "projects.hireai.subtitle": "AI-Powered CV & Portfolio Analysis Platform",
+                "projects.hireai.description": "ATS-based CV analysis and optimization platform. Analyzes CVs according to job descriptions and provides ATS-compliant scores and improvement suggestions. Reduced HR teams' pre-screening time by 50%.",
+                "projects.trendyol.subtitle": "E-commerce Order Automation",
+                "projects.trendyol.description": "Automated ordering system developed for Trendyol Yemek platform using Playwright. Smart automation solution that accelerates processes and minimizes error rates.",
+                "projects.fruit.subtitle": "Machine Learning & Computer Vision",
+                "projects.fruit.description": "Pattern recognition project that detects fruit ripeness using image processing and 5 different ML algorithms (SVM, Random Forest, Gradient Boosting, Logistic Regression, Ensemble).",
+                "projects.news.subtitle": "Modern News Aggregator Platform",
+                "projects.news.description": "Modern news aggregator developed with ASP.NET. Pulls RSS feeds with smart categorization and presents them in an organized manner.",
+                "projects.student.subtitle": "Advanced Programming Project",
+                "projects.student.description": "Comprehensive student information management system developed with C# Windows Forms and SQL Server. CRUD operations and full database integration.",
+                "projects.smarthome.subtitle": "Smart Home Control Application",
+                "projects.smarthome.description": "Smart home control mobile application developed using Flutter and Dart. Modern UI and user-friendly interface design.",
+                "projects.discord.subtitle": "Simple and Effective Music Bot",
+                "projects.discord.description": "Easy-to-use music bot developed in Python for Discord. Clean code structure and user-friendly commands.",
+                "projects.link": "View on GitHub",
+                "contact.title": "Contact",
+                "contact.location": "Location",
+                "contact.location.value": "Eskişehir, Turkey",
+                "contact.education": "Education",
+                "contact.education.value": "ESOGU - Computer Engineering",
+                "footer.copyright": "© 2025 Samet Soysal. All rights reserved.",
+                "footer.made": "Coded with passion ❤️"
+            }
+        };
+
+        // Current language
+        let currentLang = 'en';
+
+        // Language switcher
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                if (lang !== currentLang) {
+                    currentLang = lang;
+                    updateLanguage(lang);
+                    
+                    // Update active button
+                    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Update HTML lang attribute
+                    document.documentElement.lang = lang;
+                    
+                    // Save preference
+                    localStorage.setItem('preferredLang', lang);
+                }
+            });
+        });
+
+        // Update language function
+        function updateLanguage(lang) {
+            document.querySelectorAll('[data-tr]').forEach(element => {
+                const key = element.getAttribute('data-tr');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        // Scroll reveal animation
+        const scrollReveal = () => {
+            const reveals = document.querySelectorAll('.scroll-reveal');
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', scrollReveal);
+        scrollReveal(); // Initial check
+        
+        // Initialize language on page load
+        const savedLang = localStorage.getItem('preferredLang') || 'en';
+        if (savedLang !== 'en') {
+            currentLang = savedLang;
+            updateLanguage(savedLang);
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`[data-lang="${savedLang}"]`).classList.add('active');
+        } else {
+            updateLanguage('en');
+        }
+        document.documentElement.lang = savedLang;
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 25; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            const size = Math.random() * 10 + 5;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+            particle.style.opacity = Math.random() * 0.5 + 0.2;
+            particlesContainer.appendChild(particle);
+        }
+
+        // Add navbar scroll effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            const nav = document.querySelector('nav');
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                nav.style.transform = 'translateY(-100%)';
+            } else {
+                nav.style.transform = 'translateY(0)';
+            }
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>
