@@ -14,6 +14,8 @@
 - **3D Transforms** - Premium card animations with depth and perspective
 - **Gradient Overlays** - Multi-layer gradient effects on project cards
 - **Responsive Layout** - Fully optimized for desktop, tablet, and mobile devices
+- **Visitor Counter** - Real-time visitor tracking with animated count-up effect
+- **Custom Brand Logo** - Modern gradient logo with hover animations
 
 ### 🌐 Multilingual Support
 - **Turkish (TR) & English (EN)** language switcher
@@ -135,9 +137,16 @@
 
 ```
 last-26.github.io/
-├── index.html          # Main HTML file (Single page)
-└── README.md          # Project documentation
+├── index.html          # Main HTML file
+├── styles.css          # All CSS styles (26KB)
+├── script.js           # All JavaScript functionality (18KB)
+└── README.md           # Project documentation
 ```
+
+**🎯 Clean Modular Architecture**
+- Separated concerns for better maintainability
+- Easy to navigate and edit
+- Professional file organization
 
 ## 🌟 Key Highlights
 

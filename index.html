@@ -5,34 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAMET SOYSAL - AI/ML Engineer & Full-Stack Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #6366f1;
-            --secondary: #8b5cf6;
-            --accent: #10b981;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --gray: #64748b;
-            --pastel-bg: #fafbfe;
-            --pastel-section: #f5f7fa;
-            --soft-white: #fcfcfd;
-        }
-
-        body {
-            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: var(--dark);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        .container {
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Visitor Counter -->
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px 40px;
@@ -70,7 +46,49 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-brand:hover {
+            transform: translateX(5px);
+        }
+
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .nav-brand:hover .brand-logo {
+            transform: rotate(-10deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .brand-name {
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-title {
+            font-size: 0.65rem;
+            opacity: 0.8;
+            font-weight: 500;
+            color: var(--accent);
         }
 
         .nav-content {
@@ -137,6 +155,79 @@
         .lang-btn.active {
             background: var(--accent);
             color: white;
+        }
+
+        /* Visitor Counter */
+        .visitor-counter {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1), 0 3px 10px rgba(99, 102, 241, 0.1);
+            z-index: 999;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+            animation: fadeInRight 0.8s ease;
+        }
+
+        .visitor-counter:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.15);
+        }
+
+        .visitor-label {
+            font-size: 0.75rem;
+            color: var(--gray);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .visitor-count {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .visitor-icon {
+            font-size: 1.1rem;
+            color: var(--accent);
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .visitor-counter {
+                top: 80px;
+                right: 15px;
+                padding: 10px 15px;
+            }
+            
+            .visitor-count {
+                font-size: 1.4rem;
+            }
         }
 
         /* Header & Hero */
@@ -1125,14 +1216,30 @@
         .hidden {
             display: none !important;
         }
-    </style>
+    --> </style>
 </head>
 <body>
+    <!-- Visitor Counter -->
+    <div class="visitor-counter">
+        <div class="visitor-label">
+            <i class="fas fa-eye visitor-icon"></i>
+            <span data-tr="visitor.label">Visitors</span>
+        </div>
+        <div class="visitor-count" id="visitorCount">
+            <i class="fas fa-users"></i>
+            <span>0</span>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav>
         <div class="container">
             <a href="#" class="nav-brand">
-                <i class="fas fa-brain"></i> <span data-tr="nav.brand">SAMET SOYSAL</span>
+                <div class="brand-logo">SS</div>
+                <div class="brand-text">
+                    <span class="brand-name" data-tr="nav.brand">SAMET SOYSAL</span>
+                    <span class="brand-title" data-tr="nav.subtitle">AI/ML Engineer</span>
+                </div>
             </a>
             <div class="nav-content">
                 <ul class="nav-links">
@@ -1616,11 +1723,13 @@
         </div>
     </footer>
 
-    <script>
+    <script src="script.js"></script>
+    <!-- <script>
         // Translations
         const translations = {
             tr: {
                 "nav.brand": "SAMET SOYSAL",
+                "nav.subtitle": "AI/ML Mühendisi",
                 "nav.about": "Hakkımda",
                 "nav.experience": "Deneyim",
                 "nav.skills": "Yetenekler",
@@ -1682,11 +1791,13 @@
                 "contact.education": "Eğitim",
                 "contact.education.value": "ESOGU - Bilgisayar Mühendisliği",
                 "contact.email.copied": "Email kopyalandı!",
+                "visitor.label": "Ziyaretçi",
                 "footer.copyright": "© 2025 Samet Soysal. Tüm hakları saklıdır.",
                 "footer.made": "Tutkuyla kodlanmıştır ❤️"
             },
             en: {
                 "nav.brand": "SAMET SOYSAL",
+                "nav.subtitle": "AI/ML Engineer",
                 "nav.about": "About",
                 "nav.experience": "Experience",
                 "nav.skills": "Skills",
@@ -1748,6 +1859,7 @@
                 "contact.education": "Education",
                 "contact.education.value": "ESOGU - Computer Engineering",
                 "contact.email.copied": "Email copied!",
+                "visitor.label": "Visitors",
                 "footer.copyright": "© 2025 Samet Soysal. All rights reserved.",
                 "footer.made": "Coded with passion ❤️"
             }
@@ -1841,6 +1953,42 @@
             particlesContainer.appendChild(particle);
         }
 
+        // Visitor Counter
+        function initVisitorCounter() {
+            let visitorCount = localStorage.getItem('visitorCount');
+            
+            if (!visitorCount) {
+                visitorCount = Math.floor(Math.random() * 500) + 100; // Start with random number between 100-600
+                localStorage.setItem('visitorCount', visitorCount);
+            }
+            
+            // Increment count
+            visitorCount = parseInt(visitorCount) + 1;
+            localStorage.setItem('visitorCount', visitorCount);
+            
+            // Animate counter
+            const counterElement = document.querySelector('#visitorCount span');
+            let current = 0;
+            const target = parseInt(visitorCount);
+            const duration = 2000; // 2 seconds
+            const increment = target / (duration / 16); // 60fps
+            
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    counterElement.textContent = Math.floor(current).toLocaleString();
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counterElement.textContent = target.toLocaleString();
+                }
+            };
+            
+            requestAnimationFrame(updateCounter);
+        }
+
+        // Initialize visitor counter on page load
+        initVisitorCounter();
+
         // Copy email function
         function copyEmail() {
             const email = 'a.sametsoysal@gmail.com';
@@ -1896,6 +2044,6 @@
             }
             lastScroll = currentScroll;
         });
-    </script>
+    --> </script>
 </body>
 </html>
