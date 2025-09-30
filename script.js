@@ -1,5 +1,26 @@
 // Portfolio Website JavaScript - Samet Soysal
 
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBNUqCue50beKn73JOj0aYGEW5X4s1nQmU",
+  authDomain: "last-26website.firebaseapp.com",
+  databaseURL: "https://last-26website-default-rtdb.firebaseio.com",
+  projectId: "last-26website",
+  storageBucket: "last-26website.firebasestorage.app",
+  messagingSenderId: "633506878839",
+  appId: "1:633506878839:web:e02917bbd095281ddf7d72",
+  measurementId: "G-PHY5GC9FF9"
+};
+
+// Initialize Firebase
+try {
+    firebase.initializeApp(firebaseConfig);
+} catch (error) {
+    console.warn('Firebase initialization error:', error);
+}
+const database = firebase.database?.();
+
 // Translations
 const translations = {
     tr: {
@@ -233,37 +254,75 @@ if (particlesContainer) {
 }
 
 // ============================================
-// VISITOR COUNTER - LocalStorage Based
+// FIREBASE REAL-TIME ANALYTICS
 // ============================================
-function initVisitorCounter() {
+
+// ============================================
+// VISITOR COUNTER - Firebase Realtime Database
+// ============================================
+async function initVisitorCounter() {
     const counterElement = document.querySelector('#visitorCount span');
     if (!counterElement) return;
 
-    // Get or initialize visitor count
-    let visitorCount = localStorage.getItem('portfolioVisitorCount');
-    
-    if (!visitorCount) {
-        // First time visitor - start with a random base number
-        visitorCount = Math.floor(Math.random() * 300) + 500; // 500-800 arası başlangıç
-        localStorage.setItem('portfolioVisitorCount', visitorCount);
+    // Check if Firebase is available
+    if (!database) {
+        console.warn('Firebase not available, using fallback counter');
+        fallbackVisitorCounter();
+        return;
     }
-    
-    // Increment count
-    visitorCount = parseInt(visitorCount) + 1;
-    localStorage.setItem('portfolioVisitorCount', visitorCount);
-    
-    // Animate counter from 0 to current value
-    animateCounter(counterElement, 0, visitorCount, 2000);
+
+    try {
+        // Generate unique visitor ID
+        let visitorId = localStorage.getItem('portfolioVisitorId');
+        if (!visitorId) {
+            visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem('portfolioVisitorId', visitorId);
+        }
+
+        // Get current visitor count
+        const countRef = database.ref('visitors/total');
+        const snapshot = await countRef.once('value');
+        let currentCount = snapshot.val() || 0;
+
+        // Check if this visitor is new today
+        const today = new Date().toDateString();
+        const dailyRef = database.ref(`visitors/daily/${today}/${visitorId}`);
+        const dailySnapshot = await dailyRef.once('value');
+
+        if (!dailySnapshot.exists()) {
+            // New visitor for today - increment count
+            currentCount++;
+            await countRef.set(currentCount);
+            await dailyRef.set({
+                timestamp: Date.now(),
+                userAgent: navigator.userAgent,
+                language: navigator.language
+            });
+        }
+
+        // Animate counter
+        animateCounter(counterElement, 0, currentCount, 2000);
+
+        // Real-time updates
+        countRef.on('value', (snapshot) => {
+            const newCount = snapshot.val() || 0;
+            counterElement.textContent = newCount.toLocaleString();
+        });
+
+    } catch (error) {
+        console.error('Visitor counter error:', error);
+        // Fallback to localStorage
+        fallbackVisitorCounter();
+    }
 }
 
 // ============================================
-// PROJECT CLICK COUNTERS - LocalStorage Based
+// PROJECT CLICK COUNTERS - Firebase Realtime Database
 // ============================================
-function initProjectCounters() {
+async function initProjectCounters() {
     const projectCards = document.querySelectorAll('.project-card');
     
     projectCards.forEach((card, index) => {
-        // Create unique ID for each project based on title
         const titleElement = card.querySelector('h3');
         if (!titleElement) return;
         
@@ -279,37 +338,172 @@ function initProjectCounters() {
         
         const badge = document.createElement('div');
         badge.className = 'project-click-badge';
-        badge.innerHTML = '<i class="fas fa-mouse-pointer"></i> <span class="click-count">0</span>';
+        badge.innerHTML = '<i class="fas fa-eye"></i> <span class="click-count">0</span>';
         projectBody.appendChild(badge);
         
-        // Get current count from localStorage
-        const storageKey = `project-click-${projectId}`;
-        let clickCount = parseInt(localStorage.getItem(storageKey)) || Math.floor(Math.random() * 20) + 5;
-        localStorage.setItem(storageKey, clickCount);
-        
-        // Display count
-        const countSpan = badge.querySelector('.click-count');
-        countSpan.textContent = clickCount;
+        // Initialize project counter in Firebase
+        initProjectCounter(projectId, badge);
         
         // Track clicks on project links
         const projectLinks = card.querySelectorAll('.project-link, a[href*="github"], a[href*="gitlab"]');
         projectLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                // Increment counter
-                clickCount++;
-                localStorage.setItem(storageKey, clickCount);
-                
-                // Animate the update
-                animateCounter(countSpan, clickCount - 1, clickCount, 300);
-                
-                // Add pulse effect
-                badge.style.animation = 'none';
-                setTimeout(() => {
-                    badge.style.animation = 'pulse 0.5s ease';
-                }, 10);
+            link.addEventListener('click', async (e) => {
+                await incrementProjectCounter(projectId, badge);
             });
         });
     });
+}
+
+async function initProjectCounter(projectId, badge) {
+    try {
+        // Check if Firebase is available
+        if (!database) {
+            console.warn('Firebase not available, using fallback project counter');
+            const fallbackCount = localStorage.getItem(`project-${projectId}`) || Math.floor(Math.random() * 20) + 5;
+            const countSpan = badge.querySelector('.click-count');
+            countSpan.textContent = fallbackCount;
+            return;
+        }
+
+        const projectRef = database.ref(`projects/${projectId}`);
+        const snapshot = await projectRef.once('value');
+        let clickCount = snapshot.val() || 0;
+
+        // Update badge
+        const countSpan = badge.querySelector('.click-count');
+        countSpan.textContent = clickCount.toLocaleString();
+
+        // Real-time updates
+        projectRef.on('value', (snapshot) => {
+            const newCount = snapshot.val() || 0;
+            countSpan.textContent = newCount.toLocaleString();
+        });
+
+    } catch (error) {
+        console.error(`Project counter error for ${projectId}:`, error);
+    }
+}
+
+async function incrementProjectCounter(projectId, badge) {
+    try {
+        // Check if Firebase is available
+        if (!database) {
+            console.warn('Firebase not available, using fallback increment');
+            const fallbackCount = parseInt(localStorage.getItem(`project-${projectId}`)) || 0;
+            localStorage.setItem(`project-${projectId}`, fallbackCount + 1);
+            const countSpan = badge.querySelector('.click-count');
+            countSpan.textContent = (fallbackCount + 1).toLocaleString();
+            return;
+        }
+
+        const projectRef = database.ref(`projects/${projectId}`);
+        
+        // Use transaction to safely increment
+        await projectRef.transaction((currentCount) => {
+            return (currentCount || 0) + 1;
+        });
+
+        // Add pulse effect
+        badge.style.animation = 'none';
+        setTimeout(() => {
+            badge.style.animation = 'pulse 0.5s ease';
+        }, 10);
+
+    } catch (error) {
+        console.error(`Increment project counter error for ${projectId}:`, error);
+    }
+}
+
+// ============================================
+// ADVANCED ANALYTICS - Track user behavior
+// ============================================
+async function trackUserBehavior() {
+    // Check if Firebase is available
+    if (!database) {
+        console.warn('Firebase not available, skipping behavior tracking');
+        return;
+    }
+
+    try {
+        const visitorId = localStorage.getItem('portfolioVisitorId') || 'unknown';
+        const behaviorRef = database.ref(`analytics/behavior/${visitorId}`);
+        
+        const behaviorData = {
+            firstVisit: localStorage.getItem('firstVisit') || Date.now(),
+            lastVisit: Date.now(),
+            pageViews: (parseInt(localStorage.getItem('pageViews')) || 0) + 1,
+            screenResolution: `${screen.width}x${screen.height}`,
+            language: navigator.language,
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            referrer: document.referrer || 'direct'
+        };
+
+        localStorage.setItem('pageViews', behaviorData.pageViews);
+        if (!localStorage.getItem('firstVisit')) {
+            localStorage.setItem('firstVisit', behaviorData.firstVisit);
+        }
+
+        await behaviorRef.set(behaviorData);
+
+        // Track section views
+        const sections = ['about', 'experience', 'projects', 'skills', 'contact'];
+        sections.forEach(section => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        trackSectionView(section);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            const sectionElement = document.getElementById(section);
+            if (sectionElement) {
+                observer.observe(sectionElement);
+            }
+        });
+
+    } catch (error) {
+        console.error('User behavior tracking error:', error);
+    }
+}
+
+async function trackSectionView(sectionName) {
+    // Check if Firebase is available
+    if (!database) return;
+
+    try {
+        const visitorId = localStorage.getItem('portfolioVisitorId');
+        if (!visitorId) return;
+
+        const sectionRef = database.ref(`analytics/sections/${sectionName}/${visitorId}`);
+        await sectionRef.set({
+            timestamp: Date.now(),
+            duration: 0
+        });
+
+    } catch (error) {
+        console.error('Section tracking error:', error);
+    }
+}
+
+// ============================================
+// FALLBACK FUNCTIONS (if Firebase fails)
+// ============================================
+function fallbackVisitorCounter() {
+    const counterElement = document.querySelector('#visitorCount span');
+    if (!counterElement) return;
+
+    let visitorCount = localStorage.getItem('portfolioVisitorCount');
+    
+    if (!visitorCount) {
+        visitorCount = Math.floor(Math.random() * 300) + 500;
+        localStorage.setItem('portfolioVisitorCount', visitorCount);
+    }
+    
+    visitorCount = parseInt(visitorCount) + 1;
+    localStorage.setItem('portfolioVisitorCount', visitorCount);
+    
+    animateCounter(counterElement, 0, visitorCount, 2000);
 }
 
 // ============================================
@@ -319,7 +513,7 @@ function animateCounter(element, start, end, duration) {
     if (!element) return;
     
     const range = end - start;
-    const increment = range / (duration / 16); // 60fps
+    const increment = range / (duration / 16);
     let current = start;
     
     const timer = setInterval(() => {
@@ -331,6 +525,97 @@ function animateCounter(element, start, end, duration) {
             element.textContent = Math.floor(current).toLocaleString();
         }
     }, 16);
+}
+
+// ============================================
+// ADMIN DASHBOARD (Optional - for your analytics)
+// ============================================
+function initAdminDashboard() {
+    // Only initialize if you're the admin (based on some condition)
+    const isAdmin = window.location.hash === '#admin';
+    if (isAdmin) {
+        showAdminDashboard();
+    }
+}
+
+function showAdminDashboard() {
+    const dashboard = document.createElement('div');
+    dashboard.className = 'admin-dashboard';
+    dashboard.innerHTML = `
+        <div class="dashboard-content">
+            <h3>📊 Portfolio Analytics</h3>
+            <div id="stats-container">
+                <div class="stat-item">
+                    <span class="stat-label">Total Visitors:</span>
+                    <span id="total-visitors">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Today's Visitors:</span>
+                    <span id="today-visitors">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Most Popular Project:</span>
+                    <span id="popular-project">Loading...</span>
+                </div>
+            </div>
+            <button onclick="hideAdminDashboard()">Close</button>
+        </div>
+    `;
+    
+    document.body.appendChild(dashboard);
+    loadAdminStats();
+}
+
+async function loadAdminStats() {
+    // Check if Firebase is available
+    if (!database) {
+        document.getElementById('total-visitors').textContent = 'Firebase not configured';
+        return;
+    }
+
+    try {
+        // Load total visitors
+        const totalRef = database.ref('visitors/total');
+        totalRef.on('value', (snapshot) => {
+            const total = snapshot.val() || 0;
+            document.getElementById('total-visitors').textContent = total;
+        });
+
+        // Load today's visitors
+        const today = new Date().toDateString();
+        const todayRef = database.ref(`visitors/daily/${today}`);
+        todayRef.on('value', (snapshot) => {
+            const todayData = snapshot.val() || {};
+            const todayCount = Object.keys(todayData).length;
+            document.getElementById('today-visitors').textContent = todayCount;
+        });
+
+        // Load popular project
+        const projectsRef = database.ref('projects');
+        projectsRef.on('value', (snapshot) => {
+            const projects = snapshot.val() || {};
+            let popularProject = { name: 'None', count: 0 };
+            
+            Object.entries(projects).forEach(([project, count]) => {
+                if (count > popularProject.count) {
+                    popularProject = { name: project, count: count };
+                }
+            });
+            
+            document.getElementById('popular-project').textContent = 
+                `${popularProject.name} (${popularProject.count} views)`;
+        });
+
+    } catch (error) {
+        console.error('Admin dashboard error:', error);
+    }
+}
+
+function hideAdminDashboard() {
+    const dashboard = document.querySelector('.admin-dashboard');
+    if (dashboard) {
+        dashboard.remove();
+    }
 }
 
 // ============================================
@@ -412,9 +697,12 @@ window.addEventListener('scroll', () => {
 // ============================================
 // INITIALIZE ON DOM READY
 // ============================================
-document.addEventListener('DOMContentLoaded', () => {
-    initVisitorCounter();
-    initProjectCounters();
+document.addEventListener('DOMContentLoaded', async () => {
+    // Initialize all tracking systems
+    await initVisitorCounter();
+    await initProjectCounters();
+    await trackUserBehavior();
+    initAdminDashboard();
 });
 
 // Add pulse animation to CSS if not exists

@@ -1231,6 +1231,85 @@ footer p {
     }
 }
 
+/* Admin Dashboard */
+.admin-dashboard {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-content h3 {
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.stat-label {
+    font-weight: 600;
+    color: var(--gray);
+}
+
+.stat-item span:last-child {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.dashboard-content button {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+.dashboard-content button:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Error states */
+.error {
+    background: #fee2e2 !important;
+    color: #dc2626 !important;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .hero-content h1 {
