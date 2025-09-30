@@ -782,6 +782,7 @@ header {
 }
 
 .project-card {
+    position: relative;
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(20px);
     border-radius: 24px;
@@ -917,8 +918,9 @@ header {
 }
 
 .project-body {
-    padding: 2rem;
     position: relative;
+    padding: 2rem;
+    padding-bottom: 4rem;
     z-index: 2;
 }
 
@@ -960,6 +962,12 @@ header {
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
+}
+
+.project-link i.fa-github,
+.project-link i.fa-gitlab {
+    font-size: 1.1rem;
+    opacity: 0.9;
 }
 
 .project-link:hover {

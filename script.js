@@ -60,6 +60,7 @@ const translations = {
         "projects.discord.subtitle": "Basit ve Etkili Müzik Botu",
         "projects.discord.description": "Discord için Python ile geliştirilmiş kullanımı kolay müzik botu. Temiz kod yapısı ve kullanıcı dostu komutlar.",
         "projects.link": "GitHub'da Görüntüle",
+        "projects.link.gitlab": "GitLab'da Görüntüle",
         "contact.title": "İletişim",
         "contact.location": "Konum",
         "contact.location.value": "Eskişehir, Türkiye",
@@ -128,6 +129,7 @@ const translations = {
         "projects.discord.subtitle": "Simple and Effective Music Bot",
         "projects.discord.description": "Easy-to-use music bot developed in Python for Discord. Clean code structure and user-friendly commands.",
         "projects.link": "View on GitHub",
+        "projects.link.gitlab": "View on GitLab",
         "contact.title": "Contact",
         "contact.location": "Location",
         "contact.location.value": "Eskişehir, Turkey",
@@ -259,9 +261,6 @@ async function initVisitorCounter() {
     }
 }
 
-// Initialize visitor counter on page load
-initVisitorCounter();
-
 // Project Click Counter
 async function initProjectCounters() {
     const projectCards = document.querySelectorAll('.project-card');
@@ -308,9 +307,6 @@ async function incrementProjectCount(projectId, badge) {
         console.error('Project counter error:', error);
     }
 }
-
-// Initialize project counters on page load
-initProjectCounters();
 
 // Copy email function
 function copyEmail() {
@@ -366,4 +362,10 @@ window.addEventListener('scroll', () => {
         nav.style.transform = 'translateY(0)';
     }
     lastScroll = currentScroll;
+});
+
+// Initialize everything when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    initVisitorCounter();
+    initProjectCounters();
 });
