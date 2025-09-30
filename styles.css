@@ -745,6 +745,42 @@ header {
     margin-top: 2rem;
 }
 
+/* Project Click Badge */
+.project-click-badge {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.9), rgba(139, 92, 246, 0.9));
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.project-click-badge:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+}
+
+.project-click-badge i {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.click-count {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
 .project-card {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(20px);

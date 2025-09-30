@@ -228,41 +228,89 @@ for (let i = 0; i < 25; i++) {
     particlesContainer.appendChild(particle);
 }
 
-// Visitor Counter
-function initVisitorCounter() {
-    let visitorCount = localStorage.getItem('visitorCount');
-    
-    if (!visitorCount) {
-        visitorCount = Math.floor(Math.random() * 500) + 100; // Start with random number between 100-600
-        localStorage.setItem('visitorCount', visitorCount);
+// Real Visitor Counter with CountAPI
+async function initVisitorCounter() {
+    try {
+        // CountAPI endpoint for this website
+        const response = await fetch('https://api.countapi.xyz/hit/last26-portfolio/visits');
+        const data = await response.json();
+        
+        // Animate counter
+        const counterElement = document.querySelector('#visitorCount span');
+        let current = 0;
+        const target = data.value || 0;
+        const duration = 2000; // 2 seconds
+        const increment = target / (duration / 16); // 60fps
+        
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                counterElement.textContent = Math.floor(current).toLocaleString();
+                requestAnimationFrame(updateCounter);
+            } else {
+                counterElement.textContent = target.toLocaleString();
+            }
+        };
+        
+        requestAnimationFrame(updateCounter);
+    } catch (error) {
+        console.error('Visitor counter error:', error);
+        document.querySelector('#visitorCount span').textContent = '...';
     }
-    
-    // Increment count
-    visitorCount = parseInt(visitorCount) + 1;
-    localStorage.setItem('visitorCount', visitorCount);
-    
-    // Animate counter
-    const counterElement = document.querySelector('#visitorCount span');
-    let current = 0;
-    const target = parseInt(visitorCount);
-    const duration = 2000; // 2 seconds
-    const increment = target / (duration / 16); // 60fps
-    
-    const updateCounter = () => {
-        current += increment;
-        if (current < target) {
-            counterElement.textContent = Math.floor(current).toLocaleString();
-            requestAnimationFrame(updateCounter);
-        } else {
-            counterElement.textContent = target.toLocaleString();
-        }
-    };
-    
-    requestAnimationFrame(updateCounter);
 }
 
 // Initialize visitor counter on page load
 initVisitorCounter();
+
+// Project Click Counter
+async function initProjectCounters() {
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    projectCards.forEach((card, index) => {
+        const projectId = card.querySelector('h3').textContent.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+        
+        // Add click counter badge
+        const badge = document.createElement('div');
+        badge.className = 'project-click-badge';
+        badge.innerHTML = '<i class="fas fa-mouse-pointer"></i> <span class="click-count">0</span>';
+        card.querySelector('.project-body').appendChild(badge);
+        
+        // Fetch current count
+        fetchProjectCount(projectId, badge);
+        
+        // Track clicks on project links
+        const projectLink = card.querySelector('.project-link, a[href*="github"]');
+        if (projectLink) {
+            projectLink.addEventListener('click', () => {
+                incrementProjectCount(projectId, badge);
+            });
+        }
+    });
+}
+
+async function fetchProjectCount(projectId, badge) {
+    try {
+        const response = await fetch(`https://api.countapi.xyz/get/last26-portfolio/${projectId}`);
+        const data = await response.json();
+        const count = data.value || 0;
+        badge.querySelector('.click-count').textContent = count;
+    } catch (error) {
+        badge.querySelector('.click-count').textContent = '0';
+    }
+}
+
+async function incrementProjectCount(projectId, badge) {
+    try {
+        const response = await fetch(`https://api.countapi.xyz/hit/last26-portfolio/${projectId}`);
+        const data = await response.json();
+        badge.querySelector('.click-count').textContent = data.value || 0;
+    } catch (error) {
+        console.error('Project counter error:', error);
+    }
+}
+
+// Initialize project counters on page load
+initProjectCounters();
 
 // Copy email function
 function copyEmail() {
