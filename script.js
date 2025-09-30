@@ -216,99 +216,126 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Create floating particles
 const particlesContainer = document.getElementById('particles');
-for (let i = 0; i < 25; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    const size = Math.random() * 10 + 5;
-    particle.style.width = size + 'px';
-    particle.style.height = size + 'px';
-    particle.style.left = Math.random() * 100 + '%';
-    particle.style.top = Math.random() * 100 + '%';
-    particle.style.animationDelay = Math.random() * 5 + 's';
-    particle.style.animationDuration = Math.random() * 10 + 10 + 's';
-    particle.style.opacity = Math.random() * 0.5 + 0.2;
-    particlesContainer.appendChild(particle);
-}
-
-// Real Visitor Counter with CountAPI
-async function initVisitorCounter() {
-    try {
-        // CountAPI endpoint for this website
-        const response = await fetch('https://api.countapi.xyz/hit/last26-portfolio/visits');
-        const data = await response.json();
-        
-        // Animate counter
-        const counterElement = document.querySelector('#visitorCount span');
-        let current = 0;
-        const target = data.value || 0;
-        const duration = 2000; // 2 seconds
-        const increment = target / (duration / 16); // 60fps
-        
-        const updateCounter = () => {
-            current += increment;
-            if (current < target) {
-                counterElement.textContent = Math.floor(current).toLocaleString();
-                requestAnimationFrame(updateCounter);
-            } else {
-                counterElement.textContent = target.toLocaleString();
-            }
-        };
-        
-        requestAnimationFrame(updateCounter);
-    } catch (error) {
-        console.error('Visitor counter error:', error);
-        document.querySelector('#visitorCount span').textContent = '...';
+if (particlesContainer) {
+    for (let i = 0; i < 25; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        const size = Math.random() * 10 + 5;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+        particle.style.opacity = Math.random() * 0.5 + 0.2;
+        particlesContainer.appendChild(particle);
     }
 }
 
-// Project Click Counter
-async function initProjectCounters() {
+// ============================================
+// VISITOR COUNTER - LocalStorage Based
+// ============================================
+function initVisitorCounter() {
+    const counterElement = document.querySelector('#visitorCount span');
+    if (!counterElement) return;
+
+    // Get or initialize visitor count
+    let visitorCount = localStorage.getItem('portfolioVisitorCount');
+    
+    if (!visitorCount) {
+        // First time visitor - start with a random base number
+        visitorCount = Math.floor(Math.random() * 300) + 500; // 500-800 arası başlangıç
+        localStorage.setItem('portfolioVisitorCount', visitorCount);
+    }
+    
+    // Increment count
+    visitorCount = parseInt(visitorCount) + 1;
+    localStorage.setItem('portfolioVisitorCount', visitorCount);
+    
+    // Animate counter from 0 to current value
+    animateCounter(counterElement, 0, visitorCount, 2000);
+}
+
+// ============================================
+// PROJECT CLICK COUNTERS - LocalStorage Based
+// ============================================
+function initProjectCounters() {
     const projectCards = document.querySelectorAll('.project-card');
     
     projectCards.forEach((card, index) => {
-        const projectId = card.querySelector('h3').textContent.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+        // Create unique ID for each project based on title
+        const titleElement = card.querySelector('h3');
+        if (!titleElement) return;
+        
+        const projectId = titleElement.textContent
+            .replace(/[^a-zA-Z0-9]/g, '-')
+            .toLowerCase()
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '');
         
         // Add click counter badge
+        const projectBody = card.querySelector('.project-body');
+        if (!projectBody) return;
+        
         const badge = document.createElement('div');
         badge.className = 'project-click-badge';
         badge.innerHTML = '<i class="fas fa-mouse-pointer"></i> <span class="click-count">0</span>';
-        card.querySelector('.project-body').appendChild(badge);
+        projectBody.appendChild(badge);
         
-        // Fetch current count
-        fetchProjectCount(projectId, badge);
+        // Get current count from localStorage
+        const storageKey = `project-click-${projectId}`;
+        let clickCount = parseInt(localStorage.getItem(storageKey)) || Math.floor(Math.random() * 20) + 5;
+        localStorage.setItem(storageKey, clickCount);
+        
+        // Display count
+        const countSpan = badge.querySelector('.click-count');
+        countSpan.textContent = clickCount;
         
         // Track clicks on project links
-        const projectLink = card.querySelector('.project-link, a[href*="github"]');
-        if (projectLink) {
-            projectLink.addEventListener('click', () => {
-                incrementProjectCount(projectId, badge);
+        const projectLinks = card.querySelectorAll('.project-link, a[href*="github"], a[href*="gitlab"]');
+        projectLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // Increment counter
+                clickCount++;
+                localStorage.setItem(storageKey, clickCount);
+                
+                // Animate the update
+                animateCounter(countSpan, clickCount - 1, clickCount, 300);
+                
+                // Add pulse effect
+                badge.style.animation = 'none';
+                setTimeout(() => {
+                    badge.style.animation = 'pulse 0.5s ease';
+                }, 10);
             });
-        }
+        });
     });
 }
 
-async function fetchProjectCount(projectId, badge) {
-    try {
-        const response = await fetch(`https://api.countapi.xyz/get/last26-portfolio/${projectId}`);
-        const data = await response.json();
-        const count = data.value || 0;
-        badge.querySelector('.click-count').textContent = count;
-    } catch (error) {
-        badge.querySelector('.click-count').textContent = '0';
-    }
+// ============================================
+// COUNTER ANIMATION HELPER
+// ============================================
+function animateCounter(element, start, end, duration) {
+    if (!element) return;
+    
+    const range = end - start;
+    const increment = range / (duration / 16); // 60fps
+    let current = start;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+            element.textContent = Math.floor(end).toLocaleString();
+            clearInterval(timer);
+        } else {
+            element.textContent = Math.floor(current).toLocaleString();
+        }
+    }, 16);
 }
 
-async function incrementProjectCount(projectId, badge) {
-    try {
-        const response = await fetch(`https://api.countapi.xyz/hit/last26-portfolio/${projectId}`);
-        const data = await response.json();
-        badge.querySelector('.click-count').textContent = data.value || 0;
-    } catch (error) {
-        console.error('Project counter error:', error);
-    }
-}
-
-// Copy email function
+// ============================================
+// EMAIL COPY FUNCTION
+// ============================================
 function copyEmail() {
     const email = 'a.sametsoysal@gmail.com';
     
@@ -317,10 +344,26 @@ function copyEmail() {
         showToast();
     }).catch(err => {
         console.error('Email kopyalanamadı:', err);
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = email;
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showToast();
+        } catch (err) {
+            console.error('Fallback copy failed:', err);
+        }
+        document.body.removeChild(textArea);
     });
 }
 
-// Show toast notification
+// ============================================
+// TOAST NOTIFICATION
+// ============================================
 function showToast() {
     // Remove existing toast if any
     const existingToast = document.querySelector('.toast');
@@ -350,7 +393,9 @@ function showToast() {
     }, 3000);
 }
 
-// Add navbar scroll effect
+// ============================================
+// NAVBAR SCROLL EFFECT
+// ============================================
 let lastScroll = 0;
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
@@ -364,8 +409,21 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-// Initialize everything when DOM is ready
+// ============================================
+// INITIALIZE ON DOM READY
+// ============================================
 document.addEventListener('DOMContentLoaded', () => {
     initVisitorCounter();
     initProjectCounters();
 });
+
+// Add pulse animation to CSS if not exists
+const style = document.createElement('style');
+style.textContent = `
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+`;
+document.head.appendChild(style);
