@@ -3,14 +3,14 @@
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBNUqCue50beKn73JOj0aYGEW5X4s1nQmU",
-  authDomain: "last-26website.firebaseapp.com",
-  databaseURL: "https://last-26website-default-rtdb.firebaseio.com",
-  projectId: "last-26website",
-  storageBucket: "last-26website.firebasestorage.app",
-  messagingSenderId: "633506878839",
-  appId: "1:633506878839:web:e02917bbd095281ddf7d72",
-  measurementId: "G-PHY5GC9FF9"
+  apiKey: "AIzaSyCiEXF0bnQngq7sJlwcbQreyPbYzR4NN1k",
+  authDomain: "last-26.firebaseapp.com",
+  databaseURL: "https://last-26-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "last-26",
+  storageBucket: "last-26.firebasestorage.app",
+  messagingSenderId: "258323865023",
+  appId: "1:258323865023:web:427c38fd8aa1b1ff97d50a",
+  measurementId: "G-NJ781YMWZV"
 };
 
 // Initialize Firebase
