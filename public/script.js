@@ -43,6 +43,7 @@ const translations = {
         "about.stats.projects": "Tamamlanan Proje",
         "about.stats.technologies": "Teknoloji",
         "experience.title": "Deneyim",
+        "experience.certificate": "Sertifika",
         "experience.tei.title": "Yapay Zeka Stajyeri",
         "experience.tei.company": "TEI - TUSAŞ Motor Sanayii A.Ş. | IT - Data Analytics & AI",
         "experience.tei.date": "Ağustos 2025 - Eylül 2025",
@@ -52,6 +53,12 @@ const translations = {
         "experience.tei.achievement4": "Bilgi erişim süreçlerini hızlandırmak için RAG tabanlı doküman sorgulama prototipi oluşturdum",
         "experience.tei.achievement5": "n8n gibi otomasyon araçları kullanarak IT süreç akışlarını hızlandırdım ve manuel görevleri minimize ettim",
         "experience.tei.achievement6": "Playwright kullanarak Trendyol Yemek üzerinden otomatik yemek sipariş veren web scraping tabanlı uygulama geliştirdim",
+        "experience.powintec.title": "Software Developer (Remote)",
+        "experience.powintec.company": "Powintec Engineering | Wireless Charging of Small Electric Vehicles",
+        "experience.powintec.date": "Temmuz 2023 - Temmuz 2025",
+        "experience.powintec.achievement1": "Küçük elektrikli araçları hedefleyen kablosuz şarj projesi için mobil uygulamalar ve frontend arayüzleri geliştirdim",
+        "experience.powintec.achievement2": "Kullanıcı deneyimini ve işlevselliği geliştirmek için çapraz fonksiyonel ekiplerle işbirliği yaptım",
+        "experience.powintec.achievement3": "Sürdürülebilir teknoloji inovasyonuna odaklanan bir startup ortamına katkıda bulundum",
         "skills.title": "Yetenekler",
         "skills.ai.title": "Yapay Zeka & Makine Öğrenmesi",
         "skills.nlp.title": "NLP & Semantik Teknolojiler",
@@ -61,6 +68,9 @@ const translations = {
         "skills.frontend.title": "Frontend Geliştirme",
         "skills.database.title": "Veritabanı Teknolojileri",
         "skills.tools.title": "Araçlar & DevOps",
+        "skills.languages.title": "Diller",
+        "skills.languages.turkish": "Türkçe (Ana Dil)",
+        "skills.languages.english": "İngilizce (B2 - Profesyonel Yeterlilik)",
         "projects.title": "Projeler",
         "projects.badge.corporate": "KURUMSAL",
         "projects.badge.graduation": "MEZUN. PROJESİ",
@@ -112,6 +122,7 @@ const translations = {
         "about.stats.projects": "Completed Projects",
         "about.stats.technologies": "Technologies",
         "experience.title": "Experience",
+        "experience.certificate": "Certificate",
         "experience.tei.title": "Artificial Intelligence Intern",
         "experience.tei.company": "TEI - TUSAŞ Motor Sanayii A.Ş. | IT - Data Analytics & AI",
         "experience.tei.date": "August 2025 - September 2025",
@@ -121,6 +132,12 @@ const translations = {
         "experience.tei.achievement4": "Created RAG-based document querying prototype to accelerate information access processes",
         "experience.tei.achievement5": "Accelerated IT process workflows and minimized manual tasks using automation tools like n8n",
         "experience.tei.achievement6": "Developed a web scraping-based application using Playwright that autonomously orders food through Trendyol Yemek",
+        "experience.powintec.title": "Software Developer (Remote)",
+        "experience.powintec.company": "Powintec Engineering | Wireless Charging of Small Electric Vehicles",
+        "experience.powintec.date": "July 2023 - July 2025",
+        "experience.powintec.achievement1": "Developed mobile applications and frontend interfaces for a wireless charging project targeting small electric vehicles",
+        "experience.powintec.achievement2": "Collaborated with cross-functional teams to improve user experience and functionality",
+        "experience.powintec.achievement3": "Contributed to a startup environment focused on sustainable technology innovation",
         "skills.title": "Skills",
         "skills.ai.title": "Artificial Intelligence & Machine Learning",
         "skills.nlp.title": "NLP & Semantic Technologies",
@@ -130,6 +147,9 @@ const translations = {
         "skills.frontend.title": "Frontend Development",
         "skills.database.title": "Database Technologies",
         "skills.tools.title": "Tools & DevOps",
+        "skills.languages.title": "Languages",
+        "skills.languages.turkish": "Turkish (Native)",
+        "skills.languages.english": "English (B2 - Professional Proficiency)",
         "projects.title": "Projects",
         "projects.badge.corporate": "CORPORATE",
         "projects.badge.graduation": "CAPSTONE",
@@ -621,7 +641,7 @@ function hideAdminDashboard() {
 // ============================================
 // EMAIL COPY FUNCTION
 // ============================================
-function copyEmail() {
+window.copyEmail = function() {
     const email = 'a.sametsoysal@gmail.com';
     
     // Copy to clipboard
@@ -703,6 +723,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     await initProjectCounters();
     await trackUserBehavior();
     initAdminDashboard();
+    
+    // Initialize certificate button
+    initCertificateButton();
 });
 
 // Add pulse animation to CSS if not exists
@@ -715,3 +738,112 @@ style.textContent = `
 }
 `;
 document.head.appendChild(style);
+
+// ============================================
+// EXPERIENCE SLIDER
+// ============================================
+let currentExperience = 1;
+const totalExperiences = 2;
+
+window.changeExperience = function(direction) {
+    const items = document.querySelectorAll('.timeline-item');
+    const indicators = document.querySelectorAll('.experience-indicators .indicator');
+    
+    // Update current experience
+    currentExperience += direction;
+    
+    // Loop around
+    if (currentExperience > totalExperiences) {
+        currentExperience = 1;
+    } else if (currentExperience < 1) {
+        currentExperience = totalExperiences;
+    }
+    
+    // Update items visibility
+    items.forEach(item => {
+        const itemNumber = parseInt(item.getAttribute('data-experience'));
+        if (itemNumber === currentExperience) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+    
+    // Update indicators
+    indicators.forEach((indicator, index) => {
+        if (index + 1 === currentExperience) {
+            indicator.classList.add('active');
+        } else {
+            indicator.classList.remove('active');
+        }
+    });
+}
+
+window.goToExperience = function(experienceNumber) {
+    const items = document.querySelectorAll('.timeline-item');
+    const indicators = document.querySelectorAll('.experience-indicators .indicator');
+    
+    // Update current experience
+    currentExperience = experienceNumber;
+    
+    // Update items visibility
+    items.forEach(item => {
+        const itemNumber = parseInt(item.getAttribute('data-experience'));
+        if (itemNumber === experienceNumber) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+    
+    // Update indicators
+    indicators.forEach((indicator, index) => {
+        if (index + 1 === experienceNumber) {
+            indicator.classList.add('active');
+        } else {
+            indicator.classList.remove('active');
+        }
+    });
+}
+
+// ============================================
+// CERTIFICATE MODAL
+// ============================================
+function showCertificateModal() {
+    const modal = document.getElementById('certificateModal');
+    if (modal) {
+        modal.classList.add('show');
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeCertificateModal() {
+    const modal = document.getElementById('certificateModal');
+    if (modal) {
+        modal.classList.remove('show');
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Initialize certificate button
+function initCertificateButton() {
+    const certBtn = document.getElementById('certificateBtn');
+    if (certBtn) {
+        certBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showCertificateModal();
+        });
+    }
+}
+
+// Close modal on ESC key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeCertificateModal();
+    }
+});
+
+// Expose close function to window for onclick
+window.closeCertificate = closeCertificateModal;

@@ -113,27 +113,74 @@
     <section class="section" id="experience">
         <div class="container">
             <h2 class="section-title scroll-reveal" data-tr="experience.title">Deneyim</h2>
-            <div class="experience-timeline">
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-header">
-                        <div>
-                            <div class="timeline-title" data-tr="experience.tei.title">Yapay Zeka Stajyeri</div>
-                            <div class="timeline-company" data-tr="experience.tei.company">TEI - TUSAŞ Motor Sanayii A.Ş. | IT - Data Analytics & AI</div>
+            <div class="experience-slider">
+                <button class="slider-btn prev-btn" onclick="changeExperience(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="experience-timeline">
+                    <!-- TEI Experience -->
+                    <div class="timeline-item active" data-experience="1">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="timeline-title" data-tr="experience.tei.title">Yapay Zeka Stajyeri</div>
+                                <div class="timeline-company" data-tr="experience.tei.company">TEI - TUSAŞ Motor Sanayii A.Ş. | IT - Data Analytics & AI</div>
+                            </div>
+                            <div class="timeline-date" data-tr="experience.tei.date">Ağustos 2025 - Eylül 2025</div>
                         </div>
-                        <div class="timeline-date" data-tr="experience.tei.date">Ağustos 2025 - Eylül 2025</div>
+                        <ul class="timeline-achievements">
+                            <li data-tr="experience.tei.achievement1">Çok modelli destekli chatbot altyapıları tasarladım (LibreChat entegrasyonu)</li>
+                            <li data-tr="experience.tei.achievement2">CV analiz ve değerlendirme sistemlerinin geliştirilmesine katkı sağladım</li>
+                            <li data-tr="experience.tei.achievement3">Qwen2.5-VL modeli kullanarak tablolardan ve formlardan veri çıkarabilen OCR sistemi geliştirdim</li>
+                            <li data-tr="experience.tei.achievement4">Bilgi erişim süreçlerini hızlandırmak için RAG tabanlı doküman sorgulama prototipi oluşturdum</li>
+                            <li data-tr="experience.tei.achievement5">n8n gibi otomasyon araçları kullanarak IT süreç akışlarını hızlandırdım ve manuel görevleri minimize ettim</li>
+                            <li data-tr="experience.tei.achievement6">Playwright kullanarak Trendyol Yemek üzerinden otomatik yemek sipariş veren web scraping tabanlı uygulama geliştirdim</li>
+                        </ul>
+                        <button class="certificate-btn" id="certificateBtn" type="button">
+                            <i class="fas fa-certificate"></i>
+                            <span data-tr="experience.certificate">Sertifika</span>
+                        </button>
                     </div>
-                    <ul class="timeline-achievements">
-                        <li data-tr="experience.tei.achievement1">Çok modelli destekli chatbot altyapıları tasarladım (LibreChat entegrasyonu)</li>
-                        <li data-tr="experience.tei.achievement2">CV analiz ve değerlendirme sistemlerinin geliştirilmesine katkı sağladım</li>
-                        <li data-tr="experience.tei.achievement3">Qwen2.5-VL modeli kullanarak tablolardan ve formlardan veri çıkarabilen OCR sistemi geliştirdim</li>
-                        <li data-tr="experience.tei.achievement4">Bilgi erişim süreçlerini hızlandırmak için RAG tabanlı doküman sorgulama prototipi oluşturdum</li>
-                        <li data-tr="experience.tei.achievement5">n8n gibi otomasyon araçları kullanarak IT süreç akışlarını hızlandırdım ve manuel görevleri minimize ettim</li>
-                        <li data-tr="experience.tei.achievement6">Playwright kullanarak Trendyol Yemek üzerinden otomatik yemek sipariş veren web scraping tabanlı uygulama geliştirdim</li>
-                    </ul>
+
+                    <!-- Powintec Experience -->
+                    <div class="timeline-item" data-experience="2">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="timeline-title" data-tr="experience.powintec.title">Software Developer (Remote)</div>
+                                <div class="timeline-company" data-tr="experience.powintec.company">Powintec Engineering | Wireless Charging of Small Electric Vehicles</div>
+                            </div>
+                            <div class="timeline-date" data-tr="experience.powintec.date">Temmuz 2023 - Temmuz 2025</div>
+                        </div>
+                        <ul class="timeline-achievements">
+                            <li data-tr="experience.powintec.achievement1">Küçük elektrikli araçları hedefleyen kablosuz şarj projesi için mobil uygulamalar ve frontend arayüzleri geliştirdim</li>
+                            <li data-tr="experience.powintec.achievement2">Kullanıcı deneyimini ve işlevselliği geliştirmek için çapraz fonksiyonel ekiplerle işbirliği yaptım</li>
+                            <li data-tr="experience.powintec.achievement3">Sürdürülebilir teknoloji inovasyonuna odaklanan bir startup ortamına katkıda bulundum</li>
+                        </ul>
+                    </div>
                 </div>
+
+                <button class="slider-btn next-btn" onclick="changeExperience(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <!-- Slider indicators -->
+            <div class="experience-indicators">
+                <span class="indicator active" onclick="goToExperience(1)"></span>
+                <span class="indicator" onclick="goToExperience(2)"></span>
             </div>
         </div>
     </section>
+
+    <!-- Certificate Modal -->
+    <div id="certificateModal" class="certificate-modal" onclick="closeCertificate()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeCertificate()">
+                <i class="fas fa-times"></i>
+            </button>
+            <img src="TEI.jpeg" alt="TEI Certificate" class="certificate-image">
+        </div>
+    </div>
 
     <!-- Projects Section -->
     <section class="section" id="projects">
@@ -382,12 +429,11 @@
                     </div>
                     <div class="skill-tags">
                         <span class="skill-tag">ChromaDB</span>
-                        <span class="skill-tag">Pinecone</span>
                         <span class="skill-tag">Qdrant</span>
+                        <span class="skill-tag">Milvus</span>
                         <span class="skill-tag">Weaviate</span>
                         <span class="skill-tag">FAISS</span>
                         <span class="skill-tag">OpenAI Embeddings</span>
-                        <span class="skill-tag">all-MiniLM-L6-v2</span>
                     </div>
                 </div>
 
@@ -398,11 +444,11 @@
                     </div>
                     <div class="skill-tags">
                         <span class="skill-tag">Qwen2.5-VL</span>
-                        <span class="skill-tag">Surya</span>
-                        <span class="skill-tag">GOT-OCR2</span>
-                        <span class="skill-tag">Donut</span>
                         <span class="skill-tag">OpenCV</span>
                         <span class="skill-tag">Tesseract</span>
+                        <span class="skill-tag">Table-Transformer</span>
+                        <span class="skill-tag">DOTS</span>
+                        <span class="skill-tag">PyMuPDF</span>
                         <span class="skill-tag">pdf2image</span>
                     </div>
                 </div>
@@ -418,8 +464,9 @@
                         <span class="skill-tag">Flask-RESTX</span>
                         <span class="skill-tag">Express.js</span>
                         <span class="skill-tag">ASP.NET Core Web API</span>
-                        <span class="skill-tag">LibreChat Framework</span>
                         <span class="skill-tag">RESTful Services</span>
+                        <span class="skill-tag">JWT</span>
+                        <span class="skill-tag">OAuth</span>
                     </div>
                 </div>
 
@@ -463,9 +510,20 @@
                         <span class="skill-tag">Git</span>
                         <span class="skill-tag">Git LFS</span>
                         <span class="skill-tag">Playwright</span>
-                        <span class="skill-tag">Selenium</span>
-                        <span class="skill-tag">n8n Automation</span>
+                        <span class="skill-tag">n8n</span>
+                        <span class="skill-tag">Cron Jobs</span>
                         <span class="skill-tag">Swagger/OpenAPI</span>
+                    </div>
+                </div>
+
+                <div class="skill-category scroll-reveal">
+                    <div class="skill-category-title">
+                        <span class="skill-category-icon">🌍</span>
+                        <span data-tr="skills.languages.title">Diller</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag" data-tr="skills.languages.turkish">Türkçe (Ana Dil)</span>
+                        <span class="skill-tag" data-tr="skills.languages.english">İngilizce (B2 - Profesyonel Yeterlilik)</span>
                     </div>
                 </div>
             </div>
