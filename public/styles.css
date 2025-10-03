@@ -24,6 +24,59 @@ body {
     color: var(--dark);
     overflow-x: hidden;
     line-height: 1.6;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    --dark: #f8fafc;
+    --light: #0f172a;
+    --gray: #94a3b8;
+    --pastel-bg: #1e293b;
+    --pastel-section: #0f172a;
+    --soft-white: #1e293b;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    color: #f8fafc;
+}
+
+body.dark-mode .section {
+    background: rgba(15, 23, 42, 0.5);
+}
+
+body.dark-mode .project-card,
+body.dark-mode .experience-timeline,
+body.dark-mode .skill-category,
+body.dark-mode .contact-card,
+body.dark-mode .stat-card {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(100, 116, 139, 0.2);
+}
+
+body.dark-mode .visitor-counter {
+    background: rgba(30, 41, 59, 0.95);
+    border-color: rgba(100, 116, 139, 0.3);
+}
+
+body.dark-mode .visitor-data-cell:first-child {
+    border-right-color: rgba(99, 102, 241, 0.3);
+}
+
+body.dark-mode footer {
+    background: rgba(15, 23, 42, 0.95);
+}
+
+body.dark-mode .dashboard-content {
+    background: rgba(30, 41, 59, 0.95);
+    color: #f8fafc;
+}
+
+body.dark-mode .dashboard-content h3,
+body.dark-mode .dashboard-content h4 {
+    color: #f8fafc;
+}
+
+body.dark-mode #cv-stats-container .stat-item {
+    background: rgba(15, 23, 42, 0.8);
 }
 
 .container {
@@ -173,6 +226,43 @@ nav .container {
 .lang-btn.active {
     background: var(--accent);
     color: white;
+}
+
+/* Nav Controls */
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.theme-toggle i {
+    transition: transform 0.5s ease;
+}
+
+.theme-toggle:active i {
+    transform: rotate(360deg);
 }
 
 /* Visitor Counter */
@@ -389,6 +479,15 @@ header {
     animation: fadeIn 1.5s ease;
 }
 
+.cv-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    animation: fadeIn 2s ease;
+}
+
 .btn {
     padding: 14px 32px;
     border-radius: 50px;
@@ -399,6 +498,20 @@ header {
     align-items: center;
     gap: 8px;
     font-size: 1rem;
+}
+
+.btn-outline-light {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+}
+
+.btn-outline-light:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
 }
 
 .btn-primary {
@@ -1408,8 +1521,10 @@ footer p {
     background: white;
     padding: 2rem;
     border-radius: 20px;
-    max-width: 500px;
+    max-width: 650px;
     width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
@@ -1417,6 +1532,39 @@ footer p {
     color: var(--dark);
     margin-bottom: 1.5rem;
     text-align: center;
+    font-size: 1.5rem;
+}
+
+.dashboard-content h4 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    padding-top: 1rem;
+    border-top: 2px solid #e2e8f0;
+}
+
+#cv-stats-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+#cv-stats-container .stat-item {
+    flex-direction: column;
+    align-items: flex-start;
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 10px;
+    border: none;
+}
+
+#cv-stats-container .stat-label {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+#cv-stats-container .stat-item span:last-child {
     font-size: 1.5rem;
 }
 
@@ -1656,7 +1804,8 @@ footer p {
         line-height: 1.6;
     }
 
-    .cta-buttons {
+    .cta-buttons,
+    .cv-buttons {
         flex-direction: column;
         gap: 0.8rem;
     }
@@ -1665,6 +1814,10 @@ footer p {
         width: 100%;
         justify-content: center;
         padding: 12px 24px;
+    }
+    
+    .nav-controls {
+        gap: 0.5rem;
     }
 
     .nav-links {

@@ -57,9 +57,14 @@
                     <li><a href="#skills" data-tr="nav.skills">Yetenekler</a></li>
                     <li><a href="#contact" data-tr="nav.contact">İletişim</a></li>
                 </ul>
-                <div class="lang-switcher">
-                    <button class="lang-btn" data-lang="tr">TR</button>
-                    <button class="lang-btn active" data-lang="en">EN</button>
+                <div class="nav-controls">
+                    <div class="lang-switcher">
+                        <button class="lang-btn" data-lang="tr">TR</button>
+                        <button class="lang-btn active" data-lang="en">EN</button>
+                    </div>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -87,6 +92,14 @@
                 </a>
                 <a href="#contact" class="btn btn-secondary">
                     <i class="fas fa-envelope"></i> <span data-tr="hero.btn.contact">İletişim</span>
+                </a>
+            </div>
+            <div class="cv-buttons">
+                <a href="#" id="cvViewBtn" class="btn btn-outline-light" target="_blank">
+                    <i class="fas fa-eye"></i> <span data-tr="hero.btn.cv.view">CV Görüntüle</span>
+                </a>
+                <a href="#" id="cvDownloadBtn" class="btn btn-outline-light" download>
+                    <i class="fas fa-download"></i> <span data-tr="hero.btn.cv.download">CV İndir</span>
                 </a>
             </div>
         </div>

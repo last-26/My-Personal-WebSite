@@ -37,6 +37,8 @@ const translations = {
         "hero.btn.projects": "Projelerim",
         "hero.btn.github": "GitHub Profilim",
         "hero.btn.contact": "İletişim",
+        "hero.btn.cv.view": "CV Görüntüle",
+        "hero.btn.cv.download": "CV İndir",
         "about.title": "Hakkımda",
         "about.description": "Eskişehir Osmangazi Üniversitesi Bilgisayar Mühendisliği son sınıf öğrencisiyim (Mezuniyet: Şubat 2026). Yapay Zeka, Makine Öğrenmesi ve Doğal Dil İşleme alanlarında güçlü teknik uzmanlığa sahibim. RAG sistemleri, embedding teknolojileri, vektör veritabanları ve OCR tabanlı çözümler geliştirdim. Python, RESTful API entegrasyonları ve çok modelli orkestrasyon konularında production-ready AI çözümleri geliştirme deneyimim bulunmaktadır. Kurumsal projelerde verimliliği artıran ölçeklenebilir ve yenilikçi yapay zeka sistemleri tasarlama konusunda uzmanlaştım.",
         "about.stats.years": "Yıl Deneyim",
@@ -125,6 +127,8 @@ const translations = {
         "hero.btn.projects": "My Projects",
         "hero.btn.github": "My GitHub Profile",
         "hero.btn.contact": "Contact",
+        "hero.btn.cv.view": "View CV",
+        "hero.btn.cv.download": "Download CV",
         "about.title": "About Me",
         "about.description": "I am currently pursuing my Bachelor's degree in Computer Engineering at Eskişehir Osmangazi University (Expected graduation: February 2026). I have strong technical expertise in Artificial Intelligence, Machine Learning, and Natural Language Processing. I have developed RAG systems, embedding technologies, vector databases, and OCR-based solutions. I have experience in developing production-ready AI solutions in Python, RESTful API integrations, and multi-model orchestration. I specialize in designing scalable and innovative AI systems that increase efficiency in corporate projects.",
         "about.stats.years": "Years of Experience",
@@ -211,6 +215,7 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
         if (lang !== currentLang) {
             currentLang = lang;
             updateLanguage(lang);
+            updateCVButtons(lang);
             
             // Update active button
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
@@ -223,6 +228,42 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
             localStorage.setItem('preferredLang', lang);
         }
     });
+});
+
+// Update CV buttons based on language
+function updateCVButtons(lang) {
+    const cvViewBtn = document.getElementById('cvViewBtn');
+    const cvDownloadBtn = document.getElementById('cvDownloadBtn');
+    
+    if (cvViewBtn && cvDownloadBtn) {
+        const cvFile = lang === 'tr' ? 'CV_TR.pdf' : 'CV_EN.pdf';
+        cvViewBtn.href = cvFile;
+        cvDownloadBtn.href = cvFile;
+        cvDownloadBtn.download = `Samet_Soysal_CV_${lang.toUpperCase()}.pdf`;
+    }
+}
+
+// Dark Mode Toggle
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+
+// Check for saved theme preference
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+    body.classList.add('dark-mode');
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+}
+
+themeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        localStorage.setItem('theme', 'light');
+    }
 });
 
 // Update language function
@@ -262,6 +303,9 @@ if (savedLang !== 'en') {
 }
 document.documentElement.lang = savedLang;
 
+// Initialize CV buttons
+updateCVButtons(savedLang);
+
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -294,6 +338,111 @@ if (particlesContainer) {
 // ============================================
 // FIREBASE REAL-TIME ANALYTICS
 // ============================================
+
+// ============================================
+// CV TRACKING - Firebase Realtime Database
+// ============================================
+
+// Initialize CV tracking
+function initCVTracking() {
+    const cvViewBtn = document.getElementById('cvViewBtn');
+    const cvDownloadBtn = document.getElementById('cvDownloadBtn');
+    
+    if (!cvViewBtn || !cvDownloadBtn) {
+        console.warn('❌ CV buttons not found');
+        return;
+    }
+    
+    // Add tracking event listeners with preventDefault
+    cvViewBtn.addEventListener('click', async (e) => {
+        e.preventDefault(); // Prevent default link behavior
+        const cvFile = cvViewBtn.href;
+        
+        console.log('🔵 CV View button clicked, language:', currentLang);
+        
+        // Track the action
+        await trackCVAction('view', currentLang);
+        
+        // Open CV in new tab after tracking
+        window.open(cvFile, '_blank');
+    });
+    
+    cvDownloadBtn.addEventListener('click', async (e) => {
+        e.preventDefault(); // Prevent default link behavior
+        const cvFile = cvDownloadBtn.href;
+        const downloadName = cvDownloadBtn.download;
+        
+        console.log('🔵 CV Download button clicked, language:', currentLang);
+        
+        // Track the action
+        await trackCVAction('download', currentLang);
+        
+        // Trigger download after tracking
+        const link = document.createElement('a');
+        link.href = cvFile;
+        link.download = downloadName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+    
+    console.log('✅ CV tracking initialized successfully');
+}
+
+async function trackCVAction(action, language) {
+    console.log(`🔄 Starting CV tracking - Action: ${action}, Language: ${language}`);
+    
+    // Check if Firebase is available
+    if (!database) {
+        console.error('❌ Firebase database not available, CV action not tracked');
+        return;
+    }
+    console.log('✅ Firebase database is available');
+
+    try {
+        const visitorId = localStorage.getItem('portfolioVisitorId') || 'unknown';
+        const cvKey = `cv_${action}_${language}`;
+        console.log(`📊 Tracking key: ${cvKey}, Visitor ID: ${visitorId}`);
+        
+        // Track total count
+        console.log('📝 Writing to: cv_analytics/total/' + cvKey);
+        const totalRef = database.ref(`cv_analytics/total/${cvKey}`);
+        await totalRef.transaction((currentCount) => {
+            const newCount = (currentCount || 0) + 1;
+            console.log(`📈 Total count updated: ${currentCount || 0} → ${newCount}`);
+            return newCount;
+        });
+        
+        // Track by date
+        const today = new Date().toDateString();
+        console.log('📝 Writing to: cv_analytics/daily/' + today + '/' + cvKey);
+        const dailyRef = database.ref(`cv_analytics/daily/${today}/${cvKey}`);
+        await dailyRef.transaction((currentCount) => {
+            const newCount = (currentCount || 0) + 1;
+            console.log(`📅 Daily count updated: ${currentCount || 0} → ${newCount}`);
+            return newCount;
+        });
+        
+        // Track individual user action
+        console.log('📝 Writing user action to: cv_analytics/users/' + visitorId + '/' + cvKey);
+        const userActionRef = database.ref(`cv_analytics/users/${visitorId}/${cvKey}`);
+        const actionData = {
+            timestamp: Date.now(),
+            action: action,
+            language: language,
+            userAgent: navigator.userAgent,
+            referrer: document.referrer || 'direct'
+        };
+        await userActionRef.push(actionData);
+        console.log('👤 User action recorded:', actionData);
+        
+        console.log(`✅ CV ${action} tracked successfully: ${language.toUpperCase()}`);
+        
+    } catch (error) {
+        console.error('❌ CV tracking error:', error);
+        console.error('Error details:', error.message, error.stack);
+    }
+}
 
 // ============================================
 // VISITOR COUNTER - Firebase Realtime Database
@@ -589,6 +738,25 @@ function showAdminDashboard() {
                     <span id="popular-project">Loading...</span>
                 </div>
             </div>
+            <h4 style="margin-top: 20px;">📄 CV Analytics</h4>
+            <div id="cv-stats-container">
+                <div class="stat-item">
+                    <span class="stat-label">CV Views (TR):</span>
+                    <span id="cv-view-tr">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">CV Views (EN):</span>
+                    <span id="cv-view-en">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">CV Downloads (TR):</span>
+                    <span id="cv-download-tr">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">CV Downloads (EN):</span>
+                    <span id="cv-download-en">0</span>
+                </div>
+            </div>
             <button onclick="hideAdminDashboard()">Close</button>
         </div>
     `;
@@ -608,7 +776,8 @@ async function loadAdminStats() {
         const totalRef = database.ref('visitors/total');
         totalRef.on('value', (snapshot) => {
             const total = snapshot.val() || 0;
-            document.getElementById('total-visitors').textContent = total;
+            const el = document.getElementById('total-visitors');
+            if (el) el.textContent = total;
         });
 
         // Load today's visitors
@@ -617,7 +786,8 @@ async function loadAdminStats() {
         todayRef.on('value', (snapshot) => {
             const todayData = snapshot.val() || {};
             const todayCount = Object.keys(todayData).length;
-            document.getElementById('today-visitors').textContent = todayCount;
+            const el = document.getElementById('today-visitors');
+            if (el) el.textContent = todayCount;
         });
 
         // Load popular project
@@ -632,8 +802,25 @@ async function loadAdminStats() {
                 }
             });
             
-            document.getElementById('popular-project').textContent = 
-                `${popularProject.name} (${popularProject.count} views)`;
+            const el = document.getElementById('popular-project');
+            if (el) el.textContent = `${popularProject.name} (${popularProject.count} views)`;
+        });
+
+        // Load CV Analytics
+        const cvAnalyticsRef = database.ref('cv_analytics/total');
+        cvAnalyticsRef.on('value', (snapshot) => {
+            const cvData = snapshot.val() || {};
+            
+            // Update CV Views
+            const viewTR = document.getElementById('cv-view-tr');
+            const viewEN = document.getElementById('cv-view-en');
+            const downloadTR = document.getElementById('cv-download-tr');
+            const downloadEN = document.getElementById('cv-download-en');
+            
+            if (viewTR) viewTR.textContent = (cvData.cv_view_tr || 0).toLocaleString();
+            if (viewEN) viewEN.textContent = (cvData.cv_view_en || 0).toLocaleString();
+            if (downloadTR) downloadTR.textContent = (cvData.cv_download_tr || 0).toLocaleString();
+            if (downloadEN) downloadEN.textContent = (cvData.cv_download_en || 0).toLocaleString();
         });
 
     } catch (error) {
@@ -736,6 +923,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Initialize certificate button
     initCertificateButton();
+    
+    // Initialize CV tracking buttons
+    initCVTracking();
 });
 
 // Add pulse animation to CSS if not exists
