@@ -13,32 +13,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 </head>
 <body>
-    <!-- Visitor Counter -->
-    <div class="visitor-counter">
-        <div class="visitor-table">
-            <div class="visitor-header">
-                <i class="fas fa-users"></i>
-                <span data-tr="visitor.header">Ziyaretçiler</span>
-            </div>
-            <div class="visitor-data-row">
-                <div class="visitor-data-cell">
-                    <div class="visitor-label">
-                        <i class="fas fa-globe-americas"></i>
-                        <span data-tr="visitor.total">TOTAL</span>
-                    </div>
-                    <div class="visitor-count" id="visitorCount">0</div>
-                </div>
-                <div class="visitor-data-cell">
-                    <div class="visitor-label">
-                        <i class="fas fa-calendar-day"></i>
-                        <span data-tr="visitor.daily">DAILY</span>
-                    </div>
-                    <div class="visitor-count" id="dailyVisitorCount">0</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Navigation -->
     <nav>
         <div class="container">
@@ -73,6 +47,33 @@
     <!-- Hero Section -->
     <header>
         <div class="particles" id="particles"></div>
+        
+        <!-- Visitor Counter -->
+        <div class="visitor-counter">
+            <div class="visitor-table">
+                <div class="visitor-header">
+                    <i class="fas fa-users"></i>
+                    <span data-tr="visitor.header">Ziyaretçiler</span>
+                </div>
+                <div class="visitor-data-row">
+                    <div class="visitor-data-cell">
+                        <div class="visitor-label">
+                            <i class="fas fa-globe-americas"></i>
+                            <span data-tr="visitor.total">TOTAL</span>
+                        </div>
+                        <div class="visitor-count" id="visitorCount">0</div>
+                    </div>
+                    <div class="visitor-data-cell">
+                        <div class="visitor-label">
+                            <i class="fas fa-calendar-day"></i>
+                            <span data-tr="visitor.daily">DAILY</span>
+                        </div>
+                        <div class="visitor-count" id="dailyVisitorCount">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div class="hero-content">
             <div class="hero-badge">
                 <i class="fas fa-robot"></i> <span data-tr="hero.badge">AI/ML Mühendisi & Full-Stack Developer</span>
