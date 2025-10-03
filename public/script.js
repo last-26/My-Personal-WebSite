@@ -105,7 +105,9 @@ const translations = {
         "contact.education": "Eğitim",
         "contact.education.value": "ESOGU - Bilgisayar Mühendisliği",
         "contact.email.copied": "Email kopyalandı!",
-        "visitor.label": "Ziyaretçi",
+        "visitor.header": "Ziyaretçiler",
+        "visitor.total": "TOPLAM",
+        "visitor.daily": "GÜNLÜK",
         "footer.copyright": "© 2025 Samet Soysal. Tüm hakları saklıdır.",
         "footer.made": "Tutkuyla kodlanmıştır ❤️"
     },
@@ -191,7 +193,9 @@ const translations = {
         "contact.education": "Education",
         "contact.education.value": "ESOGU - Computer Engineering",
         "contact.email.copied": "Email copied!",
-        "visitor.label": "Visitors",
+        "visitor.header": "Visitors",
+        "visitor.total": "TOTAL",
+        "visitor.daily": "DAILY",
         "footer.copyright": "© 2025 Samet Soysal. All rights reserved.",
         "footer.made": "Coded with passion ❤️"
     }
@@ -295,13 +299,16 @@ if (particlesContainer) {
 // VISITOR COUNTER - Firebase Realtime Database
 // ============================================
 async function initVisitorCounter() {
-    const counterElement = document.querySelector('#visitorCount span');
-    if (!counterElement) return;
+    const counterElement = document.querySelector('#visitorCount');
+    const dailyCounterElement = document.querySelector('#dailyVisitorCount');
+    
+    if (!counterElement || !dailyCounterElement) return;
 
     // Check if Firebase is available
     if (!database) {
-        console.warn('Firebase not available, using fallback counter');
-        fallbackVisitorCounter();
+        console.error('Firebase not available');
+        counterElement.textContent = '--';
+        dailyCounterElement.textContent = '--';
         return;
     }
 
@@ -334,19 +341,33 @@ async function initVisitorCounter() {
             });
         }
 
-        // Animate counter
-        animateCounter(counterElement, 0, currentCount, 2000);
+        // Get today's visitor count
+        const todayRef = database.ref(`visitors/daily/${today}`);
+        const todaySnapshot = await todayRef.once('value');
+        const todayData = todaySnapshot.val() || {};
+        const todayCount = Object.keys(todayData).length;
 
-        // Real-time updates
+        // Animate counters
+        animateCounter(counterElement, 0, currentCount, 2000);
+        animateCounter(dailyCounterElement, 0, todayCount, 2000);
+
+        // Real-time updates for total visitors
         countRef.on('value', (snapshot) => {
             const newCount = snapshot.val() || 0;
             counterElement.textContent = newCount.toLocaleString();
         });
 
+        // Real-time updates for daily visitors
+        todayRef.on('value', (snapshot) => {
+            const dailyData = snapshot.val() || {};
+            const dailyCount = Object.keys(dailyData).length;
+            dailyCounterElement.textContent = dailyCount.toLocaleString();
+        });
+
     } catch (error) {
         console.error('Visitor counter error:', error);
-        // Fallback to localStorage
-        fallbackVisitorCounter();
+        counterElement.textContent = 'Error';
+        dailyCounterElement.textContent = 'Error';
     }
 }
 
@@ -392,10 +413,9 @@ async function initProjectCounter(projectId, badge) {
     try {
         // Check if Firebase is available
         if (!database) {
-            console.warn('Firebase not available, using fallback project counter');
-            const fallbackCount = localStorage.getItem(`project-${projectId}`) || Math.floor(Math.random() * 20) + 5;
+            console.error('Firebase not available');
             const countSpan = badge.querySelector('.click-count');
-            countSpan.textContent = fallbackCount;
+            countSpan.textContent = '--';
             return;
         }
 
@@ -422,11 +442,7 @@ async function incrementProjectCounter(projectId, badge) {
     try {
         // Check if Firebase is available
         if (!database) {
-            console.warn('Firebase not available, using fallback increment');
-            const fallbackCount = parseInt(localStorage.getItem(`project-${projectId}`)) || 0;
-            localStorage.setItem(`project-${projectId}`, fallbackCount + 1);
-            const countSpan = badge.querySelector('.click-count');
-            countSpan.textContent = (fallbackCount + 1).toLocaleString();
+            console.error('Firebase not available');
             return;
         }
 
@@ -520,25 +536,6 @@ async function trackSectionView(sectionName) {
     }
 }
 
-// ============================================
-// FALLBACK FUNCTIONS (if Firebase fails)
-// ============================================
-function fallbackVisitorCounter() {
-    const counterElement = document.querySelector('#visitorCount span');
-    if (!counterElement) return;
-
-    let visitorCount = localStorage.getItem('portfolioVisitorCount');
-    
-    if (!visitorCount) {
-        visitorCount = Math.floor(Math.random() * 300) + 500;
-        localStorage.setItem('portfolioVisitorCount', visitorCount);
-    }
-    
-    visitorCount = parseInt(visitorCount) + 1;
-    localStorage.setItem('portfolioVisitorCount', visitorCount);
-    
-    animateCounter(counterElement, 0, visitorCount, 2000);
-}
 
 // ============================================
 // COUNTER ANIMATION HELPER
@@ -601,9 +598,8 @@ function showAdminDashboard() {
 }
 
 async function loadAdminStats() {
-    // Check if Firebase is available
     if (!database) {
-        document.getElementById('total-visitors').textContent = 'Firebase not configured';
+        console.error('Firebase not available');
         return;
     }
 

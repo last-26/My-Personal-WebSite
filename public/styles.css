@@ -182,47 +182,94 @@ nav .container {
     right: 30px;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(15px);
-    padding: 15px 20px;
-    border-radius: 15px;
+    border-radius: 18px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.1), 0 3px 10px rgba(99, 102, 241, 0.1);
     z-index: 999;
     border: 2px solid rgba(255, 255, 255, 0.9);
     transition: all 0.3s ease;
     animation: fadeInRight 0.8s ease;
+    overflow: hidden;
 }
 
 .visitor-counter:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(99, 102, 241, 0.15);
+    box-shadow: 0 12px 35px rgba(99, 102, 241, 0.2);
+}
+
+.visitor-table {
+    display: grid;
+    grid-template-rows: auto auto;
+    min-width: 260px;
+}
+
+.visitor-header {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 16px 24px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-align: center;
+    letter-spacing: 0.8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.visitor-header i {
+    font-size: 1.3rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.visitor-data-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+}
+
+.visitor-data-cell {
+    padding: 18px 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.visitor-data-cell:first-child {
+    border-right: 2px solid rgba(99, 102, 241, 0.15);
 }
 
 .visitor-label {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--gray);
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 5px;
+    letter-spacing: 1px;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+    text-decoration-color: rgba(99, 102, 241, 0.4);
     display: flex;
     align-items: center;
-    gap: 5px;
+    justify-content: center;
+    gap: 6px;
+}
+
+.visitor-label i {
+    font-size: 0.95rem;
+    color: var(--primary);
 }
 
 .visitor-count {
-    font-size: 1.8rem;
-    font-weight: 800;
+    font-size: 2rem;
+    font-weight: 900;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.visitor-icon {
-    font-size: 1.1rem;
-    color: var(--accent);
+    line-height: 1;
+    margin-top: 4px;
 }
 
 @keyframes fadeInRight {
@@ -240,11 +287,39 @@ nav .container {
     .visitor-counter {
         top: 80px;
         right: 15px;
-        padding: 10px 15px;
+    }
+    
+    .visitor-table {
+        min-width: 220px;
+    }
+    
+    .visitor-header {
+        padding: 12px 18px;
+        font-size: 0.9rem;
+        gap: 8px;
+    }
+    
+    .visitor-header i {
+        font-size: 1.1rem;
+    }
+    
+    .visitor-data-cell {
+        padding: 14px 10px;
+        gap: 8px;
+    }
+    
+    .visitor-label {
+        font-size: 0.7rem;
+        letter-spacing: 0.8px;
+        gap: 5px;
+    }
+    
+    .visitor-label i {
+        font-size: 0.85rem;
     }
     
     .visitor-count {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
     }
 }
 
