@@ -79,6 +79,131 @@ body.dark-mode #cv-stats-container .stat-item {
     background: rgba(15, 23, 42, 0.8);
 }
 
+/* Dark Mode - Hakkımda Bölümü İyileştirmesi */
+body.dark-mode .about-content {
+    background: rgba(30, 41, 59, 0.6);
+    padding: 2rem;
+    border-radius: 16px;
+    color: #e2e8f0;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+body.dark-mode .about-content p {
+    color: #cbd5e1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark Mode - Deneyim Bölümü İyileştirmesi */
+body.dark-mode .timeline-item {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+body.dark-mode .timeline-title {
+    color: #f1f5f9;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .timeline-company {
+    color: #cbd5e1;
+}
+
+body.dark-mode .timeline-date {
+    background: rgba(99, 102, 241, 0.2);
+    color: #e0e7ff;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+body.dark-mode .timeline-achievements li {
+    background: rgba(15, 23, 42, 0.6);
+    color: #cbd5e1;
+    border-left-color: rgba(16, 185, 129, 0.6);
+}
+
+body.dark-mode .timeline-achievements li:hover {
+    background: rgba(99, 102, 241, 0.15);
+    color: #e2e8f0;
+    border-left-color: var(--primary);
+}
+
+body.dark-mode .timeline-achievements li::before {
+    color: #10b981;
+    text-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+}
+
+/* Dark Mode - Stat Cards İyileştirmesi */
+body.dark-mode .stat-card {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+body.dark-mode .stat-number {
+    color: #f1f5f9;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .stat-label {
+    color: #cbd5e1;
+}
+
+/* Dark Mode - Experience Timeline İyileştirmesi */
+body.dark-mode .experience-timeline {
+    background: rgba(30, 41, 59, 0.5);
+}
+
+/* Dark Mode - Certificate Button */
+body.dark-mode .certificate-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+    color: #f1f5f9;
+}
+
+body.dark-mode .certificate-btn:hover {
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.6);
+    background: linear-gradient(135deg, #059669, #10b981);
+}
+
+/* Dark Mode - Slider Buttons */
+body.dark-mode .slider-btn {
+    background: rgba(30, 41, 59, 0.9);
+    border-color: rgba(99, 102, 241, 0.6);
+    color: #a5b4fc;
+}
+
+body.dark-mode .slider-btn:hover {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+}
+
+/* Dark Mode - Experience Indicators */
+body.dark-mode .indicator {
+    background: rgba(99, 102, 241, 0.3);
+}
+
+body.dark-mode .indicator.active {
+    background: var(--primary);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+}
+
+body.dark-mode .indicator:hover {
+    background: rgba(99, 102, 241, 0.6);
+}
+
+/* Dark Mode - Section Titles */
+body.dark-mode .section-title {
+    color: #f1f5f9;
+    text-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+}
+
+body.dark-mode .section-title::after {
+    background: linear-gradient(90deg, 
+        rgba(99, 102, 241, 0.8), 
+        rgba(139, 92, 246, 0.8)
+    );
+    box-shadow: 0 2px 10px rgba(99, 102, 241, 0.4);
+}
+
 .container {
     max-width: 1400px;
     margin: 0 auto;
