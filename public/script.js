@@ -247,11 +247,19 @@ function updateCVButtons(lang) {
 const themeToggle = document.getElementById('themeToggle');
 const body = document.body;
 
-// Check for saved theme preference
+// Check for saved theme preference - Default: Dark Mode
 const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark') {
+if (savedTheme === 'light') {
+    // Only switch to light mode if explicitly saved
+    body.classList.remove('dark-mode');
+    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+} else {
+    // Default: Dark mode
     body.classList.add('dark-mode');
     themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    if (!savedTheme) {
+        localStorage.setItem('theme', 'dark');
+    }
 }
 
 themeToggle.addEventListener('click', () => {
