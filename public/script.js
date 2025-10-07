@@ -137,7 +137,7 @@ const translations = {
         "experience.title": "Experience",
         "experience.certificate": "Certificate",
         "experience.tei.title": "Artificial Intelligence Intern",
-        "experience.tei.company": "TEI - TUSAŞ Motor Sanayii A.Ş. | IT - Data Analytics & AI",
+        "experience.tei.company": "TEI-TUSAŞ Engine Industries, INC. | IT - Data Analytics & AI",
         "experience.tei.date": "August 2025 - September 2025",
         "experience.tei.achievement1": "Designed multi-model supported chatbot infrastructures (LibreChat integration)",
         "experience.tei.achievement2": "Contributed to the development of CV analysis and evaluation systems",
