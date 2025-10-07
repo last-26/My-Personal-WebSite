@@ -1,5 +1,3 @@
----
-
 # Personal Portfolio Website
 
 This is my personal portfolio website with a modern design. Initially published on GitHub Pages, it was later migrated to Firebase Hosting to be enhanced with powerful features like Firebase's Realtime Database.
