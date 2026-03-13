@@ -237,19 +237,17 @@ function updateCVButtons(lang) {
     }
 }
 
-// Dark Mode Toggle
+// Dark Mode Toggle (dark is default)
 const themeToggle = document.getElementById('themeToggle');
 const body = document.body;
 
 // Check for saved theme preference - Default: Dark Mode
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme === 'light') {
-    // Only switch to light mode if explicitly saved
-    body.classList.remove('dark-mode');
+    body.classList.add('light-mode');
     themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
 } else {
-    // Default: Dark mode
-    body.classList.add('dark-mode');
+    body.classList.remove('light-mode');
     themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
     if (!savedTheme) {
         localStorage.setItem('theme', 'dark');
@@ -257,14 +255,14 @@ if (savedTheme === 'light') {
 }
 
 themeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
+    body.classList.toggle('light-mode');
     
-    if (body.classList.contains('dark-mode')) {
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        localStorage.setItem('theme', 'dark');
-    } else {
+    if (body.classList.contains('light-mode')) {
         themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
         localStorage.setItem('theme', 'light');
+    } else {
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        localStorage.setItem('theme', 'dark');
     }
 });
 
