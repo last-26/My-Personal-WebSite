@@ -107,6 +107,9 @@ const translations = {
         "visitor.header": "Ziyaretçiler",
         "visitor.total": "TOPLAM",
         "visitor.daily": "GÜNLÜK",
+        "footer.tagline": "AI/ML çözümleri ile geleceği inşa ediyorum.",
+        "footer.nav.title": "Sayfalar",
+        "footer.social.title": "Bağlantılar",
         "footer.copyright": "© 2026 Samet Soysal. Tüm hakları saklıdır.",
         "footer.made": "Tutkuyla kodlanmıştır ❤️"
     },
@@ -194,6 +197,9 @@ const translations = {
         "visitor.header": "Visitors",
         "visitor.total": "TOTAL",
         "visitor.daily": "DAILY",
+        "footer.tagline": "Building the future with AI/ML solutions.",
+        "footer.nav.title": "Pages",
+        "footer.social.title": "Connect",
         "footer.copyright": "© 2026 Samet Soysal. All rights reserved.",
         "footer.made": "Coded with passion ❤️"
     }
