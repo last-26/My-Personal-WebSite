@@ -277,8 +277,8 @@ function updateLanguage(lang) {
 }
 
 // Scroll reveal animation
-const scrollReveal = () => {
-    const reveals = document.querySelectorAll('.scroll-reveal');
+const scrollRevealFn = () => {
+    const reveals = document.querySelectorAll('.reveal');
     reveals.forEach(element => {
         const elementTop = element.getBoundingClientRect().top;
         const elementVisible = 150;
@@ -288,8 +288,33 @@ const scrollReveal = () => {
     });
 };
 
-window.addEventListener('scroll', scrollReveal);
-scrollReveal(); // Initial check
+// Nav scroll effect
+const navScrollFn = () => {
+    const nav = document.getElementById('mainNav');
+    if (nav) {
+        if (window.scrollY > 50) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    }
+};
+
+window.addEventListener('scroll', () => {
+    scrollRevealFn();
+    navScrollFn();
+});
+scrollRevealFn();
+navScrollFn();
+
+// Cursor glow effect
+const cursorGlow = document.getElementById('cursorGlow');
+if (cursorGlow) {
+    document.addEventListener('mousemove', (e) => {
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top = e.clientY + 'px';
+    });
+}
 
 // Initialize language on page load
 const savedLang = localStorage.getItem('preferredLang') || 'en';

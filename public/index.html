@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAMET SOYSAL - AI/ML Engineer & Full-Stack Developer</title>
+    <title>Samet Soysal — AI/ML Engineer</title>
     <meta name="description" content="Samet Soysal - Computer Engineer specializing in AI, NLP, LLMs, RAG Pipelines. Portfolio showcasing enterprise-grade AI projects.">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     
@@ -17,46 +17,57 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 </head>
 <body>
+    <!-- Noise overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Cursor glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
     <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <a href="#" class="nav-brand">
-                <div class="brand-logo">SS</div>
-                <div class="brand-text">
-                    <span class="brand-name" data-tr="nav.brand">SAMET SOYSAL</span>
-                    <span class="brand-title" data-tr="nav.subtitle">AI/ML Engineer</span>
+    <nav id="mainNav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <span class="logo-icon">SS</span>
+                <div class="logo-text">
+                    <span class="logo-name" data-tr="nav.brand">SAMET SOYSAL</span>
+                    <span class="logo-role" data-tr="nav.subtitle">AI/ML Engineer</span>
                 </div>
             </a>
-            <div class="nav-content">
-                <ul class="nav-links">
-                    <li><a href="#about" data-tr="nav.about">Hakkımda</a></li>
-                    <li><a href="#experience" data-tr="nav.experience">Deneyim</a></li>
-                    <li><a href="#projects" data-tr="nav.projects">Projeler</a></li>
-                    <li><a href="#skills" data-tr="nav.skills">Yetenekler</a></li>
-                    <li><a href="#contact" data-tr="nav.contact">İletişim</a></li>
-                </ul>
-                <div class="nav-controls">
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="#about" data-tr="nav.about">Hakkımda</a>
+                    <a href="#experience" data-tr="nav.experience">Deneyim</a>
+                    <a href="#projects" data-tr="nav.projects">Projeler</a>
+                    <a href="#skills" data-tr="nav.skills">Yetenekler</a>
+                    <a href="#contact" data-tr="nav.contact">İletişim</a>
+                </div>
+                <div class="nav-actions">
                     <div class="lang-switcher">
                         <button class="lang-btn" data-lang="tr">TR</button>
                         <button class="lang-btn active" data-lang="en">EN</button>
                     </div>
                     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
                     </button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header>
+    <!-- ==================== HERO ==================== -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
         <div class="particles" id="particles"></div>
-        
+
         <!-- Visitor Counter -->
         <div class="visitor-counter">
             <div class="visitor-table">
                 <div class="visitor-header">
-                    <i class="fas fa-users"></i>
+                    <i class="fas fa-signal"></i>
                     <span data-tr="visitor.header">Ziyaretçiler</span>
                 </div>
                 <div class="visitor-data-row">
@@ -79,87 +90,101 @@
         </div>
         
         <div class="hero-content">
-            <div class="hero-badge">
-                <i class="fas fa-robot"></i> <span data-tr="hero.badge">AI/ML Mühendisi & Full-Stack Developer</span>
+            <div class="hero-tag">
+                <span class="tag-dot"></span>
+                <span data-tr="hero.badge">AI/ML Mühendisi & Full-Stack Developer</span>
             </div>
-            <h1>SAMET SOYSAL</h1>
-            <p class="subtitle" data-tr="hero.subtitle">Artificial Intelligence | Machine Learning | NLP Specialist</p>
-            <p class="description" data-tr="hero.description">
+            <h1 class="hero-title">
+                <span class="title-line">SAMET</span>
+                <span class="title-line title-outline">SOYSAL</span>
+            </h1>
+            <p class="hero-subtitle" data-tr="hero.subtitle">Artificial Intelligence | Machine Learning | NLP Specialist</p>
+            <p class="hero-desc" data-tr="hero.description">
                 RAG sistemleri, OCR teknolojileri ve çok modelli AI çözümleri geliştiriyorum. 
                 Kurumsal projelerde production-ready yapay zeka sistemleri tasarlama ve entegrasyon konularında uzmanım.
             </p>
-            <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">
-                    <i class="fas fa-folder-open"></i> <span data-tr="hero.btn.projects">Projelerim</span>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn-hero btn-glow">
+                    <i class="fas fa-rocket"></i> <span data-tr="hero.btn.projects">Projelerim</span>
                 </a>
-                <a href="https://github.com/last-26" target="_blank" class="btn btn-success">
-                    <i class="fab fa-github"></i> <span data-tr="hero.btn.github">GitHub Profilim</span>
+                <a href="https://github.com/last-26" target="_blank" class="btn-hero btn-outline">
+                    <i class="fab fa-github"></i> <span data-tr="hero.btn.github">GitHub</span>
                 </a>
-                <a href="#contact" class="btn btn-secondary">
-                    <i class="fas fa-envelope"></i> <span data-tr="hero.btn.contact">İletişim</span>
+                <a href="#contact" class="btn-hero btn-outline">
+                    <i class="fas fa-paper-plane"></i> <span data-tr="hero.btn.contact">İletişim</span>
                 </a>
             </div>
-            <div class="cv-buttons">
-                <a href="#" id="cvViewBtn" class="btn btn-outline-light" target="_blank">
+            <div class="hero-buttons" style="margin-top: 8px;">
+                <a href="#" id="cvViewBtn" class="btn-hero btn-ghost" target="_blank">
                     <i class="fas fa-eye"></i> <span data-tr="hero.btn.cv.view">CV Görüntüle</span>
                 </a>
-                <a href="#" id="cvDownloadBtn" class="btn btn-outline-light" download>
+                <a href="#" id="cvDownloadBtn" class="btn-hero btn-ghost" download>
                     <i class="fas fa-download"></i> <span data-tr="hero.btn.cv.download">CV İndir</span>
                 </a>
             </div>
         </div>
-    </header>
 
-    <!-- About Section -->
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT ==================== -->
     <section class="section" id="about">
         <div class="container">
-            <h2 class="section-title scroll-reveal" data-tr="about.title">Hakkımda</h2>
-            <div class="about-content scroll-reveal">
-                <p data-tr="about.description">
-                    Eskişehir Osmangazi Üniversitesi Bilgisayar Mühendisliği mezunuyum. 
-                    Yapay Zeka, NLP ve Büyük Dil Modelleri (LLM) alanlarında uzmanlaşmış, sonuç odaklı bir Bilgisayar Mühendisiyim. 
-                    Uçtan uca AI mimarileri, yüksek performanslı RAG pipeline'ları ve Multi-LLM orkestrasyonları tasarlama konusunda kanıtlanmış deneyime sahibim. 
-                    Temel gücüm, karmaşık makine öğrenmesi modellerini ölçeklenebilir full-stack geliştirme (React, FastAPI, PostgreSQL) ile birleştirerek 
-                    milisaniye düzeyinde gecikme ve %95+ doğruluk oranıyla veri odaklı çözümler sunmaktır.
-                </p>
+            <div class="section-header reveal">
+                <span class="section-tag">01</span>
+                <h2 class="section-title" data-tr="about.title">Hakkımda</h2>
             </div>
-            <div class="stats-grid scroll-reveal">
-                <div class="stat-card">
-                    <div class="stat-number">3+</div>
-                    <div class="stat-label" data-tr="about.stats.years">Yıl Deneyim</div>
+            <div class="bento-grid">
+                <div class="bento-card bento-main reveal">
+                    <p class="about-text" data-tr="about.description">
+                        Eskişehir Osmangazi Üniversitesi Bilgisayar Mühendisliği mezunuyum. 
+                        Yapay Zeka, NLP ve Büyük Dil Modelleri (LLM) alanlarında uzmanlaşmış, sonuç odaklı bir Bilgisayar Mühendisiyim. 
+                        Uçtan uca AI mimarileri, yüksek performanslı RAG pipeline'ları ve Multi-LLM orkestrasyonları tasarlama konusunda kanıtlanmış deneyime sahibim. 
+                        Temel gücüm, karmaşık makine öğrenmesi modellerini ölçeklenebilir full-stack geliştirme (React, FastAPI, PostgreSQL) ile birleştirerek 
+                        milisaniye düzeyinde gecikme ve %95+ doğruluk oranıyla veri odaklı çözümler sunmaktır.
+                    </p>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">10+</div>
-                    <div class="stat-label" data-tr="about.stats.projects">Tamamlanan Proje</div>
+                <div class="bento-card bento-stat reveal">
+                    <div class="stat-value">3+</div>
+                    <div class="stat-text" data-tr="about.stats.years">Yıl Deneyim</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">25+</div>
-                    <div class="stat-label" data-tr="about.stats.technologies">Teknoloji</div>
+                <div class="bento-card bento-stat reveal">
+                    <div class="stat-value">10+</div>
+                    <div class="stat-text" data-tr="about.stats.projects">Tamamlanan Proje</div>
+                </div>
+                <div class="bento-card bento-stat reveal">
+                    <div class="stat-value">25+</div>
+                    <div class="stat-text" data-tr="about.stats.technologies">Teknoloji</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
+    <!-- ==================== EXPERIENCE ==================== -->
     <section class="section" id="experience">
         <div class="container">
-            <h2 class="section-title scroll-reveal" data-tr="experience.title">Deneyim</h2>
+            <div class="section-header reveal">
+                <span class="section-tag">02</span>
+                <h2 class="section-title" data-tr="experience.title">Deneyim</h2>
+            </div>
             <div class="experience-slider">
                 <button class="slider-btn prev-btn" onclick="changeExperience(-1)">
                     <i class="fas fa-chevron-left"></i>
                 </button>
                 
                 <div class="experience-timeline">
-                    <!-- IC Ictas Nuclear Experience -->
+                    <!-- IC Ictas Nuclear -->
                     <div class="timeline-item active" data-experience="1">
-                        <div class="timeline-header">
-                            <div>
-                                <div class="timeline-title" data-tr="experience.icictas.title">Yazılım Geliştirme Stajyeri</div>
-                                <div class="timeline-company" data-tr="experience.icictas.company">IC İçtaş Nükleer ve Endüstriyel Tesisler İnşaat A.Ş.</div>
+                        <div class="exp-top">
+                            <div class="exp-info">
+                                <h3 class="exp-title" data-tr="experience.icictas.title">Yazılım Geliştirme Stajyeri</h3>
+                                <p class="exp-company" data-tr="experience.icictas.company">IC İçtaş Nükleer ve Endüstriyel Tesisler İnşaat A.Ş.</p>
                             </div>
-                            <div class="timeline-date" data-tr="experience.icictas.date">Ocak 2026</div>
+                            <span class="exp-date" data-tr="experience.icictas.date">Ocak 2026</span>
                         </div>
-                        <ul class="timeline-achievements">
+                        <ul class="exp-list">
                             <li data-tr="experience.icictas.achievement1">Akkuyu Nükleer Santral sahasından gelen verileri analiz etmek için React.js, FastAPI ve PostgreSQL kullanarak uçtan uca İSG Takip Paneli tasarladım ve geliştirdim</li>
                             <li data-tr="experience.icictas.achievement2">Backend'de Passlib ile şifre hashleme ve JWT standardını kullanarak kimlik doğrulama algoritmaları entegre ettim, SQLAlchemy ORM ile veritabanı işlemlerini güvence altına aldım</li>
                             <li data-tr="experience.icictas.achievement3">Yüksek kardinaliteli sütunlarda stratejik B-tree indeksleme uygulayarak karmaşık analitik operasyonlar (JOIN/GROUP BY) için PostgreSQL sorgu performansını optimize ettim</li>
@@ -167,37 +192,37 @@
                         </ul>
                     </div>
 
-                    <!-- TEI Experience -->
+                    <!-- TEI -->
                     <div class="timeline-item" data-experience="2">
-                        <div class="timeline-header">
-                            <div>
-                                <div class="timeline-title" data-tr="experience.tei.title">Data Science & AI Stajyeri</div>
-                                <div class="timeline-company" data-tr="experience.tei.company">TEI – TUSAŞ Motor Sanayii A.Ş. | Eskişehir</div>
+                        <div class="exp-top">
+                            <div class="exp-info">
+                                <h3 class="exp-title" data-tr="experience.tei.title">Data Science & AI Stajyeri</h3>
+                                <p class="exp-company" data-tr="experience.tei.company">TEI – TUSAŞ Motor Sanayii A.Ş. | Eskişehir</p>
                             </div>
-                            <div class="timeline-date" data-tr="experience.tei.date">Ağustos 2025 - Eylül 2025</div>
+                            <span class="exp-date" data-tr="experience.tei.date">Ağustos 2025 - Eylül 2025</span>
                         </div>
-                        <ul class="timeline-achievements">
+                        <ul class="exp-list">
                             <li data-tr="experience.tei.achievement1">İzole ağlarda (Red-Black Box) güvenli veri iletimi ve sistem mimarileri üzerine Ar-Ge çalışmaları yürüttüm</li>
                             <li data-tr="experience.tei.achievement2">İK departmanı için "SAMETEI" Generative AI asistanının Ar-Ge ve prototipleme sürecini yönettim; OpenRouter API'leri ve LibreChat üzerinden Local LLM entegrasyonu gerçekleştirdim</li>
                             <li data-tr="experience.tei.achievement3">n8n kullanarak API'ler aracılığıyla gerçek zamanlı veri çeken, finansal metrikleri otonom analiz eden ve raporlayan otomasyonlar kurdum</li>
                             <li data-tr="experience.tei.achievement4">Playwright kullanarak kullanıcı davranışını simüle eden, Trendyol Yemek üzerinden otonom sipariş veren uçtan uca e-ticaret otomasyonu (RPA) geliştirdim</li>
                         </ul>
                         <button class="certificate-btn" id="certificateBtn" type="button">
-                            <i class="fas fa-certificate"></i>
+                            <i class="fas fa-award"></i>
                             <span data-tr="experience.certificate">Sertifika</span>
                         </button>
                     </div>
 
-                    <!-- Powintec Experience -->
+                    <!-- Powintec -->
                     <div class="timeline-item" data-experience="3">
-                        <div class="timeline-header">
-                            <div>
-                                <div class="timeline-title" data-tr="experience.powintec.title">Part-Time Yazılım Geliştirici (Remote)</div>
-                                <div class="timeline-company" data-tr="experience.powintec.company">Powintec Engineering | Wireless Charging of Small Electric Vehicles</div>
+                        <div class="exp-top">
+                            <div class="exp-info">
+                                <h3 class="exp-title" data-tr="experience.powintec.title">Part-Time Yazılım Geliştirici (Remote)</h3>
+                                <p class="exp-company" data-tr="experience.powintec.company">Powintec Engineering | Wireless Charging of Small Electric Vehicles</p>
                             </div>
-                            <div class="timeline-date" data-tr="experience.powintec.date">Temmuz 2023 - Temmuz 2025</div>
+                            <span class="exp-date" data-tr="experience.powintec.date">Temmuz 2023 - Temmuz 2025</span>
                         </div>
-                        <ul class="timeline-achievements">
+                        <ul class="exp-list">
                             <li data-tr="experience.powintec.achievement1">Kablosuz şarj padlarından gelen hizalama, sıcaklık ve güç transfer verimliliği metriklerini anlık izlemek için React.js, TailwindCSS ve WebSockets kullanarak gerçek zamanlı yönetim paneli geliştirdim</li>
                             <li data-tr="experience.powintec.achievement2">Sürekli WebSocket veri akışlarının neden olduğu UI rendering darboğazlarını önlemek için React state yönetimini optimize ettim; milisaniye düzeyinde düşük gecikme ile gerçek zamanlı şarj ve voltaj metriklerini işledim</li>
                             <li data-tr="experience.powintec.achievement3">Donanım-sunucu bağlantı kopmalarına karşı proaktif hata yönetim mekanizmaları uyguladım ve UI testleri yazarak üretim ortamı kararlılığını artırdım</li>
@@ -210,7 +235,6 @@
                 </button>
             </div>
             
-            <!-- Slider indicators -->
             <div class="experience-indicators">
                 <span class="indicator active" onclick="goToExperience(1)"></span>
                 <span class="indicator" onclick="goToExperience(2)"></span>
@@ -229,303 +253,240 @@
         </div>
     </div>
 
-    <!-- Projects Section -->
+    <!-- ==================== PROJECTS ==================== -->
     <section class="section" id="projects">
         <div class="container">
-            <h2 class="section-title scroll-reveal" data-tr="projects.title">Projeler</h2>
+            <div class="section-header reveal">
+                <span class="section-tag">03</span>
+                <h2 class="section-title" data-tr="projects.title">Projeler</h2>
+            </div>
             <div class="projects-grid">
                 <!-- SAMETEI -->
-                <div class="project-card featured scroll-reveal">
-                    <div class="project-badge" data-tr="projects.badge.corporate">KURUMSAL</div>
-                    <div class="project-header">
+                <div class="project-card card-accent-1 reveal">
+                    <div class="card-badge" data-tr="projects.badge.corporate">KURUMSAL</div>
+                    <div class="card-top">
                         <h3>🏢 SAMETEI</h3>
                         <p data-tr="projects.sametei.subtitle">AI Destekli İK Doküman Yönetim Platformu</p>
                     </div>
-                    <div class="project-body">
+                    <div class="card-content">
                         <p data-tr="projects.sametei.description">
                             LibreChat çerçevesi üzerine inşa edilmiş, insan kaynakları doküman yönetimini yapay zeka ile otomatikleştiren kurumsal ölçekte platform. 
                             İK ekiplerinin doküman işleme süresini %70 azalttı.
                         </p>
-                        <div class="project-tags">
-                            <span class="tag">LibreChat UI</span>
-                            <span class="tag">LLM</span>
-                            <span class="tag">OCR</span>
-                            <span class="tag">RAG</span>
-                            <span class="tag">Docker</span>
-                            <span class="tag">ChatBot</span>
-                            <span class="tag">MongoDB</span>
-                            <span class="tag">FastAPI</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">Node.js</span>
+                        <div class="card-tags">
+                            <span>LibreChat UI</span><span>LLM</span><span>OCR</span><span>RAG</span><span>Docker</span><span>MongoDB</span><span>FastAPI</span><span>Python</span>
                         </div>
-                        <a href="https://github.com/last-26/SAMETEI" target="_blank" class="project-link">
+                        <a href="https://github.com/last-26/SAMETEI" target="_blank" class="card-link">
                             <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- HIREAI -->
-                <div class="project-card featured scroll-reveal">
-                    <div class="project-badge" data-tr="projects.badge.graduation">MEZUN. PROJESİ</div>
-                    <div class="project-header">
+                <div class="project-card card-accent-2 reveal">
+                    <div class="card-badge badge-green" data-tr="projects.badge.graduation">MEZUN. PROJESİ</div>
+                    <div class="card-top">
                         <h3>📝 HIREAI</h3>
                         <p data-tr="projects.hireai.subtitle">AI Destekli CV & Portföy Analiz Platformu</p>
                     </div>
-                    <div class="project-body">
+                    <div class="card-content">
                         <p data-tr="projects.hireai.description">
                             ATS tabanlı CV analiz ve optimizasyon platformu. CV'leri iş tanımlarına göre analiz eder, ATS uyumlu skorlar ve iyileştirme önerileri sunar. 
                             İK ekiplerinin ön eleme süresini %50 azalttı.
                         </p>
-                        <div class="project-tags">
-                            <span class="tag">Flask-RESTX</span>
-                            <span class="tag">Sentence Transformers</span>
-                            <span class="tag">PostgreSQL</span>
-                            <span class="tag">React.js</span>
-                            <span class="tag">TailwindCSS</span>
-                            <span class="tag">NLP</span>
-                            <span class="tag">ATS</span>
+                        <div class="card-tags">
+                            <span>Flask-RESTX</span><span>Sentence Transformers</span><span>PostgreSQL</span><span>React.js</span><span>TailwindCSS</span><span>NLP</span>
                         </div>
-                        <a href="https://gitlab.com/last-26/cv-analysis" target="_blank" class="project-link">
+                        <a href="https://gitlab.com/last-26/cv-analysis" target="_blank" class="card-link">
                             <i class="fab fa-gitlab"></i> <span data-tr="projects.link.gitlab">GitLab'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Bitcoin Technical Analysis Automation -->
-                <div class="project-card scroll-reveal">
-                    <div class="project-badge" style="background: linear-gradient(135deg, #f7931a, #ff6b35);" data-tr="projects.badge.automation">AUTOMATION</div>
-                    <div class="project-header">
-                        <h3><i class="fab fa-bitcoin" style="color: #f7931a;"></i> <span data-tr="projects.bitcoin.title">Bitcoin Technical Analysis Automation</span></h3>
-                        <p data-tr="projects.bitcoin.subtitle">AI-Powered Cryptocurrency Analysis & Reporting System</p>
+                <!-- Bitcoin -->
+                <div class="project-card card-accent-3 reveal">
+                    <div class="card-badge badge-orange" data-tr="projects.badge.automation">OTOMASYON</div>
+                    <div class="card-top">
+                        <h3><i class="fab fa-bitcoin" style="color:#f7931a"></i> <span data-tr="projects.bitcoin.title">Bitcoin Teknik Analiz Otomasyonu</span></h3>
+                        <p data-tr="projects.bitcoin.subtitle">AI Destekli Kripto Para Analiz & Raporlama Sistemi</p>
                     </div>
-                    <div class="project-body">
+                    <div class="card-content">
                         <p data-tr="projects.bitcoin.description">
-                            Bitcoin technical analysis system built with n8n workflow automation. Automatically collects data from Binance API and performs 15+ technical indicator analysis (SMA, EMA, RSI, MACD, Bollinger Bands, VWAP, ATR). Generates market insights with DeepSeek R1 AI model and automatically sends professional HTML reports via email every 4 hours.
+                            n8n workflow automation ile geliştirilmiş Bitcoin teknik analiz sistemi. Binance API'den otomatik veri toplayarak 15+ teknik gösterge analizi yapar.
                         </p>
-                        <div class="project-tags">
-                            <span class="tag">n8n Workflow</span>
-                            <span class="tag">Binance API</span>
-                            <span class="tag">DeepSeek R1 AI</span>
-                            <span class="tag">Technical Analysis</span>
-                            <span class="tag">Gmail API</span>
-                            <span class="tag">Google Sheets</span>
-                            <span class="tag">JavaScript</span>
+                        <div class="card-tags">
+                            <span>n8n</span><span>Binance API</span><span>DeepSeek R1</span><span>Technical Analysis</span><span>Gmail API</span>
                         </div>
-                        <a href="https://github.com/last-26/Bitcoin-Daily-Report-Automation" target="_blank" class="project-link">
+                        <a href="https://github.com/last-26/Bitcoin-Daily-Report-Automation" target="_blank" class="card-link">
                             <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Trendyol Automation -->
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
+                <!-- Trendyol -->
+                <div class="project-card card-accent-4 reveal">
+                    <div class="card-top">
                         <h3><span data-tr="projects.trendyol.title">🛒 Trendyol Otomasyon</span></h3>
                         <p data-tr="projects.trendyol.subtitle">E-ticaret Sipariş Otomasyonu</p>
                     </div>
-                    <div class="project-body">
+                    <div class="card-content">
                         <p data-tr="projects.trendyol.description">
-                            Playwright kullanarak Trendyol Yemek platformu için geliştirilmiş otomatik sipariş sistemi. 
-                            Süreçleri hızlandıran ve hata oranını minimize eden akıllı otomasyon çözümü.
+                            Playwright kullanarak Trendyol Yemek platformu için geliştirilmiş otomatik sipariş sistemi.
                         </p>
-                        <div class="project-tags">
-                            <span class="tag">Node.js</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">Automation</span>
-                            <span class="tag">Web Scraping</span>
-                            <span class="tag">Playwright</span>
+                        <div class="card-tags">
+                            <span>Node.js</span><span>Playwright</span><span>Automation</span><span>Web Scraping</span>
                         </div>
-                        <a href="https://github.com/last-26/Trendyol-Automotion-Order" target="_blank" class="project-link">
+                        <a href="https://github.com/last-26/Trendyol-Automotion-Order" target="_blank" class="card-link">
                             <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Fruit Ripeness Detection -->
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
+                <!-- Fruit Ripeness -->
+                <div class="project-card card-accent-5 reveal">
+                    <div class="card-top">
                         <h3><span data-tr="projects.fruit.title">🍎 Meyve Olgunluk Tespiti</span></h3>
                         <p data-tr="projects.fruit.subtitle">Makine Öğrenmesi & Computer Vision</p>
                     </div>
-                    <div class="project-body">
+                    <div class="card-content">
                         <p data-tr="projects.fruit.description">
-                            Görüntü işleme ve 5 farklı ML algoritması (SVM, Random Forest, Gradient Boosting, Logistic Regression, Ensemble) 
-                            kullanarak meyve olgunluğunu tespit eden pattern recognition projesi.
+                            Görüntü işleme ve 5 farklı ML algoritması kullanarak meyve olgunluğunu tespit eden pattern recognition projesi.
                         </p>
-                        <div class="project-tags">
-                            <span class="tag">OpenCV</span>
-                            <span class="tag">Image Processing</span>
-                            <span class="tag">Feature Extraction</span>
-                            <span class="tag">Classification</span>
-                            <span class="tag">Scikit-learn</span>
-                            <span class="tag">Python</span>
+                        <div class="card-tags">
+                            <span>OpenCV</span><span>Scikit-learn</span><span>Feature Extraction</span><span>Classification</span>
                         </div>
-                        <a href="https://github.com/last-26/fruit-ripeness-detection" target="_blank" class="project-link">
+                        <a href="https://github.com/last-26/fruit-ripeness-detection" target="_blank" class="card-link">
                             <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Global News Hub -->
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
+                <!-- News Hub -->
+                <div class="project-card card-accent-6 reveal">
+                    <div class="card-top">
                         <h3>📰 Global News Hub</h3>
                         <p data-tr="projects.news.subtitle">Modern Haber Toplayıcı Platform</p>
                     </div>
-                    <div class="project-body">
+                    <div class="card-content">
                         <p data-tr="projects.news.description">
-                            ASP.NET ile geliştirilmiş modern haber toplayıcı. RSS feed'lerini akıllı kategorizasyon ile çeker 
-                            ve düzenli bir şekilde kullanıcılara sunar.
+                            ASP.NET ile geliştirilmiş modern haber toplayıcı. RSS feed'lerini akıllı kategorizasyon ile çeker.
                         </p>
-                        <div class="project-tags">
-                            <span class="tag">Bootstrap</span>
-                            <span class="tag">RSS</span>
-                            <span class="tag">ASP.NET Core</span>
-                            <span class="tag">JavaScript</span>
+                        <div class="card-tags">
+                            <span>ASP.NET Core</span><span>RSS</span><span>Bootstrap</span>
                         </div>
-                        <a href="https://github.com/last-26/Global-News-Hub" target="_blank" class="project-link">
+                        <a href="https://github.com/last-26/Global-News-Hub" target="_blank" class="card-link">
                             <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- My Personal WebSite -->
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
+                <!-- Portfolio -->
+                <div class="project-card card-accent-1 reveal">
+                    <div class="card-top">
                         <h3><span data-tr="projects.portfolio.title">💼 My Personal WebSite</span></h3>
-                        <p data-tr="projects.portfolio.subtitle">Modern Portfolio Website</p>
+                        <p data-tr="projects.portfolio.subtitle">Modern Portföy Web Sitesi</p>
                     </div>
-                    <div class="project-body">
+                    <div class="card-content">
                         <p data-tr="projects.portfolio.description">
-                            Modern portfolio website with Firebase Realtime Database integration. Offers responsive user experience with multi-language support, visitor counter, and glassmorphism design.
+                            Firebase Realtime Database entegrasyonlu modern portföy web sitesi. Çok dilli destek, ziyaretçi sayacı ve responsive tasarım.
                         </p>
-                        <div class="project-tags">
-                            <span class="tag">HTML5</span>
-                            <span class="tag">CSS3</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">Firebase</span>
-                            <span class="tag">Firebase Realtime Database</span>
-                            <span class="tag">Firebase Hosting</span>
+                        <div class="card-tags">
+                            <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Firebase</span>
                         </div>
-                        <a href="https://github.com/last-26/My-Personal-WebSite" target="_blank" class="project-link">
+                        <a href="https://github.com/last-26/My-Personal-WebSite" target="_blank" class="card-link">
                             <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- ==================== SKILLS ==================== -->
     <section class="section" id="skills">
         <div class="container">
-            <h2 class="section-title scroll-reveal" data-tr="skills.title">Yetenekler</h2>
-            <div class="skills-categories">
-                <div class="skill-category scroll-reveal">
-                    <div class="skill-category-title">
-                        <span class="skill-category-icon">🤖</span>
+            <div class="section-header reveal">
+                <span class="section-tag">04</span>
+                <h2 class="section-title" data-tr="skills.title">Yetenekler</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-group reveal">
+                    <div class="skill-group-header">
+                        <span class="skill-icon">🤖</span>
                         <span data-tr="skills.ai.title">AI & Data Science</span>
                     </div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Pandas</span>
-                        <span class="skill-tag">NumPy</span>
-                        <span class="skill-tag">Scikit-learn</span>
-                        <span class="skill-tag">NLP</span>
-                        <span class="skill-tag">LLMs</span>
-                        <span class="skill-tag">RAG Pipelines</span>
-                        <span class="skill-tag">Hugging Face</span>
-                        <span class="skill-tag">Ollama</span>
-                        <span class="skill-tag">Vector Search (ChromaDB)</span>
+                    <div class="skill-pills">
+                        <span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">NumPy</span>
+                        <span class="pill">Scikit-learn</span><span class="pill">NLP</span><span class="pill">LLMs</span>
+                        <span class="pill">RAG Pipelines</span><span class="pill">Hugging Face</span><span class="pill">Ollama</span>
+                        <span class="pill">Vector Search (ChromaDB)</span>
                     </div>
                 </div>
-
-                <div class="skill-category scroll-reveal">
-                    <div class="skill-category-title">
-                        <span class="skill-category-icon">👁️</span>
+                <div class="skill-group reveal">
+                    <div class="skill-group-header">
+                        <span class="skill-icon">👁️</span>
                         <span data-tr="skills.cv.title">Computer Vision & OCR</span>
                     </div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Qwen 2.5-VL</span>
-                        <span class="skill-tag">OpenCV</span>
-                        <span class="skill-tag">Tesseract</span>
-                        <span class="skill-tag">Table-Transformer</span>
-                        <span class="skill-tag">PyMuPDF</span>
+                    <div class="skill-pills">
+                        <span class="pill">Qwen 2.5-VL</span><span class="pill">OpenCV</span><span class="pill">Tesseract</span>
+                        <span class="pill">Table-Transformer</span><span class="pill">PyMuPDF</span>
                     </div>
                 </div>
-
-                <div class="skill-category scroll-reveal">
-                    <div class="skill-category-title">
-                        <span class="skill-category-icon">⚙️</span>
+                <div class="skill-group reveal">
+                    <div class="skill-group-header">
+                        <span class="skill-icon">⚙️</span>
                         <span data-tr="skills.backend.title">Backend & Infrastructure</span>
                     </div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">FastAPI</span>
-                        <span class="skill-tag">Flask</span>
-                        <span class="skill-tag">Node.js</span>
-                        <span class="skill-tag">PostgreSQL</span>
-                        <span class="skill-tag">MongoDB</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">JWT</span>
-                        <span class="skill-tag">SQLAlchemy</span>
+                    <div class="skill-pills">
+                        <span class="pill">FastAPI</span><span class="pill">Flask</span><span class="pill">Node.js</span>
+                        <span class="pill">PostgreSQL</span><span class="pill">MongoDB</span><span class="pill">Docker</span>
+                        <span class="pill">JWT</span><span class="pill">SQLAlchemy</span>
                     </div>
                 </div>
-
-                <div class="skill-category scroll-reveal">
-                    <div class="skill-category-title">
-                        <span class="skill-category-icon">🎨</span>
+                <div class="skill-group reveal">
+                    <div class="skill-group-header">
+                        <span class="skill-icon">🎨</span>
                         <span data-tr="skills.frontend.title">Frontend & Araçlar</span>
                     </div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">React.js</span>
-                        <span class="skill-tag">Next.js</span>
-                        <span class="skill-tag">TailwindCSS</span>
-                        <span class="skill-tag">Web Scraping (Selenium, Playwright)</span>
-                        <span class="skill-tag">n8n Automation</span>
+                    <div class="skill-pills">
+                        <span class="pill">React.js</span><span class="pill">Next.js</span><span class="pill">TailwindCSS</span>
+                        <span class="pill">Web Scraping (Selenium, Playwright)</span><span class="pill">n8n Automation</span>
                     </div>
                 </div>
-
-                <div class="skill-category scroll-reveal">
-                    <div class="skill-category-title">
-                        <span class="skill-category-icon">🌍</span>
+                <div class="skill-group reveal">
+                    <div class="skill-group-header">
+                        <span class="skill-icon">🌍</span>
                         <span data-tr="skills.languages.title">Diller</span>
                     </div>
-                    <div class="skill-tags">
-                        <span class="skill-tag" data-tr="skills.languages.turkish">Türkçe (Ana Dil)</span>
-                        <span class="skill-tag" data-tr="skills.languages.english">İngilizce (B2 - Profesyonel Yeterlilik)</span>
+                    <div class="skill-pills">
+                        <span class="pill" data-tr="skills.languages.turkish">Türkçe (Ana Dil)</span>
+                        <span class="pill" data-tr="skills.languages.english">İngilizce (B2 - Profesyonel Yeterlilik)</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- ==================== CONTACT ==================== -->
     <section class="section" id="contact">
         <div class="container">
-            <h2 class="section-title scroll-reveal" data-tr="contact.title">İletişim</h2>
-            <div class="contact-grid">
-                <div class="contact-card scroll-reveal" id="email-card" onclick="copyEmail()" style="cursor: pointer;">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
+            <div class="section-header reveal">
+                <span class="section-tag">05</span>
+                <h2 class="section-title" data-tr="contact.title">İletişim</h2>
+            </div>
+            <div class="contact-row">
+                <div class="contact-item reveal" id="email-card" onclick="copyEmail()" style="cursor:pointer">
+                    <div class="contact-icon-wrap"><i class="fas fa-envelope"></i></div>
                     <h3>Email</h3>
                     <span class="contact-link">a.sametsoysal@gmail.com</span>
                 </div>
-
-                <a href="https://www.linkedin.com/in/samet-soysal/" target="_blank" class="contact-card scroll-reveal">
-                    <div class="contact-icon">
-                        <i class="fab fa-linkedin"></i>
-                    </div>
+                <a href="https://www.linkedin.com/in/samet-soysal/" target="_blank" class="contact-item reveal">
+                    <div class="contact-icon-wrap"><i class="fab fa-linkedin"></i></div>
                     <h3>LinkedIn</h3>
                     <span class="contact-link">samet-soysal</span>
                 </a>
-                
-                <a href="https://github.com/last-26" target="_blank" class="contact-card scroll-reveal">
-                    <div class="contact-icon">
-                        <i class="fab fa-github"></i>
-                    </div>
+                <a href="https://github.com/last-26" target="_blank" class="contact-item reveal">
+                    <div class="contact-icon-wrap"><i class="fab fa-github"></i></div>
                     <h3>GitHub</h3>
                     <span class="contact-link">@last-26</span>
                 </a>
@@ -538,19 +499,19 @@
         <div class="container">
             <p data-tr="footer.copyright">&copy; 2026 Samet Soysal. Tüm hakları saklıdır.</p>
             <div class="footer-links">
-                <a href="mailto:a.sametsoysal@gmail.com" title="Email">
-                    <i class="fas fa-envelope"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/samet-soysal/" target="_blank" title="LinkedIn">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="https://github.com/last-26" target="_blank" title="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
+                <a href="mailto:a.sametsoysal@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/samet-soysal/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/last-26" target="_blank"><i class="fab fa-github"></i></a>
             </div>
-            <p style="margin-top: 15px; opacity: 0.8;" data-tr="footer.made">Tutkuyla kodlanmıştır ❤️</p>
+            <p class="footer-sub" data-tr="footer.made">Tutkuyla kodlanmıştır ❤️</p>
         </div>
     </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toastNotification">
+        <i class="fas fa-check-circle"></i>
+        <span data-tr="contact.email.copied">Email kopyalandı!</span>
+    </div>
 
     <script src="script.js"></script>
 </body>
