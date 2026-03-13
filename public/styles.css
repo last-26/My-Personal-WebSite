@@ -24,7 +24,8 @@ body {
     color: var(--dark);
     overflow-x: hidden;
     line-height: 1.6;
-    transition: background 0.3s ease, color 0.3s ease;
+    transition: background 0.5s ease, color 0.3s ease;
+    scroll-behavior: smooth;
 }
 
 /* Dark Mode */
@@ -707,10 +708,20 @@ header {
 .hero-content h1 {
     font-size: 4.5rem;
     margin-bottom: 1rem;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
     animation: slideInFromLeft 0.8s ease;
-    font-weight: 800;
+    font-weight: 900;
     letter-spacing: -2px;
+    background: linear-gradient(90deg, #ffffff, #e0e7ff, #c7d2fe, #ffffff);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: slideInFromLeft 0.8s ease, gradientShift 6s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 .hero-content .subtitle {
@@ -1722,14 +1733,35 @@ footer p {
 
 .scroll-reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s ease;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-reveal.active {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* Staggered animation for skill categories */
+.skill-category.scroll-reveal:nth-child(1) { transition-delay: 0.05s; }
+.skill-category.scroll-reveal:nth-child(2) { transition-delay: 0.1s; }
+.skill-category.scroll-reveal:nth-child(3) { transition-delay: 0.15s; }
+.skill-category.scroll-reveal:nth-child(4) { transition-delay: 0.2s; }
+.skill-category.scroll-reveal:nth-child(5) { transition-delay: 0.25s; }
+
+/* Staggered animation for project cards */
+.project-card.scroll-reveal:nth-child(1) { transition-delay: 0.05s; }
+.project-card.scroll-reveal:nth-child(2) { transition-delay: 0.1s; }
+.project-card.scroll-reveal:nth-child(3) { transition-delay: 0.15s; }
+.project-card.scroll-reveal:nth-child(4) { transition-delay: 0.2s; }
+.project-card.scroll-reveal:nth-child(5) { transition-delay: 0.25s; }
+.project-card.scroll-reveal:nth-child(6) { transition-delay: 0.3s; }
+.project-card.scroll-reveal:nth-child(7) { transition-delay: 0.35s; }
+
+/* Staggered animation for stat cards */
+.stat-card:nth-child(1) { animation: fadeInUp 0.6s ease 0.1s both; }
+.stat-card:nth-child(2) { animation: fadeInUp 0.6s ease 0.2s both; }
+.stat-card:nth-child(3) { animation: fadeInUp 0.6s ease 0.3s both; }
 
 /* Floating particles */
 .particles {
@@ -1742,9 +1774,11 @@ footer p {
 
 .particle {
     position: absolute;
-    background: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.25);
     border-radius: 50%;
     animation: float 15s infinite;
+    will-change: transform;
+    filter: blur(0.5px);
 }
 
 @keyframes float {

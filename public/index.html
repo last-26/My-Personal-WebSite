@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAMET SOYSAL - AI/ML Engineer & Full-Stack Developer</title>
+    <meta name="description" content="Samet Soysal - Computer Engineer specializing in AI, NLP, LLMs, RAG Pipelines. Portfolio showcasing enterprise-grade AI projects.">
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     
     <!-- Firebase SDK -->
@@ -112,25 +116,24 @@
             <h2 class="section-title scroll-reveal" data-tr="about.title">Hakkımda</h2>
             <div class="about-content scroll-reveal">
                 <p data-tr="about.description">
-                    Eskişehir Osmangazi Üniversitesi Bilgisayar Mühendisliği son sınıf öğrencisiyim (Mezuniyet: Şubat 2026). 
-                    Yapay Zeka, Makine Öğrenmesi ve Doğal Dil İşleme alanlarında güçlü teknik uzmanlığa sahibim. 
-                    RAG sistemleri, embedding teknolojileri, vektör veritabanları ve OCR tabanlı çözümler geliştirdim. 
-                    Python, RESTful API entegrasyonları ve çok modelli orkestrasyon konularında production-ready 
-                    AI çözümleri geliştirme deneyimim bulunmaktadır. Kurumsal projelerde verimliliği artıran 
-                    ölçeklenebilir ve yenilikçi yapay zeka sistemleri tasarlama konusunda uzmanlaştım.
+                    Eskişehir Osmangazi Üniversitesi Bilgisayar Mühendisliği mezunuyum. 
+                    Yapay Zeka, NLP ve Büyük Dil Modelleri (LLM) alanlarında uzmanlaşmış, sonuç odaklı bir Bilgisayar Mühendisiyim. 
+                    Uçtan uca AI mimarileri, yüksek performanslı RAG pipeline'ları ve Multi-LLM orkestrasyonları tasarlama konusunda kanıtlanmış deneyime sahibim. 
+                    Temel gücüm, karmaşık makine öğrenmesi modellerini ölçeklenebilir full-stack geliştirme (React, FastAPI, PostgreSQL) ile birleştirerek 
+                    milisaniye düzeyinde gecikme ve %95+ doğruluk oranıyla veri odaklı çözümler sunmaktır.
                 </p>
             </div>
             <div class="stats-grid scroll-reveal">
                 <div class="stat-card">
-                    <div class="stat-number">2+</div>
+                    <div class="stat-number">3+</div>
                     <div class="stat-label" data-tr="about.stats.years">Yıl Deneyim</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">12+</div>
+                    <div class="stat-number">10+</div>
                     <div class="stat-label" data-tr="about.stats.projects">Tamamlanan Proje</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">20+</div>
+                    <div class="stat-number">25+</div>
                     <div class="stat-label" data-tr="about.stats.technologies">Teknoloji</div>
                 </div>
             </div>
@@ -147,22 +150,37 @@
                 </button>
                 
                 <div class="experience-timeline">
-                    <!-- TEI Experience -->
+                    <!-- IC Ictas Nuclear Experience -->
                     <div class="timeline-item active" data-experience="1">
                         <div class="timeline-header">
                             <div>
-                                <div class="timeline-title" data-tr="experience.tei.title">Yapay Zeka Stajyeri</div>
-                                <div class="timeline-company" data-tr="experience.tei.company">TEI - TUSAŞ Motor Sanayii A.Ş. | IT - Data Analytics & AI</div>
+                                <div class="timeline-title" data-tr="experience.icictas.title">Yazılım Geliştirme Stajyeri</div>
+                                <div class="timeline-company" data-tr="experience.icictas.company">IC İçtaş Nükleer ve Endüstriyel Tesisler İnşaat A.Ş.</div>
+                            </div>
+                            <div class="timeline-date" data-tr="experience.icictas.date">Ocak 2026</div>
+                        </div>
+                        <ul class="timeline-achievements">
+                            <li data-tr="experience.icictas.achievement1">Akkuyu Nükleer Santral sahasından gelen verileri analiz etmek için React.js, FastAPI ve PostgreSQL kullanarak uçtan uca İSG Takip Paneli tasarladım ve geliştirdim</li>
+                            <li data-tr="experience.icictas.achievement2">Backend'de Passlib ile şifre hashleme ve JWT standardını kullanarak kimlik doğrulama algoritmaları entegre ettim, SQLAlchemy ORM ile veritabanı işlemlerini güvence altına aldım</li>
+                            <li data-tr="experience.icictas.achievement3">Yüksek kardinaliteli sütunlarda stratejik B-tree indeksleme uygulayarak karmaşık analitik operasyonlar (JOIN/GROUP BY) için PostgreSQL sorgu performansını optimize ettim</li>
+                            <li data-tr="experience.icictas.achievement4">Material UI ve Recharts kütüphaneleri kullanarak yöneticiler için gerçek zamanlı analiz grafikleri üreten asenkron dashboard (SPA) mimarisi kurdum</li>
+                        </ul>
+                    </div>
+
+                    <!-- TEI Experience -->
+                    <div class="timeline-item" data-experience="2">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="timeline-title" data-tr="experience.tei.title">Data Science & AI Stajyeri</div>
+                                <div class="timeline-company" data-tr="experience.tei.company">TEI – TUSAŞ Motor Sanayii A.Ş. | Eskişehir</div>
                             </div>
                             <div class="timeline-date" data-tr="experience.tei.date">Ağustos 2025 - Eylül 2025</div>
                         </div>
                         <ul class="timeline-achievements">
-                            <li data-tr="experience.tei.achievement1">Çok modelli destekli chatbot altyapıları tasarladım (LibreChat entegrasyonu)</li>
-                            <li data-tr="experience.tei.achievement2">CV analiz ve değerlendirme sistemlerinin geliştirilmesine katkı sağladım</li>
-                            <li data-tr="experience.tei.achievement3">Qwen2.5-VL modeli kullanarak tablolardan ve formlardan veri çıkarabilen OCR sistemi geliştirdim</li>
-                            <li data-tr="experience.tei.achievement4">Bilgi erişim süreçlerini hızlandırmak için RAG tabanlı doküman sorgulama prototipi oluşturdum</li>
-                            <li data-tr="experience.tei.achievement5">n8n gibi otomasyon araçları kullanarak IT süreç akışlarını hızlandırdım ve manuel görevleri minimize ettim</li>
-                            <li data-tr="experience.tei.achievement6">Playwright kullanarak Trendyol Yemek üzerinden otomatik yemek sipariş veren web scraping tabanlı uygulama geliştirdim</li>
+                            <li data-tr="experience.tei.achievement1">İzole ağlarda (Red-Black Box) güvenli veri iletimi ve sistem mimarileri üzerine Ar-Ge çalışmaları yürüttüm</li>
+                            <li data-tr="experience.tei.achievement2">İK departmanı için "SAMETEI" Generative AI asistanının Ar-Ge ve prototipleme sürecini yönettim; OpenRouter API'leri ve LibreChat üzerinden Local LLM entegrasyonu gerçekleştirdim</li>
+                            <li data-tr="experience.tei.achievement3">n8n kullanarak API'ler aracılığıyla gerçek zamanlı veri çeken, finansal metrikleri otonom analiz eden ve raporlayan otomasyonlar kurdum</li>
+                            <li data-tr="experience.tei.achievement4">Playwright kullanarak kullanıcı davranışını simüle eden, Trendyol Yemek üzerinden otonom sipariş veren uçtan uca e-ticaret otomasyonu (RPA) geliştirdim</li>
                         </ul>
                         <button class="certificate-btn" id="certificateBtn" type="button">
                             <i class="fas fa-certificate"></i>
@@ -171,18 +189,18 @@
                     </div>
 
                     <!-- Powintec Experience -->
-                    <div class="timeline-item" data-experience="2">
+                    <div class="timeline-item" data-experience="3">
                         <div class="timeline-header">
                             <div>
-                                <div class="timeline-title" data-tr="experience.powintec.title">Software Developer (Remote)</div>
+                                <div class="timeline-title" data-tr="experience.powintec.title">Part-Time Yazılım Geliştirici (Remote)</div>
                                 <div class="timeline-company" data-tr="experience.powintec.company">Powintec Engineering | Wireless Charging of Small Electric Vehicles</div>
                             </div>
                             <div class="timeline-date" data-tr="experience.powintec.date">Temmuz 2023 - Temmuz 2025</div>
                         </div>
                         <ul class="timeline-achievements">
-                            <li data-tr="experience.powintec.achievement1">Küçük elektrikli araçları hedefleyen kablosuz şarj projesi için mobil uygulamalar ve frontend arayüzleri geliştirdim</li>
-                            <li data-tr="experience.powintec.achievement2">Kullanıcı deneyimini ve işlevselliği geliştirmek için çapraz fonksiyonel ekiplerle işbirliği yaptım</li>
-                            <li data-tr="experience.powintec.achievement3">Sürdürülebilir teknoloji inovasyonuna odaklanan bir startup ortamına katkıda bulundum</li>
+                            <li data-tr="experience.powintec.achievement1">Kablosuz şarj padlarından gelen hizalama, sıcaklık ve güç transfer verimliliği metriklerini anlık izlemek için React.js, TailwindCSS ve WebSockets kullanarak gerçek zamanlı yönetim paneli geliştirdim</li>
+                            <li data-tr="experience.powintec.achievement2">Sürekli WebSocket veri akışlarının neden olduğu UI rendering darboğazlarını önlemek için React state yönetimini optimize ettim; milisaniye düzeyinde düşük gecikme ile gerçek zamanlı şarj ve voltaj metriklerini işledim</li>
+                            <li data-tr="experience.powintec.achievement3">Donanım-sunucu bağlantı kopmalarına karşı proaktif hata yönetim mekanizmaları uyguladım ve UI testleri yazarak üretim ortamı kararlılığını artırdım</li>
                         </ul>
                     </div>
                 </div>
@@ -196,6 +214,7 @@
             <div class="experience-indicators">
                 <span class="indicator active" onclick="goToExperience(1)"></span>
                 <span class="indicator" onclick="goToExperience(2)"></span>
+                <span class="indicator" onclick="goToExperience(3)"></span>
             </div>
         </div>
     </section>
@@ -394,102 +413,7 @@
                     </div>
                 </div>
 
-                <!-- Fitness Program WebForms -->
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
-                        <h3><span data-tr="projects.fitness.title">🏋️‍♂️ Fitness Program</span></h3>
-                        <p data-tr="projects.fitness.subtitle">Personalized Workout Planner</p>
-                    </div>
-                    <div class="project-body">
-                        <p data-tr="projects.fitness.description">
-                            Fitness program creation application developed with ASP.NET Web Forms. Users can create customized workout programs based on muscle groups and save them in SQL database.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">Bootstrap</span>
-                            <span class="tag">jQuery</span>
-                            <span class="tag">MsSQL</span>
-                            <span class="tag">ASP.NET Web Forms</span>
-                            <span class="tag">JavaScript</span>
-                        </div>
-                        <a href="https://github.com/last-26/FitnessProgram-WebForms" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
 
-                <!-- Student Management System -->
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
-                        <h3><span data-tr="projects.student.title">🎓 Öğrenci Yönetim Sistemi</span></h3>
-                        <p data-tr="projects.student.subtitle">Advanced Programming Projesi</p>
-                    </div>
-                    <div class="project-body">
-                        <p data-tr="projects.student.description">
-                            C# Windows Forms ve SQL Server ile geliştirilmiş kapsamlı öğrenci bilgi yönetim sistemi. 
-                            CRUD işlemleri ve tam veritabanı entegrasyonu.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">C#</span>
-                            <span class="tag">.NET</span>
-                            <span class="tag">Database</span>
-                            <span class="tag">CRUD Operations</span>
-                            <span class="tag">WinForms</span>
-                        </div>
-                        <a href="https://github.com/last-26/Advanced-Programming-Student-Management-System" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Smart Home App V2 -->
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
-                        <h3>📱 Smart Home App V2</h3>
-                        <p data-tr="projects.smarthome.subtitle">Akıllı Ev Kontrol Uygulaması</p>
-                    </div>
-                    <div class="project-body">
-                        <p data-tr="projects.smarthome.description">
-                            Flutter ve Dart kullanılarak geliştirilmiş akıllı ev kontrol mobil uygulaması. 
-                            Modern UI ve kullanıcı dostu arayüz tasarımı.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">IoT</span>
-                            <span class="tag">Mobile App</span>
-                            <span class="tag">Flutter</span>
-                            <span class="tag">Dart</span>
-                            <span class="tag">Android/iOS</span>
-                        </div>
-                        <a href="https://github.com/last-26/SmartHome-App-V2" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Discord Music Bot -->
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
-                        <h3>🎵 Discord Music Bot</h3>
-                        <p data-tr="projects.discord.subtitle">Basit ve Etkili Müzik Botu</p>
-                    </div>
-                    <div class="project-body">
-                        <p data-tr="projects.discord.description">
-                            Discord için Python ile geliştirilmiş kullanımı kolay müzik botu. 
-                            Temiz kod yapısı ve kullanıcı dostu komutlar.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">Railway</span>
-                            <span class="tag">yt-dlp</span>
-                            <span class="tag">Music Bot</span>
-                            <span class="tag">Docker</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">FFmpeg</span>
-                            <span class="tag">discord.py</span>
-                        </div>
-                        <a href="https://github.com/last-26/Discord-MusicBot" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -501,137 +425,76 @@
             <div class="skills-categories">
                 <div class="skill-category scroll-reveal">
                     <div class="skill-category-title">
-                        <span class="skill-category-icon">💻</span>
-                        <span data-tr="skills.programming.title">Programlama Dilleri & Veritabanları</span>
+                        <span class="skill-category-icon">🤖</span>
+                        <span data-tr="skills.ai.title">AI & Data Science</span>
                     </div>
                     <div class="skill-tags">
                         <span class="skill-tag">Python</span>
-                        <span class="skill-tag">JavaScript/TypeScript</span>
-                        <span class="skill-tag">C#</span>
-                        <span class="skill-tag">SQL</span>
-                        <span class="skill-tag">PostgreSQL</span>
-                        <span class="skill-tag">MySQL</span>
-                        <span class="skill-tag">MSSQL</span>
-                        <span class="skill-tag">MongoDB</span>
-                        <span class="skill-tag">Redis</span>
-                        <span class="skill-tag">Firebase</span>
-                    </div>
-                </div>
-
-                <div class="skill-category scroll-reveal">
-                    <div class="skill-category-title">
-                        <span class="skill-category-icon">🤖</span>
-                        <span data-tr="skills.aiml.title">AI/ML Engineering</span>
-                    </div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">PyTorch</span>
-                        <span class="skill-tag">TensorFlow</span>
-                        <span class="skill-tag">Hugging Face Transformers</span>
-                        <span class="skill-tag">Scikit-learn</span>
-                        <span class="skill-tag">Numpy</span>
                         <span class="skill-tag">Pandas</span>
-                        <span class="skill-tag">Matplotlib</span>
-                    </div>
-                </div>
-
-                <div class="skill-category scroll-reveal">
-                    <div class="skill-category-title">
-                        <span class="skill-category-icon">💬</span>
-                        <span data-tr="skills.nlp.title">NLP & LLM</span>
-                    </div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">LangChain</span>
-                        <span class="skill-tag">LlamaIndex</span>
-                        <span class="skill-tag">OpenAI API</span>
-                        <span class="skill-tag">OpenRouter API</span>
+                        <span class="skill-tag">NumPy</span>
+                        <span class="skill-tag">Scikit-learn</span>
+                        <span class="skill-tag">NLP</span>
+                        <span class="skill-tag">LLMs</span>
+                        <span class="skill-tag">RAG Pipelines</span>
+                        <span class="skill-tag">Hugging Face</span>
                         <span class="skill-tag">Ollama</span>
-                        <span class="skill-tag">Sentence-Transformers</span>
-                    </div>
-                </div>
-
-                <div class="skill-category scroll-reveal">
-                    <div class="skill-category-title">
-                        <span class="skill-category-icon">🔍</span>
-                        <span data-tr="skills.rag.title">RAG & Vector Search</span>
-                    </div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">ChromaDB</span>
-                        <span class="skill-tag">Qdrant</span>
-                        <span class="skill-tag">FAISS</span>
-                        <span class="skill-tag">OpenAI Embeddings</span>
+                        <span class="skill-tag">Vector Search (ChromaDB)</span>
                     </div>
                 </div>
 
                 <div class="skill-category scroll-reveal">
                     <div class="skill-category-title">
                         <span class="skill-category-icon">👁️</span>
-                        <span data-tr="skills.ocr.title">Document Processing & OCR</span>
+                        <span data-tr="skills.cv.title">Computer Vision & OCR</span>
                     </div>
                     <div class="skill-tags">
+                        <span class="skill-tag">Qwen 2.5-VL</span>
                         <span class="skill-tag">OpenCV</span>
                         <span class="skill-tag">Tesseract</span>
                         <span class="skill-tag">Table-Transformer</span>
-                        <span class="skill-tag">DOTS</span>
                         <span class="skill-tag">PyMuPDF</span>
-                        <span class="skill-tag">scikit-image</span>
                     </div>
                 </div>
 
                 <div class="skill-category scroll-reveal">
                     <div class="skill-category-title">
                         <span class="skill-category-icon">⚙️</span>
-                        <span data-tr="skills.backend.title">Backend & API Development</span>
+                        <span data-tr="skills.backend.title">Backend & Infrastructure</span>
                     </div>
                     <div class="skill-tags">
                         <span class="skill-tag">FastAPI</span>
                         <span class="skill-tag">Flask</span>
-                        <span class="skill-tag">Flask-RESTX</span>
                         <span class="skill-tag">Node.js</span>
-                        <span class="skill-tag">Express.js</span>
-                        <span class="skill-tag">ASP.NET Core Web API</span>
-                        <span class="skill-tag">ASP.NET Web Forms</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">Docker</span>
                         <span class="skill-tag">JWT</span>
-                        <span class="skill-tag">OAuth</span>
+                        <span class="skill-tag">SQLAlchemy</span>
                     </div>
                 </div>
 
                 <div class="skill-category scroll-reveal">
                     <div class="skill-category-title">
                         <span class="skill-category-icon">🎨</span>
-                        <span data-tr="skills.frontend.title">Frontend & Mobile</span>
+                        <span data-tr="skills.frontend.title">Frontend & Araçlar</span>
                     </div>
                     <div class="skill-tags">
                         <span class="skill-tag">React.js</span>
                         <span class="skill-tag">Next.js</span>
                         <span class="skill-tag">TailwindCSS</span>
-                        <span class="skill-tag">Bootstrap</span>
-                        <span class="skill-tag">Flutter (Dart, BLoC, Go Router)</span>
-                    </div>
-                </div>
-
-                <div class="skill-category scroll-reveal">
-                    <div class="skill-category-title">
-                        <span class="skill-category-icon">🔧</span>
-                        <span data-tr="skills.automation.title">Automation & DevOps</span>
-                    </div>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Playwright</span>
-                        <span class="skill-tag">Selenium</span>
-                        <span class="skill-tag">n8n</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">Railway</span>
+                        <span class="skill-tag">Web Scraping (Selenium, Playwright)</span>
+                        <span class="skill-tag">n8n Automation</span>
                     </div>
                 </div>
 
                 <div class="skill-category scroll-reveal">
                     <div class="skill-category-title">
                         <span class="skill-category-icon">🌍</span>
-                        <span data-tr="skills.languages.title">Languages</span>
+                        <span data-tr="skills.languages.title">Diller</span>
                     </div>
                     <div class="skill-tags">
-                        <span class="skill-tag" data-tr="skills.languages.turkish">Turkish (Native)</span>
-                        <span class="skill-tag" data-tr="skills.languages.english">English (B2 - Professional Proficiency)</span>
+                        <span class="skill-tag" data-tr="skills.languages.turkish">Türkçe (Ana Dil)</span>
+                        <span class="skill-tag" data-tr="skills.languages.english">İngilizce (B2 - Profesyonel Yeterlilik)</span>
                     </div>
                 </div>
             </div>
@@ -673,7 +536,7 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p data-tr="footer.copyright">&copy; 2025 Samet Soysal. Tüm hakları saklıdır.</p>
+            <p data-tr="footer.copyright">&copy; 2026 Samet Soysal. Tüm hakları saklıdır.</p>
             <div class="footer-links">
                 <a href="mailto:a.sametsoysal@gmail.com" title="Email">
                     <i class="fas fa-envelope"></i>
