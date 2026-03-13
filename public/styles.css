@@ -357,8 +357,8 @@ body.light-mode .title-outline{-webkit-text-stroke:2px var(--accent)}
 /* ── ABOUT – Bento Grid ── */
 .bento-grid{
     display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr;
-    gap:14px;
+    grid-template-columns:repeat(3, 1fr); /* Fixed alignment to fit the 3 bottom cards perfectly */
+    gap:18px;
 }
 .bento-card{
     background:var(--bg-card);
@@ -381,8 +381,8 @@ body.light-mode .title-outline{-webkit-text-stroke:2px var(--accent)}
 .bento-card:hover::before{opacity:1}
 .bento-card:hover{transform:translateY(-4px);box-shadow:0 0 40px var(--glow)}
 
-.bento-main{grid-row:span 1;grid-column:span 4}
-.about-text{color:var(--text-2);font-size:1rem;line-height:1.9;text-align:center}
+.bento-main{grid-row:span 1;grid-column:span 3}
+.about-text{color:var(--text-2);font-size:1.05rem;line-height:1.9;text-align:center}
 
 .bento-stat{
     display:flex;flex-direction:column;align-items:center;
@@ -398,29 +398,34 @@ body.light-mode .title-outline{-webkit-text-stroke:2px var(--accent)}
 
 /* ── EXPERIENCE ── */
 .experience-slider{
-    position:relative;max-width:1100px;margin:0 auto;
-    display:flex;align-items:center;gap:2rem;
+    position:relative;max-width:1200px;margin:0 auto; /* Enlarged slider */
+    display:flex;align-items:center;gap:3rem;
 }
-.experience-timeline{flex:1;position:relative;min-height:420px}
+.experience-timeline{flex:1;position:relative;min-height:460px}
 
 .timeline-item{
-    background:var(--bg-card);border:1px solid var(--glass-border);
-    border-radius:var(--radius);padding:3rem;
+    background:rgba(6,6,14,.9);
+    border:1px solid rgba(124,58,237,.3);
+    border-radius:2px; /* Cyberpunk sharp edges */
+    padding:4rem; /* Enlarged padding */
     display:none;opacity:0;
     animation:cardIn .5s cubic-bezier(.16,1,.3,1) forwards;
     position:relative;overflow:hidden;
+    box-shadow: 0 0 10px rgba(124,58,237,.05) inset;
 }
 .timeline-item::after{
     content:'';position:absolute;top:0;left:0;width:4px;height:100%;
     background:linear-gradient(180deg,var(--accent),var(--accent-2));
-    border-radius:0 2px 2px 0;
 }
 .timeline-item.active{display:block;opacity:1}
 @keyframes cardIn{
     from{opacity:0;transform:translateX(16px) scale(.98)}
     to{opacity:1;transform:translateX(0) scale(1)}
 }
-.timeline-item:hover{border-color:rgba(124,58,237,.2);box-shadow:0 0 40px var(--glow)}
+.timeline-item:hover{
+    border-color:var(--accent);
+    box-shadow: 0 0 20px rgba(124,58,237,.4), 0 0 30px rgba(124,58,237,.1) inset;
+}
 
 .exp-top{
     display:flex;justify-content:space-between;align-items:flex-start;
@@ -451,15 +456,15 @@ body.light-mode .title-outline{-webkit-text-stroke:2px var(--accent)}
 }
 
 .slider-btn{
-    width:44px;height:44px;border-radius:50%;
-    background:var(--glass);backdrop-filter:blur(10px);
-    border:1px solid var(--glass-border);color:var(--text-2);
-    font-size:.9rem;cursor:pointer;transition:all .25s;
+    width:56px;height:56px;border-radius:2px; /* Cyberpunk enlarged button */
+    background:rgba(6,6,14,.8);backdrop-filter:blur(10px);
+    border:1px solid rgba(124,58,237,.3);color:var(--accent);
+    font-size:1.1rem;cursor:pointer;transition:all .25s;
     display:grid;place-items:center;flex-shrink:0;
 }
 .slider-btn:hover{
     background:var(--accent);color:#fff;border-color:var(--accent);
-    transform:scale(1.1);box-shadow:0 4px 20px rgba(124,58,237,.4);
+    transform:scale(1.1);box-shadow:0 0 20px rgba(124,58,237,.5);
 }
 .slider-btn:active{transform:scale(.92)}
 
