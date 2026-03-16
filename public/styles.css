@@ -54,6 +54,22 @@ body.light-mode .card:hover, body.light-mode .project-card:hover, body.light-mod
     border-color: rgba(0,0,0,0.1);
 }
 
+/* Light Mode Nav/Logo Fixes */
+body.light-mode .logo-mark {
+    color: var(--text);
+    text-shadow: none;
+}
+body.light-mode .nav-links a {
+    color: var(--text);
+    text-shadow: none;
+}
+body.light-mode .nav-links a:hover {
+    color: var(--accent);
+}
+body.light-mode .nav-links a::after {
+    background: var(--accent);
+}
+
 /* ── Reset ── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}

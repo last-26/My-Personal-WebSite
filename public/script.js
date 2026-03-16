@@ -680,7 +680,10 @@ function renderWeeklyChart(ctx, labels, data) {
                     displayColors: false,
                     callbacks: {
                         title: () => null, // Hide title
-                        label: (context) => `${context.raw} visitors`
+                        label: (context) => {
+                            const label = currentLang === 'tr' ? 'ziyaretçi' : 'visitors';
+                            return `${context.raw} ${label}`;
+                        }
                     }
                 }
             },
