@@ -1224,7 +1224,9 @@ window.goToExperience = function(experienceNumber) {
 // ============================================
 function showCertificateModal() {
     const modal = document.getElementById('certificateModal');
-    if (modal) {
+    const modalImg = document.getElementById('certificateImage');
+    if (modal && modalImg) {
+        modalImg.src = currentLang === 'tr' ? 'TEI_TR.png' : 'TEI_EN.png';
         modal.classList.add('show');
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
