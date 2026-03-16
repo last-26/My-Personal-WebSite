@@ -489,6 +489,7 @@ async function trackCVAction(action, language) {
         const userActionRef = database.ref(`cv_analytics/users/${visitorId}/${cvKey}`);
         const actionData = {
             timestamp: firebase.database.ServerValue.TIMESTAMP,
+            localTimeString: new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' }), // Added readable UTC+3 timestamp
             action: action,
             language: language,
             userAgent: navigator.userAgent,
@@ -546,6 +547,7 @@ async function initVisitorCounter() {
             await countRef.set(currentCount);
             await dailyRef.set({
                 timestamp: firebase.database.ServerValue.TIMESTAMP,
+                localTimeString: new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' }), // Added readable UTC+3 timestamp
                 userAgent: navigator.userAgent,
                 language: navigator.language
             });
@@ -811,9 +813,26 @@ async function trackUserBehavior() {
         const visitorId = localStorage.getItem('portfolioVisitorId') || 'unknown';
         const behaviorRef = database.ref(`analytics/behavior/${visitorId}`);
         
+        const currentClientTime = Date.now();
+        let firstVisitTime = localStorage.getItem('firstVisit');
+        
+        if (!firstVisitTime) {
+            firstVisitTime = currentClientTime;
+            localStorage.setItem('firstVisit', firstVisitTime.toString());
+        } else {
+            // If it's the old corrupted object string, reset it to current time
+            if (firstVisitTime === '[object Object]') {
+                firstVisitTime = currentClientTime;
+                localStorage.setItem('firstVisit', firstVisitTime.toString());
+            } else {
+                firstVisitTime = parseInt(firstVisitTime); // Convert string to number
+            }
+        }
+
         const behaviorData = {
-            firstVisit: localStorage.getItem('firstVisit') || firebase.database.ServerValue.TIMESTAMP,
+            firstVisit: firstVisitTime,
             lastVisit: firebase.database.ServerValue.TIMESTAMP,
+            lastVisitReadable: new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' }), // Added readable UTC+3 timestamp
             pageViews: (parseInt(localStorage.getItem('pageViews')) || 0) + 1,
             screenResolution: `${screen.width}x${screen.height}`,
             language: navigator.language,
@@ -822,9 +841,6 @@ async function trackUserBehavior() {
         };
 
         localStorage.setItem('pageViews', behaviorData.pageViews);
-        if (!localStorage.getItem('firstVisit')) {
-            localStorage.setItem('firstVisit', behaviorData.firstVisit);
-        }
 
         await behaviorRef.set(behaviorData);
 
