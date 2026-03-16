@@ -11,6 +11,8 @@ firebase-debug.*.log*
 public/TEI.jpeg
 public/CV_EN.pdf
 public/CV_TR.pdf
+public/c1.jpg
+public/b2.jpg
 # Firebase cache
 .firebase/
 

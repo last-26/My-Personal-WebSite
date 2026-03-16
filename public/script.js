@@ -51,6 +51,14 @@ const translations = {
         "education.school": "Eskişehir Osmangazi Üniversitesi",
         "education.date": "2020 - 2026",
         "education.detail": "Yapay Zeka, Makine Öğrenmesi ve Doğal Dil İşleme alanlarında uzmanlaşma. Mezuniyet projesi: HIREAI — AI destekli CV analiz platformu.",
+        "education.cert.c1.title": "İngilizce C1 Sertifika Programı",
+        "education.cert.c1.school": "American Cultural Language Schools",
+        "education.cert.c1.date": "Mart 2026",
+        "education.cert.c1.detail": "Okuma, yazma, dinleme ve konuşma alanlarında C1 ileri düzey profesyonel yeterlilik eğitimi ve sertifikasyonu.",
+        "education.cert.b2.title": "İngilizce B2 Sertifika Programı",
+        "education.cert.b2.school": "American Cultural Language Schools",
+        "education.cert.b2.date": "Ocak 2025",
+        "education.cert.b2.detail": "Okuma, yazma, dinleme ve konuşma alanlarında B2 orta-üst düzey profesyonel yeterlilik eğitimi ve sertifikasyonu.",
         "experience.title": "Deneyim",
         "experience.certificate": "Sertifika",
         "experience.icictas.title": "Yazılım Geliştirme Stajyeri",
@@ -151,6 +159,14 @@ const translations = {
         "education.school": "Eskisehir Osmangazi University",
         "education.date": "2020 - 2026",
         "education.detail": "Specializing in Artificial Intelligence, Machine Learning and NLP. Capstone project: HIREAI — AI-powered CV analysis platform.",
+        "education.cert.c1.title": "English C1 Certificate Program",
+        "education.cert.c1.school": "American Cultural Language Schools",
+        "education.cert.c1.date": "March 2026",
+        "education.cert.c1.detail": "C1 advanced professional proficiency training and certification in reading, writing, listening, and spoken interaction/production.",
+        "education.cert.b2.title": "English B2 Certificate Program",
+        "education.cert.b2.school": "American Cultural Language Schools",
+        "education.cert.b2.date": "January 2025",
+        "education.cert.b2.detail": "B2 upper-intermediate professional proficiency training and certification in reading, writing, listening, and spoken interaction/production.",
         "experience.title": "Experience",
         "experience.certificate": "Certificate",
         "experience.icictas.title": "Software Development Intern",
@@ -1245,8 +1261,30 @@ function initCertificateButton() {
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeCertificateModal();
+        closeEnglishCertModal();
     }
 });
+
+// English Certificate Modal Functions
+window.showEnglishCertModal = function(imgSrc) {
+    const modal = document.getElementById('englishCertModal');
+    const modalImg = document.getElementById('englishCertImage');
+    if (modal && modalImg) {
+        modalImg.src = imgSrc;
+        modal.classList.add('show');
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+window.closeEnglishCertModal = function() {
+    const modal = document.getElementById('englishCertModal');
+    if (modal) {
+        modal.classList.remove('show');
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
 
 // Expose close function to window for onclick
 window.closeCertificate = closeCertificateModal;

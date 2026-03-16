@@ -188,17 +188,59 @@
                 <span class="section-tag">02</span>
                 <h2 class="section-title" data-tr="education.title">Eğitim</h2>
             </div>
-            <div class="education-card reveal">
-                <div class="edu-icon-wrap"><i class="fas fa-graduation-cap"></i></div>
-                <div class="edu-content">
-                    <h3 class="edu-degree" data-tr="education.degree">Bilgisayar Mühendisliği Lisans</h3>
-                    <p class="edu-school" data-tr="education.school">Eskişehir Osmangazi Üniversitesi</p>
-                    <p class="edu-date" data-tr="education.date">2020 - 2026</p>
-                    <p class="edu-detail" data-tr="education.detail">Yapay Zeka, Makine Öğrenmesi ve Doğal Dil İşleme alanlarında uzmanlaşma. Mezuniyet projesi: HIREAI — AI destekli CV analiz platformu.</p>
+            <div style="display: flex; flex-direction: column; gap: 24px;">
+                <div class="education-card reveal">
+                    <div class="edu-icon-wrap"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="edu-content">
+                        <h3 class="edu-degree" data-tr="education.degree">Bilgisayar Mühendisliği Lisans</h3>
+                        <p class="edu-school" data-tr="education.school">Eskişehir Osmangazi Üniversitesi</p>
+                        <p class="edu-date" data-tr="education.date">2020 - 2026</p>
+                        <p class="edu-detail" data-tr="education.detail">Yapay Zeka, Makine Öğrenmesi ve Doğal Dil İşleme alanlarında uzmanlaşma. Mezuniyet projesi: HIREAI — AI destekli CV analiz platformu.</p>
+                    </div>
+                </div>
+
+                <div class="education-card reveal">
+                    <div class="edu-icon-wrap"><i class="fas fa-language"></i></div>
+                    <div class="edu-content">
+                        <h3 class="edu-degree" data-tr="education.cert.c1.title">İngilizce C1 Sertifika Programı</h3>
+                        <p class="edu-school" data-tr="education.cert.c1.school">American Cultural Language Schools</p>
+                        <p class="edu-date" data-tr="education.cert.c1.date">Mart 2026</p>
+                        <p class="edu-detail" data-tr="education.cert.c1.detail">Okuma, yazma, dinleme ve konuşma (Spoken Interaction & Production) alanlarında C1 ileri düzey profesyonel yeterlilik eğitimi ve sertifikasyonu.</p>
+                        
+                        <button class="certificate-btn" onclick="showEnglishCertModal('c1.jpg')" type="button" style="margin-top: 16px;">
+                            <i class="fas fa-award"></i>
+                            <span data-tr="experience.certificate">Sertifika</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="education-card reveal">
+                    <div class="edu-icon-wrap"><i class="fas fa-language"></i></div>
+                    <div class="edu-content">
+                        <h3 class="edu-degree" data-tr="education.cert.b2.title">İngilizce B2 Sertifika Programı</h3>
+                        <p class="edu-school" data-tr="education.cert.b2.school">American Cultural Language Schools</p>
+                        <p class="edu-date" data-tr="education.cert.b2.date">Ocak 2025</p>
+                        <p class="edu-detail" data-tr="education.cert.b2.detail">Okuma, yazma, dinleme ve konuşma alanlarında B2 orta-üst düzey profesyonel yeterlilik eğitimi ve sertifikasyonu.</p>
+                        
+                        <button class="certificate-btn" onclick="showEnglishCertModal('b2.jpg')" type="button" style="margin-top: 16px;">
+                            <i class="fas fa-award"></i>
+                            <span data-tr="experience.certificate">Sertifika</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- English Certificate Modal -->
+    <div id="englishCertModal" class="certificate-modal" onclick="closeEnglishCertModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeEnglishCertModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="englishCertImage" src="" alt="English Certificate" class="certificate-image">
+        </div>
+    </div>
 
     <!-- ==================== EXPERIENCE ==================== -->
     <section class="section" id="experience">
