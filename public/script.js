@@ -50,7 +50,7 @@ const translations = {
         "education.degree": "Bilgisayar Mühendisliği Lisans",
         "education.school": "Eskişehir Osmangazi Üniversitesi",
         "education.detail": "Yapay Zeka, Makine Öğrenmesi ve Doğal Dil İşleme alanlarında uzmanlaşma. Mezuniyet projesi: HIREAI — AI destekli CV analiz platformu.",
-        "education.cert.title": "İngilizce Dil Eğitimi & Sertifika Programları",
+        "education.cert.title": "İngilizce Dil Okulları",
         "education.cert.school": "American Cultural Language Schools",
         "education.cert.date": "2022 - 2024",
         "education.cert.detail": "Okuma, yazma, dinleme ve konuşma (Spoken Interaction & Production) alanlarında profesyonel yeterlilik eğitimi ve sertifikasyonu.",
