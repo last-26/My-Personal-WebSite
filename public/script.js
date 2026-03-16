@@ -155,7 +155,7 @@ const translations = {
         "education.degree": "BSc in Computer Engineering",
         "education.school": "Eskisehir Osmangazi University",
         "education.detail": "Specializing in Artificial Intelligence, Machine Learning and NLP. Capstone project: HIREAI — AI-powered CV analysis platform.",
-        "education.cert.title": "English Language Training & Certificate Programs",
+        "education.cert.title": "English Language Schools",
         "education.cert.school": "American Cultural Language Schools",
         "education.cert.date": "2022 - 2024",
         "education.cert.detail": "Professional proficiency training and certification in reading, writing, listening, and spoken interaction/production.",
