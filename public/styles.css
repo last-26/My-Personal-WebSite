@@ -12,9 +12,9 @@
     --bg-card-hover: rgba(255,255,255,0.05);
     --glass: rgba(255,255,255,0.04);
     --glass-border: rgba(255,255,255,0.06);
-    --text: #eeeef2;
-    --text-2: #d1d1e0; /* Brightened further from #b4b4c8 */
-    --text-3: #a3a3c2; /* Brightened further from #8a8aa8 */
+    --text: #ffffff; /* pure white */
+    --text-2: #e2e2ec; /* high contrast off-white */
+    --text-3: #b8b8cb; /* high contrast light gray */
     --accent: #7c3aed;
     --accent-2: #2dd4bf;
     --accent-3: #f472b6;
@@ -252,7 +252,7 @@ body.light-mode .particle{background:rgba(124,58,237,.1)}
     display:flex;align-items:center;gap:6px;
     margin-bottom:8px;padding-bottom:6px;
     border-bottom:1px solid var(--glass-border);
-    color:var(--text-3);font-size:.7rem;font-weight:600;
+    color:var(--text-2);font-size:.7rem;font-weight:600;
     text-transform:uppercase;letter-spacing:1.5px;
 }
 .visitor-header i{color:var(--accent-2);font-size:.75rem}
@@ -260,7 +260,7 @@ body.light-mode .particle{background:rgba(124,58,237,.1)}
 .visitor-data-cell{flex:1}
 .visitor-label{
     display:flex;align-items:center;gap:4px;
-    font-size:.6rem;color:var(--text-3);font-weight:600;
+    font-size:.6rem;color:var(--text-3);font-weight:700;
     text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;
 }
 .visitor-label i{font-size:.55rem}
