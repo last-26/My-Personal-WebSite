@@ -115,6 +115,8 @@ const translations = {
         "visitor.header": "Ziyaretçiler",
         "visitor.total": "TOPLAM",
         "visitor.daily": "GÜNLÜK",
+        "visitor.weekly": "SON 7 GÜN",
+        "visitor.reset.note": "Veriler 16 Mart 2026 tarihinde sıfırlanmıştır.",
         "footer.tagline": "AI/ML çözümleri ile geleceği inşa ediyorum.",
         "footer.nav.title": "Sayfalar",
         "footer.social.title": "Bağlantılar",
@@ -213,6 +215,8 @@ const translations = {
         "visitor.header": "Visitors",
         "visitor.total": "TOTAL",
         "visitor.daily": "DAILY",
+        "visitor.weekly": "LAST 7 DAYS",
+        "visitor.reset.note": "Data was reset on March 16, 2026.",
         "footer.tagline": "Building the future with AI/ML solutions.",
         "footer.nav.title": "Pages",
         "footer.social.title": "Connect",
@@ -285,6 +289,11 @@ themeToggle.addEventListener('click', () => {
     } else {
         themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
         localStorage.setItem('theme', 'dark');
+    }
+
+    // Update weekly chart theme if it exists
+    if (weeklyChartInstance && weeklyChartInstance.data.datasets[0].data.length > 0) {
+        renderWeeklyChart(document.getElementById('weeklyVisitorChart').getContext('2d'), weeklyChartInstance.data.labels, weeklyChartInstance.data.datasets[0].data);
     }
 });
 
@@ -474,7 +483,7 @@ async function trackCVAction(action, language) {
         console.log('📝 Writing user action to: cv_analytics/users/' + visitorId + '/' + cvKey);
         const userActionRef = database.ref(`cv_analytics/users/${visitorId}/${cvKey}`);
         const actionData = {
-            timestamp: Date.now(),
+            timestamp: firebase.database.ServerValue.TIMESTAMP,
             action: action,
             language: language,
             userAgent: navigator.userAgent,
@@ -531,7 +540,7 @@ async function initVisitorCounter() {
             currentCount++;
             await countRef.set(currentCount);
             await dailyRef.set({
-                timestamp: Date.now(),
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
                 userAgent: navigator.userAgent,
                 language: navigator.language
             });
@@ -560,11 +569,132 @@ async function initVisitorCounter() {
             dailyCounterElement.textContent = dailyCount.toLocaleString();
         });
 
+        // Initialize Weekly Chart
+        setTimeout(initWeeklyVisitorChart, 1000); // Small delay to let other counters finish
+
     } catch (error) {
         console.error('Visitor counter error:', error);
         counterElement.textContent = 'Error';
         dailyCounterElement.textContent = 'Error';
     }
+}
+
+let weeklyChartInstance = null;
+
+async function initWeeklyVisitorChart() {
+    if (!database) return;
+    
+    const chartContainer = document.getElementById('weeklyChartContainer');
+    const ctx = document.getElementById('weeklyVisitorChart');
+    if (!chartContainer || !ctx) return;
+
+    try {
+        const labels = [];
+        const dataPoints = [];
+        
+        // Generate last 7 days dates (oldest to newest)
+        for (let i = 6; i >= 0; i--) {
+            const date = new Date();
+            date.setDate(date.getDate() - i);
+            const dateString = date.toDateString();
+            
+            // Format label as ShortDay (e.g., 'Mon')
+            const label = date.toLocaleDateString('en-US', { weekday: 'short' });
+            labels.push(label);
+            
+            // Fetch daily count
+            const dailyRef = database.ref(`visitors/daily/${dateString}`);
+            const snapshot = await dailyRef.once('value');
+            const dailyData = snapshot.val() || {};
+            const count = Object.keys(dailyData).length;
+            dataPoints.push(count);
+        }
+
+        // Check if there is any data to show (to avoid empty chart)
+        if (dataPoints.some(count => count > 0)) {
+            chartContainer.style.display = 'block';
+            setTimeout(() => chartContainer.classList.add('show'), 100);
+            
+            renderWeeklyChart(ctx.getContext('2d'), labels, dataPoints);
+        }
+
+    } catch (error) {
+        console.error('Weekly visitor chart error:', error);
+    }
+}
+
+function renderWeeklyChart(ctx, labels, data) {
+    // Determine colors based on current theme
+    const isLightMode = document.body.classList.contains('light-mode');
+    
+    // Theme colors matching CSS variables
+    const textColor = isLightMode ? '#64748b' : '#94a3b8'; // var(--text-3)
+    const gridColor = isLightMode ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)';
+    const barGradientStart = '#2dd4bf'; // var(--accent)
+    const barGradientEnd = '#14b8a6'; // var(--accent-2)
+
+    // Create gradient
+    const gradient = ctx.createLinearGradient(0, 0, 0, 80);
+    gradient.addColorStop(0, barGradientStart);
+    gradient.addColorStop(1, barGradientEnd);
+
+    Chart.defaults.font.family = "'JetBrains Mono', monospace";
+    
+    if (weeklyChartInstance) {
+        weeklyChartInstance.destroy();
+    }
+
+    weeklyChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: gradient,
+                borderRadius: 4,
+                borderSkipped: false,
+                barThickness: 12
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: isLightMode ? 'rgba(255,255,255,0.9)' : 'rgba(15,23,42,0.9)',
+                    titleColor: isLightMode ? '#0f172a' : '#f8fafc',
+                    bodyColor: barGradientStart,
+                    borderColor: isLightMode ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.1)',
+                    borderWidth: 1,
+                    padding: 8,
+                    displayColors: false,
+                    callbacks: {
+                        title: () => null, // Hide title
+                        label: (context) => `${context.raw} visitors`
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { display: false, drawBorder: false },
+                    ticks: {
+                        color: textColor,
+                        font: { size: 9 },
+                        padding: 0
+                    }
+                },
+                y: {
+                    display: false,
+                    beginAtZero: true
+                }
+            },
+            animation: {
+                duration: 1500,
+                easing: 'easeOutQuart'
+            }
+        }
+    });
 }
 
 // ============================================
@@ -675,8 +805,8 @@ async function trackUserBehavior() {
         const behaviorRef = database.ref(`analytics/behavior/${visitorId}`);
         
         const behaviorData = {
-            firstVisit: localStorage.getItem('firstVisit') || Date.now(),
-            lastVisit: Date.now(),
+            firstVisit: localStorage.getItem('firstVisit') || firebase.database.ServerValue.TIMESTAMP,
+            lastVisit: firebase.database.ServerValue.TIMESTAMP,
             pageViews: (parseInt(localStorage.getItem('pageViews')) || 0) + 1,
             screenResolution: `${screen.width}x${screen.height}`,
             language: navigator.language,
@@ -723,7 +853,7 @@ async function trackSectionView(sectionName) {
 
         const sectionRef = database.ref(`analytics/sections/${sectionName}/${visitorId}`);
         await sectionRef.set({
-            timestamp: Date.now(),
+            timestamp: firebase.database.ServerValue.TIMESTAMP,
             duration: 0
         });
 

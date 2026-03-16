@@ -15,6 +15,9 @@
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <!-- Noise overlay -->
@@ -84,6 +87,21 @@
                         <div class="visitor-count" id="dailyVisitorCount">0</div>
                     </div>
                 </div>
+                
+                <!-- Weekly Chart Container -->
+                <div class="weekly-chart-container" id="weeklyChartContainer" style="display: none; margin-top: 10px; border-top: 1px solid var(--glass-border); padding-top: 8px;">
+                    <div class="visitor-label" style="text-align: center; margin-bottom: 6px;">
+                        <i class="fas fa-chart-bar"></i>
+                        <span data-tr="visitor.weekly">LAST 7 DAYS</span>
+                    </div>
+                    <div style="height: 60px; width: 100%;">
+                        <canvas id="weeklyVisitorChart"></canvas>
+                    </div>
+                    <div class="visitor-note" style="font-size: 0.55rem; color: var(--text-3); text-align: center; margin-top: 4px; opacity: 0.8;">
+                        <i class="fas fa-info-circle" style="font-size: 0.5rem;"></i>
+                        <span data-tr="visitor.reset.note">Veriler 16 Mart 2026 tarihinde sıfırlanmıştır.</span>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -148,7 +166,7 @@
                     </p>
                 </div>
                 <div class="bento-card bento-stat reveal">
-                    <div class="stat-value">3+</div>
+                    <div class="stat-value">2+</div>
                     <div class="stat-text" data-tr="about.stats.years">Yıl Deneyim</div>
                 </div>
                 <div class="bento-card bento-stat reveal">
