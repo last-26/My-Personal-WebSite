@@ -13,8 +13,8 @@
     --glass: rgba(255,255,255,0.04);
     --glass-border: rgba(255,255,255,0.06);
     --text: #eeeef2;
-    --text-2: #9898b0;
-    --text-3: #5e5e78;
+    --text-2: #d1d1e0; /* Brightened further from #b4b4c8 */
+    --text-3: #a3a3c2; /* Brightened further from #8a8aa8 */
     --accent: #7c3aed;
     --accent-2: #2dd4bf;
     --accent-3: #f472b6;

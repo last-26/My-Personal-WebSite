@@ -246,6 +246,11 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
             
             // Save preference
             localStorage.setItem('preferredLang', lang);
+
+            // Update chart labels if it exists
+            if (typeof initWeeklyVisitorChart === 'function') {
+                initWeeklyVisitorChart();
+            }
         }
     });
 });
@@ -598,8 +603,10 @@ async function initWeeklyVisitorChart() {
             date.setDate(date.getDate() - i);
             const dateString = date.toDateString();
             
-            // Format label as ShortDay (e.g., 'Mon')
-            const label = date.toLocaleDateString('en-US', { weekday: 'short' });
+            // Format label as ShortDay (e.g., 'Mon' in EN, 'Pzt' in TR)
+            const daysTR = ['Paz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt'];
+            const daysEN = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const label = currentLang === 'tr' ? daysTR[date.getDay()] : daysEN[date.getDay()];
             labels.push(label);
             
             // Fetch daily count
