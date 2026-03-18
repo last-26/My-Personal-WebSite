@@ -240,76 +240,67 @@
                 <span class="section-tag">03</span>
                 <h2 class="section-title" data-tr="experience.title">Deneyim</h2>
             </div>
-            <div class="experience-slider">
-                <button class="slider-btn prev-btn" onclick="changeExperience(-1)">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                
-                <div class="experience-timeline">
-                    <!-- IC Ictas Nuclear -->
-                    <div class="timeline-item active" data-experience="1">
-                        <div class="exp-top">
-                            <div class="exp-info">
-                                <h3 class="exp-title" data-tr="experience.icictas.title">Yazılım Geliştirme Stajyeri</h3>
-                                <p class="exp-company" data-tr="experience.icictas.company">IC İçtaş Nükleer ve Endüstriyel Tesisler İnşaat A.Ş.</p>
-                            </div>
-                            <span class="exp-date" data-tr="experience.icictas.date">Ocak 2026</span>
-                        </div>
-                        <ul class="exp-list">
-                            <li data-tr="experience.icictas.achievement1">Akkuyu Nükleer Santral sahasından gelen verileri analiz etmek için React.js, FastAPI ve PostgreSQL kullanarak uçtan uca İSG Takip Paneli tasarladım ve geliştirdim</li>
-                            <li data-tr="experience.icictas.achievement2">Backend'de Passlib ile şifre hashleme ve JWT standardını kullanarak kimlik doğrulama algoritmaları entegre ettim, SQLAlchemy ORM ile veritabanı işlemlerini güvence altına aldım</li>
-                            <li data-tr="experience.icictas.achievement3">Yüksek kardinaliteli sütunlarda stratejik B-tree indeksleme uygulayarak karmaşık analitik operasyonlar (JOIN/GROUP BY) için PostgreSQL sorgu performansını optimize ettim</li>
-                            <li data-tr="experience.icictas.achievement4">Material UI ve Recharts kütüphaneleri kullanarak yöneticiler için gerçek zamanlı analiz grafikleri üreten asenkron dashboard (SPA) mimarisi kurdum</li>
-                        </ul>
+            <div class="experience-roadmap">
+                <!-- IC Ictas Nuclear -->
+                <div class="roadmap-item reveal">
+                    <div class="roadmap-date-side" data-tr="experience.icictas.date">Ocak 2026</div>
+                    <div class="roadmap-dot-container">
+                        <div class="roadmap-dot"></div>
                     </div>
-
-                    <!-- TEI -->
-                    <div class="timeline-item" data-experience="2">
-                        <div class="exp-top">
-                            <div class="exp-info">
-                                <h3 class="exp-title" data-tr="experience.tei.title">Data Science & AI Stajyeri</h3>
-                                <p class="exp-company" data-tr="experience.tei.company">TEI – TUSAŞ Motor Sanayii A.Ş. | Eskişehir</p>
+                    <div class="roadmap-card">
+                        <div class="roadmap-header">
+                            <div class="roadmap-info">
+                                <h3 class="roadmap-title" data-tr="experience.icictas.title">Yazılım Geliştirme Stajyeri</h3>
+                                <p class="roadmap-company" data-tr="experience.icictas.company">IC İçtaş Nükleer ve Endüstriyel Tesisler İnşaat A.Ş.</p>
                             </div>
-                            <span class="exp-date" data-tr="experience.tei.date">Ağustos 2025 - Eylül 2025</span>
                         </div>
-                        <ul class="exp-list">
-                            <li data-tr="experience.tei.achievement1">İzole ağlarda (Red-Black Box) güvenli veri iletimi ve sistem mimarileri üzerine Ar-Ge çalışmaları yürüttüm</li>
-                            <li data-tr="experience.tei.achievement2">İK departmanı için "SAMETEI" Generative AI asistanının Ar-Ge ve prototipleme sürecini yönettim; OpenRouter API'leri ve LibreChat üzerinden Local LLM entegrasyonu gerçekleştirdim</li>
-                            <li data-tr="experience.tei.achievement3">n8n kullanarak API'ler aracılığıyla gerçek zamanlı veri çeken, finansal metrikleri otonom analiz eden ve raporlayan otomasyonlar kurdum</li>
-                            <li data-tr="experience.tei.achievement4">Playwright kullanarak kullanıcı davranışını simüle eden, Trendyol Yemek üzerinden otonom sipariş veren uçtan uca e-ticaret otomasyonu (RPA) geliştirdim</li>
-                        </ul>
+                        <div class="roadmap-desc" data-tr="experience.icictas.desc">
+                            Akkuyu Nükleer Santral sahasından gelen verileri analiz etmek için React.js, FastAPI ve PostgreSQL kullanarak uçtan uca İSG Takip Paneli geliştirdim. Backend tarafında Passlib ve JWT ile güvenli kimlik doğrulama sistemleri kurarken, SQLAlchemy ORM ile veritabanı yönetimini optimize ettim. Ayrıca yüksek kardinaliteli verilerde B-tree indeksleme stratejileri uygulayarak sorgu performansını artırdım ve Material UI ile yöneticiler için gerçek zamanlı analitik dashboard'lar tasarladım.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TEI -->
+                <div class="roadmap-item reveal">
+                    <div class="roadmap-date-side" data-tr="experience.tei.date">Ağustos 2025 - Eylül 2025</div>
+                    <div class="roadmap-dot-container">
+                        <div class="roadmap-dot"></div>
+                    </div>
+                    <div class="roadmap-card">
+                        <div class="roadmap-header">
+                            <div class="roadmap-info">
+                                <h3 class="roadmap-title" data-tr="experience.tei.title">Data Science & AI Stajyeri</h3>
+                                <p class="roadmap-company" data-tr="experience.tei.company">TEI – TUSAŞ Motor Sanayii A.Ş. | Eskişehir</p>
+                            </div>
+                        </div>
+                        <div class="roadmap-desc" data-tr="experience.tei.desc">
+                            TEI bünyesinde izole ağlarda güvenli veri iletimi ve sistem mimarileri üzerine Ar-Ge çalışmaları yürüttüm. İnsan Kaynakları departmanı için LLM tabanlı 'SAMETEI' yapay zeka asistanının prototipleme sürecini yöneterek OpenRouter ve Local LLM entegrasyonlarını gerçekleştirdim. Ayrıca n8n ile finansal metrikleri analiz eden otonom iş akışları ve Playwright kullanarak e-ticaret süreçlerini otomatize eden RPA çözümleri geliştirdim.
+                        </div>
                         <button class="certificate-btn" id="certificateBtn" type="button">
                             <i class="fas fa-award"></i>
                             <span data-tr="experience.certificate">Sertifika</span>
                         </button>
                     </div>
-
-                    <!-- Powintec -->
-                    <div class="timeline-item" data-experience="3">
-                        <div class="exp-top">
-                            <div class="exp-info">
-                                <h3 class="exp-title" data-tr="experience.powintec.title">Part-Time Yazılım Geliştirici (Remote)</h3>
-                                <p class="exp-company" data-tr="experience.powintec.company">Powintec Engineering | Wireless Charging of Small Electric Vehicles</p>
-                            </div>
-                            <span class="exp-date" data-tr="experience.powintec.date">Temmuz 2023 - Temmuz 2025</span>
-                        </div>
-                        <ul class="exp-list">
-                            <li data-tr="experience.powintec.achievement1">Kablosuz şarj padlarından gelen hizalama, sıcaklık ve güç transfer verimliliği metriklerini anlık izlemek için React.js, TailwindCSS ve WebSockets kullanarak gerçek zamanlı yönetim paneli geliştirdim</li>
-                            <li data-tr="experience.powintec.achievement2">Sürekli WebSocket veri akışlarının neden olduğu UI rendering darboğazlarını önlemek için React state yönetimini optimize ettim; milisaniye düzeyinde düşük gecikme ile gerçek zamanlı şarj ve voltaj metriklerini işledim</li>
-                            <li data-tr="experience.powintec.achievement3">Donanım-sunucu bağlantı kopmalarına karşı proaktif hata yönetim mekanizmaları uyguladım ve UI testleri yazarak üretim ortamı kararlılığını artırdım</li>
-                        </ul>
-                    </div>
                 </div>
 
-                <button class="slider-btn next-btn" onclick="changeExperience(1)">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-            
-            <div class="experience-indicators">
-                <span class="indicator active" onclick="goToExperience(1)"></span>
-                <span class="indicator" onclick="goToExperience(2)"></span>
-                <span class="indicator" onclick="goToExperience(3)"></span>
+                <!-- Powintec -->
+                <div class="roadmap-item reveal">
+                    <div class="roadmap-date-side" data-tr="experience.powintec.date">Temmuz 2023 - Temmuz 2025</div>
+                    <div class="roadmap-dot-container">
+                        <div class="roadmap-dot"></div>
+                    </div>
+                    <div class="roadmap-card">
+                        <div class="roadmap-header">
+                            <div class="roadmap-info">
+                                <h3 class="roadmap-title" data-tr="experience.powintec.title">Part-Time Yazılım Geliştirici (Remote)</h3>
+                                <p class="roadmap-company" data-tr="experience.powintec.company">Powintec Engineering | Wireless Charging of Small Electric Vehicles</p>
+                            </div>
+                        </div>
+                        <div class="roadmap-desc" data-tr="experience.powintec.desc">
+                            Kablosuz şarj sistemlerinden gelen hizalama, sıcaklık ve verimlilik verilerini anlık olarak izlemek amacıyla React.js, TailwindCSS ve WebSockets tabanlı bir yönetim paneli hazırladım. WebSocket üzerinden gelen yoğun veri akışının UI performansını etkilememesi için state yönetimini optimize ederek milisaniye düzeyinde gecikme ile veri işleme sağladım. Donanım bağlantı kopmalarına karşı hata yönetim mekanizmaları geliştirerek sistem kararlılığını artırdım.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

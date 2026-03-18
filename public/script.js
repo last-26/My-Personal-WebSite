@@ -61,23 +61,15 @@ const translations = {
         "experience.icictas.title": "Yazılım Geliştirme Stajyeri",
         "experience.icictas.company": "<a href='https://www.ictasnukleer.com.tr' target='_blank' class='company-link'>IC İçtaş Nükleer ve Endüstriyel Tesisler İnşaat A.Ş.</a>",
         "experience.icictas.date": "Ocak 2026",
-        "experience.icictas.achievement1": "Akkuyu Nükleer Santral sahasından gelen verileri analiz etmek için React.js, FastAPI ve PostgreSQL kullanarak uçtan uca İSG Takip Paneli tasarladım ve geliştirdim",
-        "experience.icictas.achievement2": "Backend'de Passlib ile şifre hashleme ve JWT standardını kullanarak kimlik doğrulama algoritmaları entegre ettim, SQLAlchemy ORM ile veritabanı işlemlerini güvence altına aldım",
-        "experience.icictas.achievement3": "Yüksek kardinaliteli sütunlarda stratejik B-tree indeksleme uygulayarak karmaşık analitik operasyonlar (JOIN/GROUP BY) için PostgreSQL sorgu performansını optimize ettim",
-        "experience.icictas.achievement4": "Material UI ve Recharts kütüphaneleri kullanarak yöneticiler için gerçek zamanlı analiz grafikleri üreten asenkron dashboard (SPA) mimarisi kurdum",
+        "experience.icictas.desc": "Akkuyu Nükleer Santral sahasından gelen verileri analiz etmek için React.js, FastAPI ve PostgreSQL kullanarak uçtan uca İSG Takip Paneli geliştirdim. Backend tarafında Passlib ve JWT ile güvenli kimlik doğrulama sistemleri kurarken, SQLAlchemy ORM ile veritabanı yönetimini optimize ettim. Ayrıca yüksek kardinaliteli verilerde B-tree indeksleme stratejileri uygulayarak sorgu performansını artırdım ve Material UI ile yöneticiler için gerçek zamanlı analitik dashboard'lar tasarladım.",
         "experience.tei.title": "Data Science & AI Stajyeri",
         "experience.tei.company": "<a href='https://www.tei.com.tr' target='_blank' class='company-link company-tei'>TEI – TUSAŞ Motor Sanayii A.Ş. | Eskişehir</a>",
-        "experience.tei.date": "Ağustos 2025 - Eylül 2025",
-        "experience.tei.achievement1": "İzole ağlarda (Red-Black Box) güvenli veri iletimi ve sistem mimarileri üzerine Ar-Ge çalışmaları yürüttüm",
-        "experience.tei.achievement2": "İK departmanı için \"SAMETEI\" Generative AI asistanının Ar-Ge ve prototipleme sürecini yönettim; OpenRouter API'leri ve LibreChat üzerinden Local LLM entegrasyonu gerçekleştirdim",
-        "experience.tei.achievement3": "n8n kullanarak API'ler aracılığıyla gerçek zamanlı veri çeken, finansal metrikleri otonom analiz eden ve raporlayan otomasyonlar kurdum",
-        "experience.tei.achievement4": "Playwright kullanarak kullanıcı davranışını simüle eden, Trendyol Yemek üzerinden otonom sipariş veren uçtan uca e-ticaret otomasyonu (RPA) geliştirdim",
+        "experience.tei.date": "Eylül 2025\n↓\nAğustos 2025",
+        "experience.tei.desc": "TEI bünyesinde izole ağlarda güvenli veri iletimi ve sistem mimarileri üzerine Ar-Ge çalışmaları yürüttüm. İnsan Kaynakları departmanı için LLM tabanlı 'SAMETEI' yapay zeka asistanının prototipleme sürecini yöneterek OpenRouter ve Local LLM entegrasyonlarını gerçekleştirdim. Ayrıca n8n ile finansal metrikleri analiz eden otonom iş akışları ve Playwright kullanarak e-ticaret süreçlerini otomatize eden RPA çözümleri geliştirdim.",
         "experience.powintec.title": "Part-Time Yazılım Geliştirici (Remote)",
         "experience.powintec.company": "Powintec Engineering | Wireless Charging of Small Electric Vehicles",
-        "experience.powintec.date": "Temmuz 2023 - Temmuz 2025",
-        "experience.powintec.achievement1": "Kablosuz şarj padlarından gelen hizalama, sıcaklık ve güç transfer verimliliği metriklerini anlık izlemek için React.js, TailwindCSS ve WebSockets kullanarak gerçek zamanlı yönetim paneli geliştirdim",
-        "experience.powintec.achievement2": "Sürekli WebSocket veri akışlarının neden olduğu UI rendering darboğazlarını önlemek için React state yönetimini optimize ettim; milisaniye düzeyinde düşük gecikme ile gerçek zamanlı şarj ve voltaj metriklerini işledim",
-        "experience.powintec.achievement3": "Donanım-sunucu bağlantı kopmalarına karşı proaktif hata yönetim mekanizmaları uyguladım ve UI testleri yazarak üretim ortamı kararlılığını artırdım",
+        "experience.powintec.date": "Temmuz 2025\n↓\nTemmuz 2023",
+        "experience.powintec.desc": "Kablosuz şarj sistemlerinden gelen hizalama, sıcaklık ve verimlilik verilerini anlık olarak izlemek amacıyla React.js, TailwindCSS ve WebSockets tabanlı bir yönetim paneli hazırladım. WebSocket üzerinden gelen yoğun veri akışının UI performansını etkilememesi için state yönetimini optimize ederek milisaniye düzeyinde gecikme ile veri işleme sağladım. Donanım bağlantı kopmalarına karşı hata yönetim mekanizmaları geliştirerek sistem kararlılığını artırdım.",
         "skills.title": "Yetenekler",
         "skills.ai.title": "AI & Data Science",
         "skills.cv.title": "Computer Vision & OCR",
@@ -166,23 +158,15 @@ const translations = {
         "experience.icictas.title": "Software Development Intern",
         "experience.icictas.company": "<a href='https://www.ictasnukleer.com.tr/en/' target='_blank' class='company-link'>IC Ictas Nuclear and Industrial Facilities Construction Inc.</a>",
         "experience.icictas.date": "January 2026",
-        "experience.icictas.achievement1": "Designed and developed an end-to-end OHS (Occupational Health and Safety) Tracking Panel using React.js, FastAPI, and PostgreSQL to analyze data coming from the Akkuyu Nuclear Power Plant site",
-        "experience.icictas.achievement2": "Integrated password hashing with Passlib and authentication algorithms using the JWT standard on the backend, and secured database operations utilizing SQLAlchemy ORM",
-        "experience.icictas.achievement3": "Optimized PostgreSQL query performance for complex analytical operations (JOIN/GROUP BY) by implementing strategic B-tree indexing on high-cardinality columns",
-        "experience.icictas.achievement4": "Built an asynchronous dashboard (SPA) architecture generating real-time analysis charts for managers using Material UI and Recharts libraries",
+        "experience.icictas.desc": "I developed an end-to-end OHS Tracking Panel using React.js, FastAPI, and PostgreSQL to analyze data from the Akkuyu Nuclear Power Plant site. I implemented secure authentication systems using Passlib and JWT on the backend, while optimizing database management with SQLAlchemy ORM. Additionally, I improved query performance by applying B-tree indexing strategies on high-cardinality data and designed real-time analytical dashboards for managers using Material UI.",
         "experience.tei.title": "Data Science & AI Intern",
         "experience.tei.company": "<a href='https://www.tei.com.tr/en' target='_blank' class='company-link company-tei'>TEI – TUSAS Engine Industries Inc. | Eskisehir, Turkey</a>",
-        "experience.tei.date": "August 2025 - September 2025",
-        "experience.tei.achievement1": "Conducted R&D on secure data transmission and system architectures across isolated networks (Red-Black Box)",
-        "experience.tei.achievement2": "Led the R&D and prototyping of \"SAMETEI\", a Generative AI assistant for the HR department; integrated OpenRouter APIs and Local LLMs via LibreChat",
-        "experience.tei.achievement3": "Architected automated workflows using n8n to fetch real-time data via APIs, autonomously analyzing and reporting financial metrics",
-        "experience.tei.achievement4": "Developed an end-to-end e-commerce automation (RPA) system using Playwright that simulates user behavior to autonomously place orders on the Trendyol Yemek platform",
+        "experience.tei.date": "September 2025\n↓\nAugust 2025",
+        "experience.tei.desc": "I conducted R&D on secure data transmission and system architectures in isolated networks at TEI. I managed the prototyping process of 'SAMETEI', an LLM-based AI assistant for the HR department, integrating OpenRouter and Local LLMs. Furthermore, I developed autonomous workflows for financial metric analysis using n8n and created RPA solutions using Playwright to automate e-commerce processes.",
         "experience.powintec.title": "Part-Time Software Developer (Remote)",
         "experience.powintec.company": "Powintec Engineering | Wireless Charging of Small Electric Vehicles",
-        "experience.powintec.date": "July 2023 - July 2025",
-        "experience.powintec.achievement1": "Developed a real-time management dashboard using React.js, TailwindCSS, and WebSockets to instantly monitor alignment, temperature, and power transfer efficiency metrics from wireless charging pads",
-        "experience.powintec.achievement2": "Optimized React state management to prevent UI rendering bottlenecks caused by continuous WebSocket data streams; ensured real-time charging and voltage metrics are processed with millisecond-level low latency",
-        "experience.powintec.achievement3": "Implemented proactive error handling mechanisms against hardware-server connection drops and increased production environment stability by writing UI tests",
+        "experience.powintec.date": "July 2025\n↓\nJuly 2023",
+        "experience.powintec.desc": "I built a management dashboard based on React.js, TailwindCSS, and WebSockets to monitor alignment, temperature, and efficiency data from wireless charging systems in real-time. I optimized state management to handle intense WebSocket data streams without compromising UI performance, ensuring low-latency data processing. I also improved system stability by developing error handling mechanisms against hardware connection drops.",
         "skills.title": "Skills",
         "skills.ai.title": "AI & Data Science",
         "skills.cv.title": "Computer Vision & OCR",
@@ -1152,72 +1136,7 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// ============================================
-// EXPERIENCE SLIDER
-// ============================================
-let currentExperience = 1;
-const totalExperiences = 3;
-
-window.changeExperience = function(direction) {
-    const items = document.querySelectorAll('.timeline-item');
-    const indicators = document.querySelectorAll('.experience-indicators .indicator');
-    
-    // Update current experience
-    currentExperience += direction;
-    
-    // Loop around
-    if (currentExperience > totalExperiences) {
-        currentExperience = 1;
-    } else if (currentExperience < 1) {
-        currentExperience = totalExperiences;
-    }
-    
-    // Update items visibility
-    items.forEach(item => {
-        const itemNumber = parseInt(item.getAttribute('data-experience'));
-        if (itemNumber === currentExperience) {
-            item.classList.add('active');
-        } else {
-            item.classList.remove('active');
-        }
-    });
-    
-    // Update indicators
-    indicators.forEach((indicator, index) => {
-        if (index + 1 === currentExperience) {
-            indicator.classList.add('active');
-        } else {
-            indicator.classList.remove('active');
-        }
-    });
-}
-
-window.goToExperience = function(experienceNumber) {
-    const items = document.querySelectorAll('.timeline-item');
-    const indicators = document.querySelectorAll('.experience-indicators .indicator');
-    
-    // Update current experience
-    currentExperience = experienceNumber;
-    
-    // Update items visibility
-    items.forEach(item => {
-        const itemNumber = parseInt(item.getAttribute('data-experience'));
-        if (itemNumber === experienceNumber) {
-            item.classList.add('active');
-        } else {
-            item.classList.remove('active');
-        }
-    });
-    
-    // Update indicators
-    indicators.forEach((indicator, index) => {
-        if (index + 1 === experienceNumber) {
-            indicator.classList.add('active');
-        } else {
-            indicator.classList.remove('active');
-        }
-    });
-}
+// Experience section slider functions removed as the layout changed to a vertical roadmap.
 
 // ============================================
 // CERTIFICATE MODAL
