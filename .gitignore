@@ -14,6 +14,12 @@ public/c1.jpg
 public/b2.jpg
 public/TEI_EN.png
 public/TEI_TR.png
+public/tei_en.png
+public/tei_tr.png
+public/tei_tr.jpg
+public/TEI_TR.jpg
+public/TEI_EN.jpg
+public/tei_en.jpg
 # Firebase cache
 .firebase/
 
