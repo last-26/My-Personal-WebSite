@@ -336,10 +336,30 @@ const updateScrollProgress = () => {
     }
 };
 
+// Active nav link highlight
+const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+const sections = document.querySelectorAll('section[id]');
+const updateActiveNav = () => {
+    const scrollY = window.scrollY + 200;
+    sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+        const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+        if (link) {
+            if (scrollY >= top && scrollY < top + height) {
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            }
+        }
+    });
+};
+
 window.addEventListener('scroll', () => {
     scrollRevealFn();
     navScrollFn();
     updateScrollProgress();
+    updateActiveNav();
 });
 scrollRevealFn();
 navScrollFn();

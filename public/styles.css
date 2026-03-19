@@ -150,7 +150,8 @@ body.light-mode nav.scrolled{background:rgba(244,244,248,0.85)}
     position:relative;
     text-shadow: 0 0 15px rgba(255,255,255,0.3);
 }
-.nav-links a:hover{color:var(--accent-2);background:var(--glass);text-shadow: 0 0 20px rgba(45,212,191,0.6);}
+.nav-links a:hover,.nav-links a.active{color:var(--accent-2);background:var(--glass);text-shadow: 0 0 20px rgba(45,212,191,0.6);}
+.nav-links a.active::after{width:50%}
 .nav-links a::after{
     content:'';position:absolute;bottom:4px;left:50%;
     width:0;height:2px;background:var(--accent);
