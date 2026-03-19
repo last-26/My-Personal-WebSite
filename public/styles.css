@@ -73,7 +73,10 @@ body.light-mode .nav-links a::after {
 /* ── Reset ── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;transition:background .5s,color .5s;text-shadow: 0 0 1px rgba(255,255,255,0.05);}
+body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;transition:background .5s ease,color .5s ease;text-shadow: 0 0 1px rgba(255,255,255,0.05);}
+.bento-card,.project-card,.skill-group,.contact-item,.education-card,.roadmap-card,nav,.pill,.card-tags span,.footer-grid,.footer-bottom,.visitor-table,.btn-hero{
+    transition:background-color .4s ease,border-color .4s ease,box-shadow .4s ease,color .4s ease,transform .3s ease;
+}
 a{text-decoration:none;color:inherit}
 ul{list-style:none}
 img{max-width:100%;display:block}
