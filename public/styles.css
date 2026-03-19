@@ -751,6 +751,7 @@ body.light-mode .roadmap-card {
 .card-accent-4 .card-top{background:linear-gradient(135deg,#f472b6,#ec4899)}
 .card-accent-5 .card-top{background:linear-gradient(135deg,#38bdf8,#0ea5e9)}
 .card-accent-6 .card-top{background:linear-gradient(135deg,#a78bfa,#8b5cf6)}
+.card-accent-7 .card-top{background:linear-gradient(135deg,#f59e0b,#ea580c)}
 
 .project-card::before{
     display:none; /* Removing old animated gradient border */
