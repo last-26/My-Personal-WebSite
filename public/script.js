@@ -314,6 +314,29 @@ const scrollRevealFn = () => {
     });
 };
 
+// Stat count-up animation
+const statCountedUp = new Set();
+const countUpStats = () => {
+    document.querySelectorAll('.stat-value[data-count]').forEach(el => {
+        if (statCountedUp.has(el)) return;
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+            statCountedUp.add(el);
+            const target = parseInt(el.getAttribute('data-count'));
+            let current = 0;
+            const step = Math.max(1, Math.floor(target / 30));
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                el.textContent = current + '+';
+            }, 40);
+        }
+    });
+};
+
 // Nav scroll effect
 const navScrollFn = () => {
     const nav = document.getElementById('mainNav');
@@ -360,6 +383,7 @@ window.addEventListener('scroll', () => {
     navScrollFn();
     updateScrollProgress();
     updateActiveNav();
+    countUpStats();
 });
 scrollRevealFn();
 navScrollFn();
