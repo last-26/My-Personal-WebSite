@@ -326,7 +326,7 @@ const scrollRevealFn = () => {
 
 // Nav scroll effect
 const navScrollFn = () => {
-    const nav = document.getElementById('navbar');
+    const nav = document.getElementById('mainNav');
     if (nav) {
         if (window.scrollY > 50) {
             nav.classList.add('scrolled');
