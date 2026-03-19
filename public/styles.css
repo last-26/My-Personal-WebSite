@@ -765,8 +765,30 @@ body.light-mode .roadmap-card {
 .card-accent-6 .card-top{background:linear-gradient(135deg,#a78bfa,#8b5cf6)}
 .card-accent-7 .card-top{background:linear-gradient(135deg,#f59e0b,#ea580c)}
 
+/* Featured project glow */
+.card-featured{
+    border-color:rgba(124,58,237,.25);
+    box-shadow:0 0 20px rgba(124,58,237,.08),0 4px 12px rgba(0,0,0,.2);
+}
+.card-featured .card-top{position:relative}
+.card-featured .card-top::after{
+    content:'';position:absolute;top:-1px;right:60px;
+    width:80px;height:3px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
+    animation:featuredShine 3s ease-in-out infinite;
+    border-radius:2px;
+}
+@keyframes featuredShine{
+    0%,100%{opacity:0;transform:translateX(-40px)}
+    50%{opacity:1;transform:translateX(40px)}
+}
+body.light-mode .card-featured{
+    border-color:rgba(109,40,217,.15);
+    box-shadow:0 0 24px rgba(109,40,217,.06),0 4px 15px rgba(0,0,0,.05);
+}
+
 .project-card::before{
-    display:none; /* Removing old animated gradient border */
+    display:none;
 }
 /* Cyberpunk glitch line on hover */
 .project-card::after {
