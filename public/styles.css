@@ -45,11 +45,11 @@ body.light-mode {
     --glow-2: rgba(13,148,136,0.12);
     --card-bg: #ffffff;
 }
-body.light-mode .card, body.light-mode .project-card, body.light-mode .contact-item, body.light-mode .education-card, body.light-mode .timeline-item, body.light-mode .skill-group, body.light-mode .bento-card {
+body.light-mode .card, body.light-mode .project-card, body.light-mode .contact-item, body.light-mode .education-card, body.light-mode .timeline-item, body.light-mode .bento-card {
     box-shadow: 0 4px 15px rgba(0,0,0,0.04);
     border: 1px solid rgba(0,0,0,0.06);
 }
-body.light-mode .card:hover, body.light-mode .project-card:hover, body.light-mode .contact-item:hover, body.light-mode .education-card:hover, body.light-mode .timeline-item:hover, body.light-mode .skill-group:hover, body.light-mode .bento-card:hover {
+body.light-mode .card:hover, body.light-mode .project-card:hover, body.light-mode .contact-item:hover, body.light-mode .education-card:hover, body.light-mode .timeline-item:hover, body.light-mode .bento-card:hover {
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     border-color: rgba(0,0,0,0.1);
 }
@@ -74,7 +74,7 @@ body.light-mode .nav-links a::after {
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
 body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;transition:background .5s ease,color .5s ease;text-shadow: 0 0 1px rgba(255,255,255,0.05);}
-.bento-card,.project-card,.skill-group,.contact-item,.education-card,.roadmap-card,nav,.pill,.card-tags span,.footer-grid,.footer-bottom,.visitor-table,.btn-hero{
+.bento-card,.project-card,.terminal,.contact-item,.education-card,.roadmap-card,nav,.pill,.card-tags span,.footer-grid,.footer-bottom,.visitor-table,.btn-hero{
     transition:background-color .4s ease,border-color .4s ease,box-shadow .4s ease,color .4s ease,transform .3s ease;
 }
 a{text-decoration:none;color:inherit}
@@ -823,57 +823,89 @@ body.light-mode .card-tags span:hover{
 }
 .card-link:hover{gap:10px;color:var(--accent-2)}
 
-/* ── SKILLS ── */
-.skills-grid{
-    display:grid;grid-template-columns:repeat(3,1fr);
-    gap:18px;
+/* ── SKILLS — Terminal ── */
+.terminal{
+    background:#0d1117;
+    border:1px solid #30363d;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 16px 48px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.03) inset;
 }
-.skill-group{
-    background:var(--card-bg);
-    border:1px solid rgba(45,212,191,.2);
-    border-radius:2px;
-    padding:1.8rem;
-    position:relative;
-    box-shadow: 0 4px 12px rgba(0,0,0,.5);
-    transition:all .3s;
+.terminal-bar{
+    display:flex;align-items:center;gap:14px;
+    padding:12px 18px;
+    background:#161b22;
+    border-bottom:1px solid #30363d;
 }
-.skill-group::before{
-    display:none; /* Remove old top line */
+.terminal-dots{display:flex;gap:7px}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot-red{background:#ff5f57}
+.dot-yellow{background:#febc2e}
+.dot-green{background:#28c840}
+.terminal-title{
+    font-family:var(--mono);font-size:.75rem;font-weight:500;
+    color:#8b949e;letter-spacing:.5px;
 }
-.skill-group:hover{
-    transform:translateY(-3px);box-shadow:0 0 36px var(--glow);
+.terminal-body{
+    padding:24px 28px 20px;
+    font-family:var(--mono);
 }
+.term-block{margin-bottom:18px}
+.term-block:last-child{margin-bottom:0}
+.term-cmd{
+    font-size:.85rem;color:#c9d1d9;margin-bottom:8px;
+    display:flex;align-items:center;gap:8px;
+}
+.term-prompt{color:#39d353;font-weight:700}
+.term-file{color:#79c0ff}
+.term-output{
+    display:flex;flex-wrap:wrap;gap:6px;
+    padding-left:16px;
+}
+.term-cursor{
+    color:#39d353;font-weight:700;
+    animation:termBlink 1s step-end infinite;
+}
+@keyframes termBlink{0%,100%{opacity:1}50%{opacity:0}}
 
-.skill-group-header{
-    display:flex;align-items:center;gap:10px;
-    font-size:1.05rem;font-weight:700;color:var(--text);
-    margin-bottom:1rem;
-}
-.skill-icon{
-    font-size:1.3rem;display:grid;place-items:center;
-    width:36px;height:36px;background:var(--glass);
-    border-radius:10px;border:1px solid var(--glass-border);
-    transition:all .3s;
-}
-.skill-group:hover .skill-icon{transform:rotate(8deg) scale(1.05);border-color:var(--accent)}
-body.light-mode .skill-icon{background:#f8fafc;border-color:#cbd5e1}
-
-.skill-pills{display:flex;flex-wrap:wrap;gap:6px}
+/* Terminal pills */
 .pill{
-    background:var(--glass);color:var(--text-2);
-    padding:6px 13px;border-radius:50px;font-size:.78rem;font-weight:500;
-    border:1px solid var(--glass-border);transition:all .25s;cursor:default;
+    background:rgba(56,189,248,.08);color:#58a6ff;
+    padding:5px 12px;border-radius:6px;font-size:.76rem;font-weight:500;
+    border:1px solid rgba(56,189,248,.15);
+    font-family:var(--mono);
+    transition:all .25s;cursor:default;
 }
 .pill:hover{
-    background:var(--accent);color:#fff;
-    border-color:var(--accent);transform:translateY(-2px);
-    box-shadow:0 4px 16px rgba(124,58,237,.3);
+    background:rgba(56,189,248,.18);color:#79c0ff;
+    border-color:rgba(56,189,248,.4);
+    transform:translateY(-2px);
+    box-shadow:0 4px 12px rgba(56,189,248,.15);
 }
+
+/* Light mode terminal */
+body.light-mode .terminal{
+    background:#ffffff;
+    border-color:#d0d7de;
+    box-shadow:0 12px 40px rgba(0,0,0,.08),0 0 0 1px rgba(0,0,0,.04) inset;
+}
+body.light-mode .terminal-bar{
+    background:#f6f8fa;
+    border-bottom-color:#d0d7de;
+}
+body.light-mode .terminal-title{color:#656d76}
+body.light-mode .term-cmd{color:#1f2328}
+body.light-mode .term-prompt{color:#1a7f37}
+body.light-mode .term-file{color:#0550ae}
+body.light-mode .term-cursor{color:#1a7f37}
 body.light-mode .pill{
-    background:#e2e8f0;color:#334155;border-color:#cbd5e1;
+    background:rgba(9,105,218,.06);color:#0550ae;
+    border-color:rgba(9,105,218,.2);
 }
 body.light-mode .pill:hover{
-    background:var(--accent);color:#fff;border-color:var(--accent);
+    background:rgba(9,105,218,.12);color:#0969da;
+    border-color:rgba(9,105,218,.4);
+    box-shadow:0 4px 12px rgba(9,105,218,.1);
 }
 
 /* ── CONTACT ── */
@@ -1072,7 +1104,7 @@ footer{
 @media(max-width:992px){
     .bento-grid{grid-template-columns:1fr 1fr 1fr}
     .bento-main{grid-column:span 3}
-    .skills-grid{grid-template-columns:1fr}
+    .terminal-body{padding:16px 18px 14px}
     .experience-slider{gap:.8rem}
     .slider-btn{width:40px;height:40px;font-size:.85rem}
     .timeline-item{padding:1.8rem}
@@ -1113,9 +1145,8 @@ footer{
     .card-content{padding:1.2rem 1.4rem}
     .card-badge{font-size:.6rem;padding:3px 10px}
     .certificate-btn{padding:8px 18px;font-size:.8rem}
-    .skill-group{padding:1.2rem}
-    .skill-group-header{font-size:.95rem}
-    .pill{font-size:.72rem;padding:5px 10px}
+    .term-cmd{font-size:.75rem}
+    .pill{font-size:.68rem;padding:4px 9px}
     .footer-grid{grid-template-columns:1fr;gap:1.5rem}
     .footer-bottom{flex-direction:column;gap:4px;text-align:center}
 }
