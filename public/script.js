@@ -409,36 +409,20 @@ function initCVTracking() {
     const cvViewBtn = document.getElementById('cvViewBtn');
     const cvDownloadBtn = document.getElementById('cvDownloadBtn');
     
-    if (!cvViewBtn || !cvDownloadBtn) {
-        console.warn('❌ CV buttons not found');
-        return;
-    }
-    
-    // Add tracking event listeners with preventDefault
+    if (!cvViewBtn || !cvDownloadBtn) return;
+
     cvViewBtn.addEventListener('click', async (e) => {
-        e.preventDefault(); // Prevent default link behavior
+        e.preventDefault();
         const cvFile = cvViewBtn.href;
-        
-        console.log('🔵 CV View button clicked, language:', currentLang);
-        
-        // Track the action
         await trackCVAction('view', currentLang);
-        
-        // Open CV in new tab after tracking
         window.open(cvFile, '_blank');
     });
-    
+
     cvDownloadBtn.addEventListener('click', async (e) => {
-        e.preventDefault(); // Prevent default link behavior
+        e.preventDefault();
         const cvFile = cvDownloadBtn.href;
         const downloadName = cvDownloadBtn.download;
-        
-        console.log('🔵 CV Download button clicked, language:', currentLang);
-        
-        // Track the action
         await trackCVAction('download', currentLang);
-        
-        // Trigger download after tracking
         const link = document.createElement('a');
         link.href = cvFile;
         link.download = downloadName;
@@ -446,63 +430,33 @@ function initCVTracking() {
         link.click();
         document.body.removeChild(link);
     });
-    
-    console.log('✅ CV tracking initialized successfully');
 }
 
 async function trackCVAction(action, language) {
-    console.log(`🔄 Starting CV tracking - Action: ${action}, Language: ${language}`);
-    
-    // Check if Firebase is available
-    if (!database) {
-        console.error('❌ Firebase database not available, CV action not tracked');
-        return;
-    }
-    console.log('✅ Firebase database is available');
+    if (!database) return;
 
     try {
         const visitorId = localStorage.getItem('portfolioVisitorId') || 'unknown';
         const cvKey = `cv_${action}_${language}`;
-        console.log(`📊 Tracking key: ${cvKey}, Visitor ID: ${visitorId}`);
-        
-        // Track total count
-        console.log('📝 Writing to: cv_analytics/total/' + cvKey);
+
         const totalRef = database.ref(`cv_analytics/total/${cvKey}`);
-        await totalRef.transaction((currentCount) => {
-            const newCount = (currentCount || 0) + 1;
-            console.log(`📈 Total count updated: ${currentCount || 0} → ${newCount}`);
-            return newCount;
-        });
-        
-        // Track by date
+        await totalRef.transaction((currentCount) => (currentCount || 0) + 1);
+
         const today = new Date().toDateString();
-        console.log('📝 Writing to: cv_analytics/daily/' + today + '/' + cvKey);
         const dailyRef = database.ref(`cv_analytics/daily/${today}/${cvKey}`);
-        await dailyRef.transaction((currentCount) => {
-            const newCount = (currentCount || 0) + 1;
-            console.log(`📅 Daily count updated: ${currentCount || 0} → ${newCount}`);
-            return newCount;
-        });
-        
-        // Track individual user action
-        console.log('📝 Writing user action to: cv_analytics/users/' + visitorId + '/' + cvKey);
+        await dailyRef.transaction((currentCount) => (currentCount || 0) + 1);
+
         const userActionRef = database.ref(`cv_analytics/users/${visitorId}/${cvKey}`);
-        const actionData = {
+        await userActionRef.push({
             timestamp: firebase.database.ServerValue.TIMESTAMP,
-            localTimeString: new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' }), // Added readable UTC+3 timestamp
+            localTimeString: new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' }),
             action: action,
             language: language,
             userAgent: navigator.userAgent,
             referrer: document.referrer || 'direct'
-        };
-        await userActionRef.push(actionData);
-        console.log('👤 User action recorded:', actionData);
-        
-        console.log(`✅ CV ${action} tracked successfully: ${language.toUpperCase()}`);
-        
+        });
     } catch (error) {
-        console.error('❌ CV tracking error:', error);
-        console.error('Error details:', error.message, error.stack);
+        // silently fail in production
     }
 }
 
@@ -515,9 +469,7 @@ async function initVisitorCounter() {
     
     if (!counterElement || !dailyCounterElement) return;
 
-    // Check if Firebase is available
     if (!database) {
-        console.error('Firebase not available');
         counterElement.textContent = '--';
         dailyCounterElement.textContent = '--';
         return;
@@ -580,9 +532,8 @@ async function initVisitorCounter() {
         setTimeout(initWeeklyVisitorChart, 1000); // Small delay to let other counters finish
 
     } catch (error) {
-        console.error('Visitor counter error:', error);
-        counterElement.textContent = 'Error';
-        dailyCounterElement.textContent = 'Error';
+        counterElement.textContent = '--';
+        dailyCounterElement.textContent = '--';
     }
 }
 
@@ -628,7 +579,7 @@ async function initWeeklyVisitorChart() {
         }
 
     } catch (error) {
-        console.error('Weekly visitor chart error:', error);
+        // silently fail
     }
 }
 
@@ -749,11 +700,8 @@ async function initProjectCounters() {
 
 async function initProjectCounter(projectId, badge) {
     try {
-        // Check if Firebase is available
         if (!database) {
-            console.error('Firebase not available');
-            const countSpan = badge.querySelector('.click-count');
-            countSpan.textContent = '--';
+            badge.querySelector('.click-count').textContent = '--';
             return;
         }
 
@@ -772,17 +720,13 @@ async function initProjectCounter(projectId, badge) {
         });
 
     } catch (error) {
-        console.error(`Project counter error for ${projectId}:`, error);
+        // silently fail
     }
 }
 
 async function incrementProjectCounter(projectId, badge) {
     try {
-        // Check if Firebase is available
-        if (!database) {
-            console.error('Firebase not available');
-            return;
-        }
+        if (!database) return;
 
         const projectRef = database.ref(`projects/${projectId}`);
         
@@ -798,7 +742,7 @@ async function incrementProjectCounter(projectId, badge) {
         }, 10);
 
     } catch (error) {
-        console.error(`Increment project counter error for ${projectId}:`, error);
+        // silently fail
     }
 }
 
@@ -806,11 +750,7 @@ async function incrementProjectCounter(projectId, badge) {
 // ADVANCED ANALYTICS - Track user behavior
 // ============================================
 async function trackUserBehavior() {
-    // Check if Firebase is available
-    if (!database) {
-        console.warn('Firebase not available, skipping behavior tracking');
-        return;
-    }
+    if (!database) return;
 
     try {
         const visitorId = localStorage.getItem('portfolioVisitorId') || 'unknown';
@@ -865,12 +805,11 @@ async function trackUserBehavior() {
         });
 
     } catch (error) {
-        console.error('User behavior tracking error:', error);
+        // silently fail
     }
 }
 
 async function trackSectionView(sectionName) {
-    // Check if Firebase is available
     if (!database) return;
 
     try {
@@ -884,7 +823,7 @@ async function trackSectionView(sectionName) {
         });
 
     } catch (error) {
-        console.error('Section tracking error:', error);
+        // silently fail
     }
 }
 
@@ -969,10 +908,7 @@ function showAdminDashboard() {
 }
 
 async function loadAdminStats() {
-    if (!database) {
-        console.error('Firebase not available');
-        return;
-    }
+    if (!database) return;
 
     try {
         // Load total visitors
@@ -1027,7 +963,7 @@ async function loadAdminStats() {
         });
 
     } catch (error) {
-        console.error('Admin dashboard error:', error);
+        // silently fail
     }
 }
 
@@ -1047,21 +983,14 @@ window.copyEmail = function() {
     // Copy to clipboard
     navigator.clipboard.writeText(email).then(() => {
         showToast();
-    }).catch(err => {
-        console.error('Email kopyalanamadı:', err);
-        // Fallback for older browsers
+    }).catch(() => {
         const textArea = document.createElement('textarea');
         textArea.value = email;
         textArea.style.position = 'fixed';
         textArea.style.opacity = '0';
         document.body.appendChild(textArea);
         textArea.select();
-        try {
-            document.execCommand('copy');
-            showToast();
-        } catch (err) {
-            console.error('Fallback copy failed:', err);
-        }
+        try { document.execCommand('copy'); showToast(); } catch (e) {}
         document.body.removeChild(textArea);
     });
 }
