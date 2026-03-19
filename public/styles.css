@@ -897,7 +897,7 @@ body.light-mode .terminal-bar{
     border-bottom-color:#d0d7de;
 }
 body.light-mode .terminal-title{color:#656d76}
-body.light-mode .term-cmd{color:#1f2328;background:rgba(0,0,0,.03);border-left-color:#1a7f37}
+body.light-mode .term-cmd{color:#1f2328;background:rgba(0,0,0,.08);border-left-color:#1a7f37}
 body.light-mode .term-prompt{color:#1a7f37}
 body.light-mode .term-file{color:#0550ae;font-weight:600}
 body.light-mode .term-cursor{color:#1a7f37}
