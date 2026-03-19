@@ -1142,49 +1142,6 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// ============================================
-// TYPEWRITER EFFECT
-// ============================================
-(function() {
-    const el = document.getElementById('typewriter');
-    if (!el) return;
-
-    const words = {
-        en: ['RAG Pipelines', 'NLP & LLMs', 'Computer Vision', 'Cloud AI (AWS)', 'Full-Stack Development'],
-        tr: ['RAG Pipeline\'ları', 'NLP & LLM\'ler', 'Bilgisayarlı Görü', 'Bulut AI (AWS)', 'Full-Stack Geliştirme']
-    };
-
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-
-    function tick() {
-        const list = words[currentLang] || words.en;
-        const current = list[wordIndex % list.length];
-
-        if (isDeleting) {
-            charIndex--;
-            el.textContent = current.substring(0, charIndex);
-            if (charIndex === 0) {
-                isDeleting = false;
-                wordIndex++;
-            }
-            setTimeout(tick, 40);
-        } else {
-            charIndex++;
-            el.textContent = current.substring(0, charIndex);
-            if (charIndex === current.length) {
-                isDeleting = true;
-                setTimeout(tick, 1800);
-            } else {
-                setTimeout(tick, 80);
-            }
-        }
-    }
-
-    setTimeout(tick, 500);
-})();
-
 // Experience section slider functions removed as the layout changed to a vertical roadmap.
 
 // ============================================
