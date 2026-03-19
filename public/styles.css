@@ -289,6 +289,7 @@ body.light-mode .particle{background:rgba(124,58,237,.1)}
 }
 
 .weekly-chart-container {
+    display:none;margin-top:10px;border-top:1px solid var(--glass-border);padding-top:8px;
     transition: all 0.3s ease;
     opacity: 0;
     transform: translateY(-10px);
@@ -297,6 +298,10 @@ body.light-mode .particle{background:rgba(124,58,237,.1)}
     opacity: 1;
     transform: translateY(0);
 }
+.weekly-chart-label{text-align:center;margin-bottom:6px}
+.weekly-chart-canvas-wrap{height:60px;width:100%}
+.visitor-note{font-size:.55rem;color:var(--text-3);text-align:center;margin-top:4px}
+.visitor-note i{font-size:.5rem}
 
 /* Hero Content */
 .hero-content{position:relative;z-index:2;text-align:center;max-width:820px;margin:0 auto}
@@ -1005,6 +1010,8 @@ footer{
     margin-left:2px;
 }
 @keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
+
+.education-list{display:flex;flex-direction:column;gap:24px}
 
 /* ── EDUCATION ── */
 .education-card{
