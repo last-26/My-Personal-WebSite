@@ -326,9 +326,20 @@ const navScrollFn = () => {
     }
 };
 
+// Scroll progress bar
+const scrollProgressBar = document.getElementById('scrollProgress');
+const updateScrollProgress = () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight > 0) {
+        scrollProgressBar.style.width = (scrollTop / docHeight * 100) + '%';
+    }
+};
+
 window.addEventListener('scroll', () => {
     scrollRevealFn();
     navScrollFn();
+    updateScrollProgress();
 });
 scrollRevealFn();
 navScrollFn();
