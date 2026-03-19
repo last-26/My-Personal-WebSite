@@ -850,17 +850,20 @@ body.light-mode .card-tags span:hover{
     padding:24px 28px 20px;
     font-family:var(--mono);
 }
-.term-block{margin-bottom:18px}
+.term-block{margin-bottom:22px}
 .term-block:last-child{margin-bottom:0}
 .term-cmd{
-    font-size:.85rem;color:#c9d1d9;margin-bottom:8px;
+    font-size:.9rem;color:#e6edf3;margin-bottom:10px;
     display:flex;align-items:center;gap:8px;
+    background:rgba(255,255,255,.03);
+    padding:8px 12px;border-radius:6px;
+    border-left:3px solid #39d353;
 }
-.term-prompt{color:#39d353;font-weight:700}
-.term-file{color:#79c0ff}
+.term-prompt{color:#39d353;font-weight:700;font-size:1rem}
+.term-file{color:#79c0ff;font-weight:600}
 .term-output{
     display:flex;flex-wrap:wrap;gap:6px;
-    padding-left:16px;
+    padding-left:20px;
 }
 .term-cursor{
     color:#39d353;font-weight:700;
@@ -894,9 +897,9 @@ body.light-mode .terminal-bar{
     border-bottom-color:#d0d7de;
 }
 body.light-mode .terminal-title{color:#656d76}
-body.light-mode .term-cmd{color:#1f2328}
+body.light-mode .term-cmd{color:#1f2328;background:rgba(0,0,0,.03);border-left-color:#1a7f37}
 body.light-mode .term-prompt{color:#1a7f37}
-body.light-mode .term-file{color:#0550ae}
+body.light-mode .term-file{color:#0550ae;font-weight:600}
 body.light-mode .term-cursor{color:#1a7f37}
 body.light-mode .pill{
     background:rgba(9,105,218,.06);color:#0550ae;
