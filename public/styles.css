@@ -699,6 +699,11 @@ body.light-mode .btn-ghost:hover{background:var(--accent-2);color:#fff;box-shado
 .bento-card:hover{transform:translateY(-4px);box-shadow:0 0 40px var(--glow)}
 
 .bento-main{grid-row:span 1;grid-column:span 3}
+.about-intro{
+    font-size:1.55rem;font-weight:700;line-height:1.4;
+    text-align:center;margin-bottom:1.2rem;
+    color:var(--text);
+}
 .about-text{color:var(--text-2);font-size:1.05rem;line-height:1.9;text-align:center}
 
 .bento-stat{
