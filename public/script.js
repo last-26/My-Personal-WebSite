@@ -1254,11 +1254,33 @@ function initCertificateButton() {
     }
 }
 
+// Company Logo Modal Functions
+window.showLogoModal = function(imgSrc) {
+    const modal = document.getElementById('logoModal');
+    const modalImg = document.getElementById('logoModalImage');
+    if (modal && modalImg) {
+        modalImg.src = imgSrc;
+        modal.classList.add('show');
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+window.closeLogoModal = function() {
+    const modal = document.getElementById('logoModal');
+    if (modal) {
+        modal.classList.remove('show');
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
 // Close modal on ESC key
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeCertificateModal();
         closeEnglishCertModal();
+        closeLogoModal();
     }
 });
 

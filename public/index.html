@@ -256,7 +256,7 @@
                     </div>
                     <div class="roadmap-card">
                         <div class="roadmap-card-stripe"></div>
-                        <a href="https://www.ictasnukleer.com.tr" target="_blank" class="roadmap-logo-link"><img class="roadmap-logo" src="ic-logo.png" alt="IC İçtaş"></a>
+                        <button class="roadmap-logo-link" onclick="showLogoModal('ic-logo.png')" type="button"><img class="roadmap-logo" src="ic-logo.png" alt="IC İçtaş"></button>
                         <div class="roadmap-header">
                             <div class="roadmap-info">
                                 <h3 class="roadmap-title" data-tr="experience.icictas.title">Yazılım Geliştirme Stajyeri</h3>
@@ -279,7 +279,7 @@
                     </div>
                     <div class="roadmap-card">
                         <div class="roadmap-card-stripe"></div>
-                        <a href="https://www.tei.com.tr" target="_blank" class="roadmap-logo-link"><img class="roadmap-logo" src="tei-logo.png" alt="TEI"></a>
+                        <button class="roadmap-logo-link" onclick="showLogoModal('tei-logo.png')" type="button"><img class="roadmap-logo" src="tei-logo.png" alt="TEI"></button>
                         <div class="roadmap-header">
                             <div class="roadmap-info">
                                 <h3 class="roadmap-title" data-tr="experience.tei.title">Data Science & AI Stajyeri</h3>
@@ -320,6 +320,16 @@
             </div>
         </div>
     </section>
+
+    <!-- Company Logo Modal -->
+    <div id="logoModal" class="certificate-modal" onclick="closeLogoModal()">
+        <div class="modal-content logo-modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeLogoModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="logoModalImage" src="" alt="Company Logo" class="logo-modal-image">
+        </div>
+    </div>
 
     <!-- Certificate Modal -->
     <div id="certificateModal" class="certificate-modal" onclick="closeCertificate()">

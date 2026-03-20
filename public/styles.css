@@ -965,19 +965,20 @@ body.light-mode .rm-orange .roadmap-date-side {
 /* Company logo badge */
 .roadmap-logo-link {
     position: absolute;
-    top: 16px; right: 16px;
+    top: 14px; right: 14px;
     z-index: 3;
-    display: block;
+    background: none; border: none;
+    padding: 0; cursor: pointer;
     transition: transform 0.3s;
 }
-.roadmap-logo-link:hover { transform: scale(1.12); }
+.roadmap-logo-link:hover { transform: scale(1.1); }
 .roadmap-logo {
-    width: 46px; height: 46px;
-    border-radius: 12px;
+    width: 54px; height: 54px;
+    border-radius: 14px;
     object-fit: contain;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.06);
     border: 1px solid var(--glass-border);
-    padding: 5px;
+    padding: 6px;
     transition: box-shadow 0.3s;
     display: block;
 }
@@ -991,6 +992,19 @@ body.light-mode .roadmap-logo {
 }
 body.light-mode .roadmap-logo-link:hover .roadmap-logo {
     box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+/* Logo modal */
+.logo-modal-content {
+    display: flex; align-items: center; justify-content: center;
+}
+.logo-modal-image {
+    max-width: 320px; max-height: 320px;
+    border-radius: 20px;
+    background: var(--bg-2);
+    border: 1px solid var(--glass-border);
+    padding: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    object-fit: contain;
 }
 
 /* Dark mode card glow per item */
@@ -1097,8 +1111,8 @@ body.light-mode .roadmap-item:hover .roadmap-card {
         padding-left: 6px;
     }
     .roadmap-card { grid-column: 2; }
-    .roadmap-logo-link { top: 12px; right: 12px; }
-    .roadmap-logo { width: 38px; height: 38px; }
+    .roadmap-logo-link { top: 10px; right: 10px; }
+    .roadmap-logo { width: 42px; height: 42px; }
     .roadmap-header { padding-right: 46px; }
 }
 
