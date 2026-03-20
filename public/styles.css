@@ -678,25 +678,44 @@ body.light-mode .btn-ghost:hover{background:var(--accent-2);color:#fff;box-shado
 }
 .bento-card{
     background:var(--bg-card);
-    border:1px solid var(--glass-border);
+    border:1px solid rgba(124,58,237,0.1);
     border-radius:var(--radius);
     padding:2rem;
-    height:100%; /* Fix alignment so all boxes stretch equally */
+    height:100%;
     display:flex;flex-direction:column;justify-content:center;
     transition:all .4s cubic-bezier(.16,1,.3,1);
     position:relative;overflow:hidden;
 }
+/* Gradient border on hover */
 .bento-card::before{
     content:'';position:absolute;inset:0;
-    border-radius:var(--radius);padding:1px;
-    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    border-radius:var(--radius);padding:1.5px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2),var(--accent-3));
+    background-size:200% 200%;
     -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
     mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
     -webkit-mask-composite:xor;mask-composite:exclude;
-    opacity:0;transition:opacity .3s;pointer-events:none;
+    opacity:0;transition:opacity .4s;pointer-events:none;
 }
-.bento-card:hover::before{opacity:1}
-.bento-card:hover{transform:translateY(-4px);box-shadow:0 0 40px var(--glow)}
+.bento-card:hover::before{opacity:1;animation:bentoBorder 3s ease infinite}
+@keyframes bentoBorder{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+.bento-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 8px 40px rgba(124,58,237,0.1),0 0 20px rgba(124,58,237,0.05);
+    border-color:transparent;
+}
+/* Light mode bento */
+body.light-mode .bento-card{
+    border-color:rgba(0,0,0,0.06);
+}
+body.light-mode .bento-card:hover{
+    box-shadow:0 8px 40px rgba(109,40,217,0.08),0 0 20px rgba(109,40,217,0.04);
+    border-color:transparent;
+}
 
 .bento-main{grid-row:span 1;grid-column:span 3}
 .about-intro{
