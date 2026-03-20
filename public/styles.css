@@ -700,11 +700,25 @@ body.light-mode .btn-ghost:hover{background:var(--accent-2);color:#fff;box-shado
 
 .bento-main{grid-row:span 1;grid-column:span 3}
 .about-intro{
-    font-size:1.55rem;font-weight:700;line-height:1.4;
-    text-align:center;margin-bottom:1.2rem;
-    color:var(--text);
+    font-size:1.6rem;font-weight:700;line-height:1.5;
+    text-align:center;margin-bottom:1.4rem;
+    padding-bottom:1.2rem;
+    border-bottom:1px solid var(--glass-border);
+    background:linear-gradient(135deg,var(--text) 40%,var(--accent));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    background-clip:text;
+    letter-spacing:-.3px;
 }
-.about-text{color:var(--text-2);font-size:1.05rem;line-height:1.9;text-align:center}
+body.light-mode .about-intro{
+    background:linear-gradient(135deg,var(--text) 50%,var(--accent));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    background-clip:text;
+}
+body.light-mode .about-intro .kw{
+    -webkit-text-fill-color:var(--accent);
+}
+.about-text{color:var(--text-3);font-size:1rem;line-height:1.9;text-align:center;letter-spacing:.1px}
+body.light-mode .about-text{color:var(--text-2)}
 .kw{
     color:var(--accent);font-weight:600;
     background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(45,212,191,0.06));
