@@ -850,19 +850,22 @@ body.light-mode .kw{
 }
 .roadmap-item:last-child { margin-bottom: 0; }
 
-/* Side Date — fixed width, single-line */
+/* Side Date */
 .roadmap-date-side {
     text-align: center;
-    padding: 10px 16px;
-    font-size: 0.82rem;
+    padding: 10px 12px;
+    font-size: 0.78rem;
     font-weight: 700;
     font-family: var(--mono);
     border-radius: 10px;
     transition: all 0.3s ease;
     line-height: 1.3;
-    width: 150px;
+    width: 100%;
+    max-width: 170px;
     margin: 0 auto;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 /* Per-item date colors — dark mode */
 .rm-purple .roadmap-date-side {
@@ -960,25 +963,34 @@ body.light-mode .rm-orange .roadmap-date-side {
 .rm-orange .roadmap-card-stripe { background: linear-gradient(90deg, #fb923c, #f97316); }
 
 /* Company logo badge */
-.roadmap-logo {
+.roadmap-logo-link {
     position: absolute;
     top: 16px; right: 16px;
+    z-index: 3;
+    display: block;
+    transition: transform 0.3s;
+}
+.roadmap-logo-link:hover { transform: scale(1.12); }
+.roadmap-logo {
     width: 46px; height: 46px;
     border-radius: 12px;
     object-fit: contain;
     background: rgba(255,255,255,0.05);
     border: 1px solid var(--glass-border);
     padding: 5px;
-    transition: all 0.3s;
+    transition: box-shadow 0.3s;
+    display: block;
 }
-.roadmap-item:hover .roadmap-logo {
-    transform: scale(1.08);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+.roadmap-logo-link:hover .roadmap-logo {
+    box-shadow: 0 4px 18px rgba(0,0,0,0.2);
 }
 body.light-mode .roadmap-logo {
     background: #ffffff;
     border-color: rgba(0,0,0,0.08);
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+body.light-mode .roadmap-logo-link:hover .roadmap-logo {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
 
 /* Dark mode card glow per item */
@@ -1085,7 +1097,8 @@ body.light-mode .roadmap-item:hover .roadmap-card {
         padding-left: 6px;
     }
     .roadmap-card { grid-column: 2; }
-    .roadmap-logo { width: 38px; height: 38px; top: 12px; right: 12px; }
+    .roadmap-logo-link { top: 12px; right: 12px; }
+    .roadmap-logo { width: 38px; height: 38px; }
     .roadmap-header { padding-right: 46px; }
 }
 
