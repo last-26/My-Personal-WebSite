@@ -712,11 +712,11 @@ function renderWeeklyChart(ctx, labels, data) {
     // Determine colors based on current theme
     const isLightMode = document.body.classList.contains('light-mode');
     
-    // Theme colors matching CSS variables
-    const textColor = isLightMode ? '#64748b' : '#94a3b8'; // var(--text-3)
-    const gridColor = isLightMode ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)';
-    const barGradientStart = '#2dd4bf'; // var(--accent)
-    const barGradientEnd = '#14b8a6'; // var(--accent-2)
+    // Theme colors
+    const textColor = isLightMode ? '#36322f' : '#94a3b8';
+    const gridColor = isLightMode ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.05)';
+    const barGradientStart = isLightMode ? '#6d28d9' : '#2dd4bf';
+    const barGradientEnd = isLightMode ? '#8b5cf6' : '#14b8a6';
 
     // Create gradient
     const gradient = ctx.createLinearGradient(0, 0, 0, 80);
@@ -747,10 +747,10 @@ function renderWeeklyChart(ctx, labels, data) {
             plugins: {
                 legend: { display: false },
                 tooltip: {
-                    backgroundColor: isLightMode ? 'rgba(255,255,255,0.9)' : 'rgba(15,23,42,0.9)',
-                    titleColor: isLightMode ? '#0f172a' : '#f8fafc',
-                    bodyColor: barGradientStart,
-                    borderColor: isLightMode ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.1)',
+                    backgroundColor: isLightMode ? '#ffffff' : 'rgba(15,23,42,0.9)',
+                    titleColor: isLightMode ? '#1a1816' : '#f8fafc',
+                    bodyColor: isLightMode ? '#6d28d9' : '#2dd4bf',
+                    borderColor: isLightMode ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.1)',
                     borderWidth: 1,
                     padding: 8,
                     displayColors: false,
