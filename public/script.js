@@ -232,14 +232,18 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
             currentLang = lang;
             updateLanguage(lang);
             updateCVButtons(lang);
-            
+
             // Update active button
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
             this.classList.add('active');
 
+            // Update sliding indicator
+            const switcher = document.querySelector('.lang-switcher');
+            if (switcher) switcher.setAttribute('data-active', lang);
+
             // Update HTML lang attribute
             document.documentElement.lang = lang;
-            
+
             // Save preference
             localStorage.setItem('preferredLang', lang);
 
@@ -414,6 +418,10 @@ if (savedLang !== 'en') {
     updateLanguage('en');
 }
 document.documentElement.lang = savedLang;
+
+// Set language indicator position
+const langSwitcher = document.querySelector('.lang-switcher');
+if (langSwitcher) langSwitcher.setAttribute('data-active', savedLang);
 
 // Initialize CV buttons
 updateCVButtons(savedLang);
