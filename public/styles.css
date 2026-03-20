@@ -705,6 +705,16 @@ body.light-mode .btn-ghost:hover{background:var(--accent-2);color:#fff;box-shado
     color:var(--text);
 }
 .about-text{color:var(--text-2);font-size:1.05rem;line-height:1.9;text-align:center}
+.kw{
+    color:var(--accent);font-weight:600;
+    background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(45,212,191,0.06));
+    padding:1px 6px;border-radius:4px;
+    white-space:nowrap;
+}
+body.light-mode .kw{
+    color:var(--accent);
+    background:linear-gradient(135deg,rgba(109,40,217,0.08),rgba(13,148,136,0.05));
+}
 
 .bento-stat{
     display:flex;flex-direction:column;align-items:center;
