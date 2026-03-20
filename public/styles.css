@@ -30,17 +30,17 @@
 }
 
 body.light-mode {
-    --bg: #ebe8e1; /* Slightly darker, warmer beige */
+    --bg: #ebe8e1;
     --bg-2: #ffffff;
     --bg-card: #ffffff;
     --bg-card-hover: #fafaf9;
     --glass: rgba(255,255,255,0.9);
-    --glass-border: rgba(0,0,0,0.06);
-    --text: #1c1917;
-    --text-2: #44403c;
-    --text-3: #78716c;
+    --glass-border: rgba(0,0,0,0.08);
+    --text: #1a1816;
+    --text-2: #36322f;
+    --text-3: #57534e;
     --accent: #6d28d9;
-    --accent-2: #0d9488;
+    --accent-2: #0d7d72;
     --glow: rgba(109,40,217,0.15);
     --glow-2: rgba(13,148,136,0.12);
     --card-bg: #ffffff;
@@ -53,6 +53,19 @@ body.light-mode .card:hover, body.light-mode .project-card:hover, body.light-mod
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     border-color: rgba(0,0,0,0.1);
 }
+/* Light mode text refinements */
+body.light-mode .hero-desc{color:var(--text-2)}
+body.light-mode .contact-item h3{color:var(--text)}
+body.light-mode .contact-link{color:var(--accent);font-weight:600}
+body.light-mode .footer-tagline{color:var(--text-2)}
+body.light-mode .footer-nav h4,body.light-mode .footer-social h4{color:var(--text-2);letter-spacing:1.5px}
+body.light-mode .footer-bottom p{color:var(--text-2)}
+body.light-mode .stat-text{color:var(--text-2)}
+body.light-mode .section-tag{color:var(--accent);background:rgba(109,40,217,.08);border-color:rgba(109,40,217,.12)}
+body.light-mode .contact-item{border-color:rgba(13,125,114,.15)}
+body.light-mode .contact-item:hover{border-color:var(--accent-2);box-shadow:0 8px 30px rgba(13,125,114,.12)}
+body.light-mode .education-card{border-color:rgba(109,40,217,.12)}
+body.light-mode .education-card:hover{border-color:rgba(109,40,217,.25);box-shadow:0 8px 30px rgba(109,40,217,.08)}
 
 /* Light Mode Nav/Logo Fixes */
 body.light-mode .logo-mark {
@@ -488,8 +501,12 @@ body.light-mode .metric-daily .metric-icon{
     background:rgba(13,148,136,0.08);
 }
 body.light-mode .widget-chart{
-    border-top-color:rgba(0,0,0,0.05);
+    border-top-color:rgba(0,0,0,0.06);
 }
+body.light-mode .widget-status{color:var(--text-2)}
+body.light-mode .metric-label{color:var(--text-2)}
+body.light-mode .chart-header{color:var(--text-2)}
+body.light-mode .chart-note{color:var(--text-3)}
 
 /* Hero Content */
 .hero-content{position:relative;z-index:2;text-align:center;max-width:820px;margin:0 auto}
