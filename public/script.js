@@ -286,20 +286,35 @@ if (savedTheme === 'light') {
 }
 
 themeToggle.addEventListener('click', () => {
-    body.classList.toggle('light-mode');
-    
-    if (body.classList.contains('light-mode')) {
-        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        localStorage.setItem('theme', 'light');
-    } else {
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        localStorage.setItem('theme', 'dark');
-    }
+    // Animate icon out
+    const icon = themeToggle.querySelector('i');
+    icon.style.transform = 'rotate(360deg) scale(0)';
 
-    // Update weekly chart theme if it exists
-    if (weeklyChartInstance && weeklyChartInstance.data.datasets[0].data.length > 0) {
-        renderWeeklyChart(document.getElementById('weeklyVisitorChart').getContext('2d'), weeklyChartInstance.data.labels, weeklyChartInstance.data.datasets[0].data);
-    }
+    setTimeout(() => {
+        body.classList.toggle('light-mode');
+
+        if (body.classList.contains('light-mode')) {
+            themeToggle.innerHTML = '<i class="fas fa-moon" style="transform:scale(0)"></i>';
+            localStorage.setItem('theme', 'light');
+        } else {
+            themeToggle.innerHTML = '<i class="fas fa-sun" style="transform:scale(0)"></i>';
+            localStorage.setItem('theme', 'dark');
+        }
+
+        // Animate icon in
+        requestAnimationFrame(() => {
+            const newIcon = themeToggle.querySelector('i');
+            newIcon.style.transition = 'transform .4s cubic-bezier(.34,1.56,.64,1)';
+            requestAnimationFrame(() => {
+                newIcon.style.transform = 'rotate(0deg) scale(1)';
+            });
+        });
+
+        // Update weekly chart theme if it exists
+        if (weeklyChartInstance && weeklyChartInstance.data.datasets[0].data.length > 0) {
+            renderWeeklyChart(document.getElementById('weeklyVisitorChart').getContext('2d'), weeklyChartInstance.data.labels, weeklyChartInstance.data.datasets[0].data);
+        }
+    }, 250);
 });
 
 // Update language function
