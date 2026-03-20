@@ -69,39 +69,41 @@
 
         <!-- Visitor Counter -->
         <div class="visitor-counter">
-            <div class="visitor-table">
-                <div class="visitor-header">
-                    <i class="fas fa-signal"></i>
-                    <span data-tr="visitor.header">Ziyaretçiler</span>
-                </div>
-                <div class="visitor-data-row">
-                    <div class="visitor-data-cell">
-                        <div class="visitor-label">
-                            <i class="fas fa-globe-americas"></i>
-                            <span data-tr="visitor.total">TOTAL</span>
-                        </div>
-                        <div class="visitor-count" id="visitorCount">0</div>
+            <div class="visitor-widget">
+                <div class="widget-glow"></div>
+                <div class="widget-header">
+                    <div class="widget-status">
+                        <span class="status-dot"></span>
+                        <span data-tr="visitor.header">Ziyaretçiler</span>
                     </div>
-                    <div class="visitor-data-cell">
-                        <div class="visitor-label">
-                            <i class="fas fa-calendar-day"></i>
-                            <span data-tr="visitor.daily">DAILY</span>
+                    <i class="fas fa-chart-line widget-header-icon"></i>
+                </div>
+                <div class="widget-metrics">
+                    <div class="metric-card metric-total">
+                        <div class="metric-icon"><i class="fas fa-users"></i></div>
+                        <div class="metric-data">
+                            <span class="metric-value" id="visitorCount">0</span>
+                            <span class="metric-label" data-tr="visitor.total">TOTAL</span>
                         </div>
-                        <div class="visitor-count" id="dailyVisitorCount">0</div>
+                    </div>
+                    <div class="metric-card metric-daily">
+                        <div class="metric-icon"><i class="fas fa-calendar-day"></i></div>
+                        <div class="metric-data">
+                            <span class="metric-value" id="dailyVisitorCount">0</span>
+                            <span class="metric-label" data-tr="visitor.daily">DAILY</span>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Weekly Chart Container -->
-                <div class="weekly-chart-container" id="weeklyChartContainer" style="display: none; margin-top: 10px; border-top: 1px solid var(--glass-border); padding-top: 8px;">
-                    <div class="visitor-label" style="text-align: center; margin-bottom: 6px;">
+                <div class="widget-chart" id="weeklyChartContainer" style="display:none;">
+                    <div class="chart-header">
                         <i class="fas fa-chart-bar"></i>
                         <span data-tr="visitor.weekly">LAST 7 DAYS</span>
                     </div>
-                    <div style="height: 60px; width: 100%;">
+                    <div class="chart-canvas">
                         <canvas id="weeklyVisitorChart"></canvas>
                     </div>
-                    <div class="visitor-note" style="font-size: 0.55rem; color: var(--text-3); text-align: center; margin-top: 4px;">
-                        <i class="fas fa-info-circle" style="font-size: 0.5rem;"></i>
+                    <div class="chart-note">
+                        <i class="fas fa-info-circle"></i>
                         <span data-tr="visitor.reset.note">Veriler 16 Mart 2026 tarihinde sıfırlanmıştır.</span>
                     </div>
                 </div>

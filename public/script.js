@@ -696,8 +696,8 @@ async function initWeeklyVisitorChart() {
         // Check if there is any data to show (to avoid empty chart)
         if (dataPoints.some(count => count > 0)) {
             chartContainer.style.display = 'block';
-            setTimeout(() => chartContainer.classList.add('show'), 100);
-            
+            setTimeout(() => chartContainer.classList.add('show'), 150);
+
             renderWeeklyChart(ctx.getContext('2d'), labels, dataPoints);
         }
 
