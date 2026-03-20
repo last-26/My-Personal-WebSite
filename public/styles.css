@@ -215,7 +215,7 @@ body.light-mode .lang-indicator{
     width:42px;height:42px;border-radius:12px;
     background:rgba(124,58,237,0.06);
     border:1px solid rgba(124,58,237,0.12);
-    color:var(--accent);font-size:1.05rem;cursor:pointer;
+    color:#facc15;font-size:1.05rem;cursor:pointer;
     display:grid;place-items:center;
     transition:all .4s cubic-bezier(.4,0,.2,1);
     position:relative;overflow:hidden;
@@ -224,9 +224,9 @@ body.light-mode .lang-indicator{
     transition:transform .5s cubic-bezier(.4,0,.2,1);
 }
 .theme-toggle:hover{
-    background:linear-gradient(135deg,var(--accent),#a855f7);
-    color:#fff;border-color:transparent;
-    box-shadow:0 0 20px rgba(124,58,237,.4);
+    background:rgba(250,204,21,0.12);
+    color:#facc15;border-color:rgba(250,204,21,0.3);
+    box-shadow:0 0 20px rgba(250,204,21,.25);
 }
 .theme-toggle:hover i{transform:rotate(30deg) scale(1.1)}
 .theme-toggle:active i{transform:rotate(180deg) scale(0.8)}
