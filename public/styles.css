@@ -213,8 +213,8 @@ body.light-mode .lang-indicator{
 
 .theme-toggle{
     width:42px;height:42px;border-radius:12px;
-    background:rgba(124,58,237,0.06);
-    border:1px solid rgba(124,58,237,0.12);
+    background:rgba(250,204,21,0.06);
+    border:1px solid rgba(250,204,21,0.15);
     color:#facc15;font-size:1.05rem;cursor:pointer;
     display:grid;place-items:center;
     transition:all .4s cubic-bezier(.4,0,.2,1);
@@ -222,23 +222,40 @@ body.light-mode .lang-indicator{
 }
 .theme-toggle i{
     transition:transform .5s cubic-bezier(.4,0,.2,1);
+    animation:sunSpin 12s linear infinite;
+}
+@keyframes sunSpin{
+    from{transform:rotate(0deg)}to{transform:rotate(360deg)}
 }
 .theme-toggle:hover{
     background:rgba(250,204,21,0.12);
     color:#facc15;border-color:rgba(250,204,21,0.3);
-    box-shadow:0 0 20px rgba(250,204,21,.25);
+    box-shadow:0 0 22px rgba(250,204,21,.3);
 }
-.theme-toggle:hover i{transform:rotate(30deg) scale(1.1)}
-.theme-toggle:active i{transform:rotate(180deg) scale(0.8)}
+.theme-toggle:hover i{animation-duration:3s}
+.theme-toggle:active i{animation:none;transform:rotate(180deg) scale(0.8)}
+/* Light mode — dark button with glowing moon */
 body.light-mode .theme-toggle{
-    background:rgba(109,40,217,0.06);
-    border-color:rgba(109,40,217,0.12);
-    color:var(--accent);
+    background:#0f172a;
+    border-color:rgba(255,255,255,0.1);
+    color:#e2e8f0;
+    box-shadow:0 2px 12px rgba(0,0,0,0.2);
+}
+body.light-mode .theme-toggle i{
+    animation:moonGlow 3s ease-in-out infinite;
+    text-shadow:0 0 12px rgba(226,232,240,0.8),0 0 24px rgba(226,232,240,0.4);
+}
+@keyframes moonGlow{
+    0%,100%{text-shadow:0 0 12px rgba(226,232,240,0.8),0 0 24px rgba(226,232,240,0.4);transform:rotate(0deg) scale(1)}
+    50%{text-shadow:0 0 18px rgba(226,232,240,1),0 0 36px rgba(226,232,240,0.6);transform:rotate(-15deg) scale(1.1)}
 }
 body.light-mode .theme-toggle:hover{
-    background:linear-gradient(135deg,var(--accent),#8b5cf6);
-    color:#fff;
-    box-shadow:0 0 20px rgba(109,40,217,.3);
+    background:#1e293b;
+    border-color:rgba(226,232,240,0.2);
+    box-shadow:0 0 24px rgba(226,232,240,0.2),0 4px 16px rgba(0,0,0,0.3);
+}
+body.light-mode .theme-toggle:hover i{
+    text-shadow:0 0 20px rgba(255,255,255,1),0 0 40px rgba(226,232,240,0.7);
 }
 
 /* ── DYNAMIC EFFECTS ── */
