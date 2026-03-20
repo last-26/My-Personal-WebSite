@@ -112,14 +112,14 @@ body.light-mode .cursor-glow{background:radial-gradient(circle,rgba(124,58,237,0
 /* ── Nav ── */
 nav{
     position:fixed;top:0;left:0;width:100%;z-index:1000;
-    padding:14px 0;transition:all .3s;
+    padding:20px 0;transition:all .3s;
 }
 nav.scrolled{
     background:rgba(6,6,14,0.8);
     backdrop-filter:blur(24px) saturate(180%);
     -webkit-backdrop-filter:blur(24px) saturate(180%);
     border-bottom:1px solid var(--glass-border);
-    padding:10px 0;
+    padding:14px 0;
 }
 body.light-mode nav.scrolled{background:rgba(244,244,248,0.85)}
 
@@ -129,7 +129,7 @@ body.light-mode nav.scrolled{background:rgba(244,244,248,0.85)}
 .logo{display:flex;align-items:center;gap:10px;transition:transform .2s}
 .logo:hover{transform:translateY(-1px)}
 .logo-dot{
-    width:10px;height:10px;border-radius:50%;
+    width:12px;height:12px;border-radius:50%;
     background:linear-gradient(135deg,var(--accent),var(--accent-2));
     box-shadow:0 0 12px rgba(124,58,237,.5);
     animation:dotPulse 3s ease-in-out infinite;
@@ -138,15 +138,15 @@ body.light-mode nav.scrolled{background:rgba(244,244,248,0.85)}
     0%,100%{box-shadow:0 0 12px rgba(124,58,237,.5);transform:scale(1)}
     50%{box-shadow:0 0 20px rgba(124,58,237,.7);transform:scale(1.15)}
 }
-.logo-mark{font-size:1.4rem;font-weight:800;color:#ffffff;letter-spacing:1px;text-shadow: 0 0 15px rgba(124,58,237,0.4);}
+.logo-mark{font-size:1.65rem;font-weight:800;color:#ffffff;letter-spacing:1.5px;text-shadow: 0 0 15px rgba(124,58,237,0.4);}
 .logo-accent{color:var(--accent);text-shadow: 0 0 15px var(--accent);}
 .logo-accent{color:var(--accent);font-weight:800}
 
-.nav-right{display:flex;align-items:center;gap:1.5rem}
+.nav-right{display:flex;align-items:center;gap:1.8rem}
 .nav-links{display:flex;gap:2px}
 .nav-links a{
-    color:#ffffff;font-size:.9rem;font-weight:800;
-    padding:8px 14px;border-radius:8px;transition:all .2s;
+    color:#ffffff;font-size:.95rem;font-weight:800;
+    padding:9px 16px;border-radius:8px;transition:all .2s;
     position:relative;
     text-shadow: 0 0 15px rgba(255,255,255,0.3);
 }
