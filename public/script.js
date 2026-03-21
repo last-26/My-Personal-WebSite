@@ -528,7 +528,7 @@ navScrollFn();
     // --- Card cache (shared) ---
     function cacheCards() {
         const els = document.querySelectorAll(
-            '.bento-card,.project-card,.roadmap-card,.education-card,.contact-item'
+            '.bento-card,.project-card,.roadmap-card,.education-card,.contact-item,.terminal'
         );
         cachedCards = [];
         els.forEach(el => {
@@ -587,7 +587,7 @@ navScrollFn();
         // Charge-up check
         const chActive = chargeUp.active &&
             (Date.now() - chargeUp.startTime < CHARGE_DUR + CHARGE_EASE);
-        let spawnN = 1, lightBoost = 0;
+        let spawnN = speed > 8 ? 2 : 1, lightBoost = 0;
 
         if (chActive && !isLight()) {
             const el = Date.now() - chargeUp.startTime;
@@ -598,19 +598,19 @@ navScrollFn();
         }
 
         for (let i = 0; i < spawnN; i++) {
-            const spread = (Math.random() - 0.5) * 0.6;
+            const spread = (Math.random() - 0.5) * 0.8;
             particles.push({
-                x: mouse.x + (Math.random() - 0.5) * 3,
-                y: mouse.y + (Math.random() - 0.5) * 3,
-                vx: -nx * 0.4 + spread,
-                vy: -ny * 0.4 + spread + 0.15,
+                x: mouse.x + (Math.random() - 0.5) * 4,
+                y: mouse.y + (Math.random() - 0.5) * 4,
+                vx: -nx * 0.5 + spread,
+                vy: -ny * 0.5 + spread + 0.15,
                 life: 1,
-                decay: 0.035 + Math.random() * 0.03,
-                len: 2 + Math.random() * 3,
+                decay: 0.02 + Math.random() * 0.02,
+                len: 3 + Math.random() * 5,
                 hue: Math.random() > 0.5 ? 263 : 174,
                 lb: lightBoost,
-                nx: nx + (Math.random() - 0.5) * 0.4,
-                ny: ny + (Math.random() - 0.5) * 0.4
+                nx: nx + (Math.random() - 0.5) * 0.5,
+                ny: ny + (Math.random() - 0.5) * 0.5
             });
         }
     });
@@ -687,21 +687,21 @@ navScrollFn();
             const p = particles[i];
             p.x += p.vx; p.y += p.vy; p.life -= p.decay;
             if (p.life <= 0) { particles.splice(i, 1); continue; }
-            const a = p.life * 0.5;
+            const a = p.life * 0.7;
             const sat = p.hue === 263 ? '73%' : '70%';
-            const l = (p.hue === 263 ? 58 : 55) + (p.lb || 0);
+            const l = (p.hue === 263 ? 60 : 58) + (p.lb || 0);
             const len = p.len * p.life;
-            cCtx.shadowBlur = 3;
-            cCtx.shadowColor = `hsla(${p.hue},${sat},${l}%,${a * 0.4})`;
+            cCtx.shadowBlur = 5;
+            cCtx.shadowColor = `hsla(${p.hue},${sat},${l}%,${a * 0.5})`;
             cCtx.strokeStyle = `hsla(${p.hue},${sat},${l}%,${a})`;
-            cCtx.lineWidth = 0.8;
+            cCtx.lineWidth = 1.2;
             cCtx.beginPath();
             cCtx.moveTo(p.x, p.y);
             cCtx.lineTo(p.x + p.nx * len, p.y + p.ny * len);
             cCtx.stroke();
         }
         cCtx.shadowBlur = 0;
-        if (particles.length > 80) particles.splice(0, particles.length - 80);
+        if (particles.length > 120) particles.splice(0, particles.length - 120);
 
         // Spawn sparks
         trySpawnSparks();
