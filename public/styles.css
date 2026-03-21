@@ -193,6 +193,16 @@ body.light-mode .lightning-hit{
     box-shadow:0 0 14px rgba(109,40,217,0.3),0 0 30px rgba(109,40,217,0.1) !important;
     border-color:rgba(109,40,217,.4) !important;
 }
+/* Spark hit pulse on cards (subtle) */
+.spark-hit{
+    box-shadow:0 0 8px rgba(124,58,237,0.2) !important;
+    border-color:rgba(124,58,237,.25) !important;
+    transition:box-shadow .1s ease,border-color .1s ease !important;
+}
+body.light-mode .spark-hit{
+    box-shadow:0 0 6px rgba(109,40,217,0.12) !important;
+    border-color:rgba(109,40,217,.2) !important;
+}
 @media(max-width:768px){
     .cyber-edge{width:30px}
 }

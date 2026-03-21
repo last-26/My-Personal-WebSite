@@ -421,109 +421,69 @@ window.addEventListener('scroll', () => {
 scrollRevealFn();
 navScrollFn();
 
-// Cursor particle trail effect
+// ============================================
+// Unified Cursor Particle + Lightning System
+// ============================================
 (function() {
-    const canvas = document.getElementById('cursorCanvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    let mouse = { x: -100, y: -100 };
-    let animFrame;
+    const cCanvas = document.getElementById('cursorCanvas');
+    const lCanvas = document.getElementById('lightningCanvas');
+    if (!cCanvas || !lCanvas) return;
+    const cCtx = cCanvas.getContext('2d');
+    const lCtx = lCanvas.getContext('2d');
+    const isMobile = window.innerWidth < 768;
 
+    // --- Shared Config ---
+    const COLORS_DARK = [
+        { r:124, g:58, b:237 },
+        { r:45, g:212, b:191 }
+    ];
+    const COLORS_LIGHT = [
+        { r:109, g:40, b:217 },
+        { r:13, g:125, b:114 }
+    ];
+    const EDGE_ZONE = 60;
+    const ROD_ZONE = 150;
+    const SPARK_RANGE = 60;
+
+    // --- Shared State ---
+    let mouse = { x: -1000, y: -1000 };
+    let lastMouseMove = 0;
+    let particles = [];
+    let sparks = [];
+    let bolts = [];
+    let impactFlashes = [];
+    let cachedCards = [];
+    let scrollSpeed = 0;
+    let lastScrollY = window.scrollY;
+    let lastScrollTime = Date.now();
+    let scrollDir = 1;
+    let chargeUp = { active: false, startTime: 0 };
+    const CHARGE_DUR = 300;
+    const CHARGE_EASE = 100;
+    let lRunning = false;
+    let lRafId = null;
+
+    // --- Helpers ---
+    function isLight() { return document.body.classList.contains('light-mode'); }
+    function getColors() { return isLight() ? COLORS_LIGHT : COLORS_DARK; }
+    function opMult() { return isLight() ? 0.5 : 1.0; }
+    function pickColor() { const c = getColors(); return c[Math.random() > 0.5 ? 0 : 1]; }
+    function rgba(c, a) { return `rgba(${c.r},${c.g},${c.b},${a})`; }
+    function hypot(x1, y1, x2, y2) { return Math.hypot(x2 - x1, y2 - y1); }
+
+    // --- Resize ---
     function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        cCanvas.width = lCanvas.width = window.innerWidth;
+        cCanvas.height = lCanvas.height = window.innerHeight;
     }
     resize();
     window.addEventListener('resize', resize);
 
-    document.addEventListener('mousemove', (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-        for (let i = 0; i < 2; i++) {
-            particles.push({
-                x: mouse.x,
-                y: mouse.y,
-                vx: (Math.random() - 0.5) * 1.5,
-                vy: (Math.random() - 0.5) * 1.5,
-                life: 1,
-                decay: 0.015 + Math.random() * 0.015,
-                size: Math.random() * 3 + 1.5,
-                hue: Math.random() > 0.5 ? 263 : 174
-            });
-        }
-    });
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = particles.length - 1; i >= 0; i--) {
-            const p = particles[i];
-            p.x += p.vx;
-            p.y += p.vy;
-            p.life -= p.decay;
-            if (p.life <= 0) {
-                particles.splice(i, 1);
-                continue;
-            }
-            const alpha = p.life * 0.7;
-            const sat = p.hue === 263 ? '73%' : '70%';
-            const light = p.hue === 263 ? '58%' : '55%';
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
-            ctx.fillStyle = `hsla(${p.hue},${sat},${light},${alpha})`;
-            ctx.fill();
-            ctx.shadowBlur = 6;
-            ctx.shadowColor = `hsla(${p.hue},${sat},${light},${alpha * 0.5})`;
-        }
-        ctx.shadowBlur = 0;
-        if (particles.length > 150) particles.splice(0, particles.length - 150);
-        animFrame = requestAnimationFrame(animate);
-    }
-    animate();
-
-})();
-
-// ============================================
-// Canvas-based Lightning System
-// ============================================
-(function() {
-    const lCanvas = document.getElementById('lightningCanvas');
-    if (!lCanvas) return;
-    const lCtx = lCanvas.getContext('2d');
-    const isMobile = window.innerWidth < 768;
-
-    // --- Config ---
-    const COLORS_DARK = [
-        { r:124, g:58, b:237 },  // --accent  #7c3aed
-        { r:45, g:212, b:191 }   // --accent-2 #2dd4bf
-    ];
-    const COLORS_LIGHT = [
-        { r:109, g:40, b:217 },  // #6d28d9
-        { r:13, g:125, b:114 }   // #0d7d72
-    ];
-    const EDGE_ZONE = 60; // px from each edge where bolts originate
-
-    // --- State ---
-    let bolts = [];         // active bolt animations
-    let rafId = null;
-    let isRunning = false;
-    let cachedCards = [];   // {el, left, top, right, bottom}
-    let scrollSpeed = 0;
-    let lastScrollY = window.scrollY;
-    let lastScrollTime = Date.now();
-    let scrollDir = 1;     // 1 = down, -1 = up
-
-    function lResize() {
-        lCanvas.width = window.innerWidth;
-        lCanvas.height = window.innerHeight;
-    }
-    lResize();
-    window.addEventListener('resize', () => { lResize(); cacheCards(); });
-
-    // --- Card position cache ---
+    // --- Card cache (shared) ---
     function cacheCards() {
-        const selectors = '.bento-card,.project-card,.roadmap-card,.education-card,.contact-item';
-        const els = document.querySelectorAll(selectors);
+        const els = document.querySelectorAll(
+            '.bento-card,.project-card,.roadmap-card,.education-card,.contact-item'
+        );
         cachedCards = [];
         els.forEach(el => {
             const r = el.getBoundingClientRect();
@@ -533,10 +493,10 @@ navScrollFn();
         });
     }
     cacheCards();
-    let cacheThrottle = null;
+    let cacheTimer = null;
     function throttledCache() {
-        if (cacheThrottle) return;
-        cacheThrottle = setTimeout(() => { cacheCards(); cacheThrottle = null; }, 200);
+        if (cacheTimer) return;
+        cacheTimer = setTimeout(() => { cacheCards(); cacheTimer = null; }, 200);
     }
     window.addEventListener('scroll', throttledCache, { passive: true });
     window.addEventListener('resize', throttledCache);
@@ -548,11 +508,10 @@ navScrollFn();
             const dy = Math.abs(window.scrollY - lastScrollY);
             const dt = Math.max(now - lastScrollTime, 1);
             scrollDir = window.scrollY > lastScrollY ? 1 : -1;
-            scrollSpeed = Math.min(dy / dt * 16, 30); // normalize to ~px/frame, cap at 30
+            scrollSpeed = Math.min(dy / dt * 16, 30);
             lastScrollY = window.scrollY;
             lastScrollTime = now;
         }, { passive: true });
-        // Decay scroll speed
         setInterval(() => {
             if (Date.now() - lastScrollTime > 100) {
                 scrollSpeed *= 0.85;
@@ -561,168 +520,362 @@ navScrollFn();
         }, 50);
     }
 
-    // --- Color helpers ---
-    function getColors() {
-        return document.body.classList.contains('light-mode') ? COLORS_LIGHT : COLORS_DARK;
+    // ========== CURSOR PARTICLES + SPARKS (cCanvas) ==========
+
+    // --- Mouse handler: spawn particles ---
+    document.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        lastMouseMove = Date.now();
+
+        // Lightning rod mode check
+        const nearLeft = mouse.x < ROD_ZONE;
+        const nearRight = mouse.x > window.innerWidth - ROD_ZONE;
+        const isRod = !isMobile && (nearLeft || nearRight);
+
+        // Charge-up check
+        const chActive = chargeUp.active &&
+            (Date.now() - chargeUp.startTime < CHARGE_DUR + CHARGE_EASE);
+        let sizeMult = 1, lifeMult = 1, velMult = 1, spawnN = 2, lightBoost = 0;
+
+        if (isRod) { sizeMult = 1.3; lifeMult = 1.2; }
+
+        if (chActive && !isLight()) {
+            const el = Date.now() - chargeUp.startTime;
+            let t = el > CHARGE_DUR ? 1 - (el - CHARGE_DUR) / CHARGE_EASE : 1;
+            t = Math.max(0, t);
+            spawnN = Math.round(2 + 3 * t);
+            velMult = 1 + t;
+            lightBoost = 22 * t;
+            sizeMult = Math.max(sizeMult, 1 + 0.3 * t);
+        }
+
+        for (let i = 0; i < spawnN; i++) {
+            particles.push({
+                x: mouse.x, y: mouse.y,
+                vx: (Math.random() - 0.5) * 1.5 * velMult,
+                vy: (Math.random() - 0.5) * 1.5 * velMult,
+                life: 1 * lifeMult,
+                decay: 0.015 + Math.random() * 0.015,
+                size: (Math.random() * 3 + 1.5) * sizeMult,
+                hue: Math.random() > 0.5 ? 263 : 174,
+                lb: lightBoost
+            });
+        }
+    });
+
+    // --- Nearest point on card edge ---
+    function nearestEdgePt(card, mx, my) {
+        const cx = Math.max(card.left, Math.min(mx, card.right));
+        const cy = Math.max(card.top, Math.min(my, card.bottom));
+        if (mx >= card.left && mx <= card.right && my >= card.top && my <= card.bottom) {
+            const d = [
+                { x: card.left, y: my, d: mx - card.left },
+                { x: card.right, y: my, d: card.right - mx },
+                { x: mx, y: card.top, d: my - card.top },
+                { x: mx, y: card.bottom, d: card.bottom - my }
+            ];
+            d.sort((a, b) => a.d - b.d);
+            return { x: d[0].x, y: d[0].y };
+        }
+        return { x: cx, y: cy };
     }
-    function getOpacityMult() {
-        return document.body.classList.contains('light-mode') ? 0.5 : 1.0;
+
+    // --- Generate micro spark ---
+    function mkSpark(mx, my, tx, ty) {
+        const color = pickColor();
+        const segs = 3 + Math.floor(Math.random() * 3);
+        const pts = [{ x: mx, y: my }];
+        for (let i = 0; i < segs; i++) {
+            const p = (i + 1) / segs;
+            pts.push({
+                x: mx + (tx - mx) * p + (Math.random() - 0.5) * 16,
+                y: my + (ty - my) * p + (Math.random() - 0.5) * 16
+            });
+        }
+        pts[pts.length - 1] = {
+            x: tx + (Math.random() - 0.5) * 4,
+            y: ty + (Math.random() - 0.5) * 4
+        };
+        return {
+            pts, color, birth: performance.now(),
+            life: 150 + Math.random() * 100,
+            card: null, hitDone: false, done: false
+        };
     }
-    function pickColor() {
-        const c = getColors();
-        return c[Math.random() > 0.5 ? 0 : 1];
+
+    // --- Spark spawner ---
+    let sparkCD = 0;
+    function trySpawnSparks() {
+        if (isMobile || Date.now() - lastMouseMove > 500) return;
+        const now = performance.now();
+        if (now < sparkCD) return;
+        sparkCD = now + 80 + Math.random() * 40;
+
+        const near = [];
+        for (const card of cachedCards) {
+            const np = nearestEdgePt(card, mouse.x, mouse.y);
+            const d = hypot(mouse.x, mouse.y, np.x, np.y);
+            if (d < SPARK_RANGE && d > 5) near.push({ card, np, d });
+        }
+        near.sort((a, b) => a.d - b.d);
+        for (const t of near.slice(0, 3)) {
+            const s = mkSpark(mouse.x, mouse.y, t.np.x, t.np.y);
+            s.card = t.card;
+            sparks.push(s);
+        }
     }
-    function rgba(c, a) {
-        return `rgba(${c.r},${c.g},${c.b},${a})`;
+
+    // --- Cursor canvas animation (always runs) ---
+    function cursorLoop() {
+        cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
+        const om = opMult();
+
+        // Particles
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
+            p.x += p.vx; p.y += p.vy; p.life -= p.decay;
+            if (p.life <= 0) { particles.splice(i, 1); continue; }
+            const a = p.life * 0.7;
+            const sat = p.hue === 263 ? '73%' : '70%';
+            const l = (p.hue === 263 ? 58 : 55) + (p.lb || 0);
+            cCtx.shadowBlur = 6;
+            cCtx.shadowColor = `hsla(${p.hue},${sat},${l}%,${a * 0.5})`;
+            cCtx.fillStyle = `hsla(${p.hue},${sat},${l}%,${a})`;
+            cCtx.beginPath();
+            cCtx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+            cCtx.fill();
+        }
+        cCtx.shadowBlur = 0;
+        if (particles.length > 200) particles.splice(0, particles.length - 200);
+
+        // Spawn sparks
+        trySpawnSparks();
+
+        // Sparks
+        const now = performance.now();
+        for (let i = sparks.length - 1; i >= 0; i--) {
+            const s = sparks[i];
+            const el = now - s.birth;
+            if (el > s.life) { sparks.splice(i, 1); continue; }
+            let a = el < s.life - 200 ? 1 : (s.life - el) / 200;
+            a *= om;
+            const c = s.color;
+            cCtx.save();
+            cCtx.lineCap = 'round'; cCtx.lineJoin = 'round';
+            cCtx.shadowColor = rgba(c, 0.5 * a);
+            cCtx.shadowBlur = 10;
+            cCtx.strokeStyle = rgba(c, 0.8 * a);
+            cCtx.lineWidth = 1 + Math.random() * 0.5;
+            cCtx.beginPath();
+            cCtx.moveTo(s.pts[0].x, s.pts[0].y);
+            for (let j = 1; j < s.pts.length; j++) cCtx.lineTo(s.pts[j].x, s.pts[j].y);
+            cCtx.stroke();
+            cCtx.restore();
+            if (!s.hitDone && el > s.life * 0.6 && s.card) {
+                s.hitDone = true;
+                s.card.el.classList.add('spark-hit');
+                setTimeout(() => s.card.el.classList.remove('spark-hit'), 100);
+            }
+        }
+
+        // Impact flashes (lightning rod hits)
+        for (let i = impactFlashes.length - 1; i >= 0; i--) {
+            const f = impactFlashes[i];
+            const el = now - f.birth;
+            if (el > 150) { impactFlashes.splice(i, 1); continue; }
+            const a = (1 - el / 150) * om;
+            const g = cCtx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r);
+            g.addColorStop(0, rgba(f.color, 0.7 * a));
+            g.addColorStop(0.4, rgba(f.color, 0.25 * a));
+            g.addColorStop(1, rgba(f.color, 0));
+            cCtx.fillStyle = g;
+            cCtx.beginPath();
+            cCtx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+            cCtx.fill();
+        }
+
+        requestAnimationFrame(cursorLoop);
     }
+    cursorLoop();
+
+    // ========== LIGHTNING SYSTEM (lCanvas) ==========
 
     // --- Bolt geometry ---
     function generateBolt(side, direction) {
-        // side: 'left' or 'right'
-        // direction: 1 = top-to-bottom, -1 = bottom-to-top
-        const W = lCanvas.width;
-        const H = lCanvas.height;
+        const W = lCanvas.width, H = lCanvas.height;
         const color = pickColor();
-        const segLen = 15 + Math.random() * 15; // 15-30px
-        const totalSegs = 8 + Math.floor(Math.random() * 10); // 8-17 segments
-
-        // Start x: within edge zone
+        const segLen = 15 + Math.random() * 15;
+        const totalSegs = 8 + Math.floor(Math.random() * 10);
         let sx = side === 'left' ? Math.random() * EDGE_ZONE : W - Math.random() * EDGE_ZONE;
-        // Start y: random
-        let sy = direction === 1 ?
-            Math.random() * H * 0.3 :
-            H - Math.random() * H * 0.3;
+        let sy = direction === 1 ? Math.random() * H * 0.3 : H - Math.random() * H * 0.3;
 
-        // Decide if attracted to a card
+        // Card attraction
         let attractTarget = null;
         if (!isMobile && cachedCards.length > 0 && Math.random() < 0.55) {
-            // Find cards on the same side
-            const candidates = cachedCards.filter(c =>
+            const cands = cachedCards.filter(c =>
                 side === 'left' ? c.left < W * 0.4 : c.right > W * 0.6
             );
-            if (candidates.length > 0) {
-                attractTarget = candidates[Math.floor(Math.random() * candidates.length)];
+            if (cands.length) attractTarget = cands[Math.floor(Math.random() * cands.length)];
+        }
+
+        // Lightning rod: is mouse near this edge?
+        let rodTarget = null;
+        if (!isMobile) {
+            const mNearL = side === 'left' && mouse.x < ROD_ZONE;
+            const mNearR = side === 'right' && mouse.x > W - ROD_ZONE;
+            if (mNearL || mNearR) {
+                const eDist = mNearL ? mouse.x : W - mouse.x;
+                const prob = 0.3 + 0.6 * (1 - eDist / ROD_ZONE);
+                if (Math.random() < prob) rodTarget = { x: mouse.x, y: mouse.y };
             }
         }
 
-        // Build segments
+        // Build main path
         const points = [{ x: sx, y: sy }];
         let cx = sx, cy = sy;
         for (let i = 0; i < totalSegs; i++) {
-            let dx = (Math.random() - 0.5) * 40; // ±20px horizontal offset
+            let dx = (Math.random() - 0.5) * 40;
             let dy = direction * segLen;
-
-            // Bias toward card if attracted (increasing bias)
             if (attractTarget && i > totalSegs * 0.3) {
-                const targetX = side === 'left' ? attractTarget.left - 10 : attractTarget.right + 10;
-                const targetY = (attractTarget.top + attractTarget.bottom) / 2;
-                const progress = (i - totalSegs * 0.3) / (totalSegs * 0.7);
-                const bias = progress * 0.6;
-                dx += (targetX - cx) * bias * 0.15;
-                dy += (targetY - cy) * bias * 0.1;
+                const tx = side === 'left' ? attractTarget.left - 10 : attractTarget.right + 10;
+                const ty = (attractTarget.top + attractTarget.bottom) / 2;
+                const prog = (i - totalSegs * 0.3) / (totalSegs * 0.7);
+                dx += (tx - cx) * prog * 0.6 * 0.15;
+                dy += (ty - cy) * prog * 0.6 * 0.1;
             }
-
-            cx += dx;
-            cy += dy;
-
-            // Clamp x loosely
+            cx += dx; cy += dy;
             if (side === 'left') cx = Math.max(-5, Math.min(cx, W * 0.25));
             else cx = Math.max(W * 0.75, Math.min(cx, W + 5));
-
             points.push({ x: cx, y: cy });
         }
 
-        // Generate branches
+        // Normal branches
         const branches = [];
         for (let i = 2; i < points.length - 1; i++) {
             if (Math.random() < 0.3) {
                 const bp = points[i];
-                const branchPts = [{ x: bp.x, y: bp.y }];
+                const bPts = [{ x: bp.x, y: bp.y }];
                 let bx = bp.x, by = bp.y;
-                const branchSegs = 3 + Math.floor(Math.random() * 3);
-                for (let j = 0; j < branchSegs; j++) {
+                const n = 3 + Math.floor(Math.random() * 3);
+                for (let j = 0; j < n; j++) {
                     bx += (Math.random() - 0.5) * 25;
                     by += direction * (8 + Math.random() * 12);
-                    branchPts.push({ x: bx, y: by });
+                    bPts.push({ x: bx, y: by });
                 }
-                branches.push(branchPts);
+                branches.push(bPts);
             }
         }
 
-        return { points, branches, color, attractTarget, side,
-                 birth: performance.now(),
-                 fadeInDur: 100 + Math.random() * 100,
-                 fadeOutDur: 300 + Math.random() * 200,
-                 opacity: 0, phase: 'in', done: false };
+        // Lightning rod branch toward cursor
+        if (rodTarget) {
+            const startIdx = Math.min(
+                Math.floor(totalSegs * 0.4 + Math.random() * totalSegs * 0.4),
+                points.length - 1
+            );
+            const sp = points[startIdx];
+            const rPts = [{ x: sp.x, y: sp.y }];
+            let rx = sp.x, ry = sp.y;
+            const rDist = hypot(rx, ry, rodTarget.x, rodTarget.y);
+            const rSegs = Math.max(3, Math.floor(rDist / 20));
+            const eDist = side === 'left' ? mouse.x : W - mouse.x;
+            const bias = 0.3 + 0.7 * (1 - eDist / ROD_ZONE);
+            for (let j = 0; j < rSegs; j++) {
+                const p = (j + 1) / rSegs;
+                const tx = sp.x + (rodTarget.x - sp.x) * p;
+                const ty = sp.y + (rodTarget.y - sp.y) * p;
+                rx = tx + (Math.random() - 0.5) * 30 * (1 - bias * p);
+                ry = ty + (Math.random() - 0.5) * 20 * (1 - bias * p);
+                rPts.push({ x: rx, y: ry });
+            }
+            branches.push(rPts);
+        }
+
+        return {
+            points, branches, color, attractTarget, rodTarget, side,
+            birth: performance.now(),
+            fadeInDur: 100 + Math.random() * 100,
+            fadeOutDur: 300 + Math.random() * 200,
+            opacity: 0, phase: 'in', done: false, rodHitDone: false
+        };
     }
 
     // --- Draw bolt ---
     function drawBolt(bolt, t) {
         const elapsed = t - bolt.birth;
-        const opMult = getOpacityMult();
+        const om = opMult();
 
         if (bolt.phase === 'in') {
             bolt.opacity = Math.min(1, elapsed / bolt.fadeInDur);
             if (elapsed >= bolt.fadeInDur) {
                 bolt.phase = 'out';
                 bolt.fadeStart = t;
-                // Hit card
                 if (bolt.attractTarget) {
-                    const el = bolt.attractTarget.el;
-                    el.classList.add('lightning-hit');
-                    setTimeout(() => el.classList.remove('lightning-hit'), 120);
+                    bolt.attractTarget.el.classList.add('lightning-hit');
+                    setTimeout(() => bolt.attractTarget.el.classList.remove('lightning-hit'), 120);
+                }
+                if (bolt.rodTarget && !bolt.rodHitDone) {
+                    bolt.rodHitDone = true;
+                    impactFlashes.push({
+                        x: bolt.rodTarget.x, y: bolt.rodTarget.y,
+                        color: bolt.color, r: 8 + Math.random() * 4,
+                        birth: performance.now()
+                    });
+                }
+                // Charge-up: check if any point near mouse
+                for (const pt of bolt.points) {
+                    if (hypot(pt.x, pt.y, mouse.x, mouse.y) < 200) {
+                        chargeUp.active = true;
+                        chargeUp.startTime = Date.now();
+                        break;
+                    }
                 }
             }
         } else if (bolt.phase === 'out') {
-            const fadeElapsed = t - bolt.fadeStart;
-            bolt.opacity = Math.max(0, 1 - fadeElapsed / bolt.fadeOutDur);
+            const fe = t - bolt.fadeStart;
+            bolt.opacity = Math.max(0, 1 - fe / bolt.fadeOutDur);
             if (bolt.opacity <= 0) { bolt.done = true; return; }
         }
 
-        const alpha = bolt.opacity * opMult;
+        const a = bolt.opacity * om;
         const c = bolt.color;
 
-        // Ambient glow (wide, soft)
+        // Ambient glow
         if (bolt.phase === 'in' || bolt.opacity > 0.5) {
-            const midIdx = Math.floor(bolt.points.length / 2);
-            const mid = bolt.points[midIdx];
-            const grad = lCtx.createRadialGradient(mid.x, mid.y, 0, mid.x, mid.y, 120);
-            grad.addColorStop(0, rgba(c, 0.08 * alpha));
-            grad.addColorStop(1, rgba(c, 0));
-            lCtx.fillStyle = grad;
+            const mid = bolt.points[Math.floor(bolt.points.length / 2)];
+            const g = lCtx.createRadialGradient(mid.x, mid.y, 0, mid.x, mid.y, 120);
+            g.addColorStop(0, rgba(c, 0.08 * a));
+            g.addColorStop(1, rgba(c, 0));
+            lCtx.fillStyle = g;
             lCtx.fillRect(mid.x - 120, mid.y - 120, 240, 240);
         }
 
-        // Draw main bolt
         lCtx.save();
-        lCtx.lineCap = 'round';
-        lCtx.lineJoin = 'round';
-        lCtx.shadowColor = rgba(c, 0.7 * alpha);
+        lCtx.lineCap = 'round'; lCtx.lineJoin = 'round';
+
+        // Main bolt
+        lCtx.shadowColor = rgba(c, 0.7 * a);
         lCtx.shadowBlur = 18;
-        lCtx.strokeStyle = rgba(c, 0.9 * alpha);
+        lCtx.strokeStyle = rgba(c, 0.9 * a);
         lCtx.lineWidth = 2.5;
         lCtx.beginPath();
         lCtx.moveTo(bolt.points[0].x, bolt.points[0].y);
-        for (let i = 1; i < bolt.points.length; i++) {
-            lCtx.lineTo(bolt.points[i].x, bolt.points[i].y);
-        }
+        for (let i = 1; i < bolt.points.length; i++) lCtx.lineTo(bolt.points[i].x, bolt.points[i].y);
         lCtx.stroke();
 
-        // Bright core
+        // White core
         lCtx.shadowBlur = 8;
-        lCtx.strokeStyle = rgba({ r:255, g:255, b:255 }, 0.5 * alpha);
+        lCtx.strokeStyle = `rgba(255,255,255,${0.5 * a})`;
         lCtx.lineWidth = 1;
         lCtx.beginPath();
         lCtx.moveTo(bolt.points[0].x, bolt.points[0].y);
-        for (let i = 1; i < bolt.points.length; i++) {
-            lCtx.lineTo(bolt.points[i].x, bolt.points[i].y);
-        }
+        for (let i = 1; i < bolt.points.length; i++) lCtx.lineTo(bolt.points[i].x, bolt.points[i].y);
         lCtx.stroke();
 
-        // Draw branches
+        // Branches
         lCtx.shadowBlur = 10;
-        lCtx.shadowColor = rgba(c, 0.5 * alpha);
-        lCtx.strokeStyle = rgba(c, 0.6 * alpha);
+        lCtx.shadowColor = rgba(c, 0.5 * a);
+        lCtx.strokeStyle = rgba(c, 0.6 * a);
         lCtx.lineWidth = 1.2;
         bolt.branches.forEach(br => {
             lCtx.beginPath();
@@ -734,64 +887,51 @@ navScrollFn();
         lCtx.restore();
     }
 
-    // --- Animation loop ---
-    function animLoop(t) {
+    // --- Lightning animation loop (idle-optimized) ---
+    function lightningLoop(t) {
         lCtx.clearRect(0, 0, lCanvas.width, lCanvas.height);
         for (let i = bolts.length - 1; i >= 0; i--) {
             drawBolt(bolts[i], t);
             if (bolts[i].done) bolts.splice(i, 1);
         }
         if (bolts.length > 0) {
-            rafId = requestAnimationFrame(animLoop);
+            lRafId = requestAnimationFrame(lightningLoop);
         } else {
-            isRunning = false;
-            rafId = null;
+            lRunning = false; lRafId = null;
         }
     }
 
-    function ensureRunning() {
-        if (!isRunning) {
-            isRunning = true;
-            rafId = requestAnimationFrame(animLoop);
-        }
+    function ensureLRun() {
+        if (!lRunning) { lRunning = true; lRafId = requestAnimationFrame(lightningLoop); }
     }
 
-    // --- Spawn bolt ---
     function spawnBolt(side, dirHint) {
-        const dir = dirHint || (Math.random() > 0.5 ? 1 : -1);
-        bolts.push(generateBolt(side || (Math.random() > 0.5 ? 'left' : 'right'), dir));
-        ensureRunning();
+        bolts.push(generateBolt(
+            side || (Math.random() > 0.5 ? 'left' : 'right'),
+            dirHint || (Math.random() > 0.5 ? 1 : -1)
+        ));
+        ensureLRun();
     }
 
-    // --- Passive ambient loop ---
+    // --- Ambient loop ---
     function ambientLoop() {
-        const delay = isMobile ?
-            4000 + Math.random() * 6000 :
-            2000 + Math.random() * 3000;
-        setTimeout(() => {
-            spawnBolt(Math.random() > 0.5 ? 'left' : 'right');
-            ambientLoop();
-        }, delay);
+        const delay = isMobile ? 4000 + Math.random() * 6000 : 2000 + Math.random() * 3000;
+        setTimeout(() => { spawnBolt(); ambientLoop(); }, delay);
     }
     setTimeout(() => { spawnBolt('left'); spawnBolt('right'); }, 1000);
     ambientLoop();
 
     // --- Scroll-triggered bolts ---
     if (!isMobile) {
-        let scrollBoltCooldown = 0;
+        let scrollCD = 0;
         setInterval(() => {
             if (scrollSpeed < 2) return;
             const now = Date.now();
-            if (now < scrollBoltCooldown) return;
-            // Higher speed = shorter cooldown
-            const cd = Math.max(200, 1200 - scrollSpeed * 40);
-            scrollBoltCooldown = now + cd;
-            const side = Math.random() > 0.5 ? 'left' : 'right';
-            spawnBolt(side, scrollDir);
-            // Very fast scroll: double bolt
-            if (scrollSpeed > 15) {
-                spawnBolt(side === 'left' ? 'right' : 'left', scrollDir);
-            }
+            if (now < scrollCD) return;
+            scrollCD = now + Math.max(200, 1200 - scrollSpeed * 40);
+            const s = Math.random() > 0.5 ? 'left' : 'right';
+            spawnBolt(s, scrollDir);
+            if (scrollSpeed > 15) spawnBolt(s === 'left' ? 'right' : 'left', scrollDir);
         }, 100);
     }
 })();
