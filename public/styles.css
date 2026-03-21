@@ -1041,8 +1041,8 @@ body.light-mode .rm-orange .roadmap-date-side {
 }
 .roadmap-logo-link:hover { transform: scale(1.1); }
 .roadmap-logo {
-    width: 54px; height: 54px;
-    border-radius: 14px;
+    width: 72px; height: 72px;
+    border-radius: 16px;
     object-fit: contain;
     background: rgba(255,255,255,0.06);
     border: 1px solid var(--glass-border);
@@ -1180,7 +1180,7 @@ body.light-mode .roadmap-item:hover .roadmap-card {
     }
     .roadmap-card { grid-column: 2; }
     .roadmap-logo-link { top: 10px; right: 10px; }
-    .roadmap-logo { width: 42px; height: 42px; }
+    .roadmap-logo { width: 54px; height: 54px; }
     .roadmap-header { padding-right: 46px; }
 }
 
