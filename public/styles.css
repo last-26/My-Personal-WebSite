@@ -21,8 +21,6 @@
     --accent-4: #fb923c;
     --accent-5: #38bdf8;
     --accent-6: #a78bfa;
-    --glow: rgba(124,58,237,0.15);
-    --glow-2: rgba(45,212,191,0.12);
     --radius: 20px;
     --font: 'Space Grotesk', system-ui, sans-serif;
     --mono: 'JetBrains Mono', monospace;
@@ -41,8 +39,6 @@ body.light-mode {
     --text-3: #57534e;
     --accent: #6d28d9;
     --accent-2: #0d7d72;
-    --glow: rgba(109,40,217,0.15);
-    --glow-2: rgba(13,148,136,0.12);
     --card-bg: #ffffff;
 }
 body.light-mode .card, body.light-mode .project-card, body.light-mode .contact-item, body.light-mode .education-card, body.light-mode .timeline-item, body.light-mode .bento-card {
@@ -115,12 +111,6 @@ img{max-width:100%;display:block}
     background-repeat:repeat;
 }
 
-/* ── Cursor Trail Canvas ── */
-#cursorCanvas{
-    position:fixed;inset:0;z-index:9998;pointer-events:none;
-    width:100%;height:100%;
-}
-
 /* ── Lightning Canvas ── */
 #lightningCanvas{
     position:fixed;inset:0;z-index:2;pointer-events:none;
@@ -180,16 +170,6 @@ body.light-mode .cyber-edge::before{
 body.light-mode .lightning-hit{
     box-shadow:0 0 14px rgba(109,40,217,0.3),0 0 30px rgba(109,40,217,0.1) !important;
     border-color:rgba(109,40,217,.4) !important;
-}
-/* Spark hit pulse on cards (subtle) */
-.spark-hit{
-    box-shadow:0 0 8px rgba(124,58,237,0.2) !important;
-    border-color:rgba(124,58,237,.25) !important;
-    transition:box-shadow .1s ease,border-color .1s ease !important;
-}
-body.light-mode .spark-hit{
-    box-shadow:0 0 6px rgba(109,40,217,0.12) !important;
-    border-color:rgba(109,40,217,.2) !important;
 }
 @media(max-width:768px){
     .cyber-edge{width:30px}

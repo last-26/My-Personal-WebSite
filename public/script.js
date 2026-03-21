@@ -468,17 +468,15 @@ navScrollFn();
 })();
 
 // ============================================
-// Unified Cursor Particle + Lightning System
+// Lightning System
 // ============================================
 (function() {
-    const cCanvas = document.getElementById('cursorCanvas');
     const lCanvas = document.getElementById('lightningCanvas');
-    if (!cCanvas || !lCanvas) return;
-    const cCtx = cCanvas.getContext('2d');
+    if (!lCanvas) return;
     const lCtx = lCanvas.getContext('2d');
     const isMobile = window.innerWidth < 768;
 
-    // --- Shared Config ---
+    // --- Config ---
     const COLORS_DARK = [
         { r:124, g:58, b:237 },
         { r:45, g:212, b:191 }
@@ -488,24 +486,14 @@ navScrollFn();
         { r:13, g:125, b:114 }
     ];
     const EDGE_ZONE = 60;
-    const ROD_ZONE = 150;
-    const SPARK_RANGE = 60;
 
-    // --- Shared State ---
-    let mouse = { x: -1000, y: -1000 };
-    let lastMouseMove = 0;
-    let particles = [];
-    let sparks = [];
+    // --- State ---
     let bolts = [];
-    let impactFlashes = [];
     let cachedCards = [];
     let scrollSpeed = 0;
     let lastScrollY = window.scrollY;
     let lastScrollTime = Date.now();
     let scrollDir = 1;
-    let chargeUp = { active: false, startTime: 0 };
-    const CHARGE_DUR = 300;
-    const CHARGE_EASE = 100;
     let lRunning = false;
     let lRafId = null;
 
@@ -515,17 +503,16 @@ navScrollFn();
     function opMult() { return isLight() ? 0.5 : 1.0; }
     function pickColor() { const c = getColors(); return c[Math.random() > 0.5 ? 0 : 1]; }
     function rgba(c, a) { return `rgba(${c.r},${c.g},${c.b},${a})`; }
-    function hypot(x1, y1, x2, y2) { return Math.hypot(x2 - x1, y2 - y1); }
 
     // --- Resize ---
     function resize() {
-        cCanvas.width = lCanvas.width = window.innerWidth;
-        cCanvas.height = lCanvas.height = window.innerHeight;
+        lCanvas.width = window.innerWidth;
+        lCanvas.height = window.innerHeight;
     }
     resize();
     window.addEventListener('resize', resize);
 
-    // --- Card cache (shared) ---
+    // --- Card cache ---
     function cacheCards() {
         const els = document.querySelectorAll(
             '.bento-card,.project-card,.roadmap-card,.education-card,.contact-item'
@@ -566,187 +553,6 @@ navScrollFn();
         }, 50);
     }
 
-    // ========== CURSOR PARTICLES + SPARKS (cCanvas) ==========
-
-    // --- Mouse handler: spawn particles ---
-    document.addEventListener('mousemove', (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-        lastMouseMove = Date.now();
-
-        // Lightning rod mode check
-        const nearLeft = mouse.x < ROD_ZONE;
-        const nearRight = mouse.x > window.innerWidth - ROD_ZONE;
-        const isRod = !isMobile && (nearLeft || nearRight);
-
-        // Charge-up check
-        const chActive = chargeUp.active &&
-            (Date.now() - chargeUp.startTime < CHARGE_DUR + CHARGE_EASE);
-        let sizeMult = 1, lifeMult = 1, velMult = 1, spawnN = 2, lightBoost = 0;
-
-        if (isRod) { sizeMult = 1.3; lifeMult = 1.2; }
-
-        if (chActive && !isLight()) {
-            const el = Date.now() - chargeUp.startTime;
-            let t = el > CHARGE_DUR ? 1 - (el - CHARGE_DUR) / CHARGE_EASE : 1;
-            t = Math.max(0, t);
-            spawnN = Math.round(2 + 3 * t);
-            velMult = 1 + t;
-            lightBoost = 22 * t;
-            sizeMult = Math.max(sizeMult, 1 + 0.3 * t);
-        }
-
-        for (let i = 0; i < spawnN; i++) {
-            particles.push({
-                x: mouse.x, y: mouse.y,
-                vx: (Math.random() - 0.5) * 1.5 * velMult,
-                vy: (Math.random() - 0.5) * 1.5 * velMult,
-                life: 1 * lifeMult,
-                decay: 0.015 + Math.random() * 0.015,
-                size: (Math.random() * 3 + 1.5) * sizeMult,
-                hue: Math.random() > 0.5 ? 263 : 174,
-                lb: lightBoost
-            });
-        }
-    });
-
-    // --- Nearest point on card edge ---
-    function nearestEdgePt(card, mx, my) {
-        const cx = Math.max(card.left, Math.min(mx, card.right));
-        const cy = Math.max(card.top, Math.min(my, card.bottom));
-        if (mx >= card.left && mx <= card.right && my >= card.top && my <= card.bottom) {
-            const d = [
-                { x: card.left, y: my, d: mx - card.left },
-                { x: card.right, y: my, d: card.right - mx },
-                { x: mx, y: card.top, d: my - card.top },
-                { x: mx, y: card.bottom, d: card.bottom - my }
-            ];
-            d.sort((a, b) => a.d - b.d);
-            return { x: d[0].x, y: d[0].y };
-        }
-        return { x: cx, y: cy };
-    }
-
-    // --- Generate micro spark ---
-    function mkSpark(mx, my, tx, ty) {
-        const color = pickColor();
-        const segs = 3 + Math.floor(Math.random() * 3);
-        const pts = [{ x: mx, y: my }];
-        for (let i = 0; i < segs; i++) {
-            const p = (i + 1) / segs;
-            pts.push({
-                x: mx + (tx - mx) * p + (Math.random() - 0.5) * 16,
-                y: my + (ty - my) * p + (Math.random() - 0.5) * 16
-            });
-        }
-        pts[pts.length - 1] = {
-            x: tx + (Math.random() - 0.5) * 4,
-            y: ty + (Math.random() - 0.5) * 4
-        };
-        return {
-            pts, color, birth: performance.now(),
-            life: 150 + Math.random() * 100,
-            card: null, hitDone: false, done: false
-        };
-    }
-
-    // --- Spark spawner ---
-    let sparkCD = 0;
-    function trySpawnSparks() {
-        if (isMobile || Date.now() - lastMouseMove > 500) return;
-        const now = performance.now();
-        if (now < sparkCD) return;
-        sparkCD = now + 80 + Math.random() * 40;
-
-        const near = [];
-        for (const card of cachedCards) {
-            const np = nearestEdgePt(card, mouse.x, mouse.y);
-            const d = hypot(mouse.x, mouse.y, np.x, np.y);
-            if (d < SPARK_RANGE && d > 5) near.push({ card, np, d });
-        }
-        near.sort((a, b) => a.d - b.d);
-        for (const t of near.slice(0, 3)) {
-            const s = mkSpark(mouse.x, mouse.y, t.np.x, t.np.y);
-            s.card = t.card;
-            sparks.push(s);
-        }
-    }
-
-    // --- Cursor canvas animation (always runs) ---
-    function cursorLoop() {
-        cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
-        const om = opMult();
-
-        // Particles
-        for (let i = particles.length - 1; i >= 0; i--) {
-            const p = particles[i];
-            p.x += p.vx; p.y += p.vy; p.life -= p.decay;
-            if (p.life <= 0) { particles.splice(i, 1); continue; }
-            const a = p.life * 0.7;
-            const sat = p.hue === 263 ? '73%' : '70%';
-            const l = (p.hue === 263 ? 58 : 55) + (p.lb || 0);
-            cCtx.shadowBlur = 6;
-            cCtx.shadowColor = `hsla(${p.hue},${sat},${l}%,${a * 0.5})`;
-            cCtx.fillStyle = `hsla(${p.hue},${sat},${l}%,${a})`;
-            cCtx.beginPath();
-            cCtx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
-            cCtx.fill();
-        }
-        cCtx.shadowBlur = 0;
-        if (particles.length > 200) particles.splice(0, particles.length - 200);
-
-        // Spawn sparks
-        trySpawnSparks();
-
-        // Sparks
-        const now = performance.now();
-        for (let i = sparks.length - 1; i >= 0; i--) {
-            const s = sparks[i];
-            const el = now - s.birth;
-            if (el > s.life) { sparks.splice(i, 1); continue; }
-            let a = el < s.life - 200 ? 1 : (s.life - el) / 200;
-            a *= om;
-            const c = s.color;
-            cCtx.save();
-            cCtx.lineCap = 'round'; cCtx.lineJoin = 'round';
-            cCtx.shadowColor = rgba(c, 0.5 * a);
-            cCtx.shadowBlur = 10;
-            cCtx.strokeStyle = rgba(c, 0.8 * a);
-            cCtx.lineWidth = 1 + Math.random() * 0.5;
-            cCtx.beginPath();
-            cCtx.moveTo(s.pts[0].x, s.pts[0].y);
-            for (let j = 1; j < s.pts.length; j++) cCtx.lineTo(s.pts[j].x, s.pts[j].y);
-            cCtx.stroke();
-            cCtx.restore();
-            if (!s.hitDone && el > s.life * 0.6 && s.card) {
-                s.hitDone = true;
-                s.card.el.classList.add('spark-hit');
-                setTimeout(() => s.card.el.classList.remove('spark-hit'), 100);
-            }
-        }
-
-        // Impact flashes (lightning rod hits)
-        for (let i = impactFlashes.length - 1; i >= 0; i--) {
-            const f = impactFlashes[i];
-            const el = now - f.birth;
-            if (el > 150) { impactFlashes.splice(i, 1); continue; }
-            const a = (1 - el / 150) * om;
-            const g = cCtx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r);
-            g.addColorStop(0, rgba(f.color, 0.7 * a));
-            g.addColorStop(0.4, rgba(f.color, 0.25 * a));
-            g.addColorStop(1, rgba(f.color, 0));
-            cCtx.fillStyle = g;
-            cCtx.beginPath();
-            cCtx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-            cCtx.fill();
-        }
-
-        requestAnimationFrame(cursorLoop);
-    }
-    cursorLoop();
-
-    // ========== LIGHTNING SYSTEM (lCanvas) ==========
-
     // --- Bolt geometry ---
     function generateBolt(side, direction) {
         const W = lCanvas.width, H = lCanvas.height;
@@ -763,18 +569,6 @@ navScrollFn();
                 side === 'left' ? c.left < W * 0.4 : c.right > W * 0.6
             );
             if (cands.length) attractTarget = cands[Math.floor(Math.random() * cands.length)];
-        }
-
-        // Lightning rod: is mouse near this edge?
-        let rodTarget = null;
-        if (!isMobile) {
-            const mNearL = side === 'left' && mouse.x < ROD_ZONE;
-            const mNearR = side === 'right' && mouse.x > W - ROD_ZONE;
-            if (mNearL || mNearR) {
-                const eDist = mNearL ? mouse.x : W - mouse.x;
-                const prob = 0.3 + 0.6 * (1 - eDist / ROD_ZONE);
-                if (Math.random() < prob) rodTarget = { x: mouse.x, y: mouse.y };
-            }
         }
 
         // Build main path
@@ -813,36 +607,12 @@ navScrollFn();
             }
         }
 
-        // Lightning rod branch toward cursor
-        if (rodTarget) {
-            const startIdx = Math.min(
-                Math.floor(totalSegs * 0.4 + Math.random() * totalSegs * 0.4),
-                points.length - 1
-            );
-            const sp = points[startIdx];
-            const rPts = [{ x: sp.x, y: sp.y }];
-            let rx = sp.x, ry = sp.y;
-            const rDist = hypot(rx, ry, rodTarget.x, rodTarget.y);
-            const rSegs = Math.max(3, Math.floor(rDist / 20));
-            const eDist = side === 'left' ? mouse.x : W - mouse.x;
-            const bias = 0.3 + 0.7 * (1 - eDist / ROD_ZONE);
-            for (let j = 0; j < rSegs; j++) {
-                const p = (j + 1) / rSegs;
-                const tx = sp.x + (rodTarget.x - sp.x) * p;
-                const ty = sp.y + (rodTarget.y - sp.y) * p;
-                rx = tx + (Math.random() - 0.5) * 30 * (1 - bias * p);
-                ry = ty + (Math.random() - 0.5) * 20 * (1 - bias * p);
-                rPts.push({ x: rx, y: ry });
-            }
-            branches.push(rPts);
-        }
-
         return {
-            points, branches, color, attractTarget, rodTarget, side,
+            points, branches, color, attractTarget,
             birth: performance.now(),
             fadeInDur: 100 + Math.random() * 100,
             fadeOutDur: 300 + Math.random() * 200,
-            opacity: 0, phase: 'in', done: false, rodHitDone: false
+            opacity: 0, phase: 'in', done: false
         };
     }
 
@@ -859,22 +629,6 @@ navScrollFn();
                 if (bolt.attractTarget) {
                     bolt.attractTarget.el.classList.add('lightning-hit');
                     setTimeout(() => bolt.attractTarget.el.classList.remove('lightning-hit'), 120);
-                }
-                if (bolt.rodTarget && !bolt.rodHitDone) {
-                    bolt.rodHitDone = true;
-                    impactFlashes.push({
-                        x: bolt.rodTarget.x, y: bolt.rodTarget.y,
-                        color: bolt.color, r: 8 + Math.random() * 4,
-                        birth: performance.now()
-                    });
-                }
-                // Charge-up: check if any point near mouse
-                for (const pt of bolt.points) {
-                    if (hypot(pt.x, pt.y, mouse.x, mouse.y) < 200) {
-                        chargeUp.active = true;
-                        chargeUp.startTime = Date.now();
-                        break;
-                    }
                 }
             }
         } else if (bolt.phase === 'out') {
