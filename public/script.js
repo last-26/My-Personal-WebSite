@@ -421,14 +421,105 @@ window.addEventListener('scroll', () => {
 scrollRevealFn();
 navScrollFn();
 
-// Cursor glow effect
-const cursorGlow = document.getElementById('cursorGlow');
-if (cursorGlow) {
+// Cursor particle trail effect
+(function() {
+    const canvas = document.getElementById('cursorCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let mouse = { x: -100, y: -100 };
+    let animFrame;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
     document.addEventListener('mousemove', (e) => {
-        cursorGlow.style.left = e.clientX + 'px';
-        cursorGlow.style.top = e.clientY + 'px';
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        for (let i = 0; i < 2; i++) {
+            particles.push({
+                x: mouse.x,
+                y: mouse.y,
+                vx: (Math.random() - 0.5) * 1.5,
+                vy: (Math.random() - 0.5) * 1.5,
+                life: 1,
+                decay: 0.015 + Math.random() * 0.015,
+                size: Math.random() * 2.5 + 1,
+                hue: Math.random() > 0.5 ? 263 : 174
+            });
+        }
     });
-}
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.life -= p.decay;
+            if (p.life <= 0) {
+                particles.splice(i, 1);
+                continue;
+            }
+            const alpha = p.life * 0.7;
+            const sat = p.hue === 263 ? '73%' : '70%';
+            const light = p.hue === 263 ? '58%' : '55%';
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+            ctx.fillStyle = `hsla(${p.hue},${sat},${light},${alpha})`;
+            ctx.fill();
+            ctx.shadowBlur = 6;
+            ctx.shadowColor = `hsla(${p.hue},${sat},${light},${alpha * 0.5})`;
+        }
+        ctx.shadowBlur = 0;
+        if (particles.length > 150) particles.splice(0, particles.length - 150);
+        animFrame = requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Edge lightning effect
+    const edges = document.querySelectorAll('.cyber-edge');
+    function lightning() {
+        edges.forEach(edge => {
+            const flash = document.createElement('div');
+            flash.style.cssText = `
+                position:absolute;
+                ${edge.classList.contains('cyber-edge-left') ? 'right:0' : 'left:0'};
+                top:${10 + Math.random() * 80}%;
+                width:2px;height:${30 + Math.random() * 120}px;
+                background:linear-gradient(180deg,transparent,rgba(124,58,237,.8),rgba(45,212,191,.6),transparent);
+                border-radius:2px;
+                box-shadow:0 0 8px rgba(124,58,237,.6),0 0 20px rgba(124,58,237,.3);
+                opacity:0;
+                animation:lightningFlash ${0.1 + Math.random() * 0.2}s ease-out forwards;
+            `;
+            edge.appendChild(flash);
+            setTimeout(() => flash.remove(), 500);
+        });
+        setTimeout(lightning, 3000 + Math.random() * 6000);
+    }
+    setTimeout(lightning, 2000);
+
+    // Add lightning flash keyframes
+    if (!document.getElementById('lightningStyle')) {
+        const style = document.createElement('style');
+        style.id = 'lightningStyle';
+        style.textContent = `
+            @keyframes lightningFlash {
+                0% { opacity:0; transform:scaleY(0.3); }
+                20% { opacity:1; transform:scaleY(1); }
+                40% { opacity:0.3; }
+                60% { opacity:0.9; }
+                100% { opacity:0; transform:scaleY(0.5); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+})();
 
 // Initialize language on page load
 const savedLang = localStorage.getItem('preferredLang') || 'en';
