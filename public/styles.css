@@ -1243,6 +1243,7 @@ body.light-mode .roadmap-item:hover .roadmap-card {
     transition:transform .4s ease-in-out,box-shadow .4s ease-in-out,border-color .4s ease-in-out;
     position:relative;
     backdrop-filter:blur(10px);
+    display:flex;flex-direction:column;
 }
 /* Theme radial gradient overlay */
 .project-card::before{
@@ -1360,7 +1361,7 @@ body.light-mode .roadmap-item:hover .roadmap-card {
 .card-top p{color:var(--accent-6);font-size:.8rem;font-weight:400}
 
 /* --- Card content --- */
-.card-content{padding:1.2rem 1.8rem 0;position:relative;z-index:2}
+.card-content{padding:1.2rem 1.8rem 0;position:relative;z-index:2;flex:1;display:flex;flex-direction:column}
 /* Description with line-clamp */
 .card-desc{
     color:var(--text-2);line-height:1.7;font-size:.86rem;margin-bottom:.6rem;
@@ -1415,7 +1416,7 @@ body.light-mode .roadmap-item:hover .roadmap-card {
 .card-link{
     display:flex;align-items:center;gap:8px;
     color:var(--accent);font-weight:600;font-size:.84rem;
-    padding:1rem 1.8rem;margin:0 -1.8rem;
+    padding:1rem 1.8rem;margin:0 -1.8rem;margin-top:auto;
     border-top:1px solid rgba(124,58,237,.08);
     background:linear-gradient(90deg,rgba(124,58,237,.04),transparent);
     transition:all .2s;
