@@ -481,60 +481,318 @@ navScrollFn();
     }
     animate();
 
-    // Edge lightning effect
-    const edges = document.querySelectorAll('.cyber-edge');
-    function lightning() {
-        edges.forEach(edge => {
-            const isLeft = edge.classList.contains('cyber-edge-left');
-            const boltHeight = 80 + Math.random() * 250;
-            const boltWidth = 40 + Math.random() * 80;
-            const flash = document.createElement('div');
-            flash.style.cssText = `
-                position:absolute;
-                ${isLeft ? 'right:-10px' : 'left:-10px'};
-                top:${5 + Math.random() * 75}%;
-                width:${boltWidth}px;height:${boltHeight}px;
-                background:radial-gradient(ellipse at ${isLeft ? 'left' : 'right'} center,
-                    rgba(124,58,237,.6) 0%,
-                    rgba(124,58,237,.3) 20%,
-                    rgba(45,212,191,.15) 50%,
-                    transparent 80%);
-                opacity:0;
-                animation:lightningFlash ${0.15 + Math.random() * 0.2}s ease-out forwards;
-                pointer-events:none;
-            `;
-            const bolt = document.createElement('div');
-            bolt.style.cssText = `
-                position:absolute;
-                ${isLeft ? 'right:0' : 'left:0'};
-                top:0;bottom:0;width:3px;
-                background:linear-gradient(180deg,transparent,rgba(124,58,237,.9),rgba(45,212,191,.7),rgba(124,58,237,.9),transparent);
-                box-shadow:0 0 12px rgba(124,58,237,.8),0 0 30px rgba(124,58,237,.4);
-                border-radius:2px;
-            `;
-            flash.appendChild(bolt);
-            edge.appendChild(flash);
-            setTimeout(() => flash.remove(), 600);
-        });
-        setTimeout(lightning, 2500 + Math.random() * 5000);
-    }
-    setTimeout(lightning, 1500);
+})();
 
-    // Add lightning flash keyframes
-    if (!document.getElementById('lightningStyle')) {
-        const style = document.createElement('style');
-        style.id = 'lightningStyle';
-        style.textContent = `
-            @keyframes lightningFlash {
-                0% { opacity:0; transform:scaleY(0.3); }
-                15% { opacity:1; transform:scaleY(1); }
-                30% { opacity:0.2; }
-                45% { opacity:0.95; }
-                70% { opacity:0.5; }
-                100% { opacity:0; transform:scaleY(0.6); }
+// ============================================
+// Canvas-based Lightning System
+// ============================================
+(function() {
+    const lCanvas = document.getElementById('lightningCanvas');
+    if (!lCanvas) return;
+    const lCtx = lCanvas.getContext('2d');
+    const isMobile = window.innerWidth < 768;
+
+    // --- Config ---
+    const COLORS_DARK = [
+        { r:124, g:58, b:237 },  // --accent  #7c3aed
+        { r:45, g:212, b:191 }   // --accent-2 #2dd4bf
+    ];
+    const COLORS_LIGHT = [
+        { r:109, g:40, b:217 },  // #6d28d9
+        { r:13, g:125, b:114 }   // #0d7d72
+    ];
+    const EDGE_ZONE = 60; // px from each edge where bolts originate
+
+    // --- State ---
+    let bolts = [];         // active bolt animations
+    let rafId = null;
+    let isRunning = false;
+    let cachedCards = [];   // {el, left, top, right, bottom}
+    let scrollSpeed = 0;
+    let lastScrollY = window.scrollY;
+    let lastScrollTime = Date.now();
+    let scrollDir = 1;     // 1 = down, -1 = up
+
+    function lResize() {
+        lCanvas.width = window.innerWidth;
+        lCanvas.height = window.innerHeight;
+    }
+    lResize();
+    window.addEventListener('resize', () => { lResize(); cacheCards(); });
+
+    // --- Card position cache ---
+    function cacheCards() {
+        const selectors = '.bento-card,.project-card,.roadmap-card,.education-card,.contact-item';
+        const els = document.querySelectorAll(selectors);
+        cachedCards = [];
+        els.forEach(el => {
+            const r = el.getBoundingClientRect();
+            if (r.bottom > 0 && r.top < window.innerHeight) {
+                cachedCards.push({ el, left: r.left, top: r.top, right: r.right, bottom: r.bottom });
             }
-        `;
-        document.head.appendChild(style);
+        });
+    }
+    cacheCards();
+    let cacheThrottle = null;
+    function throttledCache() {
+        if (cacheThrottle) return;
+        cacheThrottle = setTimeout(() => { cacheCards(); cacheThrottle = null; }, 200);
+    }
+    window.addEventListener('scroll', throttledCache, { passive: true });
+    window.addEventListener('resize', throttledCache);
+
+    // --- Scroll tracking ---
+    if (!isMobile) {
+        window.addEventListener('scroll', () => {
+            const now = Date.now();
+            const dy = Math.abs(window.scrollY - lastScrollY);
+            const dt = Math.max(now - lastScrollTime, 1);
+            scrollDir = window.scrollY > lastScrollY ? 1 : -1;
+            scrollSpeed = Math.min(dy / dt * 16, 30); // normalize to ~px/frame, cap at 30
+            lastScrollY = window.scrollY;
+            lastScrollTime = now;
+        }, { passive: true });
+        // Decay scroll speed
+        setInterval(() => {
+            if (Date.now() - lastScrollTime > 100) {
+                scrollSpeed *= 0.85;
+                if (scrollSpeed < 0.5) scrollSpeed = 0;
+            }
+        }, 50);
+    }
+
+    // --- Color helpers ---
+    function getColors() {
+        return document.body.classList.contains('light-mode') ? COLORS_LIGHT : COLORS_DARK;
+    }
+    function getOpacityMult() {
+        return document.body.classList.contains('light-mode') ? 0.5 : 1.0;
+    }
+    function pickColor() {
+        const c = getColors();
+        return c[Math.random() > 0.5 ? 0 : 1];
+    }
+    function rgba(c, a) {
+        return `rgba(${c.r},${c.g},${c.b},${a})`;
+    }
+
+    // --- Bolt geometry ---
+    function generateBolt(side, direction) {
+        // side: 'left' or 'right'
+        // direction: 1 = top-to-bottom, -1 = bottom-to-top
+        const W = lCanvas.width;
+        const H = lCanvas.height;
+        const color = pickColor();
+        const segLen = 15 + Math.random() * 15; // 15-30px
+        const totalSegs = 8 + Math.floor(Math.random() * 10); // 8-17 segments
+
+        // Start x: within edge zone
+        let sx = side === 'left' ? Math.random() * EDGE_ZONE : W - Math.random() * EDGE_ZONE;
+        // Start y: random
+        let sy = direction === 1 ?
+            Math.random() * H * 0.3 :
+            H - Math.random() * H * 0.3;
+
+        // Decide if attracted to a card
+        let attractTarget = null;
+        if (!isMobile && cachedCards.length > 0 && Math.random() < 0.55) {
+            // Find cards on the same side
+            const candidates = cachedCards.filter(c =>
+                side === 'left' ? c.left < W * 0.4 : c.right > W * 0.6
+            );
+            if (candidates.length > 0) {
+                attractTarget = candidates[Math.floor(Math.random() * candidates.length)];
+            }
+        }
+
+        // Build segments
+        const points = [{ x: sx, y: sy }];
+        let cx = sx, cy = sy;
+        for (let i = 0; i < totalSegs; i++) {
+            let dx = (Math.random() - 0.5) * 40; // ±20px horizontal offset
+            let dy = direction * segLen;
+
+            // Bias toward card if attracted (increasing bias)
+            if (attractTarget && i > totalSegs * 0.3) {
+                const targetX = side === 'left' ? attractTarget.left - 10 : attractTarget.right + 10;
+                const targetY = (attractTarget.top + attractTarget.bottom) / 2;
+                const progress = (i - totalSegs * 0.3) / (totalSegs * 0.7);
+                const bias = progress * 0.6;
+                dx += (targetX - cx) * bias * 0.15;
+                dy += (targetY - cy) * bias * 0.1;
+            }
+
+            cx += dx;
+            cy += dy;
+
+            // Clamp x loosely
+            if (side === 'left') cx = Math.max(-5, Math.min(cx, W * 0.25));
+            else cx = Math.max(W * 0.75, Math.min(cx, W + 5));
+
+            points.push({ x: cx, y: cy });
+        }
+
+        // Generate branches
+        const branches = [];
+        for (let i = 2; i < points.length - 1; i++) {
+            if (Math.random() < 0.3) {
+                const bp = points[i];
+                const branchPts = [{ x: bp.x, y: bp.y }];
+                let bx = bp.x, by = bp.y;
+                const branchSegs = 3 + Math.floor(Math.random() * 3);
+                for (let j = 0; j < branchSegs; j++) {
+                    bx += (Math.random() - 0.5) * 25;
+                    by += direction * (8 + Math.random() * 12);
+                    branchPts.push({ x: bx, y: by });
+                }
+                branches.push(branchPts);
+            }
+        }
+
+        return { points, branches, color, attractTarget, side,
+                 birth: performance.now(),
+                 fadeInDur: 100 + Math.random() * 100,
+                 fadeOutDur: 300 + Math.random() * 200,
+                 opacity: 0, phase: 'in', done: false };
+    }
+
+    // --- Draw bolt ---
+    function drawBolt(bolt, t) {
+        const elapsed = t - bolt.birth;
+        const opMult = getOpacityMult();
+
+        if (bolt.phase === 'in') {
+            bolt.opacity = Math.min(1, elapsed / bolt.fadeInDur);
+            if (elapsed >= bolt.fadeInDur) {
+                bolt.phase = 'out';
+                bolt.fadeStart = t;
+                // Hit card
+                if (bolt.attractTarget) {
+                    const el = bolt.attractTarget.el;
+                    el.classList.add('lightning-hit');
+                    setTimeout(() => el.classList.remove('lightning-hit'), 120);
+                }
+            }
+        } else if (bolt.phase === 'out') {
+            const fadeElapsed = t - bolt.fadeStart;
+            bolt.opacity = Math.max(0, 1 - fadeElapsed / bolt.fadeOutDur);
+            if (bolt.opacity <= 0) { bolt.done = true; return; }
+        }
+
+        const alpha = bolt.opacity * opMult;
+        const c = bolt.color;
+
+        // Ambient glow (wide, soft)
+        if (bolt.phase === 'in' || bolt.opacity > 0.5) {
+            const midIdx = Math.floor(bolt.points.length / 2);
+            const mid = bolt.points[midIdx];
+            const grad = lCtx.createRadialGradient(mid.x, mid.y, 0, mid.x, mid.y, 120);
+            grad.addColorStop(0, rgba(c, 0.08 * alpha));
+            grad.addColorStop(1, rgba(c, 0));
+            lCtx.fillStyle = grad;
+            lCtx.fillRect(mid.x - 120, mid.y - 120, 240, 240);
+        }
+
+        // Draw main bolt
+        lCtx.save();
+        lCtx.lineCap = 'round';
+        lCtx.lineJoin = 'round';
+        lCtx.shadowColor = rgba(c, 0.7 * alpha);
+        lCtx.shadowBlur = 18;
+        lCtx.strokeStyle = rgba(c, 0.9 * alpha);
+        lCtx.lineWidth = 2.5;
+        lCtx.beginPath();
+        lCtx.moveTo(bolt.points[0].x, bolt.points[0].y);
+        for (let i = 1; i < bolt.points.length; i++) {
+            lCtx.lineTo(bolt.points[i].x, bolt.points[i].y);
+        }
+        lCtx.stroke();
+
+        // Bright core
+        lCtx.shadowBlur = 8;
+        lCtx.strokeStyle = rgba({ r:255, g:255, b:255 }, 0.5 * alpha);
+        lCtx.lineWidth = 1;
+        lCtx.beginPath();
+        lCtx.moveTo(bolt.points[0].x, bolt.points[0].y);
+        for (let i = 1; i < bolt.points.length; i++) {
+            lCtx.lineTo(bolt.points[i].x, bolt.points[i].y);
+        }
+        lCtx.stroke();
+
+        // Draw branches
+        lCtx.shadowBlur = 10;
+        lCtx.shadowColor = rgba(c, 0.5 * alpha);
+        lCtx.strokeStyle = rgba(c, 0.6 * alpha);
+        lCtx.lineWidth = 1.2;
+        bolt.branches.forEach(br => {
+            lCtx.beginPath();
+            lCtx.moveTo(br[0].x, br[0].y);
+            for (let i = 1; i < br.length; i++) lCtx.lineTo(br[i].x, br[i].y);
+            lCtx.stroke();
+        });
+
+        lCtx.restore();
+    }
+
+    // --- Animation loop ---
+    function animLoop(t) {
+        lCtx.clearRect(0, 0, lCanvas.width, lCanvas.height);
+        for (let i = bolts.length - 1; i >= 0; i--) {
+            drawBolt(bolts[i], t);
+            if (bolts[i].done) bolts.splice(i, 1);
+        }
+        if (bolts.length > 0) {
+            rafId = requestAnimationFrame(animLoop);
+        } else {
+            isRunning = false;
+            rafId = null;
+        }
+    }
+
+    function ensureRunning() {
+        if (!isRunning) {
+            isRunning = true;
+            rafId = requestAnimationFrame(animLoop);
+        }
+    }
+
+    // --- Spawn bolt ---
+    function spawnBolt(side, dirHint) {
+        const dir = dirHint || (Math.random() > 0.5 ? 1 : -1);
+        bolts.push(generateBolt(side || (Math.random() > 0.5 ? 'left' : 'right'), dir));
+        ensureRunning();
+    }
+
+    // --- Passive ambient loop ---
+    function ambientLoop() {
+        const delay = isMobile ?
+            4000 + Math.random() * 6000 :
+            2000 + Math.random() * 3000;
+        setTimeout(() => {
+            spawnBolt(Math.random() > 0.5 ? 'left' : 'right');
+            ambientLoop();
+        }, delay);
+    }
+    setTimeout(() => { spawnBolt('left'); spawnBolt('right'); }, 1000);
+    ambientLoop();
+
+    // --- Scroll-triggered bolts ---
+    if (!isMobile) {
+        let scrollBoltCooldown = 0;
+        setInterval(() => {
+            if (scrollSpeed < 2) return;
+            const now = Date.now();
+            if (now < scrollBoltCooldown) return;
+            // Higher speed = shorter cooldown
+            const cd = Math.max(200, 1200 - scrollSpeed * 40);
+            scrollBoltCooldown = now + cd;
+            const side = Math.random() > 0.5 ? 'left' : 'right';
+            spawnBolt(side, scrollDir);
+            // Very fast scroll: double bolt
+            if (scrollSpeed > 15) {
+                spawnBolt(side === 'left' ? 'right' : 'left', scrollDir);
+            }
+        }, 100);
     }
 })();
 
