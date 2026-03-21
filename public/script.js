@@ -568,44 +568,49 @@ navScrollFn();
 
     // ========== CURSOR PARTICLES + SPARKS (cCanvas) ==========
 
-    // --- Mouse handler: spawn particles ---
+    // --- Mouse handler: spawn electric ember particles ---
     document.addEventListener('mousemove', (e) => {
+        const prevX = mouse.x, prevY = mouse.y;
         mouse.x = e.clientX;
         mouse.y = e.clientY;
         lastMouseMove = Date.now();
 
-        // Lightning rod mode check
-        const nearLeft = mouse.x < ROD_ZONE;
-        const nearRight = mouse.x > window.innerWidth - ROD_ZONE;
-        const isRod = !isMobile && (nearLeft || nearRight);
+        // Mouse velocity for directional streaks
+        const dx = mouse.x - prevX;
+        const dy = mouse.y - prevY;
+        const speed = Math.sqrt(dx * dx + dy * dy);
+        if (speed < 2) return; // only spawn when moving
+
+        const nx = dx / speed;
+        const ny = dy / speed;
 
         // Charge-up check
         const chActive = chargeUp.active &&
             (Date.now() - chargeUp.startTime < CHARGE_DUR + CHARGE_EASE);
-        let sizeMult = 1, lifeMult = 1, velMult = 1, spawnN = 2, lightBoost = 0;
-
-        if (isRod) { sizeMult = 1.3; lifeMult = 1.2; }
+        let spawnN = 1, lightBoost = 0;
 
         if (chActive && !isLight()) {
             const el = Date.now() - chargeUp.startTime;
             let t = el > CHARGE_DUR ? 1 - (el - CHARGE_DUR) / CHARGE_EASE : 1;
             t = Math.max(0, t);
-            spawnN = Math.round(2 + 3 * t);
-            velMult = 1 + t;
-            lightBoost = 22 * t;
-            sizeMult = Math.max(sizeMult, 1 + 0.3 * t);
+            spawnN = Math.round(1 + 2 * t);
+            lightBoost = 15 * t;
         }
 
         for (let i = 0; i < spawnN; i++) {
+            const spread = (Math.random() - 0.5) * 0.6;
             particles.push({
-                x: mouse.x, y: mouse.y,
-                vx: (Math.random() - 0.5) * 1.5 * velMult,
-                vy: (Math.random() - 0.5) * 1.5 * velMult,
-                life: 1 * lifeMult,
-                decay: 0.015 + Math.random() * 0.015,
-                size: (Math.random() * 3 + 1.5) * sizeMult,
+                x: mouse.x + (Math.random() - 0.5) * 3,
+                y: mouse.y + (Math.random() - 0.5) * 3,
+                vx: -nx * 0.4 + spread,
+                vy: -ny * 0.4 + spread + 0.15,
+                life: 1,
+                decay: 0.035 + Math.random() * 0.03,
+                len: 2 + Math.random() * 3,
                 hue: Math.random() > 0.5 ? 263 : 174,
-                lb: lightBoost
+                lb: lightBoost,
+                nx: nx + (Math.random() - 0.5) * 0.4,
+                ny: ny + (Math.random() - 0.5) * 0.4
             });
         }
     });
@@ -677,23 +682,26 @@ navScrollFn();
         cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
         const om = opMult();
 
-        // Particles
+        // Particles — electric embers (line streaks)
         for (let i = particles.length - 1; i >= 0; i--) {
             const p = particles[i];
             p.x += p.vx; p.y += p.vy; p.life -= p.decay;
             if (p.life <= 0) { particles.splice(i, 1); continue; }
-            const a = p.life * 0.7;
+            const a = p.life * 0.5;
             const sat = p.hue === 263 ? '73%' : '70%';
             const l = (p.hue === 263 ? 58 : 55) + (p.lb || 0);
-            cCtx.shadowBlur = 6;
-            cCtx.shadowColor = `hsla(${p.hue},${sat},${l}%,${a * 0.5})`;
-            cCtx.fillStyle = `hsla(${p.hue},${sat},${l}%,${a})`;
+            const len = p.len * p.life;
+            cCtx.shadowBlur = 3;
+            cCtx.shadowColor = `hsla(${p.hue},${sat},${l}%,${a * 0.4})`;
+            cCtx.strokeStyle = `hsla(${p.hue},${sat},${l}%,${a})`;
+            cCtx.lineWidth = 0.8;
             cCtx.beginPath();
-            cCtx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
-            cCtx.fill();
+            cCtx.moveTo(p.x, p.y);
+            cCtx.lineTo(p.x + p.nx * len, p.y + p.ny * len);
+            cCtx.stroke();
         }
         cCtx.shadowBlur = 0;
-        if (particles.length > 200) particles.splice(0, particles.length - 200);
+        if (particles.length > 80) particles.splice(0, particles.length - 80);
 
         // Spawn sparks
         trySpawnSparks();
