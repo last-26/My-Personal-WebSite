@@ -136,7 +136,7 @@ img{max-width:100%;display:block}
 /* ── Cyberpunk Edge Effects ── */
 .cyber-edge{
     position:fixed;top:0;bottom:0;width:60px;z-index:1;pointer-events:none;
-    overflow:hidden;
+    overflow:visible;
 }
 .cyber-edge-left{left:0}
 .cyber-edge-right{right:0}

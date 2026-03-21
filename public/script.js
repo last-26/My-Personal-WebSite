@@ -448,7 +448,7 @@ navScrollFn();
                 vy: (Math.random() - 0.5) * 1.5,
                 life: 1,
                 decay: 0.015 + Math.random() * 0.015,
-                size: Math.random() * 2.5 + 1,
+                size: Math.random() * 3 + 1.5,
                 hue: Math.random() > 0.5 ? 263 : 174
             });
         }
@@ -485,24 +485,40 @@ navScrollFn();
     const edges = document.querySelectorAll('.cyber-edge');
     function lightning() {
         edges.forEach(edge => {
+            const isLeft = edge.classList.contains('cyber-edge-left');
+            const boltHeight = 80 + Math.random() * 250;
+            const boltWidth = 40 + Math.random() * 80;
             const flash = document.createElement('div');
             flash.style.cssText = `
                 position:absolute;
-                ${edge.classList.contains('cyber-edge-left') ? 'right:0' : 'left:0'};
-                top:${10 + Math.random() * 80}%;
-                width:2px;height:${30 + Math.random() * 120}px;
-                background:linear-gradient(180deg,transparent,rgba(124,58,237,.8),rgba(45,212,191,.6),transparent);
-                border-radius:2px;
-                box-shadow:0 0 8px rgba(124,58,237,.6),0 0 20px rgba(124,58,237,.3);
+                ${isLeft ? 'right:-10px' : 'left:-10px'};
+                top:${5 + Math.random() * 75}%;
+                width:${boltWidth}px;height:${boltHeight}px;
+                background:radial-gradient(ellipse at ${isLeft ? 'left' : 'right'} center,
+                    rgba(124,58,237,.6) 0%,
+                    rgba(124,58,237,.3) 20%,
+                    rgba(45,212,191,.15) 50%,
+                    transparent 80%);
                 opacity:0;
-                animation:lightningFlash ${0.1 + Math.random() * 0.2}s ease-out forwards;
+                animation:lightningFlash ${0.15 + Math.random() * 0.2}s ease-out forwards;
+                pointer-events:none;
             `;
+            const bolt = document.createElement('div');
+            bolt.style.cssText = `
+                position:absolute;
+                ${isLeft ? 'right:0' : 'left:0'};
+                top:0;bottom:0;width:3px;
+                background:linear-gradient(180deg,transparent,rgba(124,58,237,.9),rgba(45,212,191,.7),rgba(124,58,237,.9),transparent);
+                box-shadow:0 0 12px rgba(124,58,237,.8),0 0 30px rgba(124,58,237,.4);
+                border-radius:2px;
+            `;
+            flash.appendChild(bolt);
             edge.appendChild(flash);
-            setTimeout(() => flash.remove(), 500);
+            setTimeout(() => flash.remove(), 600);
         });
-        setTimeout(lightning, 3000 + Math.random() * 6000);
+        setTimeout(lightning, 2500 + Math.random() * 5000);
     }
-    setTimeout(lightning, 2000);
+    setTimeout(lightning, 1500);
 
     // Add lightning flash keyframes
     if (!document.getElementById('lightningStyle')) {
@@ -511,10 +527,11 @@ navScrollFn();
         style.textContent = `
             @keyframes lightningFlash {
                 0% { opacity:0; transform:scaleY(0.3); }
-                20% { opacity:1; transform:scaleY(1); }
-                40% { opacity:0.3; }
-                60% { opacity:0.9; }
-                100% { opacity:0; transform:scaleY(0.5); }
+                15% { opacity:1; transform:scaleY(1); }
+                30% { opacity:0.2; }
+                45% { opacity:0.95; }
+                70% { opacity:0.5; }
+                100% { opacity:0; transform:scaleY(0.6); }
             }
         `;
         document.head.appendChild(style);
