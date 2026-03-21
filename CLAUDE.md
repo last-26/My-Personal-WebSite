@@ -21,23 +21,15 @@ Files are served directly from `/public/`. No build step required.
 ### Single-page application structure
 - `public/index.html` — All HTML sections in one file
 - `public/styles.css` — All styling including themes, animations, responsive layout
-- `public/script.js` — All JavaScript (~1600 lines)
+- `public/script.js` — All JavaScript (~1200 lines)
 
 ### script.js organization
-1. **Firebase config & init** (lines ~1–21): App initialization, database reference
-2. **Translation dictionary** (lines ~24–248): EN/TR strings keyed by `data-tr` attribute values
-3. **Language & theme system** (lines ~250–310): `updateCVButtons()`, dark mode toggle, persistence
-4. **Core UI functions** (lines ~313–406): `updateLanguage()`, scroll reveal, count-up stats, nav scroll, scroll progress, active nav
-5. **Project card enhancements** (IIFE, lines ~408–468): Tag categorization, expand/collapse descriptions
-6. **Lightning system** (IIFE, lines ~470–786): Edge lightning bolts with card attraction, scroll-triggered bolts, ambient loop
-7. **CV tracking** (lines ~796–895): View/download events per language (EN/TR) stored at `cv_analytics/`
-8. **Visitor counter** (lines ~897–1100): Unique ID (localStorage), daily/total counters, weekly chart (Chart.js)
-9. **Project click counters** (lines ~1101–1192): Atomic Firebase transactions per project link
-10. **User behavior tracking** (lines ~1193–1279): Section visibility (Intersection Observer), page view counts, device metadata
-11. **Admin dashboard** (lines ~1302–1428): Analytics dashboard with secret access
-12. **Utility functions** (lines ~1429–1503): Email copy, toast notifications, navbar auto-hide
-13. **DOM ready init** (lines ~1505–1531): Main initialization sequence
-14. **Certificate modals** (lines ~1535–1620): Certificate, company logo, and English cert modal functions
+1. **Translation dictionary** (lines ~25–220): EN/TR strings keyed by `data-tr` attribute values
+2. **Firebase initialization**: Analytics + Realtime Database
+3. **Visitor tracking**: Unique ID (localStorage), daily/total counters, section view tracking
+4. **CV analytics**: View/download tracking per language (EN/TR) stored at `cv_analytics/`
+5. **Project click counters**: Atomic Firebase transactions per project link
+6. **UI logic**: Theme toggle, language switcher, scroll animations, particles, typewriter effect
 
 ### Multi-language system
 - Language (`en`/`tr`) stored in `localStorage`
@@ -52,12 +44,6 @@ Files are served directly from `/public/`. No build step required.
 ### Theme system
 - CSS custom properties on `:root` — overridden by `.light-mode` on `<body>`
 - Default: dark mode; preference persisted to `localStorage`
-
-### Visual effects
-- **Lightning system**: Ambient edge lightning bolts on `<canvas id="lightningCanvas">`, attracted to cards, scroll-triggered
-- **Cyberpunk edges**: CSS gradient lines on left/right screen edges with animation
-- **Noise overlay**: Subtle noise texture via `.noise-overlay`
-- **Scroll animations**: Elements fade/slide in via `.scroll-reveal` class + Intersection Observer
 
 ## Key Conventions
 
