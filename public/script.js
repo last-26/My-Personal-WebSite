@@ -95,10 +95,10 @@ const translations = {
         "projects.bitcoin.title": "Bitcoin Teknik Analiz Otomasyonu",
         "projects.bitcoin.subtitle": "AI Destekli Kripto Para Analiz & Raporlama Sistemi",
         "projects.bitcoin.description": "n8n workflow automation ile geliştirilmiş Bitcoin teknik analiz sistemi. Binance API'den otomatik veri toplayarak 15+ teknik gösterge analizi yapar (SMA, EMA, RSI, MACD, Bollinger Bands, VWAP, ATR). DeepSeek R1 AI modeli ile piyasa yorumları oluşturur ve profesyonel HTML raporlarını her 4 saatte bir otomatik olarak email ile gönderir.",
-        "projects.trendyol.title": "🛒 Trendyol Otomasyon",
+        "projects.trendyol.title": "Trendyol Otomasyon",
         "projects.trendyol.subtitle": "E-ticaret Sipariş Otomasyonu",
         "projects.trendyol.description": "Playwright kullanarak Trendyol Yemek platformu için geliştirilmiş otomatik sipariş sistemi. Süreçleri hızlandıran ve hata oranını minimize eden akıllı otomasyon çözümü.",
-        "projects.fruit.title": "🍎 Meyve Olgunluk Tespiti",
+        "projects.fruit.title": "Meyve Olgunluk Tespiti",
         "projects.fruit.subtitle": "Makine Öğrenmesi & Computer Vision",
         "projects.fruit.description": "Görüntü işleme ve 5 farklı ML algoritması (SVM, Random Forest, Gradient Boosting, Logistic Regression, Ensemble) kullanarak meyve olgunluğunu tespit eden pattern recognition projesi.",
         "projects.news.subtitle": "Modern Haber Toplayıcı Platform",
@@ -197,10 +197,10 @@ const translations = {
         "projects.bitcoin.title": "Bitcoin Technical Analysis Automation",
         "projects.bitcoin.subtitle": "AI-Powered Cryptocurrency Analysis & Reporting System",
         "projects.bitcoin.description": "Bitcoin technical analysis system built with n8n workflow automation. Automatically collects data from Binance API and performs 15+ technical indicator analysis (SMA, EMA, RSI, MACD, Bollinger Bands, VWAP, ATR). Generates market insights with DeepSeek R1 AI model and automatically sends professional HTML reports via email every 4 hours.",
-        "projects.trendyol.title": "🛒 Trendyol Automation",
+        "projects.trendyol.title": "Trendyol Automation",
         "projects.trendyol.subtitle": "E-commerce Order Automation",
         "projects.trendyol.description": "Automated ordering system developed for Trendyol Yemek platform using Playwright. Smart automation solution that accelerates processes and minimizes error rates.",
-        "projects.fruit.title": "🍎 Fruit Ripeness Detection",
+        "projects.fruit.title": "Fruit Ripeness Detection",
         "projects.fruit.subtitle": "Machine Learning & Computer Vision",
         "projects.fruit.description": "Pattern recognition project that detects fruit ripeness using image processing and 5 different ML algorithms (SVM, Random Forest, Gradient Boosting, Logistic Regression, Ensemble).",
         "projects.news.subtitle": "Modern News Aggregator Platform",
@@ -420,6 +420,68 @@ window.addEventListener('scroll', () => {
 });
 scrollRevealFn();
 navScrollFn();
+
+// ============================================
+// Project Card Enhancements
+// ============================================
+(function() {
+    // --- Tag auto-categorization ---
+    const TAG_MAP = {
+        ai: ['python','llm','rag','nlp','ocr','scikit-learn','opencv','sentence transformers',
+             'classification','feature extraction','langgraph','deepseek r1','technical analysis',
+             'aws bedrock','bedrock','machine learning','ai'],
+        backend: ['fastapi','flask-restx','docker','postgresql','mongodb','sqlalchemy','pytest',
+                  'node.js','asp.net core','sse','librechat ui'],
+        frontend: ['react.js','next.js','tailwindcss','bootstrap','typescript'],
+        devops: ['github actions','ci/cd','n8n','automation','playwright','web scraping',
+                 'binance api','gmail api','rss'],
+        cloud: ['aws','aws cdk','lambda','s3','textract','dynamodb','api gateway','sns']
+    };
+    document.querySelectorAll('.card-tags span').forEach(tag => {
+        const t = tag.textContent.trim().toLowerCase();
+        let cls = 'tag-ai';
+        for (const [cat, keywords] of Object.entries(TAG_MAP)) {
+            if (keywords.some(k => t === k || t.includes(k))) { cls = 'tag-' + cat; break; }
+        }
+        tag.classList.add(cls);
+    });
+
+    // --- Staggered tag animation delay ---
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.querySelectorAll('.card-tags span').forEach((tag, i) => {
+            tag.style.transitionDelay = (i * 20) + 'ms';
+        });
+        // Reset delay on mouse leave
+        card.addEventListener('mouseleave', () => {
+            card.querySelectorAll('.card-tags span').forEach(tag => {
+                tag.style.transitionDelay = '0ms';
+            });
+            // Re-set after transition completes for next hover
+            setTimeout(() => {
+                card.querySelectorAll('.card-tags span').forEach((tag, i) => {
+                    tag.style.transitionDelay = (i * 20) + 'ms';
+                });
+            }, 400);
+        });
+    });
+
+    // --- Expand/collapse descriptions ---
+    document.querySelectorAll('.card-expand-btn').forEach(btn => {
+        const desc = btn.parentElement.querySelector('.card-desc');
+        if (!desc) return;
+        // Hide button if text isn't clamped
+        requestAnimationFrame(() => {
+            if (desc.scrollHeight <= desc.clientHeight + 2) {
+                btn.style.display = 'none';
+            }
+        });
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const expanded = desc.classList.toggle('expanded');
+            btn.classList.toggle('active', expanded);
+        });
+    });
+})();
 
 // ============================================
 // Unified Cursor Particle + Lightning System

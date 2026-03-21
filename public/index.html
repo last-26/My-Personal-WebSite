@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=12">
+    <link rel="stylesheet" href="styles.css?v=13">
     
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -357,180 +357,225 @@
             </div>
             <div class="projects-grid">
                 <!-- SAMETEI -->
-                <div class="project-card card-featured reveal">
+                <div class="project-card card-featured card-theme-purple reveal">
                     <div class="card-badge" data-tr="projects.badge.corporate">KURUMSAL</div>
                     <div class="card-top">
-                        <h3>🏢 SAMETEI</h3>
-                        <p data-tr="projects.sametei.subtitle">AI Destekli İK Doküman Yönetim Platformu</p>
+                        <div class="card-accent-bar"></div>
+                        <div class="card-icon"><i class="fas fa-building"></i></div>
+                        <div class="card-title-group">
+                            <h3>SAMETEI</h3>
+                            <p data-tr="projects.sametei.subtitle">AI Destekli İK Doküman Yönetim Platformu</p>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <p data-tr="projects.sametei.description">
-                            LibreChat çerçevesi üzerine inşa edilmiş, insan kaynakları doküman yönetimini yapay zeka ile otomatikleştiren kurumsal ölçekte platform. 
+                        <p class="card-desc" data-tr="projects.sametei.description">
+                            LibreChat çerçevesi üzerine inşa edilmiş, insan kaynakları doküman yönetimini yapay zeka ile otomatikleştiren kurumsal ölçekte platform.
                             İK ekiplerinin doküman işleme süresini %70 azalttı.
                         </p>
+                        <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
                             <span>LibreChat UI</span><span>LLM</span><span>OCR</span><span>RAG</span><span>Docker</span><span>MongoDB</span><span>FastAPI</span><span>Python</span>
                         </div>
                         <a href="https://github.com/last-26/SAMETEI" target="_blank" class="card-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
+                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- HIREAI -->
-                <div class="project-card card-featured reveal">
+                <div class="project-card card-featured card-theme-lavender reveal">
                     <div class="card-badge" data-tr="projects.badge.graduation">MEZUN. PROJESİ</div>
                     <div class="card-top">
-                        <h3>📝 HIREAI</h3>
-                        <p data-tr="projects.hireai.subtitle">AI Destekli CV & Portföy Analiz Platformu</p>
+                        <div class="card-accent-bar"></div>
+                        <div class="card-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="card-title-group">
+                            <h3>HIREAI</h3>
+                            <p data-tr="projects.hireai.subtitle">AI Destekli CV & Portföy Analiz Platformu</p>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <p data-tr="projects.hireai.description">
-                            ATS tabanlı CV analiz ve optimizasyon platformu. CV'leri iş tanımlarına göre analiz eder, ATS uyumlu skorlar ve iyileştirme önerileri sunar. 
+                        <p class="card-desc" data-tr="projects.hireai.description">
+                            ATS tabanlı CV analiz ve optimizasyon platformu. CV'leri iş tanımlarına göre analiz eder, ATS uyumlu skorlar ve iyileştirme önerileri sunar.
                             İK ekiplerinin ön eleme süresini %50 azalttı.
                         </p>
+                        <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
                             <span>Flask-RESTX</span><span>Sentence Transformers</span><span>PostgreSQL</span><span>React.js</span><span>TailwindCSS</span><span>NLP</span>
                         </div>
                         <a href="https://gitlab.com/last-26/cv-analysis" target="_blank" class="card-link">
-                            <i class="fab fa-gitlab"></i> <span data-tr="projects.link.gitlab">GitLab'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
+                            <i class="fab fa-gitlab"></i> <span data-tr="projects.link.gitlab">GitLab'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- NextHire -->
-                <div class="project-card card-featured reveal">
+                <div class="project-card card-featured card-theme-pink reveal">
                     <div class="card-badge" data-tr="projects.badge.agent">AI AGENT</div>
                     <div class="card-top">
-                        <h3>🤖 NextHire</h3>
-                        <p data-tr="projects.nexthire.subtitle">AI-Powered Job Application Agent</p>
+                        <div class="card-accent-bar"></div>
+                        <div class="card-icon"><i class="fas fa-robot"></i></div>
+                        <div class="card-title-group">
+                            <h3>NextHire</h3>
+                            <p data-tr="projects.nexthire.subtitle">AI-Powered Job Application Agent</p>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <p data-tr="projects.nexthire.description">
+                        <p class="card-desc" data-tr="projects.nexthire.description">
                             LangGraph tabanlı çok adımlı AI agent sistemi. CV yükle, iş ilanı yapıştır — agent otomatik olarak ATS skoru hesaplar, eksik yetkinlikleri belirler, kişiselleştirilmiş ön yazı oluşturur ve başvuruyu kanban panosuna ekler. Multi-model routing ile maliyet-performans optimizasyonu sağlar.
                         </p>
+                        <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
                             <span>LangGraph</span><span>FastAPI</span><span>Next.js</span><span>AWS Bedrock</span><span>PostgreSQL</span><span>Docker</span><span>SSE</span><span>TypeScript</span>
                         </div>
                         <a href="https://github.com/last-26/NextHire" target="_blank" class="card-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
+                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- AWS AI Doc QA -->
-                <div class="project-card card-featured reveal">
+                <div class="project-card card-featured card-theme-blue reveal">
                     <div class="card-badge" data-tr="projects.badge.cloud">BULUT</div>
                     <div class="card-top">
-                        <h3>☁️ AWS AI Doc QA</h3>
-                        <p data-tr="projects.awsai.subtitle">AWS ile Akıllı Doküman Soru-Cevap Sistemi</p>
+                        <div class="card-accent-bar"></div>
+                        <div class="card-icon"><i class="fas fa-cloud"></i></div>
+                        <div class="card-title-group">
+                            <h3>AWS AI Doc QA</h3>
+                            <p data-tr="projects.awsai.subtitle">AWS ile Akıllı Doküman Soru-Cevap Sistemi</p>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <p data-tr="projects.awsai.description">
+                        <p class="card-desc" data-tr="projects.awsai.description">
                             AWS bulut servisleri üzerine inşa edilmiş serverless doküman soru-cevap sistemi. PDF dokümanları S3'e yüklenir, Textract ile otomatik metin çıkarımı yapılır ve Bedrock üzerindeki Claude AI modeli ile doğal dilde sorulara yanıt verilir. API Gateway, Lambda, DynamoDB, SNS ve CDK ile tamamen Infrastructure as Code olarak tasarlanmıştır.
                         </p>
+                        <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
                             <span>AWS CDK</span><span>Lambda</span><span>S3</span><span>Textract</span><span>Bedrock</span><span>DynamoDB</span><span>API Gateway</span><span>SNS</span><span>Python</span>
                         </div>
                         <a href="https://github.com/last-26/aws-ai-project" target="_blank" class="card-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
+                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- SwiftLink -->
-                <div class="project-card reveal">
+                <div class="project-card card-theme-teal reveal">
                     <div class="card-badge" data-tr="projects.badge.devops">DEVOPS</div>
                     <div class="card-top">
-                        <h3>🔗 SwiftLink</h3>
-                        <p data-tr="projects.swiftlink.subtitle">Hızlı & Modern URL Kısaltma Servisi</p>
+                        <div class="card-accent-bar"></div>
+                        <div class="card-icon"><i class="fas fa-link"></i></div>
+                        <div class="card-title-group">
+                            <h3>SwiftLink</h3>
+                            <p data-tr="projects.swiftlink.subtitle">Hızlı & Modern URL Kısaltma Servisi</p>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <p data-tr="projects.swiftlink.description">
+                        <p class="card-desc" data-tr="projects.swiftlink.description">
                             FastAPI ile geliştirilmiş, Docker ile konteynerize edilmiş ve GitHub Actions CI/CD pipeline'ı ile otomatik test edilen modern URL kısaltma uygulaması. Kısaltılmış linkler için tıklama analitiği ve gerçek zamanlı istatistikler sunar.
                         </p>
+                        <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
                             <span>FastAPI</span><span>Docker</span><span>GitHub Actions</span><span>SQLAlchemy</span><span>pytest</span><span>Python</span>
                         </div>
                         <a href="https://github.com/last-26/SwiftLink" target="_blank" class="card-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
+                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Bitcoin -->
-                <div class="project-card reveal">
+                <div class="project-card card-theme-orange reveal">
                     <div class="card-badge" data-tr="projects.badge.automation">OTOMASYON</div>
                     <div class="card-top">
-                        <h3><i class="fab fa-bitcoin" style="color:#f7931a"></i> <span data-tr="projects.bitcoin.title">Bitcoin Teknik Analiz Otomasyonu</span></h3>
-                        <p data-tr="projects.bitcoin.subtitle">AI Destekli Kripto Para Analiz & Raporlama Sistemi</p>
+                        <div class="card-accent-bar"></div>
+                        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="card-title-group">
+                            <h3 data-tr="projects.bitcoin.title">Bitcoin Teknik Analiz Otomasyonu</h3>
+                            <p data-tr="projects.bitcoin.subtitle">AI Destekli Kripto Para Analiz & Raporlama Sistemi</p>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <p data-tr="projects.bitcoin.description">
+                        <p class="card-desc" data-tr="projects.bitcoin.description">
                             n8n workflow automation ile geliştirilmiş Bitcoin teknik analiz sistemi. Binance API'den otomatik veri toplayarak 15+ teknik gösterge analizi yapar.
                         </p>
+                        <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
                             <span>n8n</span><span>Binance API</span><span>DeepSeek R1</span><span>Technical Analysis</span><span>Gmail API</span>
                         </div>
                         <a href="https://github.com/last-26/Bitcoin-Daily-Report-Automation" target="_blank" class="card-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
+                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Trendyol -->
-                <div class="project-card reveal">
+                <div class="project-card card-theme-orange reveal">
                     <div class="card-top">
-                        <h3><span data-tr="projects.trendyol.title">🛒 Trendyol Otomasyon</span></h3>
-                        <p data-tr="projects.trendyol.subtitle">E-ticaret Sipariş Otomasyonu</p>
+                        <div class="card-accent-bar"></div>
+                        <div class="card-icon"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="card-title-group">
+                            <h3 data-tr="projects.trendyol.title">Trendyol Otomasyon</h3>
+                            <p data-tr="projects.trendyol.subtitle">E-ticaret Sipariş Otomasyonu</p>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <p data-tr="projects.trendyol.description">
+                        <p class="card-desc" data-tr="projects.trendyol.description">
                             Playwright kullanarak Trendyol Yemek platformu için geliştirilmiş otomatik sipariş sistemi.
                         </p>
+                        <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
                             <span>Node.js</span><span>Playwright</span><span>Automation</span><span>Web Scraping</span>
                         </div>
                         <a href="https://github.com/last-26/Trendyol-Automotion-Order" target="_blank" class="card-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
+                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Fruit Ripeness -->
-                <div class="project-card reveal">
+                <div class="project-card card-theme-purple reveal">
                     <div class="card-top">
-                        <h3><span data-tr="projects.fruit.title">🍎 Meyve Olgunluk Tespiti</span></h3>
-                        <p data-tr="projects.fruit.subtitle">Makine Öğrenmesi & Computer Vision</p>
+                        <div class="card-accent-bar"></div>
+                        <div class="card-icon"><i class="fas fa-apple-alt"></i></div>
+                        <div class="card-title-group">
+                            <h3 data-tr="projects.fruit.title">Meyve Olgunluk Tespiti</h3>
+                            <p data-tr="projects.fruit.subtitle">Makine Öğrenmesi & Computer Vision</p>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <p data-tr="projects.fruit.description">
+                        <p class="card-desc" data-tr="projects.fruit.description">
                             Görüntü işleme ve 5 farklı ML algoritması kullanarak meyve olgunluğunu tespit eden pattern recognition projesi.
                         </p>
+                        <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
                             <span>OpenCV</span><span>Scikit-learn</span><span>Feature Extraction</span><span>Classification</span>
                         </div>
                         <a href="https://github.com/last-26/fruit-ripeness-detection" target="_blank" class="card-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
+                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- News Hub -->
-                <div class="project-card reveal">
+                <div class="project-card card-theme-blue reveal">
                     <div class="card-top">
-                        <h3>📰 Global News Hub</h3>
-                        <p data-tr="projects.news.subtitle">Modern Haber Toplayıcı Platform</p>
+                        <div class="card-accent-bar"></div>
+                        <div class="card-icon"><i class="fas fa-newspaper"></i></div>
+                        <div class="card-title-group">
+                            <h3>Global News Hub</h3>
+                            <p data-tr="projects.news.subtitle">Modern Haber Toplayıcı Platform</p>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <p data-tr="projects.news.description">
+                        <p class="card-desc" data-tr="projects.news.description">
                             ASP.NET ile geliştirilmiş modern haber toplayıcı. RSS feed'lerini akıllı kategorizasyon ile çeker.
                         </p>
+                        <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
                             <span>ASP.NET Core</span><span>RSS</span><span>Bootstrap</span>
                         </div>
                         <a href="https://github.com/last-26/Global-News-Hub" target="_blank" class="card-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right"></i>
+                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
                         </a>
                     </div>
                 </div>
@@ -680,6 +725,6 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <script src="script.js?v=10"></script>
+    <script src="script.js?v=11"></script>
 </body>
 </html>
