@@ -22,6 +22,9 @@ public/TEI_EN.jpg
 public/TEI_TR.jpg
 public/tei_en.jpg
 public/tei_tr.jpg
+# Claude Code local settings
+.claude/
+
 # Firebase cache
 .firebase/
 
