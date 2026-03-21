@@ -1178,6 +1178,7 @@ body.light-mode .roadmap-item:hover .roadmap-card {
 .card-accent-6 .card-top{background:linear-gradient(135deg,#a78bfa,#8b5cf6)}
 .card-accent-7 .card-top{background:linear-gradient(135deg,#f59e0b,#ea580c)}
 .card-accent-8 .card-top{background:linear-gradient(135deg,#10b981,#34d399)}
+.card-accent-9 .card-top{background:linear-gradient(135deg,#6366f1,#8b5cf6)}
 
 /* Featured project glow */
 .card-featured{
@@ -1227,6 +1228,7 @@ body.light-mode .card-featured{
 .badge-green{background:rgba(16,185,129,.7)}
 .badge-orange{background:rgba(249,115,22,.7)}
 .badge-blue{background:rgba(59,130,246,.7)}
+.badge-purple{background:rgba(124,58,237,.7)}
 
 .card-top{
     padding:1.6rem 1.8rem;color:#fff;
