@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "last-26",
     "public": "public",
     "ignore": [
       "firebase.json",
