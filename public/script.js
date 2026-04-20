@@ -97,6 +97,10 @@ const translations = {
         "skills.terminal.title": "samet@portfolyo:~/yetenekler",
         "skills.languages.turkish": "Türkçe (Ana Dil)",
         "skills.languages.english": "İngilizce (B2 - Profesyonel Yeterlilik)",
+        "skills.summary.unit": "yetenek",
+        "skills.summary.files": "dosya",
+        "skills.summary.advanced": "ileri",
+        "skills.summary.compiled": "derlendi",
         "projects.title": "Projeler",
         "projects.badge.corporate": "KURUMSAL",
         "projects.badge.graduation": "MEZUN. PROJESİ",
@@ -256,6 +260,10 @@ const translations = {
         "experience.powintec.achievements.3": "Hardened the app with error-handling mechanisms against hardware disconnects.",
         "skills.title": "Skills",
         "skills.terminal.title": "samet@portfolio:~/skills",
+        "skills.summary.unit": "skills",
+        "skills.summary.files": "files",
+        "skills.summary.advanced": "advanced",
+        "skills.summary.compiled": "compiled",
         "skills.languages.turkish": "Turkish (Native)",
         "skills.languages.english": "English (B2 - Professional Proficiency)",
         "projects.title": "Projects",
@@ -400,12 +408,18 @@ const body = document.body;
 
 // Check for saved theme preference - Default: Dark Mode
 const savedTheme = localStorage.getItem('theme');
+const themeIcon = themeToggle.querySelector('i');
+function setThemeIcon(light){
+    if(!themeIcon) return;
+    themeIcon.classList.toggle('fa-moon', light);
+    themeIcon.classList.toggle('fa-sun', !light);
+}
 if (savedTheme === 'light') {
     body.classList.add('light-mode');
-    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    setThemeIcon(true);
 } else {
     body.classList.remove('light-mode');
-    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    setThemeIcon(false);
     if (!savedTheme) {
         localStorage.setItem('theme', 'dark');
     }
@@ -414,27 +428,26 @@ if (savedTheme === 'light') {
 themeToggle.addEventListener('click', () => {
     // Animate icon out
     const icon = themeToggle.querySelector('i');
-    icon.style.transform = 'rotate(360deg) scale(0)';
+    if(icon) icon.style.transform = 'rotate(360deg) scale(0)';
+    themeToggle.classList.add('is-switching');
 
     setTimeout(() => {
         body.classList.toggle('light-mode');
+        const isLight = body.classList.contains('light-mode');
+        setThemeIcon(isLight);
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
 
-        if (body.classList.contains('light-mode')) {
-            themeToggle.innerHTML = '<i class="fas fa-moon" style="transform:scale(0)"></i>';
-            localStorage.setItem('theme', 'light');
-        } else {
-            themeToggle.innerHTML = '<i class="fas fa-sun" style="transform:scale(0)"></i>';
-            localStorage.setItem('theme', 'dark');
-        }
-
-        // Animate icon in
-        requestAnimationFrame(() => {
-            const newIcon = themeToggle.querySelector('i');
-            newIcon.style.transition = 'transform .4s cubic-bezier(.34,1.56,.64,1)';
+        const newIcon = themeToggle.querySelector('i');
+        if(newIcon){
+            newIcon.style.transform = 'rotate(-180deg) scale(0)';
             requestAnimationFrame(() => {
-                newIcon.style.transform = 'rotate(0deg) scale(1)';
+                newIcon.style.transition = 'transform .5s cubic-bezier(.34,1.56,.64,1)';
+                requestAnimationFrame(() => {
+                    newIcon.style.transform = 'rotate(0deg) scale(1)';
+                });
             });
-        });
+        }
+        setTimeout(()=>themeToggle.classList.remove('is-switching'), 650);
 
         // Update weekly chart theme if it exists
         if (weeklyChartInstance && weeklyChartInstance.data.datasets[0].data.length > 0) {
@@ -2107,6 +2120,58 @@ window.closeCertificate = closeCertificateModal;
     }, { threshold: 0.2, rootMargin: '0px 0px -80px 0px' });
 
     blocks.forEach(b => io.observe(b));
+})();
+
+// ============================================
+// Skills summary — auto-count pills, count-up on reveal
+// ============================================
+(function initSkillsSummary(){
+    const host = document.querySelector('#skills');
+    if (!host) return;
+    const total = host.querySelectorAll('.term-block:not(.term-summary):not(.term-end) .pill').length;
+    const advanced = host.querySelectorAll('.term-block:not(.term-summary):not(.term-end) .pill[data-level="Advanced"]').length;
+
+    const elTotal = document.getElementById('skillTotal');
+    const elAdv = document.getElementById('skillAdvanced');
+    const elMini = document.getElementById('skillTotalMini');
+    if (elTotal) elTotal.dataset.count = total;
+    if (elMini) elMini.dataset.count = total;
+    if (elAdv) elAdv.dataset.count = advanced;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const setNow = (el,n)=>{ if(el) el.textContent = n; };
+
+    if (reduced || !('IntersectionObserver' in window)){
+        setNow(elTotal,total); setNow(elAdv,advanced); setNow(elMini,total);
+        return;
+    }
+
+    const countUp = (el, target, dur=900) => {
+        if (!el) return;
+        const start = performance.now();
+        const tick = (now) => {
+            const p = Math.min(1, (now - start) / dur);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(target * eased);
+            if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+    };
+
+    const summary = host.querySelector('.term-summary');
+    if (!summary) return;
+    const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+            if (!e.isIntersecting) return;
+            setTimeout(()=>{
+                countUp(elTotal, total);
+                countUp(elMini, total);
+                countUp(elAdv, advanced, 700);
+            }, 200);
+            io.unobserve(e.target);
+        });
+    }, { threshold: 0.4 });
+    io.observe(summary);
 })();
 
 /* ── EXPERIENCE: expand/collapse cards ── */

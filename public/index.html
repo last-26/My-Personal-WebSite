@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=32">
+    <link rel="stylesheet" href="styles.css?v=36">
     
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -54,11 +54,36 @@
                 <div class="nav-actions">
                     <div class="lang-switcher" data-active="en">
                         <div class="lang-indicator"></div>
-                        <button class="lang-btn" data-lang="tr">TR</button>
-                        <button class="lang-btn active" data-lang="en">EN</button>
+                        <button class="lang-btn" data-lang="tr" aria-label="Türkçe" title="Türkçe">
+                            <svg class="flag" viewBox="0 0 24 24" aria-hidden="true">
+                                <defs><clipPath id="flagTR"><circle cx="12" cy="12" r="12"/></clipPath></defs>
+                                <g clip-path="url(#flagTR)">
+                                    <rect width="24" height="24" fill="#E30A17"/>
+                                    <circle cx="10.2" cy="12" r="4.2" fill="#fff"/>
+                                    <circle cx="11.1" cy="12" r="3.4" fill="#E30A17"/>
+                                    <polygon fill="#fff" points="14.2,10.4 14.61,11.43 15.72,11.51 14.87,12.22 15.14,13.29 14.2,12.7 13.26,13.29 13.53,12.22 12.68,11.51 13.79,11.43"/>
+                                </g>
+                            </svg>
+                        </button>
+                        <button class="lang-btn active" data-lang="en" aria-label="English" title="English">
+                            <svg class="flag" viewBox="0 0 24 24" aria-hidden="true">
+                                <defs><clipPath id="flagEN"><circle cx="12" cy="12" r="12"/></clipPath></defs>
+                                <g clip-path="url(#flagEN)">
+                                    <rect width="24" height="24" fill="#012169"/>
+                                    <path d="M0,0 L24,24 M24,0 L0,24" stroke="#fff" stroke-width="3.2"/>
+                                    <path d="M0,0 L24,24 M24,0 L0,24" stroke="#C8102E" stroke-width="1.6"/>
+                                    <path d="M12,0 V24 M0,12 H24" stroke="#fff" stroke-width="4.5"/>
+                                    <path d="M12,0 V24 M0,12 H24" stroke="#C8102E" stroke-width="2.6"/>
+                                </g>
+                            </svg>
+                        </button>
                     </div>
                     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                        <i class="fas fa-sun"></i>
+                        <span class="tt-ring" aria-hidden="true"></span>
+                        <span class="tt-halo" aria-hidden="true"></span>
+                        <span class="tt-core">
+                            <i class="fas fa-sun"></i>
+                        </span>
                     </button>
                 </div>
             </div>
@@ -927,7 +952,28 @@
                             <span class="pill" data-tr="skills.languages.english" style="--i:1">İngilizce (B2 - Profesyonel Yeterlilik)</span>
                         </div>
                     </div>
-                    <div class="term-block">
+                    <div class="term-block term-summary">
+                        <div class="term-cmd"><span class="term-cat-icon">📊</span><span class="term-prompt">$</span> wc -l <span class="term-file">*.txt</span></div>
+                        <div class="term-output term-summary-out">
+                            <div class="term-sum-stat">
+                                <span class="sm-num" id="skillTotal" data-count="42">—</span>
+                                <span class="sm-unit" data-tr="skills.summary.unit">yetenek</span>
+                            </div>
+                            <div class="term-sum-stat">
+                                <span class="sm-num">6</span>
+                                <span class="sm-unit" data-tr="skills.summary.files">dosya</span>
+                            </div>
+                            <div class="term-sum-stat">
+                                <span class="sm-num"><span id="skillAdvanced">—</span><span class="sm-num-slash">/</span><span id="skillTotalMini">—</span></span>
+                                <span class="sm-unit" data-tr="skills.summary.advanced">ileri</span>
+                            </div>
+                            <div class="term-sum-stat sm-status">
+                                <span class="sm-status-dot"></span>
+                                <span class="sm-label" data-tr="skills.summary.compiled">derlendi</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="term-block term-end">
                         <div class="term-cmd"><span class="term-prompt">$</span> <span class="term-cursor">_</span></div>
                     </div>
                 </div>
@@ -1061,6 +1107,6 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <script src="script.js?v=26"></script>
+    <script src="script.js?v=28"></script>
 </body>
 </html>
