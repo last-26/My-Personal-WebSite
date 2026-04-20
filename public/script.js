@@ -40,7 +40,7 @@ const translations = {
         "hero.btn.cv.view": "CV Görüntüle",
         "hero.btn.cv.download": "CV İndir",
         "about.title": "Hakkımda",
-        "about.intro": "<span class='kw'>Yapay Zeka</span>, <span class='kw'>NLP</span> ve <span class='kw'>Büyük Dil Modelleri</span> alanlarında uzmanlaşmış, sonuç odaklı bir Bilgisayar Mühendisiyim.",
+        "about.intro": "Uçtan uca <span class='kw'>AI sistemleri</span> tasarlıyorum — veriden modele, prototipten üretime, <span class='kw'>ölçeklenebilir</span> ve ölçülebilir.",
         "about.description": "Eskişehir Osmangazi Üniversitesi Bilgisayar Mühendisliği mezunuyum. Uçtan uca <span class='kw'>AI mimarileri</span>, yüksek performanslı <span class='kw'>RAG pipeline</span>'ları ve <span class='kw'>Multi-LLM</span> orkestrasyonları tasarlama konusunda kanıtlanmış deneyime sahibim. Temel gücüm, karmaşık makine öğrenmesi modellerini ölçeklenebilir <span class='kw'>full-stack</span> geliştirme (<span class='kw'>React</span>, <span class='kw'>FastAPI</span>, <span class='kw'>PostgreSQL</span>) ile birleştirerek milisaniye düzeyinde gecikme ve <span class='kw'>%95+ doğruluk</span> oranıyla veri odaklı çözümler sunmaktır.",
         "about.stats.years": "Yıl Deneyim",
         "about.stats.projects": "Tamamlanan Proje",
@@ -58,18 +58,41 @@ const translations = {
         "education.cert.b2.btn": "B2 Sertifikası",
         "experience.title": "Deneyim",
         "experience.certificate": "Sertifika",
+        "experience.more": "Daha fazla göster",
+        "experience.less": "Daha az göster",
+        "experience.achievementsLabel": "ÖNEMLİ KAZANIMLAR",
         "experience.icictas.title": "Yazılım Geliştirme Stajyeri",
         "experience.icictas.company": "<a href='https://www.ictasnukleer.com.tr' target='_blank' class='company-link'>IC İçtaş Nükleer ve Endüstriyel Tesisler İnşaat A.Ş.</a>",
         "experience.icictas.date": "Oca 2026",
         "experience.icictas.desc": "Akkuyu Nükleer Santral sahasından gelen verileri analiz etmek için React.js, FastAPI ve PostgreSQL kullanarak uçtan uca İSG Takip Paneli geliştirdim. Backend tarafında Passlib ve JWT ile güvenli kimlik doğrulama sistemleri kurarken, SQLAlchemy ORM ile veritabanı yönetimini optimize ettim. Ayrıca yüksek kardinaliteli verilerde B-tree indeksleme stratejileri uygulayarak sorgu performansını artırdım ve Material UI ile yöneticiler için gerçek zamanlı analitik dashboard'lar tasarladım.",
+        "experience.icictas.metrics.1": "Full-stack stack",
+        "experience.icictas.metrics.2": "Gerçek zamanlı dashboard",
+        "experience.icictas.metrics.3": "B-tree indeksleme",
+        "experience.icictas.achievements.1": "Akkuyu Nükleer sahası için React + FastAPI ile uçtan uca İSG Takip Paneli geliştirdim.",
+        "experience.icictas.achievements.2": "Passlib ve JWT tabanlı güvenli kimlik doğrulama akışı kurdum.",
+        "experience.icictas.achievements.3": "SQLAlchemy ORM ile yazılmış sorgularda B-tree indeksleme uygulayarak performansı önemli ölçüde artırdım.",
+        "experience.icictas.achievements.4": "Material UI ile yöneticiler için gerçek zamanlı analitik dashboard'lar tasarladım.",
         "experience.tei.title": "Data Science & AI Stajyeri",
         "experience.tei.company": "<a href='https://www.tei.com.tr' target='_blank' class='company-link company-tei'>TEI – TUSAŞ Motor Sanayii A.Ş. | Eskişehir</a>",
         "experience.tei.date": "Ağu – Eyl 2025",
         "experience.tei.desc": "TEI bünyesinde izole ağlarda güvenli veri iletimi ve sistem mimarileri üzerine Ar-Ge çalışmaları yürüttüm. İnsan Kaynakları departmanı için LLM tabanlı 'SAMETEI' yapay zeka asistanının prototipleme sürecini yöneterek OpenRouter ve Local LLM entegrasyonlarını gerçekleştirdim. Ayrıca n8n ile finansal metrikleri analiz eden otonom iş akışları ve Playwright kullanarak e-ticaret süreçlerini otomatize eden RPA çözümleri geliştirdim.",
+        "experience.tei.metrics.1": "Multi-LLM prototip",
+        "experience.tei.metrics.2": "n8n otomasyonları",
+        "experience.tei.metrics.3": "İzole ağ Ar-Ge",
+        "experience.tei.achievements.1": "LLM tabanlı 'SAMETEI' İK asistanı prototipini OpenRouter + Local LLM entegrasyonuyla yönettim.",
+        "experience.tei.achievements.2": "n8n ile finansal metrikleri analiz eden otonom iş akışları geliştirdim.",
+        "experience.tei.achievements.3": "Playwright ile e-ticaret süreçlerini otomatize eden RPA çözümleri kurdum.",
+        "experience.tei.achievements.4": "İzole ağlarda güvenli veri iletimi üzerine Ar-Ge notları hazırladım.",
         "experience.powintec.title": "Part-Time Yazılım Geliştirici (Remote)",
         "experience.powintec.company": "Powintec Engineering | Wireless Charging of Small Electric Vehicles",
         "experience.powintec.date": "Tem 2023 – Tem 2025",
         "experience.powintec.desc": "Kablosuz şarj sistemlerinden gelen hizalama, sıcaklık ve verimlilik verilerini anlık olarak izlemek amacıyla React.js, TailwindCSS ve WebSockets tabanlı bir yönetim paneli hazırladım. WebSocket üzerinden gelen yoğun veri akışının UI performansını etkilememesi için state yönetimini optimize ederek milisaniye düzeyinde gecikme ile veri işleme sağladım. Donanım bağlantı kopmalarına karşı hata yönetim mekanizmaları geliştirerek sistem kararlılığını artırdım.",
+        "experience.powintec.metrics.1": "Kablosuz şarj UI",
+        "experience.powintec.metrics.2": "WebSocket stream",
+        "experience.powintec.metrics.3": "< ms latency",
+        "experience.powintec.achievements.1": "React + TailwindCSS + WebSocket tabanlı kablosuz şarj izleme paneli hazırladım.",
+        "experience.powintec.achievements.2": "Yüksek frekanslı WebSocket verisinde state yönetimini optimize ederek UI jank'ini giderdim.",
+        "experience.powintec.achievements.3": "Donanım bağlantı kopmalarına karşı hata yönetim mekanizmaları geliştirdim.",
         "skills.title": "Yetenekler",
         "skills.terminal.title": "samet@portfolyo:~/yetenekler",
         "skills.languages.turkish": "Türkçe (Ana Dil)",
@@ -82,10 +105,20 @@ const translations = {
         "projects.badge.devops": "DEVOPS",
         "projects.badge.agent": "AI AJAN",
         "projects.badge.mlops": "MLOPS",
+        "projects.badge.rl": "RL / TRADING",
+        "projects.status.live": "Canlı",
+        "projects.status.archive": "Arşiv",
+        "projects.status.wip": "Aktif geliştirme",
+        "projects.wip": "Şu an üzerinde çalışıyorum",
+        "projects.smtbot.subtitle": "Reinforcement Learning Trading Bot'u",
+        "projects.smtbot.description": "Kişisel trading deneyimimi pekiştirmeli öğrenme ile birleştiren uçtan uca bir bot. PPO + Stable Baselines3 ajanları Pine Script sinyallerinden özellik mühendisliği yapılmış veriler üzerinde eğitiliyor, walk-forward optimization ile out-of-sample dönemlerde doğrulanıyor ve MCP server aracılığıyla canlı sinyallere bağlanıyor. Kendi tecrübemi içselleştirmiş, ölçülebilir ve risk kontrollü bir otonom trader üretmeyi hedefliyor.",
+        "projects.smtbot.metric": "PPO · Stable Baselines3 · Walk-Forward Optimization",
         "projects.finsenti.subtitle": "Finansal Duygu Analizi MLOps Pipeline'ı",
         "projects.finsenti.description": "Finansal metin duygu analizi için uçtan uca MLOps pipeline'ı. FinBERT ve distilBERT modellerini LoRA adaptörleri ile fine-tune eder, deneyleri MLflow ile takip eder ve tahminleri FastAPI + Next.js ile sunar. FinBERT + LoRA modeli %91.1 doğruluk ve 0.90 F1 skoru elde etti.",
+        "projects.finsenti.metric": "%91.1 doğruluk · FinBERT + LoRA",
         "projects.nexthire.subtitle": "AI Destekli İş Başvuru Ajanı",
         "projects.nexthire.description": "LangGraph tabanlı çok adımlı AI agent sistemi. CV yükle, iş ilanı yapıştır — agent otomatik olarak ATS skoru hesaplar, eksik yetkinlikleri belirler, kişiselleştirilmiş ön yazı oluşturur ve başvuruyu kanban panosuna ekler. Multi-model routing ile maliyet-performans optimizasyonu sağlar.",
+        "projects.nexthire.metric": "LangGraph · Çoklu-model yönlendirme",
         "projects.awsai.subtitle": "AWS ile Akıllı Doküman Soru-Cevap Sistemi",
         "projects.awsai.description": "AWS bulut servisleri üzerine inşa edilmiş serverless doküman soru-cevap sistemi. PDF dokümanları S3'e yüklenir, Textract ile otomatik metin çıkarımı yapılır ve Bedrock üzerindeki Claude AI modeli ile doğal dilde sorulara yanıt verilir. API Gateway, Lambda, DynamoDB, SNS ve CDK ile tamamen Infrastructure as Code olarak tasarlanmıştır.",
         "projects.swiftlink.subtitle": "Hızlı & Modern URL Kısaltma Servisi",
@@ -105,17 +138,51 @@ const translations = {
         "projects.link": "GitHub'da Görüntüle",
         "projects.link.gitlab": "GitLab'da Görüntüle",
         "contact.title": "İletişim",
+        "contact.eyebrow": "İLETİŞİME GEÇ",
+        "contact.statement.line1": "Birlikte bir şey",
+        "contact.statement.line2": "inşa edelim.",
+        "contact.lead": "Yeni fırsatlara ve işbirliklerine her zaman açığım. Hızla dönüş yaparım.",
+        "contact.copy": "kopyala",
         "contact.email.copied": "Email kopyalandı!",
-        "visitor.header": "Ziyaretçiler",
-        "visitor.total": "TOPLAM",
-        "visitor.daily": "GÜNLÜK",
+        "hero.meta.role": "ROL",
+        "hero.meta.location": "KONUM",
+        "hero.meta.time": "YEREL SAAT",
+        "hero.meta.status": "DURUM",
+        "hero.meta.available": "Çalışmaya hazır",
+        "hero.scroll": "KAYDIR",
+        "about.eyebrow": "KİMİM",
+        "about.stats.metayears": "DENEYİM",
+        "about.stats.metaprojects": "TAMAMLANAN",
+        "about.stats.metatech": "STACK",
+        "about.specs.ataGlance": "ÖZET",
+        "about.specs.basedIn": "LOKASYON",
+        "about.specs.basedInVal": "Eskişehir, Türkiye",
+        "about.specs.openTo": "AÇIK OLDUĞUM",
+        "about.specs.openToVal": "Tam Zamanlı · Sözleşmeli · Uzaktan",
+        "about.specs.focus": "ODAK",
+        "about.specs.focusVal": "AI · ML · LLM · Production",
+        "education.badge.bsc": "LİSANS",
+        "education.badge.lang": "DİL",
+        "skills.terminal.status": "bağlı",
+        "visitor.header": "Ziyaretçi",
+        "visitor.total": "toplam",
+        "visitor.daily": "bugün",
         "visitor.weekly": "SON 7 GÜN",
+        "visitor.weekly.cta": "7 günlük dağılımı gör",
         "visitor.reset.note": "Veriler 16 Mart 2026 tarihinde sıfırlanmıştır.",
         "footer.tagline": "AI/ML & Cloud çözümleri ile geleceği inşa ediyorum.",
+        "footer.signature": "Görüşmek üzere.",
+        "footer.uptop": "Başa dön",
+        "footer.status": "Yeni fırsatlara açık",
         "footer.nav.title": "Sayfalar",
         "footer.social.title": "Bağlantılar",
+        "footer.meta.title": "Meta",
+        "footer.meta.time": "Yerel saat",
+        "footer.meta.loc": "Konum",
+        "footer.meta.stack": "Stack",
+        "footer.meta.host": "Hosting",
         "footer.copyright": "© 2026 Samet Soysal. Tüm hakları saklıdır.",
-        "footer.made": "Tutkuyla kodlanmıştır ❤️"
+        "footer.made": "Tutkuyla kodlanmıştır"
     },
     en: {
         "nav.about": "About",
@@ -134,7 +201,7 @@ const translations = {
         "hero.btn.cv.view": "View CV",
         "hero.btn.cv.download": "Download CV",
         "about.title": "About Me",
-        "about.intro": "A results-driven Computer Engineer specializing in <span class='kw'>Artificial Intelligence</span>, <span class='kw'>NLP</span> & <span class='kw'>Large Language Models</span>.",
+        "about.intro": "I design end-to-end <span class='kw'>AI systems</span> — from data to model, prototype to production, <span class='kw'>scalable</span> and measurable.",
         "about.description": "Graduated from Eskişehir Osmangazi University with a BSc in Computer Engineering. I have a proven track record of designing end-to-end <span class='kw'>AI architectures</span>, high-performance <span class='kw'>RAG pipelines</span>, and <span class='kw'>Multi-LLM</span> orchestrations. My core strength lies in bridging complex machine learning models with scalable <span class='kw'>full-stack</span> development (<span class='kw'>React</span>, <span class='kw'>FastAPI</span>, <span class='kw'>PostgreSQL</span>) to deliver data-driven solutions with millisecond-level latency and over <span class='kw'>95% accuracy</span>.",
         "about.stats.years": "Years of Experience",
         "about.stats.projects": "Completed Projects",
@@ -152,18 +219,41 @@ const translations = {
         "education.cert.b2.btn": "B2 Certificate",
         "experience.title": "Experience",
         "experience.certificate": "Certificate",
+        "experience.more": "Show more",
+        "experience.less": "Show less",
+        "experience.achievementsLabel": "KEY ACHIEVEMENTS",
         "experience.icictas.title": "Software Development Intern",
         "experience.icictas.company": "<a href='https://www.ictasnukleer.com.tr/en/' target='_blank' class='company-link'>IC Ictas Nuclear and Industrial Facilities Construction Inc.</a>",
         "experience.icictas.date": "Jan 2026",
         "experience.icictas.desc": "I developed an end-to-end OHS Tracking Panel using React.js, FastAPI, and PostgreSQL to analyze data from the Akkuyu Nuclear Power Plant site. I implemented secure authentication systems using Passlib and JWT on the backend, while optimizing database management with SQLAlchemy ORM. Additionally, I improved query performance by applying B-tree indexing strategies on high-cardinality data and designed real-time analytical dashboards for managers using Material UI.",
+        "experience.icictas.metrics.1": "Full-stack stack",
+        "experience.icictas.metrics.2": "Real-time dashboard",
+        "experience.icictas.metrics.3": "B-tree indexed",
+        "experience.icictas.achievements.1": "Built an end-to-end OHS Tracking Panel for the Akkuyu Nuclear site with React + FastAPI.",
+        "experience.icictas.achievements.2": "Implemented secure authentication flow using Passlib and JWT.",
+        "experience.icictas.achievements.3": "Optimized SQLAlchemy ORM queries with B-tree indexing for substantial perf gains.",
+        "experience.icictas.achievements.4": "Designed real-time analytical dashboards for managers with Material UI.",
         "experience.tei.title": "Data Science & AI Intern",
         "experience.tei.company": "<a href='https://www.tei.com.tr/en' target='_blank' class='company-link company-tei'>TEI – TUSAS Engine Industries Inc. | Eskisehir, Turkey</a>",
         "experience.tei.date": "Aug – Sep 2025",
         "experience.tei.desc": "I conducted R&D on secure data transmission and system architectures in isolated networks at TEI. I managed the prototyping process of 'SAMETEI', an LLM-based AI assistant for the HR department, integrating OpenRouter and Local LLMs. Furthermore, I developed autonomous workflows for financial metric analysis using n8n and created RPA solutions using Playwright to automate e-commerce processes.",
+        "experience.tei.metrics.1": "Multi-LLM prototype",
+        "experience.tei.metrics.2": "n8n automations",
+        "experience.tei.metrics.3": "Isolated-network R&D",
+        "experience.tei.achievements.1": "Led the 'SAMETEI' HR LLM assistant prototype with OpenRouter + Local LLM integration.",
+        "experience.tei.achievements.2": "Built autonomous n8n workflows for financial metric analysis.",
+        "experience.tei.achievements.3": "Delivered Playwright-based RPA solutions for e-commerce automation.",
+        "experience.tei.achievements.4": "Produced R&D notes on secure data transmission in isolated networks.",
         "experience.powintec.title": "Part-Time Software Developer (Remote)",
         "experience.powintec.company": "Powintec Engineering | Wireless Charging of Small Electric Vehicles",
         "experience.powintec.date": "Jul 2023 – Jul 2025",
         "experience.powintec.desc": "I built a management dashboard based on React.js, TailwindCSS, and WebSockets to monitor alignment, temperature, and efficiency data from wireless charging systems in real-time. I optimized state management to handle intense WebSocket data streams without compromising UI performance, ensuring low-latency data processing. I also improved system stability by developing error handling mechanisms against hardware connection drops.",
+        "experience.powintec.metrics.1": "Wireless-charging UI",
+        "experience.powintec.metrics.2": "WebSocket stream",
+        "experience.powintec.metrics.3": "< ms latency",
+        "experience.powintec.achievements.1": "Shipped a React + TailwindCSS + WebSocket dashboard for live wireless-charging telemetry.",
+        "experience.powintec.achievements.2": "Optimized state management on high-frequency WebSocket traffic, eliminating UI jank.",
+        "experience.powintec.achievements.3": "Hardened the app with error-handling mechanisms against hardware disconnects.",
         "skills.title": "Skills",
         "skills.terminal.title": "samet@portfolio:~/skills",
         "skills.languages.turkish": "Turkish (Native)",
@@ -176,10 +266,20 @@ const translations = {
         "projects.badge.devops": "DEVOPS",
         "projects.badge.agent": "AI AGENT",
         "projects.badge.mlops": "MLOPS",
+        "projects.badge.rl": "RL / TRADING",
+        "projects.status.live": "Live",
+        "projects.status.archive": "Archive",
+        "projects.status.wip": "In active development",
+        "projects.wip": "Currently building",
+        "projects.smtbot.subtitle": "Reinforcement Learning Trading Bot",
+        "projects.smtbot.description": "An end-to-end trading bot that fuses my own discretionary experience with reinforcement learning. PPO agents on Stable Baselines3 train on features engineered from Pine Script signals, get validated across out-of-sample walk-forward windows, and stream live decisions through an MCP server. The goal: a measurable, risk-aware autonomous trader that has internalized the way I read markets.",
+        "projects.smtbot.metric": "PPO · Stable Baselines3 · Walk-Forward Optimization",
         "projects.finsenti.subtitle": "Financial Sentiment Analysis MLOps Pipeline",
         "projects.finsenti.description": "End-to-end MLOps pipeline for financial sentiment analysis. Fine-tunes FinBERT and distilBERT with LoRA adapters, tracks experiments with MLflow, and serves predictions via FastAPI + Next.js. FinBERT + LoRA model achieved 91.1% accuracy and 0.90 F1 score.",
+        "projects.finsenti.metric": "91.1% accuracy · FinBERT + LoRA",
         "projects.nexthire.subtitle": "AI-Powered Job Application Agent",
         "projects.nexthire.description": "Multi-step AI agent system built with LangGraph. Upload your CV, paste a job posting — the agent automatically calculates ATS score, identifies skill gaps, generates a personalized cover letter, and adds the application to a kanban board. Optimizes cost-performance with multi-model routing.",
+        "projects.nexthire.metric": "LangGraph · Multi-model routing",
         "projects.awsai.subtitle": "Intelligent Document Q&A System on AWS",
         "projects.awsai.description": "Serverless document question-answering system built on AWS cloud services. PDFs are uploaded to S3, text is automatically extracted via Textract, and Claude AI model on Bedrock answers natural language questions. Fully designed as Infrastructure as Code with API Gateway, Lambda, DynamoDB, SNS, and CDK.",
         "projects.swiftlink.subtitle": "Fast & Modern URL Shortener Service",
@@ -199,17 +299,51 @@ const translations = {
         "projects.link": "View on GitHub",
         "projects.link.gitlab": "View on GitLab",
         "contact.title": "Contact",
+        "contact.eyebrow": "GET IN TOUCH",
+        "contact.statement.line1": "Let's build",
+        "contact.statement.line2": "something together.",
+        "contact.lead": "I'm always open to new opportunities and collaborations. I get back to you fast.",
+        "contact.copy": "copy",
         "contact.email.copied": "Email copied!",
+        "hero.meta.role": "ROLE",
+        "hero.meta.location": "LOCATION",
+        "hero.meta.time": "LOCAL TIME",
+        "hero.meta.status": "STATUS",
+        "hero.meta.available": "Available for work",
+        "hero.scroll": "SCROLL",
+        "about.eyebrow": "WHO I AM",
+        "about.stats.metayears": "EXPERIENCE",
+        "about.stats.metaprojects": "SHIPPED",
+        "about.stats.metatech": "STACK",
+        "about.specs.ataGlance": "AT A GLANCE",
+        "about.specs.basedIn": "BASED IN",
+        "about.specs.basedInVal": "Eskisehir, Türkiye",
+        "about.specs.openTo": "OPEN TO",
+        "about.specs.openToVal": "Full-time · Contract · Remote",
+        "about.specs.focus": "FOCUS",
+        "about.specs.focusVal": "AI · ML · LLM · Production",
+        "education.badge.bsc": "BSc",
+        "education.badge.lang": "LANG",
+        "skills.terminal.status": "connected",
         "visitor.header": "Visitors",
-        "visitor.total": "TOTAL",
-        "visitor.daily": "DAILY",
+        "visitor.total": "total",
+        "visitor.daily": "today",
         "visitor.weekly": "LAST 7 DAYS",
+        "visitor.weekly.cta": "View 7-day breakdown",
         "visitor.reset.note": "Data was reset on March 16, 2026.",
         "footer.tagline": "Building the future with AI/ML & Cloud solutions.",
+        "footer.signature": "See you on the next build.",
+        "footer.uptop": "Back to top",
+        "footer.status": "Open to new opportunities",
         "footer.nav.title": "Pages",
         "footer.social.title": "Connect",
+        "footer.meta.title": "Meta",
+        "footer.meta.time": "Local time",
+        "footer.meta.loc": "Location",
+        "footer.meta.stack": "Stack",
+        "footer.meta.host": "Hosting",
         "footer.copyright": "© 2026 Samet Soysal. All rights reserved.",
-        "footer.made": "Coded with passion ❤️"
+        "footer.made": "Coded with passion"
     }
 };
 
@@ -356,7 +490,7 @@ const countUpStats = () => {
 
 // Nav scroll effect
 const navScrollFn = () => {
-    const nav = document.getElementById('mainNav');
+    const nav = document.getElementById('navbar') || document.querySelector('nav');
     if (nav) {
         if (window.scrollY > 50) {
             nav.classList.add('scrolled');
@@ -1261,12 +1395,12 @@ async function initWeeklyVisitorChart() {
             dataPoints.push(count);
         }
 
-        // Check if there is any data to show (to avoid empty chart)
+        // Render the chart inline if we have data. Hide the container if not.
         if (dataPoints.some(count => count > 0)) {
-            chartContainer.style.display = 'block';
-            setTimeout(() => chartContainer.classList.add('show'), 150);
-
             renderWeeklyChart(ctx.getContext('2d'), labels, dataPoints);
+            chartContainer.classList.add('show');
+        } else {
+            chartContainer.style.display = 'none';
         }
 
     } catch (error) {
@@ -1279,12 +1413,12 @@ function renderWeeklyChart(ctx, labels, data) {
     const isLightMode = document.body.classList.contains('light-mode');
     
     // Theme colors
-    const textColor = isLightMode ? '#36322f' : '#94a3b8';
+    const textColor = isLightMode ? '#24211e' : '#a8acbe';
     const gridColor = isLightMode ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.05)';
-    const barGradientStart = isLightMode ? '#6d28d9' : '#2dd4bf';
-    const barGradientEnd = isLightMode ? '#8b5cf6' : '#14b8a6';
+    const barGradientStart = isLightMode ? '#7c3aed' : '#2dd4bf';
+    const barGradientEnd = isLightMode ? '#2dd4bf' : '#7c3aed';
 
-    // Create gradient
+    // Create gradient (vertical → bar top to bottom)
     const gradient = ctx.createLinearGradient(0, 0, 0, 80);
     gradient.addColorStop(0, barGradientStart);
     gradient.addColorStop(1, barGradientEnd);
@@ -1313,10 +1447,10 @@ function renderWeeklyChart(ctx, labels, data) {
             plugins: {
                 legend: { display: false },
                 tooltip: {
-                    backgroundColor: isLightMode ? '#ffffff' : 'rgba(15,23,42,0.9)',
-                    titleColor: isLightMode ? '#1a1816' : '#f8fafc',
-                    bodyColor: isLightMode ? '#6d28d9' : '#2dd4bf',
-                    borderColor: isLightMode ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.1)',
+                    backgroundColor: isLightMode ? '#14110e' : 'rgba(15,23,42,0.9)',
+                    titleColor: isLightMode ? '#ffffff' : '#f8fafc',
+                    bodyColor: isLightMode ? '#ffffff' : '#2dd4bf',
+                    borderColor: isLightMode ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.1)',
                     borderWidth: 1,
                     padding: 8,
                     displayColors: false,
@@ -1367,14 +1501,14 @@ async function initProjectCounters() {
             .replace(/-+/g, '-')
             .replace(/^-|-$/g, '');
         
-        // Add click counter badge
-        const projectBody = card.querySelector('.project-body');
-        if (!projectBody) return;
-        
+        // Add click counter badge — prefer magazine meta row, fallback to project-body
+        const badgeHost = card.querySelector('.card-meta') || card.querySelector('.project-body');
+        if (!badgeHost) return;
+
         const badge = document.createElement('div');
         badge.className = 'project-click-badge';
         badge.innerHTML = '<i class="fas fa-eye"></i> <span class="click-count">0</span>';
-        projectBody.appendChild(badge);
+        badgeHost.appendChild(badge);
         
         // Initialize project counter in Firebase
         initProjectCounter(projectId, badge);
@@ -1760,15 +1894,18 @@ window.addEventListener('scroll', () => {
 // INITIALIZE ON DOM READY
 // ============================================
 document.addEventListener('DOMContentLoaded', async () => {
+    // Kick off page-load stagger on next frame
+    requestAnimationFrame(() => document.body.classList.add('is-loaded'));
+
     // Initialize all tracking systems
     await initVisitorCounter();
     await initProjectCounters();
     await trackUserBehavior();
     initAdminDashboard();
-    
+
     // Initialize certificate button
     initCertificateButton();
-    
+
     // Initialize CV tracking buttons
     initCVTracking();
 });
@@ -1873,3 +2010,364 @@ window.closeEnglishCertModal = function() {
 
 // Expose close function to window for onclick
 window.closeCertificate = closeCertificateModal;
+
+// ============================================
+// Turn 1 — Hero microinteractions
+// ============================================
+(function initHeroMicro(){
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // --- Local time (Istanbul) ---
+    const localTimeEl = document.getElementById('localTime');
+    if (localTimeEl){
+        const fmt = new Intl.DateTimeFormat('en-GB',{
+            hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Europe/Istanbul'
+        });
+        const tick = () => { localTimeEl.textContent = fmt.format(new Date()) + ' GMT+3'; };
+        tick(); setInterval(tick, 30000);
+    }
+
+    if (reduced) return;
+
+    // --- Magnetic buttons ---
+    const magnets = document.querySelectorAll('[data-magnetic]');
+    magnets.forEach((el) => {
+        let raf = null;
+        const onMove = (e) => {
+            const r = el.getBoundingClientRect();
+            const cx = r.left + r.width/2;
+            const cy = r.top + r.height/2;
+            const dx = e.clientX - cx;
+            const dy = e.clientY - cy;
+            const dist = Math.hypot(dx, dy);
+            if (dist > 90) return;
+            if (raf) cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(() => {
+                el.style.transform = `translate(${dx*0.22}px, ${dy*0.22}px)`;
+            });
+        };
+        const onLeave = () => {
+            if (raf) cancelAnimationFrame(raf);
+            el.style.transform = '';
+        };
+        el.addEventListener('mousemove', onMove);
+        el.addEventListener('mouseleave', onLeave);
+    });
+
+    // --- Orb scroll parallax (uses margin-top to avoid clobbering orbDrift transform) ---
+    const orbs = document.querySelectorAll('.gradient-orb');
+    if (orbs.length){
+        const speeds = [-0.14, 0.09, -0.06];
+        let orbRaf = null;
+        const applyParallax = () => {
+            const y = window.scrollY;
+            orbs.forEach((orb, i) => {
+                const s = speeds[i % speeds.length];
+                orb.style.marginTop = `${y * s}px`;
+            });
+            orbRaf = null;
+        };
+        window.addEventListener('scroll', () => {
+            if (orbRaf) return;
+            orbRaf = requestAnimationFrame(applyParallax);
+        }, { passive:true });
+        applyParallax();
+    }
+})();
+
+// ============================================
+// Turn 2 — Terminal typing reveal
+// ============================================
+(function initTerminalTyping(){
+    const blocks = document.querySelectorAll('#skills .term-block');
+    if (!blocks.length) return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    blocks.forEach((b, i) => {
+        b.setAttribute('data-type-ready','');
+        b.style.setProperty('--type-delay', `${i * 0.18}s`);
+    });
+
+    if (reduced){
+        blocks.forEach(b => b.classList.add('term-animated'));
+        return;
+    }
+
+    if (!('IntersectionObserver' in window)){
+        blocks.forEach(b => b.classList.add('term-animated'));
+        return;
+    }
+
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('term-animated');
+            io.unobserve(entry.target);
+        });
+    }, { threshold: 0.2, rootMargin: '0px 0px -80px 0px' });
+
+    blocks.forEach(b => io.observe(b));
+})();
+
+/* ── EXPERIENCE: expand/collapse cards ── */
+(function initRoadmapExpand(){
+    const buttons = document.querySelectorAll('.roadmap-more-btn');
+    if (!buttons.length) return;
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const card = btn.closest('.roadmap-card');
+            if (!card) return;
+            const extra = card.querySelector('.roadmap-extra');
+            if (!extra) return;
+            const isOpen = btn.getAttribute('aria-expanded') === 'true';
+            const label = btn.querySelector('span');
+            const lang = (typeof currentLang !== 'undefined' ? currentLang : (localStorage.getItem('preferredLang') || 'tr'));
+            const dict = (typeof translations !== 'undefined' && translations[lang]) || {};
+            if (isOpen){
+                extra.setAttribute('hidden','');
+                btn.setAttribute('aria-expanded','false');
+                if (label) {
+                    label.textContent = dict['experience.more'] || (lang === 'tr' ? 'Daha fazla göster' : 'Show more');
+                    label.setAttribute('data-tr','experience.more');
+                }
+            } else {
+                extra.removeAttribute('hidden');
+                btn.setAttribute('aria-expanded','true');
+                if (label) {
+                    label.textContent = dict['experience.less'] || (lang === 'tr' ? 'Daha az göster' : 'Show less');
+                    label.setAttribute('data-tr','experience.less');
+                }
+            }
+        });
+    });
+})();
+
+/* ── EXPERIENCE: scroll progress dot on timeline ── */
+(function initRoadmapProgress(){
+    const dot = document.querySelector('.experience-progress-dot');
+    const roadmap = document.querySelector('.experience-roadmap');
+    if (!dot || !roadmap) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced){ dot.style.display = 'none'; return; }
+
+    let ticking = false;
+    const update = () => {
+        const rect = roadmap.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const startOffset = 40;
+        const totalTrack = Math.max(0, rect.height - startOffset * 2);
+
+        const viewCenter = vh * 0.45;
+        const passed = viewCenter - rect.top - startOffset;
+        const ratio = Math.max(0, Math.min(1, passed / totalTrack));
+
+        if (rect.bottom < 0 || rect.top > vh){
+            dot.classList.remove('active');
+        } else {
+            dot.classList.add('active');
+            dot.style.top = (startOffset + ratio * totalTrack) + 'px';
+        }
+        ticking = false;
+    };
+
+    const onScroll = () => {
+        if (!ticking){
+            requestAnimationFrame(update);
+            ticking = true;
+        }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+})();
+
+/* ═══════════════════════════════════════════════════════════════════
+   SMTbot showcase — live BTC/USDT chart + ticker from Binance public API
+   ═══════════════════════════════════════════════════════════════════ */
+(function initSMTbotLiveBTC(){
+    const chartLine = document.querySelector('.showcase-chart-line');
+    const chartFill = document.querySelector('.showcase-chart-fill');
+    const chartTip  = document.querySelector('.showcase-chart-tip');
+    const chartHalo = document.querySelector('.showcase-chart-tip-halo');
+    const hiLine    = document.querySelector('.chart-hi-line');
+    const loLine    = document.querySelector('.chart-lo-line');
+    const hiMarker  = document.querySelector('.chart-hi-marker');
+    const loMarker  = document.querySelector('.chart-lo-marker');
+    const hiLabel   = document.querySelector('.chart-hi-label');
+    const loLabel   = document.querySelector('.chart-lo-label');
+    const hiValEl   = document.getElementById('sc-hi-val');
+    const loValEl   = document.getElementById('sc-lo-val');
+    const hiTimeEl  = document.getElementById('sc-hi-time');
+    const loTimeEl  = document.getElementById('sc-lo-time');
+    const priceEl   = document.getElementById('sc-btc-price');
+    const changeEl  = document.getElementById('sc-btc-change');
+    const highEl    = document.getElementById('sc-btc-high');
+    const lowEl     = document.getElementById('sc-btc-low');
+    const volEl     = document.getElementById('sc-btc-vol');
+    if (!chartLine || !priceEl) return;
+
+    // Last 24h @ 30-min resolution: 48 × 30m = 1440 min
+    const KLINES = 'https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=30m&limit=48';
+    const TICKER = 'https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT';
+
+    const W = 200, H = 100, yTop = 8, yBot = 92;
+    let chartMin = 0, chartMax = 1;
+    let lastPrice = null;
+    let bars = [];              // [{openTime, close, high, low}]
+    let hiBarX = 0, loBarX = 0; // viewBox x positions of the extreme bars
+
+    const fmtUSD0 = n => '$' + Number(n).toLocaleString('en-US', { maximumFractionDigits: 0 });
+    const fmtPct  = n => (n >= 0 ? '+' : '') + Number(n).toFixed(2) + '%';
+    const fmtBigB = n => {
+        const v = Number(n);
+        if (v >= 1e9) return (v / 1e9).toFixed(2) + 'B';
+        if (v >= 1e6) return (v / 1e6).toFixed(1) + 'M';
+        if (v >= 1e3) return (v / 1e3).toFixed(1) + 'K';
+        return v.toFixed(0);
+    };
+    const fmtTime = ms => {
+        const d = new Date(ms);
+        const hh = String(d.getHours()).padStart(2,'0');
+        const mm = String(d.getMinutes()).padStart(2,'0');
+        return hh + ':' + mm;
+    };
+    const priceToY = p => {
+        const range = (chartMax - chartMin) || 1;
+        const clamped = Math.max(chartMin, Math.min(chartMax, p));
+        return yBot - ((clamped - chartMin) / range) * (yBot - yTop);
+    };
+    const setTip = (cx, cy) => {
+        if (chartTip){ chartTip.setAttribute('cx', cx); chartTip.setAttribute('cy', cy); }
+        if (chartHalo){ chartHalo.setAttribute('cx', cx); chartHalo.setAttribute('cy', cy); }
+    };
+
+    function renderLine(){
+        if (!bars.length) return;
+        const n = bars.length;
+        const pts = bars.map((b, i) => {
+            const x = (i / (n - 1)) * W;
+            const y = priceToY(b.close);
+            return x.toFixed(2) + ',' + y.toFixed(2);
+        });
+        // Extend the line/fill to the live price at x=W so the tip always sits on it
+        if (lastPrice !== null){
+            pts[pts.length - 1] = W.toFixed(2) + ',' + priceToY(lastPrice).toFixed(2);
+        }
+        const lineD = 'M' + pts.join(' L');
+        const fillD = lineD + ' L' + W + ',' + H + ' L0,' + H + ' Z';
+        chartLine.setAttribute('d', lineD);
+        if (chartFill) chartFill.setAttribute('d', fillD);
+
+        // H/L lines, markers, labels — using kline-derived 24h extremes
+        const hiBar = bars.reduce((a, b) => b.high > a.high ? b : a, bars[0]);
+        const loBar = bars.reduce((a, b) => b.low  < a.low  ? b : a, bars[0]);
+        const hiIdx = bars.indexOf(hiBar);
+        const loIdx = bars.indexOf(loBar);
+        hiBarX = (hiIdx / (n - 1)) * W;
+        loBarX = (loIdx / (n - 1)) * W;
+        const hiY = priceToY(hiBar.high);
+        const loY = priceToY(loBar.low);
+        if (hiLine){ hiLine.setAttribute('y1', hiY); hiLine.setAttribute('y2', hiY); }
+        if (loLine){ loLine.setAttribute('y1', loY); loLine.setAttribute('y2', loY); }
+        if (hiMarker){
+            hiMarker.setAttribute('cx', hiBarX);
+            hiMarker.setAttribute('cy', hiY);
+            hiMarker.classList.add('visible');
+        }
+        if (loMarker){
+            loMarker.setAttribute('cx', loBarX);
+            loMarker.setAttribute('cy', loY);
+            loMarker.classList.add('visible');
+        }
+        if (hiValEl)  hiValEl.textContent  = fmtUSD0(hiBar.high);
+        if (loValEl)  loValEl.textContent  = fmtUSD0(loBar.low);
+        if (hiTimeEl) hiTimeEl.textContent = fmtTime(hiBar.openTime);
+        if (loTimeEl) loTimeEl.textContent = fmtTime(loBar.openTime);
+        if (hiLabel)  hiLabel.style.top = hiY + '%';
+        if (loLabel)  loLabel.style.top = loY + '%';
+
+        setTip(W, priceToY(lastPrice ?? bars[n - 1].close));
+    }
+
+    async function drawChart(){
+        try {
+            const res = await fetch(KLINES);
+            if (!res.ok) return;
+            const data = await res.json();
+            if (!data.length) return;
+            bars = data.map(k => ({
+                openTime: k[0],
+                high:  parseFloat(k[2]),
+                low:   parseFloat(k[3]),
+                close: parseFloat(k[4]),
+            }));
+            chartMin = Math.min(...bars.map(b => b.low));
+            chartMax = Math.max(...bars.map(b => b.high));
+            // Include live tick in window so the tip never clips
+            if (lastPrice !== null){
+                chartMin = Math.min(chartMin, lastPrice);
+                chartMax = Math.max(chartMax, lastPrice);
+            }
+            renderLine();
+            // Re-trigger draw-in animation
+            chartLine.style.animation = 'none';
+            void chartLine.getBoundingClientRect();
+            chartLine.style.animation = '';
+        } catch (e) { /* silent — keep static fallback */ }
+    }
+
+    async function drawTicker(){
+        try {
+            const res = await fetch(TICKER);
+            if (!res.ok) return;
+            const d = await res.json();
+            const price  = parseFloat(d.lastPrice);
+            const change = parseFloat(d.priceChangePercent);
+            const high   = parseFloat(d.highPrice);
+            const low    = parseFloat(d.lowPrice);
+            const vol    = parseFloat(d.quoteVolume);
+            if (priceEl){
+                priceEl.textContent = fmtUSD0(price);
+                if (lastPrice !== null && price !== lastPrice){
+                    const dir = price > lastPrice ? 'flash-up' : 'flash-dn';
+                    priceEl.classList.remove('flash-up','flash-dn');
+                    void priceEl.offsetWidth;
+                    priceEl.classList.add(dir);
+                }
+            }
+            if (changeEl){
+                changeEl.textContent = fmtPct(change);
+                changeEl.classList.toggle('neg', change < 0);
+                changeEl.classList.toggle('pos', change >= 0);
+            }
+            if (highEl) highEl.textContent = fmtUSD0(high);
+            if (lowEl)  lowEl.textContent  = fmtUSD0(low);
+            if (volEl)  volEl.textContent  = '$' + fmtBigB(vol);
+            lastPrice = price;
+            // Expand window if live price breaches our kline extents so nothing clips
+            if (price > chartMax) chartMax = price;
+            if (price < chartMin) chartMin = price;
+            if (bars.length) renderLine();
+        } catch (e) { /* silent */ }
+    }
+
+    drawChart();
+    drawTicker();
+    setInterval(drawChart, 20_000);
+    setInterval(drawTicker, 5_000);
+})();
+
+/* Footer live local-time ticker */
+(function initFooterClock(){
+    const el = document.getElementById('footerTime');
+    if (!el) return;
+    const pad = n => String(n).padStart(2, '0');
+    const tick = () => {
+        const d = new Date();
+        el.textContent = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+    };
+    tick();
+    setInterval(tick, 1000);
+})();

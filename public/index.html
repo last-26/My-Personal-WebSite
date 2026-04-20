@@ -8,9 +8,9 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=15">
+    <link rel="stylesheet" href="styles.css?v=32">
     
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -74,89 +74,99 @@
         </div>
         <div class="particles" id="particles"></div>
 
-        <!-- Visitor Counter -->
-        <div class="visitor-counter">
-            <div class="visitor-widget">
-                <div class="widget-glow"></div>
-                <div class="widget-header">
-                    <div class="widget-status">
-                        <span class="status-dot"></span>
-                        <span data-tr="visitor.header">Ziyaretçiler</span>
-                    </div>
-                    <i class="fas fa-chart-line widget-header-icon"></i>
+        <div class="hero-grid container">
+            <!-- Left column: editorial title stack -->
+            <div class="hero-main">
+                <h1 class="hero-title reveal">
+                    <span class="title-line title-glitch" data-text="SAMET">SAMET</span>
+                    <span class="title-line title-outline title-glitch" data-text="SOYSAL">SOYSAL</span>
+                </h1>
+                <p class="hero-subtitle reveal">
+                    <span data-tr="hero.subtitle.prefix">I specialize in</span>
+                    <span class="typewriter-wrapper"><span class="typewriter" id="typewriter"></span><span class="typewriter-cursor">|</span></span>
+                </p>
+                <p class="hero-desc reveal" data-tr="hero.description">
+                    RAG sistemleri, OCR teknolojileri ve çok modelli AI çözümleri geliştiriyorum.
+                    Kurumsal projelerde production-ready yapay zeka sistemleri tasarlama ve entegrasyon konularında uzmanım.
+                </p>
+                <div class="hero-buttons reveal">
+                    <a href="#projects" class="btn-hero btn-glow" data-magnetic>
+                        <i class="fas fa-rocket"></i> <span data-tr="hero.btn.projects">Projelerim</span>
+                    </a>
+                    <a href="https://github.com/last-26" target="_blank" class="btn-hero btn-outline" data-magnetic>
+                        <i class="fab fa-github"></i> <span data-tr="hero.btn.github">GitHub</span>
+                    </a>
+                    <a href="#contact" class="btn-hero btn-outline" data-magnetic>
+                        <i class="fas fa-paper-plane"></i> <span data-tr="hero.btn.contact">İletişim</span>
+                    </a>
                 </div>
-                <div class="widget-metrics">
-                    <div class="metric-card metric-total">
-                        <div class="metric-icon"><i class="fas fa-users"></i></div>
-                        <div class="metric-data">
-                            <span class="metric-value" id="visitorCount">0</span>
-                            <span class="metric-label" data-tr="visitor.total">TOTAL</span>
+                <div class="hero-buttons hero-buttons-cv reveal">
+                    <a href="#" id="cvViewBtn" class="btn-hero btn-ghost" target="_blank" data-magnetic>
+                        <i class="fas fa-eye"></i> <span data-tr="hero.btn.cv.view">CV Görüntüle</span>
+                    </a>
+                    <a href="#" id="cvDownloadBtn" class="btn-hero btn-ghost" download data-magnetic>
+                        <i class="fas fa-download"></i> <span data-tr="hero.btn.cv.download">CV İndir</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right column: editorial meta strip -->
+            <aside class="hero-meta reveal">
+                <div class="meta-row">
+                    <span class="meta-key" data-tr="hero.meta.role">ROLE</span>
+                    <span class="meta-val">AI / ML Engineer</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-key" data-tr="hero.meta.location">LOCATION</span>
+                    <span class="meta-val">Eskişehir, TR</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-key" data-tr="hero.meta.time">LOCAL TIME</span>
+                    <span class="meta-val" id="localTime">—</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-key" data-tr="hero.meta.status">STATUS</span>
+                    <span class="meta-val meta-live">
+                        <span class="meta-live-dot"></span>
+                        <span data-tr="hero.meta.available">Available for work</span>
+                    </span>
+                </div>
+
+                <div class="meta-divider"></div>
+
+                <!-- Compact visitor chip (preserves all analytic IDs) -->
+                <div class="visitor-counter">
+                    <div class="visitor-chip" id="visitorChip">
+                        <span class="chip-dot"></span>
+                        <span class="chip-label" data-tr="visitor.header">VISITORS</span>
+                        <span class="chip-sep">·</span>
+                        <span class="chip-num"><span id="visitorCount">0</span></span>
+                        <span class="chip-meta" data-tr="visitor.total">total</span>
+                        <span class="chip-sep">·</span>
+                        <span class="chip-num chip-num-accent">+<span id="dailyVisitorCount">0</span></span>
+                        <span class="chip-meta" data-tr="visitor.daily">today</span>
+                    </div>
+                    <div class="widget-chart widget-chart-inline" id="weeklyChartContainer">
+                        <div class="chart-header">
+                            <i class="fas fa-chart-bar"></i>
+                            <span data-tr="visitor.weekly">LAST 7 DAYS</span>
+                        </div>
+                        <div class="chart-canvas">
+                            <canvas id="weeklyVisitorChart"></canvas>
+                        </div>
+                        <div class="chart-note">
+                            <i class="fas fa-info-circle"></i>
+                            <span data-tr="visitor.reset.note">Veriler 16 Mart 2026 tarihinde sıfırlanmıştır.</span>
                         </div>
                     </div>
-                    <div class="metric-card metric-daily">
-                        <div class="metric-icon"><i class="fas fa-calendar-day"></i></div>
-                        <div class="metric-data">
-                            <span class="metric-value" id="dailyVisitorCount">0</span>
-                            <span class="metric-label" data-tr="visitor.daily">DAILY</span>
-                        </div>
-                    </div>
                 </div>
-                <div class="widget-chart" id="weeklyChartContainer" style="display:none;">
-                    <div class="chart-header">
-                        <i class="fas fa-chart-bar"></i>
-                        <span data-tr="visitor.weekly">LAST 7 DAYS</span>
-                    </div>
-                    <div class="chart-canvas">
-                        <canvas id="weeklyVisitorChart"></canvas>
-                    </div>
-                    <div class="chart-note">
-                        <i class="fas fa-info-circle"></i>
-                        <span data-tr="visitor.reset.note">Veriler 16 Mart 2026 tarihinde sıfırlanmıştır.</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="hero-content">
-            <div class="hero-tag reveal">
-                <span class="tag-dot pulse-dot"></span>
-                <span data-tr="hero.badge">AI/ML Mühendisi & Full-Stack Developer</span>
-            </div>
-            <h1 class="hero-title reveal">
-                <span class="title-line title-glitch" data-text="SAMET">SAMET</span>
-                <span class="title-line title-outline title-glitch" data-text="SOYSAL">SOYSAL</span>
-            </h1>
-            <p class="hero-subtitle">
-                <span data-tr="hero.subtitle.prefix">I specialize in</span>
-                <span class="typewriter-wrapper"><span class="typewriter" id="typewriter"></span><span class="typewriter-cursor">|</span></span>
-            </p>
-            <p class="hero-desc" data-tr="hero.description">
-                RAG sistemleri, OCR teknolojileri ve çok modelli AI çözümleri geliştiriyorum. 
-                Kurumsal projelerde production-ready yapay zeka sistemleri tasarlama ve entegrasyon konularında uzmanım.
-            </p>
-            <div class="hero-buttons">
-                <a href="#projects" class="btn-hero btn-glow">
-                    <i class="fas fa-rocket"></i> <span data-tr="hero.btn.projects">Projelerim</span>
-                </a>
-                <a href="https://github.com/last-26" target="_blank" class="btn-hero btn-outline">
-                    <i class="fab fa-github"></i> <span data-tr="hero.btn.github">GitHub</span>
-                </a>
-                <a href="#contact" class="btn-hero btn-outline">
-                    <i class="fas fa-paper-plane"></i> <span data-tr="hero.btn.contact">İletişim</span>
-                </a>
-            </div>
-            <div class="hero-buttons" style="margin-top: 8px;">
-                <a href="#" id="cvViewBtn" class="btn-hero btn-ghost" target="_blank">
-                    <i class="fas fa-eye"></i> <span data-tr="hero.btn.cv.view">CV Görüntüle</span>
-                </a>
-                <a href="#" id="cvDownloadBtn" class="btn-hero btn-ghost" download>
-                    <i class="fas fa-download"></i> <span data-tr="hero.btn.cv.download">CV İndir</span>
-                </a>
-            </div>
+            </aside>
         </div>
 
         <div class="scroll-indicator">
+            <span class="scroll-label" data-tr="hero.scroll">SCROLL</span>
             <div class="scroll-line"></div>
+            <span class="scroll-dot"></span>
         </div>
     </section>
 
@@ -167,9 +177,13 @@
                 <span class="section-tag">01</span>
                 <h2 class="section-title" data-tr="about.title">Hakkımda</h2>
             </div>
-            <div class="bento-grid">
-                <div class="bento-card bento-main reveal">
-                    <h3 class="about-intro" data-tr="about.intro"><span class="kw">Yapay Zeka</span>, <span class="kw">NLP</span> ve <span class="kw">Büyük Dil Modelleri</span> alanlarında uzmanlaşmış, sonuç odaklı bir Bilgisayar Mühendisiyim.</h3>
+            <div class="about-lede reveal">
+                <span class="about-eyebrow" data-tr="about.eyebrow">WHO I AM</span>
+                <h3 class="about-quote" data-tr="about.intro">Uçtan uca <span class="kw">AI sistemleri</span> tasarlıyorum — veriden modele, prototipten üretime, <span class="kw">ölçeklenebilir</span> ve ölçülebilir.</h3>
+            </div>
+
+            <div class="about-body">
+                <div class="about-prose reveal">
                     <p class="about-text" data-tr="about.description">
                         Eskişehir Osmangazi Üniversitesi Bilgisayar Mühendisliği mezunuyum.
                         Uçtan uca <span class="kw">AI mimarileri</span>, yüksek performanslı <span class="kw">RAG pipeline</span>'ları ve <span class="kw">Multi-LLM</span> orkestrasyonları tasarlama konusunda kanıtlanmış deneyime sahibim.
@@ -177,17 +191,74 @@
                         milisaniye düzeyinde gecikme ve <span class="kw">%95+ doğruluk</span> oranıyla veri odaklı çözümler sunmaktır.
                     </p>
                 </div>
-                <div class="bento-card bento-stat reveal">
-                    <div class="stat-value" data-count="2">0+</div>
-                    <div class="stat-text" data-tr="about.stats.years">Yıl Deneyim</div>
-                </div>
-                <div class="bento-card bento-stat reveal">
-                    <div class="stat-value" data-count="11">0+</div>
-                    <div class="stat-text" data-tr="about.stats.projects">Tamamlanan Proje</div>
-                </div>
-                <div class="bento-card bento-stat reveal">
-                    <div class="stat-value" data-count="25">0+</div>
-                    <div class="stat-text" data-tr="about.stats.technologies">Teknoloji</div>
+                <aside class="about-specs reveal">
+                    <div class="spec-group spec-group--nums">
+                        <span class="spec-label" data-tr="about.specs.ataGlance">AT A GLANCE</span>
+                        <ul class="spec-list">
+                            <li class="spec-row">
+                                <span class="spec-num stat-value" data-count="2">0+</span>
+                                <span class="spec-desc" data-tr="about.stats.years">Yıl Deneyim</span>
+                            </li>
+                            <li class="spec-row">
+                                <span class="spec-num stat-value" data-count="10">0+</span>
+                                <span class="spec-desc" data-tr="about.stats.projects">Tamamlanan Proje</span>
+                            </li>
+                            <li class="spec-row">
+                                <span class="spec-num stat-value" data-count="25">0+</span>
+                                <span class="spec-desc" data-tr="about.stats.technologies">Teknoloji</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="spec-group">
+                        <span class="spec-label" data-tr="about.specs.openTo">OPEN TO</span>
+                        <span class="spec-val" data-tr="about.specs.openToVal">Full-time · Contract · Remote</span>
+                    </div>
+                    <div class="spec-group">
+                        <span class="spec-label" data-tr="about.specs.focus">FOCUS</span>
+                        <span class="spec-val" data-tr="about.specs.focusVal">AI · ML · LLM · Production</span>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- Tech marquee -->
+            <div class="tech-marquee reveal" aria-hidden="true">
+                <div class="tech-track">
+                    <div class="tech-ribbon">
+                        <span class="tech-item">Python</span>
+                        <span class="tech-item">FastAPI</span>
+                        <span class="tech-item">React</span>
+                        <span class="tech-item">Next.js</span>
+                        <span class="tech-item">PostgreSQL</span>
+                        <span class="tech-item">Docker</span>
+                        <span class="tech-item">AWS</span>
+                        <span class="tech-item">LangGraph</span>
+                        <span class="tech-item">LangChain</span>
+                        <span class="tech-item">FinBERT</span>
+                        <span class="tech-item">Transformers</span>
+                        <span class="tech-item">MLflow</span>
+                        <span class="tech-item">OpenCV</span>
+                        <span class="tech-item">n8n</span>
+                        <span class="tech-item">TailwindCSS</span>
+                        <span class="tech-item">JWT</span>
+                    </div>
+                    <div class="tech-ribbon" aria-hidden="true">
+                        <span class="tech-item">Python</span>
+                        <span class="tech-item">FastAPI</span>
+                        <span class="tech-item">React</span>
+                        <span class="tech-item">Next.js</span>
+                        <span class="tech-item">PostgreSQL</span>
+                        <span class="tech-item">Docker</span>
+                        <span class="tech-item">AWS</span>
+                        <span class="tech-item">LangGraph</span>
+                        <span class="tech-item">LangChain</span>
+                        <span class="tech-item">FinBERT</span>
+                        <span class="tech-item">Transformers</span>
+                        <span class="tech-item">MLflow</span>
+                        <span class="tech-item">OpenCV</span>
+                        <span class="tech-item">n8n</span>
+                        <span class="tech-item">TailwindCSS</span>
+                        <span class="tech-item">JWT</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -200,37 +271,56 @@
                 <span class="section-tag">02</span>
                 <h2 class="section-title" data-tr="education.title">Eğitim</h2>
             </div>
-            <div style="display: flex; flex-direction: column; gap: 24px;">
-                <div class="education-card reveal">
+            <div class="education-list">
+                <article class="education-card reveal">
                     <div class="edu-icon-wrap"><i class="fas fa-graduation-cap"></i></div>
                     <div class="edu-content">
-                        <h3 class="edu-degree" data-tr="education.degree">Bilgisayar Mühendisliği Lisans</h3>
+                        <div class="edu-top">
+                            <h3 class="edu-degree" data-tr="education.degree">Bilgisayar Mühendisliği Lisans</h3>
+                            <span class="edu-badge" data-tr="education.badge.bsc">BSc</span>
+                        </div>
                         <p class="edu-school" data-tr="education.school">Eskişehir Osmangazi Üniversitesi</p>
-                        <p class="edu-date" data-tr="education.date">2020 - 2026</p>
                         <p class="edu-detail" data-tr="education.detail">Yapay Zeka, Makine Öğrenmesi ve Doğal Dil İşleme alanlarında uzmanlaşma. Mezuniyet projesi: HIREAI — AI destekli CV analiz platformu.</p>
+                        <div class="edu-timeline" aria-hidden="true">
+                            <div class="edu-timeline-track">
+                                <div class="edu-timeline-fill" style="--fill-start:0%;--fill-end:100%"></div>
+                            </div>
+                            <div class="edu-timeline-labels">
+                                <span>2020</span><span>2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>2026</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </article>
 
-                <div class="education-card reveal">
+                <article class="education-card reveal">
                     <div class="edu-icon-wrap"><i class="fas fa-language"></i></div>
                     <div class="edu-content">
-                        <h3 class="edu-degree" data-tr="education.cert.title">İngilizce Dil Okulları</h3>
+                        <div class="edu-top">
+                            <h3 class="edu-degree" data-tr="education.cert.title">İngilizce Dil Okulları</h3>
+                            <span class="edu-badge" data-tr="education.badge.lang">LANG</span>
+                        </div>
                         <p class="edu-school" data-tr="education.cert.school">American Cultural Language Schools</p>
-                        <p class="edu-date" data-tr="education.cert.date">2022 - 2024</p>
                         <p class="edu-detail" data-tr="education.cert.detail">Okuma, yazma, dinleme ve konuşma (Spoken Interaction & Production) alanlarında profesyonel yeterlilik eğitimi ve sertifikasyonu.</p>
-                        
-                        <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px;">
-                            <button class="certificate-btn" onclick="showEnglishCertModal('c1.jpg')" type="button">
+                        <div class="edu-timeline" aria-hidden="true">
+                            <div class="edu-timeline-track">
+                                <div class="edu-timeline-fill" style="--fill-start:28.5%;--fill-end:71.5%"></div>
+                            </div>
+                            <div class="edu-timeline-labels">
+                                <span>2020</span><span>2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>2026</span>
+                            </div>
+                        </div>
+                        <div class="edu-proofs">
+                            <button class="proof-chip" onclick="showEnglishCertModal('c1.jpg')" type="button">
                                 <i class="fas fa-award"></i>
                                 <span data-tr="education.cert.c1.btn">C1 Sertifikası</span>
                             </button>
-                            <button class="certificate-btn" onclick="showEnglishCertModal('b2.jpg')" type="button" style="background: linear-gradient(135deg, var(--accent), var(--accent-6)); box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);">
+                            <button class="proof-chip" onclick="showEnglishCertModal('b2.jpg')" type="button">
                                 <i class="fas fa-award"></i>
                                 <span data-tr="education.cert.b2.btn">B2 Sertifikası</span>
                             </button>
                         </div>
                     </div>
-                </div>
+                </article>
             </div>
         </div>
     </section>
@@ -253,9 +343,12 @@
                 <h2 class="section-title" data-tr="experience.title">Deneyim</h2>
             </div>
             <div class="experience-roadmap">
+                <div class="experience-progress-dot" aria-hidden="true"></div>
                 <!-- IC Ictas Nuclear -->
                 <div class="roadmap-item rm-purple reveal">
-                    <div class="roadmap-date-side" data-tr="experience.icictas.date">Ocak 2026</div>
+                    <div class="roadmap-date-side-wrap">
+                        <div class="roadmap-date-side" data-tr="experience.icictas.date">Ocak 2026</div>
+                    </div>
                     <div class="roadmap-dot-container">
                         <div class="roadmap-dot">
                             <span class="dot-ring"></span>
@@ -263,6 +356,7 @@
                     </div>
                     <div class="roadmap-card">
                         <div class="roadmap-card-stripe"></div>
+                        <img class="roadmap-watermark" src="ic-logo.png" alt="" aria-hidden="true">
                         <button class="roadmap-logo-link" onclick="showLogoModal('ic-logo.png')" type="button"><img class="roadmap-logo" src="ic-logo.png" alt="IC İçtaş"></button>
                         <div class="roadmap-header">
                             <div class="roadmap-info">
@@ -273,12 +367,32 @@
                         <div class="roadmap-desc" data-tr="experience.icictas.desc">
                             Akkuyu Nükleer Santral sahasından gelen verileri analiz etmek için React.js, FastAPI ve PostgreSQL kullanarak uçtan uca İSG Takip Paneli geliştirdim. Backend tarafında Passlib ve JWT ile güvenli kimlik doğrulama sistemleri kurarken, SQLAlchemy ORM ile veritabanı yönetimini optimize ettim. Ayrıca yüksek kardinaliteli verilerde B-tree indeksleme stratejileri uygulayarak sorgu performansını artırdım ve Material UI ile yöneticiler için gerçek zamanlı analitik dashboard'lar tasarladım.
                         </div>
+                        <div class="roadmap-metrics">
+                            <span class="roadmap-metric"><i class="fas fa-layer-group"></i><span data-tr="experience.icictas.metrics.1">Full-stack stack</span></span>
+                            <span class="roadmap-metric"><i class="fas fa-bolt"></i><span data-tr="experience.icictas.metrics.2">Real-time dashboard</span></span>
+                            <span class="roadmap-metric"><i class="fas fa-database"></i><span data-tr="experience.icictas.metrics.3">B-tree indexed</span></span>
+                        </div>
+                        <div class="roadmap-extra" hidden>
+                            <span class="roadmap-extra-label" data-tr="experience.achievementsLabel">ÖNEMLİ KAZANIMLAR</span>
+                            <ul class="roadmap-achievements">
+                                <li data-tr="experience.icictas.achievements.1">Akkuyu Nükleer sahası için React + FastAPI ile uçtan uca İSG Takip Paneli geliştirdim.</li>
+                                <li data-tr="experience.icictas.achievements.2">Passlib ve JWT tabanlı güvenli kimlik doğrulama akışı kurdum.</li>
+                                <li data-tr="experience.icictas.achievements.3">SQLAlchemy ORM ile yazılmış sorgularda B-tree indeksleme uygulayarak performansı önemli ölçüde artırdım.</li>
+                                <li data-tr="experience.icictas.achievements.4">Material UI ile yöneticiler için gerçek zamanlı analitik dashboard'lar tasarladım.</li>
+                            </ul>
+                        </div>
+                        <button class="roadmap-more-btn" type="button" aria-expanded="false">
+                            <span data-tr="experience.more">Daha fazla göster</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
                     </div>
                 </div>
 
                 <!-- TEI -->
                 <div class="roadmap-item rm-teal reveal">
-                    <div class="roadmap-date-side" data-tr="experience.tei.date">Ağu – Eyl 2025</div>
+                    <div class="roadmap-date-side-wrap">
+                        <div class="roadmap-date-side" data-tr="experience.tei.date">Ağu – Eyl 2025</div>
+                    </div>
                     <div class="roadmap-dot-container">
                         <div class="roadmap-dot">
                             <span class="dot-ring"></span>
@@ -286,6 +400,7 @@
                     </div>
                     <div class="roadmap-card">
                         <div class="roadmap-card-stripe"></div>
+                        <img class="roadmap-watermark" src="tei-logo.png" alt="" aria-hidden="true">
                         <button class="roadmap-logo-link" onclick="showLogoModal('tei-logo.png')" type="button"><img class="roadmap-logo" src="tei-logo.png" alt="TEI"></button>
                         <div class="roadmap-header">
                             <div class="roadmap-info">
@@ -296,16 +411,36 @@
                         <div class="roadmap-desc" data-tr="experience.tei.desc">
                             TEI bünyesinde izole ağlarda güvenli veri iletimi ve sistem mimarileri üzerine Ar-Ge çalışmaları yürüttüm. İnsan Kaynakları departmanı için LLM tabanlı 'SAMETEI' yapay zeka asistanının prototipleme sürecini yöneterek OpenRouter ve Local LLM entegrasyonlarını gerçekleştirdim. Ayrıca n8n ile finansal metrikleri analiz eden otonom iş akışları ve Playwright kullanarak e-ticaret süreçlerini otomatize eden RPA çözümleri geliştirdim.
                         </div>
-                        <button class="certificate-btn" id="certificateBtn" type="button">
-                            <i class="fas fa-award"></i>
-                            <span data-tr="experience.certificate">Sertifika</span>
+                        <div class="roadmap-metrics">
+                            <span class="roadmap-metric"><i class="fas fa-robot"></i><span data-tr="experience.tei.metrics.1">Multi-LLM prototip</span></span>
+                            <span class="roadmap-metric"><i class="fas fa-diagram-project"></i><span data-tr="experience.tei.metrics.2">n8n otomasyonları</span></span>
+                            <span class="roadmap-metric"><i class="fas fa-shield-halved"></i><span data-tr="experience.tei.metrics.3">İzole ağ Ar-Ge</span></span>
+                        </div>
+                        <div class="roadmap-extra" hidden>
+                            <span class="roadmap-extra-label" data-tr="experience.achievementsLabel">ÖNEMLİ KAZANIMLAR</span>
+                            <ul class="roadmap-achievements">
+                                <li data-tr="experience.tei.achievements.1">LLM tabanlı 'SAMETEI' İK asistanı prototipini OpenRouter + Local LLM entegrasyonuyla yönettim.</li>
+                                <li data-tr="experience.tei.achievements.2">n8n ile finansal metrikleri analiz eden otonom iş akışları geliştirdim.</li>
+                                <li data-tr="experience.tei.achievements.3">Playwright ile e-ticaret süreçlerini otomatize eden RPA çözümleri kurdum.</li>
+                                <li data-tr="experience.tei.achievements.4">İzole ağlarda güvenli veri iletimi üzerine Ar-Ge notları hazırladım.</li>
+                            </ul>
+                            <button class="certificate-btn" id="certificateBtn" type="button">
+                                <i class="fas fa-award"></i>
+                                <span data-tr="experience.certificate">Sertifika</span>
+                            </button>
+                        </div>
+                        <button class="roadmap-more-btn" type="button" aria-expanded="false">
+                            <span data-tr="experience.more">Daha fazla göster</span>
+                            <i class="fas fa-chevron-down"></i>
                         </button>
                     </div>
                 </div>
 
                 <!-- Powintec -->
                 <div class="roadmap-item rm-orange reveal">
-                    <div class="roadmap-date-side" data-tr="experience.powintec.date">Tem 2023 – Tem 2025</div>
+                    <div class="roadmap-date-side-wrap">
+                        <div class="roadmap-date-side" data-tr="experience.powintec.date">Tem 2023 – Tem 2025</div>
+                    </div>
                     <div class="roadmap-dot-container">
                         <div class="roadmap-dot">
                             <span class="dot-ring"></span>
@@ -322,6 +457,23 @@
                         <div class="roadmap-desc" data-tr="experience.powintec.desc">
                             Kablosuz şarj sistemlerinden gelen hizalama, sıcaklık ve verimlilik verilerini anlık olarak izlemek amacıyla React.js, TailwindCSS ve WebSockets tabanlı bir yönetim paneli hazırladım. WebSocket üzerinden gelen yoğun veri akışının UI performansını etkilememesi için state yönetimini optimize ederek milisaniye düzeyinde gecikme ile veri işleme sağladım. Donanım bağlantı kopmalarına karşı hata yönetim mekanizmaları geliştirerek sistem kararlılığını artırdım.
                         </div>
+                        <div class="roadmap-metrics">
+                            <span class="roadmap-metric"><i class="fas fa-plug"></i><span data-tr="experience.powintec.metrics.1">Kablosuz şarj UI</span></span>
+                            <span class="roadmap-metric"><i class="fas fa-tower-broadcast"></i><span data-tr="experience.powintec.metrics.2">WebSocket stream</span></span>
+                            <span class="roadmap-metric"><i class="fas fa-gauge-high"></i><span data-tr="experience.powintec.metrics.3">&lt; ms latency</span></span>
+                        </div>
+                        <div class="roadmap-extra" hidden>
+                            <span class="roadmap-extra-label" data-tr="experience.achievementsLabel">ÖNEMLİ KAZANIMLAR</span>
+                            <ul class="roadmap-achievements">
+                                <li data-tr="experience.powintec.achievements.1">React + TailwindCSS + WebSocket tabanlı kablosuz şarj izleme paneli hazırladım.</li>
+                                <li data-tr="experience.powintec.achievements.2">Yüksek frekanslı WebSocket verisinde state yönetimini optimize ederek UI jank'ini giderdim.</li>
+                                <li data-tr="experience.powintec.achievements.3">Donanım bağlantı kopmalarına karşı hata yönetim mekanizmaları geliştirdim.</li>
+                            </ul>
+                        </div>
+                        <button class="roadmap-more-btn" type="button" aria-expanded="false">
+                            <span data-tr="experience.more">Daha fazla göster</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -355,20 +507,114 @@
                 <span class="section-tag">04</span>
                 <h2 class="section-title" data-tr="projects.title">Projeler</h2>
             </div>
-            <div class="projects-grid">
-                <!-- FinSenti -->
-                <div class="project-card card-theme-teal reveal">
-                    <span class="card-new-badge">NEW</span>
-                    <div class="card-badge" data-tr="projects.badge.mlops">MLOPS</div>
+            <div class="projects-grid projects-magazine">
+                <!-- 00 · SMTbot — Showcase (currently building) -->
+                <article class="project-card card-showcase card-theme-orange reveal">
+                    <div class="card-wip-row">
+                        <span class="card-wip-badge">
+                            <span class="wip-dot"></span>
+                            <span data-tr="projects.wip">Şu an üzerinde çalışıyorum</span>
+                        </span>
+                        <span class="card-showcase-tag" data-tr="projects.badge.rl">RL / TRADING</span>
+                    </div>
+                    <div class="showcase-grid">
+                        <div class="showcase-left">
+                            <div class="card-meta">
+                                <span class="card-status card-status-wip"><span data-tr="projects.status.wip">Aktif geliştirme</span></span>
+                            </div>
+                            <div class="card-top">
+                                <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                                <div class="card-title-group">
+                                    <h3>SMTbot</h3>
+                                    <p class="card-tagline" data-tr="projects.smtbot.subtitle">Reinforcement Learning Trading Bot'u</p>
+                                </div>
+                            </div>
+                            <div class="card-highlight" data-tr="projects.smtbot.metric">PPO · Stable Baselines3 · Walk-Forward Optimization</div>
+                            <div class="card-content project-body">
+                                <p class="card-desc" data-tr="projects.smtbot.description">
+                                    Kişisel trading deneyimimi pekiştirmeli öğrenme ile birleştiren uçtan uca bir bot. PPO + Stable Baselines3 ajanları Pine Script sinyallerinden özellik mühendisliği yapılmış veriler üzerinde eğitiliyor, walk-forward optimization ile out-of-sample dönemlerde doğrulanıyor ve MCP server aracılığıyla canlı sinyallere bağlanıyor. Kendi tecrübemi içselleştirmiş, ölçülebilir ve risk kontrollü bir otonom trader üretmeyi hedefliyor.
+                                </p>
+                                <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
+                                <div class="card-tags">
+                                    <span class="tag-backend">Python</span><span class="tag-ai">PPO</span><span class="tag-ai">Stable Baselines3</span><span class="tag-ai">Reinforcement Learning</span><span class="tag-devops">MLOps</span><span class="tag-devops">MCP Server</span><span class="tag-backend">Pine Script</span><span class="tag-ai">Walk-Forward Opt.</span>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="https://github.com/last-26/SMTbot" target="_blank" class="card-link">
+                                        <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                                    </a>
+                                    <span class="card-year">2026</span>
+                                </div>
+                            </div>
+                        </div>
+                        <aside class="showcase-visual" aria-hidden="true">
+                            <div class="showcase-visual-inner">
+                                <div class="showcase-ticker-row">
+                                    <div class="showcase-ticker">
+                                        <span class="ticker-pulse"></span>
+                                        <span class="ticker-symbol">BTC/USDT</span>
+                                    </div>
+                                    <span class="showcase-live-price" id="sc-btc-price">—</span>
+                                </div>
+                                <div class="showcase-chart-wrap">
+                                    <svg class="showcase-chart" viewBox="0 0 200 100" preserveAspectRatio="none">
+                                        <defs>
+                                            <linearGradient id="smtFill" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="0%" stop-color="#fb923c" stop-opacity="0.35"/>
+                                                <stop offset="100%" stop-color="#fb923c" stop-opacity="0"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <g class="chart-grid">
+                                            <line x1="0" x2="200" y1="25" y2="25"/>
+                                            <line x1="0" x2="200" y1="50" y2="50"/>
+                                            <line x1="0" x2="200" y1="75" y2="75"/>
+                                            <line x1="50"  x2="50"  y1="0" y2="100"/>
+                                            <line x1="100" x2="100" y1="0" y2="100"/>
+                                            <line x1="150" x2="150" y1="0" y2="100"/>
+                                        </g>
+                                        <line class="chart-hi-line" x1="0" x2="200" y1="18" y2="18"/>
+                                        <line class="chart-lo-line" x1="0" x2="200" y1="82" y2="82"/>
+                                        <path class="showcase-chart-fill" d="M0,70 L15,62 L30,66 L45,48 L60,54 L75,38 L90,44 L105,28 L120,36 L135,22 L150,30 L165,18 L180,24 L200,10 L200,100 L0,100 Z" fill="url(#smtFill)"/>
+                                        <path class="showcase-chart-line" d="M0,70 L15,62 L30,66 L45,48 L60,54 L75,38 L90,44 L105,28 L120,36 L135,22 L150,30 L165,18 L180,24 L200,10" fill="none" stroke="#fb923c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <circle class="chart-hi-marker" cx="0" cy="0" r="2"/>
+                                        <circle class="chart-lo-marker" cx="0" cy="0" r="2"/>
+                                        <circle class="showcase-chart-tip-halo" cx="200" cy="10" r="5"/>
+                                        <circle class="showcase-chart-tip" cx="200" cy="10" r="2.4"/>
+                                    </svg>
+                                    <div class="chart-hi-label"><span class="clbl-k">H</span><span class="clbl-v" id="sc-hi-val">—</span><span class="clbl-t" id="sc-hi-time">—</span></div>
+                                    <div class="chart-lo-label"><span class="clbl-k">L</span><span class="clbl-v" id="sc-lo-val">—</span><span class="clbl-t" id="sc-lo-time">—</span></div>
+                                </div>
+                                <div class="chart-timeline">
+                                    <span>-24h</span>
+                                    <span>-18h</span>
+                                    <span>-12h</span>
+                                    <span>-6h</span>
+                                    <span>now</span>
+                                </div>
+                                <div class="showcase-stats">
+                                    <div class="sc-stat"><span class="sc-stat-k">24h</span><span class="sc-stat-v" id="sc-btc-change">—</span></div>
+                                    <div class="sc-stat"><span class="sc-stat-k">24h Vol</span><span class="sc-stat-v" id="sc-btc-vol">—</span></div>
+                                    <div class="sc-stat"><span class="sc-stat-k">24h High</span><span class="sc-stat-v" id="sc-btc-high">—</span></div>
+                                    <div class="sc-stat"><span class="sc-stat-k">24h Low</span><span class="sc-stat-v" id="sc-btc-low">—</span></div>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </article>
+
+                <!-- 01 · FinSenti — Featured -->
+                <article class="project-card card-featured card-theme-teal reveal">
+                    <div class="card-meta">
+                        <span class="card-badge" data-tr="projects.badge.mlops">MLOPS</span>
+                    </div>
                     <div class="card-top">
-                        <div class="card-accent-bar"></div>
                         <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
                         <div class="card-title-group">
                             <h3>FinSenti</h3>
-                            <p data-tr="projects.finsenti.subtitle">Finansal Duygu Analizi MLOps Pipeline'ı</p>
+                            <p class="card-tagline" data-tr="projects.finsenti.subtitle">Finansal Duygu Analizi MLOps Pipeline'ı</p>
                         </div>
                     </div>
-                    <div class="card-content">
+                    <div class="card-highlight" data-tr="projects.finsenti.metric">%91.1 doğruluk · FinBERT + LoRA</div>
+                    <div class="card-content project-body">
                         <p class="card-desc" data-tr="projects.finsenti.description">
                             Finansal metin duygu analizi için uçtan uca MLOps pipeline'ı. FinBERT ve distilBERT modellerini LoRA adaptörleri ile fine-tune eder, deneyleri MLflow ile takip eder ve tahminleri FastAPI + Next.js ile sunar. FinBERT + LoRA modeli %91.1 doğruluk ve 0.90 F1 skoru elde etti.
                         </p>
@@ -376,25 +622,29 @@
                         <div class="card-tags">
                             <span>FinBERT</span><span>LoRA/PEFT</span><span>MLflow</span><span>FastAPI</span><span>Next.js</span><span>Docker</span><span>Python</span>
                         </div>
-                        <a href="https://github.com/last-26/FinSenti" target="_blank" class="card-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
-                        </a>
+                        <div class="card-footer">
+                            <a href="https://github.com/last-26/FinSenti" target="_blank" class="card-link">
+                                <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                            </a>
+                            <span class="card-year">2026</span>
+                        </div>
                     </div>
-                </div>
+                </article>
 
-                <!-- NextHire -->
-                <div class="project-card card-theme-pink reveal">
-                    <span class="card-new-badge">NEW</span>
-                    <div class="card-badge" data-tr="projects.badge.agent">AI AJAN</div>
+                <!-- 02 · NextHire — Featured -->
+                <article class="project-card card-featured card-theme-pink reveal">
+                    <div class="card-meta">
+                        <span class="card-badge" data-tr="projects.badge.agent">AI AJAN</span>
+                    </div>
                     <div class="card-top">
-                        <div class="card-accent-bar"></div>
                         <div class="card-icon"><i class="fas fa-robot"></i></div>
                         <div class="card-title-group">
                             <h3>NextHire</h3>
-                            <p data-tr="projects.nexthire.subtitle">AI Destekli İş Başvuru Ajanı</p>
+                            <p class="card-tagline" data-tr="projects.nexthire.subtitle">AI Destekli İş Başvuru Ajanı</p>
                         </div>
                     </div>
-                    <div class="card-content">
+                    <div class="card-highlight" data-tr="projects.nexthire.metric">LangGraph · Multi-model routing</div>
+                    <div class="card-content project-body">
                         <p class="card-desc" data-tr="projects.nexthire.description">
                             LangGraph tabanlı çok adımlı AI agent sistemi. CV yükle, iş ilanı yapıştır — agent otomatik olarak ATS skoru hesaplar, eksik yetkinlikleri belirler, kişiselleştirilmiş ön yazı oluşturur ve başvuruyu kanban panosuna ekler. Multi-model routing ile maliyet-performans optimizasyonu sağlar.
                         </p>
@@ -402,25 +652,28 @@
                         <div class="card-tags">
                             <span>LangGraph</span><span>FastAPI</span><span>Next.js</span><span>AWS Bedrock</span><span>PostgreSQL</span><span>Docker</span><span>SSE</span><span>TypeScript</span>
                         </div>
-                        <a href="https://github.com/last-26/NextHire" target="_blank" class="card-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
-                        </a>
+                        <div class="card-footer">
+                            <a href="https://github.com/last-26/NextHire" target="_blank" class="card-link">
+                                <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                            </a>
+                            <span class="card-year">2026</span>
+                        </div>
                     </div>
-                </div>
+                </article>
 
-                <!-- AWS AI Doc QA -->
-                <div class="project-card card-theme-blue reveal">
-                    <span class="card-new-badge">NEW</span>
-                    <div class="card-badge" data-tr="projects.badge.cloud">BULUT</div>
+                <!-- 03 · AWS AI Doc QA — Standard -->
+                <article class="project-card card-standard card-theme-blue reveal">
+                    <div class="card-meta">
+                        <span class="card-badge" data-tr="projects.badge.cloud">BULUT</span>
+                    </div>
                     <div class="card-top">
-                        <div class="card-accent-bar"></div>
                         <div class="card-icon"><i class="fas fa-cloud"></i></div>
                         <div class="card-title-group">
                             <h3>AWS AI Doc QA</h3>
-                            <p data-tr="projects.awsai.subtitle">AWS ile Akıllı Doküman Soru-Cevap Sistemi</p>
+                            <p class="card-tagline" data-tr="projects.awsai.subtitle">AWS ile Akıllı Doküman Soru-Cevap Sistemi</p>
                         </div>
                     </div>
-                    <div class="card-content">
+                    <div class="card-content project-body">
                         <p class="card-desc" data-tr="projects.awsai.description">
                             AWS bulut servisleri üzerine inşa edilmiş serverless doküman soru-cevap sistemi. PDF dokümanları S3'e yüklenir, Textract ile otomatik metin çıkarımı yapılır ve Bedrock üzerindeki Claude AI modeli ile doğal dilde sorulara yanıt verilir. API Gateway, Lambda, DynamoDB, SNS ve CDK ile tamamen Infrastructure as Code olarak tasarlanmıştır.
                         </p>
@@ -428,25 +681,28 @@
                         <div class="card-tags">
                             <span>AWS CDK</span><span>Lambda</span><span>S3</span><span>Textract</span><span>Bedrock</span><span>DynamoDB</span><span>API Gateway</span><span>SNS</span><span>Python</span>
                         </div>
-                        <a href="https://github.com/last-26/aws-ai-project" target="_blank" class="card-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
-                        </a>
+                        <div class="card-footer">
+                            <a href="https://github.com/last-26/aws-ai-project" target="_blank" class="card-link">
+                                <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                            </a>
+                            <span class="card-year">2026</span>
+                        </div>
                     </div>
-                </div>
+                </article>
 
-                <!-- SwiftLink -->
-                <div class="project-card card-theme-teal reveal">
-                    <span class="card-new-badge">NEW</span>
-                    <div class="card-badge" data-tr="projects.badge.devops">DEVOPS</div>
+                <!-- 04 · SwiftLink — Standard -->
+                <article class="project-card card-standard card-theme-teal reveal">
+                    <div class="card-meta">
+                        <span class="card-badge" data-tr="projects.badge.devops">DEVOPS</span>
+                    </div>
                     <div class="card-top">
-                        <div class="card-accent-bar"></div>
                         <div class="card-icon"><i class="fas fa-link"></i></div>
                         <div class="card-title-group">
                             <h3>SwiftLink</h3>
-                            <p data-tr="projects.swiftlink.subtitle">Hızlı & Modern URL Kısaltma Servisi</p>
+                            <p class="card-tagline" data-tr="projects.swiftlink.subtitle">Hızlı & Modern URL Kısaltma Servisi</p>
                         </div>
                     </div>
-                    <div class="card-content">
+                    <div class="card-content project-body">
                         <p class="card-desc" data-tr="projects.swiftlink.description">
                             FastAPI ile geliştirilmiş, Docker ile konteynerize edilmiş ve GitHub Actions CI/CD pipeline'ı ile otomatik test edilen modern URL kısaltma uygulaması. Kısaltılmış linkler için tıklama analitiği ve gerçek zamanlı istatistikler sunar.
                         </p>
@@ -454,24 +710,28 @@
                         <div class="card-tags">
                             <span>FastAPI</span><span>Docker</span><span>GitHub Actions</span><span>SQLAlchemy</span><span>pytest</span><span>Python</span>
                         </div>
-                        <a href="https://github.com/last-26/SwiftLink" target="_blank" class="card-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
-                        </a>
+                        <div class="card-footer">
+                            <a href="https://github.com/last-26/SwiftLink" target="_blank" class="card-link">
+                                <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                            </a>
+                            <span class="card-year">2025</span>
+                        </div>
                     </div>
-                </div>
+                </article>
 
-                <!-- SAMETEI -->
-                <div class="project-card card-theme-purple reveal">
-                    <div class="card-badge" data-tr="projects.badge.corporate">KURUMSAL</div>
+                <!-- 05 · SAMETEI — Standard -->
+                <article class="project-card card-standard card-theme-purple reveal">
+                    <div class="card-meta">
+                        <span class="card-badge" data-tr="projects.badge.corporate">KURUMSAL</span>
+                    </div>
                     <div class="card-top">
-                        <div class="card-accent-bar"></div>
                         <div class="card-icon"><i class="fas fa-building"></i></div>
                         <div class="card-title-group">
                             <h3>SAMETEI</h3>
-                            <p data-tr="projects.sametei.subtitle">AI Destekli İK Doküman Yönetim Platformu</p>
+                            <p class="card-tagline" data-tr="projects.sametei.subtitle">AI Destekli İK Doküman Yönetim Platformu</p>
                         </div>
                     </div>
-                    <div class="card-content">
+                    <div class="card-content project-body">
                         <p class="card-desc" data-tr="projects.sametei.description">
                             LibreChat çerçevesi üzerine inşa edilmiş, insan kaynakları doküman yönetimini yapay zeka ile otomatikleştiren kurumsal ölçekte platform.
                             İK ekiplerinin doküman işleme süresini %70 azalttı.
@@ -480,24 +740,28 @@
                         <div class="card-tags">
                             <span>LibreChat UI</span><span>LLM</span><span>OCR</span><span>RAG</span><span>Docker</span><span>MongoDB</span><span>FastAPI</span><span>Python</span>
                         </div>
-                        <a href="https://github.com/last-26/SAMETEI" target="_blank" class="card-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
-                        </a>
+                        <div class="card-footer">
+                            <a href="https://github.com/last-26/SAMETEI" target="_blank" class="card-link">
+                                <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                            </a>
+                            <span class="card-year">2025</span>
+                        </div>
                     </div>
-                </div>
+                </article>
 
-                <!-- HIREAI -->
-                <div class="project-card card-theme-lavender reveal">
-                    <div class="card-badge" data-tr="projects.badge.graduation">MEZUN. PROJESİ</div>
+                <!-- 06 · HIREAI — Mini-featured -->
+                <article class="project-card card-mini-featured card-theme-lavender reveal">
+                    <div class="card-meta">
+                        <span class="card-badge" data-tr="projects.badge.graduation">MEZUN. PROJESİ</span>
+                    </div>
                     <div class="card-top">
-                        <div class="card-accent-bar"></div>
                         <div class="card-icon"><i class="fas fa-file-alt"></i></div>
                         <div class="card-title-group">
                             <h3>HIREAI</h3>
-                            <p data-tr="projects.hireai.subtitle">AI Destekli CV & Portföy Analiz Platformu</p>
+                            <p class="card-tagline" data-tr="projects.hireai.subtitle">AI Destekli CV & Portföy Analiz Platformu</p>
                         </div>
                     </div>
-                    <div class="card-content">
+                    <div class="card-content project-body">
                         <p class="card-desc" data-tr="projects.hireai.description">
                             ATS tabanlı CV analiz ve optimizasyon platformu. CV'leri iş tanımlarına göre analiz eder, ATS uyumlu skorlar ve iyileştirme önerileri sunar.
                             İK ekiplerinin ön eleme süresini %50 azalttı.
@@ -506,48 +770,28 @@
                         <div class="card-tags">
                             <span>Flask-RESTX</span><span>Sentence Transformers</span><span>PostgreSQL</span><span>React.js</span><span>TailwindCSS</span><span>NLP</span>
                         </div>
-                        <a href="https://gitlab.com/last-26/cv-analysis" target="_blank" class="card-link">
-                            <i class="fab fa-gitlab"></i> <span data-tr="projects.link.gitlab">GitLab'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Fruit Ripeness -->
-                <div class="project-card card-theme-purple reveal">
-                    <div class="card-top">
-                        <div class="card-accent-bar"></div>
-                        <div class="card-icon"><i class="fas fa-apple-alt"></i></div>
-                        <div class="card-title-group">
-                            <h3 data-tr="projects.fruit.title">Meyve Olgunluk Tespiti</h3>
-                            <p data-tr="projects.fruit.subtitle">Makine Öğrenmesi & Computer Vision</p>
+                        <div class="card-footer">
+                            <a href="https://gitlab.com/last-26/cv-analysis" target="_blank" class="card-link">
+                                <i class="fab fa-gitlab"></i> <span data-tr="projects.link.gitlab">GitLab'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                            </a>
+                            <span class="card-year">2025</span>
                         </div>
                     </div>
-                    <div class="card-content">
-                        <p class="card-desc" data-tr="projects.fruit.description">
-                            Görüntü işleme ve 5 farklı ML algoritması kullanarak meyve olgunluğunu tespit eden pattern recognition projesi.
-                        </p>
-                        <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
-                        <div class="card-tags">
-                            <span>OpenCV</span><span>Scikit-learn</span><span>Feature Extraction</span><span>Classification</span>
-                        </div>
-                        <a href="https://github.com/last-26/fruit-ripeness-detection" target="_blank" class="card-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
-                        </a>
-                    </div>
-                </div>
+                </article>
 
-                <!-- Bitcoin -->
-                <div class="project-card card-theme-orange reveal">
-                    <div class="card-badge" data-tr="projects.badge.automation">OTOMASYON</div>
+                <!-- 07 · Bitcoin Automation — Mini-featured -->
+                <article class="project-card card-mini-featured card-theme-orange reveal">
+                    <div class="card-meta">
+                        <span class="card-badge" data-tr="projects.badge.automation">OTOMASYON</span>
+                    </div>
                     <div class="card-top">
-                        <div class="card-accent-bar"></div>
                         <div class="card-icon"><i class="fas fa-chart-line"></i></div>
                         <div class="card-title-group">
                             <h3 data-tr="projects.bitcoin.title">Bitcoin Teknik Analiz Otomasyonu</h3>
-                            <p data-tr="projects.bitcoin.subtitle">AI Destekli Kripto Para Analiz & Raporlama Sistemi</p>
+                            <p class="card-tagline" data-tr="projects.bitcoin.subtitle">AI Destekli Kripto Para Analiz & Raporlama Sistemi</p>
                         </div>
                     </div>
-                    <div class="card-content">
+                    <div class="card-content project-body">
                         <p class="card-desc" data-tr="projects.bitcoin.description">
                             n8n workflow automation ile geliştirilmiş Bitcoin teknik analiz sistemi. Binance API'den otomatik veri toplayarak 15+ teknik gösterge analizi yapar.
                         </p>
@@ -555,35 +799,62 @@
                         <div class="card-tags">
                             <span>n8n</span><span>Binance API</span><span>DeepSeek R1</span><span>Technical Analysis</span><span>Gmail API</span>
                         </div>
-                        <a href="https://github.com/last-26/Bitcoin-Daily-Report-Automation" target="_blank" class="card-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- News Hub -->
-                <div class="project-card card-theme-blue reveal">
-                    <div class="card-top">
-                        <div class="card-accent-bar"></div>
-                        <div class="card-icon"><i class="fas fa-newspaper"></i></div>
-                        <div class="card-title-group">
-                            <h3>Global News Hub</h3>
-                            <p data-tr="projects.news.subtitle">Modern Haber Toplayıcı Platform</p>
+                        <div class="card-footer">
+                            <a href="https://github.com/last-26/Bitcoin-Daily-Report-Automation" target="_blank" class="card-link">
+                                <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                            </a>
+                            <span class="card-year">2025</span>
                         </div>
                     </div>
-                    <div class="card-content">
+                </article>
+
+                <!-- 08 · Fruit Ripeness — Archive -->
+                <article class="project-card card-archive card-theme-purple reveal">
+                    <div class="card-meta">
+                        <span class="card-status card-status-archive" data-tr="projects.status.archive">Archived</span>
+                    </div>
+                    <div class="card-top">
+                        <div class="card-title-group">
+                            <h3 data-tr="projects.fruit.title">Meyve Olgunluk Tespiti</h3>
+                            <p class="card-tagline" data-tr="projects.fruit.subtitle">Makine Öğrenmesi & Computer Vision</p>
+                        </div>
+                    </div>
+                    <div class="card-content project-body">
+                        <p class="card-desc" data-tr="projects.fruit.description">
+                            Görüntü işleme ve 5 farklı ML algoritması kullanarak meyve olgunluğunu tespit eden pattern recognition projesi.
+                        </p>
+                        <div class="card-footer">
+                            <a href="https://github.com/last-26/fruit-ripeness-detection" target="_blank" class="card-link">
+                                <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                            </a>
+                            <span class="card-year">2023</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 09 · News Hub — Archive -->
+                <article class="project-card card-archive card-theme-blue reveal">
+                    <div class="card-meta">
+                        <span class="card-status card-status-archive" data-tr="projects.status.archive">Archived</span>
+                    </div>
+                    <div class="card-top">
+                        <div class="card-title-group">
+                            <h3>Global News Hub</h3>
+                            <p class="card-tagline" data-tr="projects.news.subtitle">Modern Haber Toplayıcı Platform</p>
+                        </div>
+                    </div>
+                    <div class="card-content project-body">
                         <p class="card-desc" data-tr="projects.news.description">
                             ASP.NET ile geliştirilmiş modern haber toplayıcı. RSS feed'lerini akıllı kategorizasyon ile çeker.
                         </p>
-                        <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
-                        <div class="card-tags">
-                            <span>ASP.NET Core</span><span>RSS</span><span>Bootstrap</span>
+                        <div class="card-footer">
+                            <a href="https://github.com/last-26/Global-News-Hub" target="_blank" class="card-link">
+                                <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                            </a>
+                            <span class="card-year">2023</span>
                         </div>
-                        <a href="https://github.com/last-26/Global-News-Hub" target="_blank" class="card-link">
-                            <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
-                        </a>
                     </div>
-                </div>
+                </article>
 
             </div>
         </div>
@@ -604,6 +875,10 @@
                         <span class="dot dot-green"></span>
                     </div>
                     <span class="terminal-title" data-tr="skills.terminal.title">samet@portfolio:~/skills</span>
+                    <span class="terminal-status">
+                        <span class="terminal-status-dot"></span>
+                        <span data-tr="skills.terminal.status">connected</span>
+                    </span>
                 </div>
                 <div class="terminal-body">
                     <div class="term-block">
@@ -661,42 +936,73 @@
     </section>
 
     <!-- ==================== CONTACT ==================== -->
-    <section class="section" id="contact">
+    <section class="section section-contact" id="contact">
         <div class="container">
             <div class="section-header reveal">
                 <span class="section-tag">06</span>
                 <h2 class="section-title" data-tr="contact.title">İletişim</h2>
             </div>
-            <div class="contact-row">
-                <div class="contact-item reveal" id="email-card" onclick="copyEmail()" style="cursor:pointer">
-                    <div class="contact-icon-wrap"><i class="fas fa-envelope"></i></div>
-                    <h3>Email</h3>
-                    <span class="contact-link">a.sametsoysal@gmail.com</span>
+            <div class="contact-editorial">
+                <p class="contact-eyebrow reveal" data-tr="contact.eyebrow">GET IN TOUCH</p>
+                <h3 class="contact-statement reveal reveal-fade">
+                    <span data-tr="contact.statement.line1">Birlikte bir şey</span>
+                    <em data-tr="contact.statement.line2">inşa edelim.</em>
+                </h3>
+                <p class="contact-lead reveal" data-tr="contact.lead">Yeni fırsatlara ve işbirliklerine her zaman açığım. Hızla dönüş yaparım.</p>
+                <div class="contact-email-wrap reveal reveal-scale">
+                    <button type="button" id="email-card" class="contact-email" onclick="copyEmail()" aria-label="Copy email">
+                        <span class="contact-email-text">a.sametsoysal@gmail.com</span>
+                        <span class="contact-email-action">
+                            <i class="fas fa-copy"></i>
+                            <span data-tr="contact.copy">kopyala</span>
+                        </span>
+                    </button>
                 </div>
-                <a href="https://www.linkedin.com/in/samet-soysal/" target="_blank" class="contact-item reveal">
-                    <div class="contact-icon-wrap"><i class="fab fa-linkedin"></i></div>
-                    <h3>LinkedIn</h3>
-                    <span class="contact-link">samet-soysal</span>
-                </a>
-                <a href="https://github.com/last-26" target="_blank" class="contact-item reveal">
-                    <div class="contact-icon-wrap"><i class="fab fa-github"></i></div>
-                    <h3>GitHub</h3>
-                    <span class="contact-link">@last-26</span>
-                </a>
+                <div class="contact-links reveal">
+                    <a href="https://www.linkedin.com/in/samet-soysal/" target="_blank" class="contact-link-mini" data-magnetic>
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                        <span class="contact-link-handle">/in/samet-soysal</span>
+                        <i class="fas fa-arrow-up-right-from-square contact-link-arrow"></i>
+                    </a>
+                    <a href="https://github.com/last-26" target="_blank" class="contact-link-mini" data-magnetic>
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                        <span class="contact-link-handle">@last-26</span>
+                        <i class="fas fa-arrow-up-right-from-square contact-link-arrow"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="footer-v2">
+        <div class="footer-top-glow" aria-hidden="true"></div>
         <div class="container">
+            <div class="footer-hero">
+                <div class="footer-hero-left">
+                    <span class="footer-eyebrow">// end.signature</span>
+                    <h2 class="footer-signature" data-tr="footer.signature">Görüşmek üzere.</h2>
+                </div>
+                <a href="#hero" class="footer-uptop" aria-label="Back to top">
+                    <span data-tr="footer.uptop">Başa dön</span>
+                    <i class="fas fa-arrow-up"></i>
+                </a>
+            </div>
+
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a href="#" class="footer-logo">
                         <span class="logo-bracket">&lt;</span><span class="logo-mark">SAMET</span><span class="logo-bracket">/&gt;</span>
                     </a>
                     <p class="footer-tagline" data-tr="footer.tagline">AI/ML & Cloud çözümleri ile geleceği inşa ediyorum.</p>
+                    <div class="footer-status">
+                        <span class="fs-dot"></span>
+                        <span data-tr="footer.status">Yeni fırsatlara açık</span>
+                    </div>
                 </div>
+
                 <div class="footer-nav">
                     <h4 data-tr="footer.nav.title">Sayfalar</h4>
                     <a href="#about" data-tr="nav.about">Hakkımda</a>
@@ -705,16 +1011,41 @@
                     <a href="#projects" data-tr="nav.projects">Projeler</a>
                     <a href="#skills" data-tr="nav.skills">Yetenekler</a>
                 </div>
+
                 <div class="footer-social">
                     <h4 data-tr="footer.social.title">Bağlantılar</h4>
                     <a href="mailto:a.sametsoysal@gmail.com"><i class="fas fa-envelope"></i> Email</a>
-                    <a href="https://www.linkedin.com/in/samet-soysal/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                    <a href="https://github.com/last-26" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://www.linkedin.com/in/samet-soysal/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://github.com/last-26" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+
+                <div class="footer-meta">
+                    <h4 data-tr="footer.meta.title">Meta</h4>
+                    <div class="fm-row">
+                        <span class="fm-k" data-tr="footer.meta.time">Yerel saat</span>
+                        <span class="fm-v" id="footerTime">--:--:--</span>
+                    </div>
+                    <div class="fm-row">
+                        <span class="fm-k" data-tr="footer.meta.loc">Konum</span>
+                        <span class="fm-v">Eskişehir, TR</span>
+                    </div>
+                    <div class="fm-row">
+                        <span class="fm-k" data-tr="footer.meta.stack">Stack</span>
+                        <span class="fm-v">HTML · CSS · JS</span>
+                    </div>
+                    <div class="fm-row">
+                        <span class="fm-k" data-tr="footer.meta.host">Hosting</span>
+                        <span class="fm-v">Firebase</span>
+                    </div>
                 </div>
             </div>
+
             <div class="footer-bottom">
                 <p data-tr="footer.copyright">&copy; 2026 Samet Soysal. Tüm hakları saklıdır.</p>
-                <p class="footer-sub" data-tr="footer.made">Tutkuyla kodlanmıştır ❤️</p>
+                <div class="footer-badges">
+                    <span class="fb-chip"><span class="fb-chip-dot"></span><span data-tr="footer.made">Tutkuyla kodlanmıştır</span></span>
+                    <span class="fb-chip fb-chip-mono">v1.0.0 · no frameworks</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -730,6 +1061,6 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <script src="script.js?v=12"></script>
+    <script src="script.js?v=26"></script>
 </body>
 </html>
