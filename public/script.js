@@ -1,5 +1,18 @@
 // Portfolio Website JavaScript - Samet Soysal
 
+// ── Console signature (for the curious devs reading the source) ──
+(function consoleSignature(){
+    try {
+        const big = 'font: 700 32px "Instrument Serif", Georgia, serif; color:#7c3aed; letter-spacing:-.02em;';
+        const sub = 'color:#a8acbe; font: 12px "JetBrains Mono", monospace; line-height:1.6;';
+        const accent = 'color:#2dd4bf; font: 12px "JetBrains Mono", monospace;';
+        console.log('%cSamet Soysal', big);
+        console.log('%cAI/ML Engineer — production AI is mostly engineering. The 90/10 rule.', sub);
+        console.log('%c→ github.com/last-26   ✉ a.sametsoysal@gmail.com', accent);
+        console.log('%cBuilt from scratch in vanilla JS — no frameworks. If you spot a bug, drop a line.', sub);
+    } catch (_) { /* console unavailable — silent */ }
+})();
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -33,15 +46,31 @@ const translations = {
         "hero.badge": "AI/ML Mühendisi & Full-Stack Developer",
         "hero.subtitle.prefix": "Uzmanlık alanım:",
         "hero.subtitle": "Yapay Zeka | Makine Öğrenmesi | NLP Uzmanı",
-        "hero.description": "RAG sistemleri, OCR teknolojileri ve çok modelli AI çözümleri geliştiriyorum. Kurumsal projelerde production-ready yapay zeka sistemleri tasarlama ve entegrasyon konularında uzmanım.",
+        "hero.description": "Üretim ortamı için AI inşa eden bir Bilgisayar Mühendisi — RAG hatları, çok-modelli orkestrasyonlar ve MCP tabanlı ajanlar. Uçtan uca sistemler, milisaniyelik veri çekimiyle modelleri gerçek veri mühendisliğine bağlıyor.",
         "hero.btn.projects": "Projelerim",
         "hero.btn.github": "GitHub Profilim",
         "hero.btn.contact": "İletişim",
         "hero.btn.cv.view": "CV Görüntüle",
         "hero.btn.cv.download": "CV İndir",
         "about.title": "Hakkımda",
-        "about.intro": "Uçtan uca <span class='kw'>AI sistemleri</span> tasarlıyorum — veriden modele, prototipten üretime, <span class='kw'>ölçeklenebilir</span> ve ölçülebilir.",
-        "about.description": "Eskişehir Osmangazi Üniversitesi Bilgisayar Mühendisliği mezunuyum. Uçtan uca <span class='kw'>AI mimarileri</span>, yüksek performanslı <span class='kw'>RAG pipeline</span>'ları ve <span class='kw'>Multi-LLM</span> orkestrasyonları tasarlama konusunda kanıtlanmış deneyime sahibim. Temel gücüm, karmaşık makine öğrenmesi modellerini ölçeklenebilir <span class='kw'>full-stack</span> geliştirme (<span class='kw'>React</span>, <span class='kw'>FastAPI</span>, <span class='kw'>PostgreSQL</span>) ile birleştirerek milisaniye düzeyinde gecikme ve <span class='kw'>%95+ doğruluk</span> oranıyla veri odaklı çözümler sunmaktır.",
+        "about.intro": "<span class='kw'>Üretim ortamındaki AI'ın büyük kısmı mühendislik işidir.</span> Modeller demoda göz boyar — sistemler sahada ayakta kalır. Ben sistemleri inşa ederim.",
+        "about.origin": "<span class='kw'>Eskişehir Osmangazi Üniversitesi</span> mezunu bir Bilgisayar Mühendisiyim. Mühendislik temelimi makine öğrenmesi, örüntü tanıma ve graf teorisi üzerine kurdum — sonra odağı, gerçekten kullanıcının eline ulaşan uygulamalı LLM sistemlerine kaydırdım.",
+        "about.focus": "Üretim ortamı için AI inşa ediyorum: <span class='kw'>RAG hatları</span> 300ms altı gecikmeyle, <span class='kw'>çok-modelli orkestrasyonlar</span> bulut + yerel modellerin yedekli kombinasyonuyla, ve gerçek veri mühendisliğine bağlanan <span class='kw'>MCP tabanlı ajanlar</span>. İşin asıl ilginç tarafı, modelin veri akışıyla kesiştiği yerde.",
+        "about.impact": "FinSenti'de FinBERT ile <span class='kw'>%91.1 doğruluk</span>; iş başvuru süresini saatlerden dakikalara indiren LangGraph ajanları (NextHire); SAMETEI'de kurumsal İK doküman süreçlerinde <span class='kw'>%70 hızlanma</span>. Ölçek + mühendislik + biraz da inat.",
+        "about.dossier.role": "Rol",
+        "about.dossier.roleVal": "AI/ML Mühendisi",
+        "about.dossier.edu": "Eğitim",
+        "about.dossier.eduVal": "Eskişehir Osmangazi Üniversitesi · Bilgisayar Mühendisliği (Lisans)",
+        "about.dossier.based": "Lokasyon",
+        "about.dossier.basedVal": "Eskişehir, Türkiye",
+        "about.dossier.recent": "Son deneyim",
+        "about.dossier.recentVal": "IC İçtaş · TEI · Powintec",
+        "about.dossier.focus": "Odak",
+        "about.dossier.focusVal": "RAG · Çok-model · MCP · Vector Search",
+        "about.dossier.lang": "Diller",
+        "about.dossier.langVal": "Türkçe · İngilizce (B2)",
+        "about.dossier.status": "Durum",
+        "about.dossier.statusVal": "Yeni fırsatlara açık",
         "about.stats.years": "Yıl Deneyim",
         "about.stats.projects": "Tamamlanan Proje",
         "about.stats.technologies": "Teknoloji",
@@ -115,6 +144,42 @@ const translations = {
         "projects.status.wip": "Aktif geliştirme",
         "projects.wip": "Şu an üzerinde çalışıyorum",
         "projects.smtbot.subtitle": "Reinforcement Learning Trading Bot'u",
+        "projects.smtbot.casebtn": "Vakayı oku",
+        "case.smtbot.h1": "vaka çalışması.",
+        "case.smtbot.cover.problem": "Sezgisel trading: kurallar kafanda, sonuçlar kayda geçmiyor. Sistemleştirmenin tek yolu — senin baktığın grafiklere bakan ve sen uyurken emir veren bir bot.",
+        "case.smtbot.cover.status": "Bybit V5 demo · 746 test geçer",
+        "case.smtbot.stat1.k": "Strateji",
+        "case.smtbot.stat2.k": "Giriş · HTF",
+        "case.smtbot.stat3.k": "Testler",
+        "case.smtbot.stat4.k": "Mod",
+        "case.smtbot.arch.tag": "01 · Mimari",
+        "case.smtbot.arch.h": "TradingView gözler. Python beyin. Bybit eller.",
+        "case.smtbot.arch.lead": "Üç aktör, tek karar döngüsü. Pine indikatörleri (smt_overlay + smt_oscillator) grafiği okur. Bir MCP daemon, TradingView Desktop'un debug portu üzerinden bu okumaları Python'a taşır. Python VMC planlayıcısını çalıştırır, risk yöneticisini uygular ve emirleri pybit üzerinden Bybit V5'e yönlendirir. SQLite ise async jurnal. Pine settle durumu her döngüde kontrol edilir — bar kapanmadıysa döngü atlanır.",
+        "case.smtbot.stack.tag": "02 · Yığın",
+        "case.smtbot.stack.h": "Bot neyden yapılı?",
+        "case.smtbot.stack.lead": "Her bileşen tek bir gerekçeyle seçildi: 7/24 döngüde sen izlemezken ayakta kalmalı. Gösteriş için framework yok, kendini ödemeyen soyutlama yok.",
+        "case.smtbot.stack.eyes": "Gözler",
+        "case.smtbot.stack.brain": "Beyin",
+        "case.smtbot.stack.hands": "Eller",
+        "case.smtbot.stack.tooling": "AI Aletleri &amp; Testler",
+        "case.smtbot.stack.eyes.list": "<li><strong>TradingView Desktop</strong> <span>chart motoru + Pine runtime, CDP üzerinden headless</span></li><li><strong>Pine Script v5</strong> <span>smt_overlay + smt_oscillator (özel indikatörler, settle-aware)</span></li><li><strong>CDP debug</strong> <span>Chrome DevTools Protocol :9222 — chart'a salt-okunur erişim</span></li>",
+        "case.smtbot.stack.brain.list": "<li><strong>Python 3.11+</strong> <span>asyncio çekirdek; pydantic ile tipli yapılandırma modelleri</span></li><li><strong>Node.js 18+</strong> <span>MCP daemon — TV → Python CDP istemcisi</span></li><li><strong>pandas · numpy · ta</strong> <span>vektörize analiz primitif'leri, dış ML çağrısı yok</span></li><li><strong>pydantic · pyyaml</strong> <span>tipli yapılandırma + env değişkeni; açılışta şema doğrulaması</span></li><li><strong>httpx · loguru · rich</strong> <span>async HTTP, yapılandırılmış JSON log, terminal UI</span></li><li><strong>FastAPI + uvicorn</strong> <span>localhost:8000'da salt-okunur jurnal görüntüleyici</span></li><li><strong>aiosqlite</strong> <span>append-only async jurnal — her cycle, her emir, her breaker tetiklemesi</span></li>",
+        "case.smtbot.stack.hands.list": "<li><strong>Bybit V5 REST</strong> <span>pybit ile vadeli işlem (V5 endpoint, hedge-aware)</span></li><li><strong>websockets</strong> <span>canlı pozisyon takibi + fill onayları</span></li><li><strong>UTA + hedge mode</strong> <span>Unified Trading Account, cross-margin USDT/USDC</span></li><li><strong>Limit + SL</strong> <span>asla market emir yok — risk stop'la sınırlı</span></li>",
+        "case.smtbot.stack.tooling.list": "<li><strong>Claude Code</strong> <span>çift-yönlü AI eşi — kodu yazar, parametreleri tune eder, logları analiz eder (kararlar Python tarafında)</span></li><li><strong>Skills</strong> <span>kod tabanı örüntüleri için özel Markdown Skill'leri (risk matematiği, Pine köprüsü, Bybit operasyonları)</span></li><li><strong>Agents</strong> <span>kod gözden geçirme, denetim ve regresyon için alt-ajan çağrıları</span></li><li><strong>MCP</strong> <span>TradingView protokol köprüsü — chart durumunu Python'a salt-okunur taşır</span></li><li><strong>pytest</strong> <span>746 vaka, her breaker sınırını ve her settle yolunu sabitliyor</span></li><li><strong>Optuna TPE</strong> <span>walk-forward Bayesian tune (Pass 3, planlanan)</span></li><li><strong>stable-baselines3</strong> <span>RL yol haritası (Phase 6) — şu an kural-bazlı VMC</span></li>",
+        "case.smtbot.problems.tag": "03 · Problemler",
+        "case.smtbot.problems.h": "Üç zor problem.",
+        "case.smtbot.p1.h": "Pine ile Python'u dürüstçe köprülemek.",
+        "case.smtbot.p1.body": "Standart webhook yaklaşımları sinyalin yarısını kaybeder. TradingView Desktop'u headless-debug modunda (<em>--remote-debugging-port=9222</em>) açıyorum, Pine çıktı tablolarını render edilmiş grafikten doğrudan okuyan bir MCP daemon ekliyorum. Pine settle durumu her döngüde kontrol ediliyor — indikatör barı kapatmadıysa döngü atlanır. <em>Settle olmamış bar = işlem yok.</em> Bot, grafiğe rağmen değil, grafikle birlikte deterministik hâle geliyor.",
+        "case.smtbot.p2.h": "Gerçekten ateşleyen risk devre kesicileri.",
+        "case.smtbot.p2.body": "<em>risk_manager.py</em> içinde üç bağımsız devre kesici var: kümülatif drawdown (günlük sıfırlanır), ardışık kayıp (kötü şans serilerini sınırlar) ve günlük R-bütçesi (N R kaybedildikten sonra zorunlu durur). Hepsi emir gönderiminden önce eşzamanlı çalışır. 746 vakalık pytest suite her kesicinin sınırını sabitliyor — eşik içindeki stop'lar, eski veriden tetiklenen kesiciler, sadece-demo yollarının kazara canlı çağrılarından korunması (<em>BybitClient</em> constructor'ı, <em>allow_live=True</em> açıkça verilmediği sürece canlıyı reddeder).",
+        "case.smtbot.p3.h": "Demo → canlı geçişi sürpriz olmadan.",
+        "case.smtbot.p3.body": "Canlıya geçmek <em>BYBIT_DEMO=0</em>'ı çevirmek değil. Çok adımlı bir ritüel: ayrı bir alt-hesap, sadece read+trade yetkili (asla çekim yetkisi yok!) yeni API anahtarı, IP whitelist'i ve o açık <em>allow_live=True</em> bayrağı. Bir de Türk ISP katmanı var — Bybit'in edge'inin oturduğu bazı CloudFront IP'leri, bazı Türk operatörleri tarafından TCP-443'te DPI ile düşürülüyor. Bot, açılışta DNS'i probe edip ulaşılabilir bir edge'e pinler. Loglarda <em>bybit_demo_dns_pin_failed</em> görürsen, savaşacağın bot değil ISP.",
+        "case.smtbot.learnings.tag": "04 · Öğrendiklerim",
+        "case.smtbot.learnings.h": "Post-it'e yazacağım üç satır.",
+        "case.smtbot.learn1": "<em>Pine kaynak gerçeklik, Python uygulayıcı.</em> Grafikle tartışma — settle durumu boşuna yok.",
+        "case.smtbot.learn2": "<em>Bot kendi başına işlem açıyorsa testler asla fazla değildir.</em> 746 vaka, sen izlemezken para kaybetmeye güvendiğin bir sürecin bedeli.",
+        "case.smtbot.learn3": "<em>TR ISP egress bir mimari meselesi, ayar tuhaflığı değil.</em> Failover'ı açılışta kur — yoksa botun gece 3'te sessizce ölür.",
+        "case.smtbot.back": "Portföye dön",
         "projects.smtbot.description": "Kişisel trading deneyimimi pekiştirmeli öğrenme ile birleştiren uçtan uca bir bot. PPO + Stable Baselines3 ajanları Pine Script sinyallerinden özellik mühendisliği yapılmış veriler üzerinde eğitiliyor, walk-forward optimization ile out-of-sample dönemlerde doğrulanıyor ve MCP server aracılığıyla canlı sinyallere bağlanıyor. Kendi tecrübemi içselleştirmiş, ölçülebilir ve risk kontrollü bir otonom trader üretmeyi hedefliyor.",
         "projects.smtbot.metric": "PPO · Stable Baselines3 · Walk-Forward Optimization",
         "projects.finsenti.subtitle": "Finansal Duygu Analizi MLOps Pipeline'ı",
@@ -124,9 +189,9 @@ const translations = {
         "projects.nexthire.description": "LangGraph tabanlı çok adımlı AI agent sistemi. CV yükle, iş ilanı yapıştır — agent otomatik olarak ATS skoru hesaplar, eksik yetkinlikleri belirler, kişiselleştirilmiş ön yazı oluşturur ve başvuruyu kanban panosuna ekler. Multi-model routing ile maliyet-performans optimizasyonu sağlar.",
         "projects.nexthire.metric": "LangGraph · Çoklu-model yönlendirme",
         "projects.awsai.subtitle": "AWS ile Akıllı Doküman Soru-Cevap Sistemi",
-        "projects.awsai.description": "AWS bulut servisleri üzerine inşa edilmiş serverless doküman soru-cevap sistemi. PDF dokümanları S3'e yüklenir, Textract ile otomatik metin çıkarımı yapılır ve Bedrock üzerindeki Claude AI modeli ile doğal dilde sorulara yanıt verilir. API Gateway, Lambda, DynamoDB, SNS ve CDK ile tamamen Infrastructure as Code olarak tasarlanmıştır.",
+        "projects.awsai.description": "Tamamen serverless doküman Q&A — PDF'ler S3'te, metin Textract'tan, doğal dil cevapları Bedrock üzerindeki Claude'dan. Tüm yığın Infrastructure as Code (CDK) ile yazıldı; konsolda değil version control'de yaşıyor. API Gateway + Lambda + DynamoDB + SNS.",
         "projects.swiftlink.subtitle": "Hızlı & Modern URL Kısaltma Servisi",
-        "projects.swiftlink.description": "FastAPI ile geliştirilmiş, Docker ile konteynerize edilmiş ve GitHub Actions CI/CD pipeline'ı ile otomatik test edilen modern URL kısaltma uygulaması. Kısaltılmış linkler için tıklama analitiği ve gerçek zamanlı istatistikler sunar.",
+        "projects.swiftlink.description": "FastAPI ile uçtan uca URL kısaltıcı — Docker ile konteynerize, GitHub Actions ile CI test. Tıklama analitiği, gerçek zamanlı istatistik, özel slug. API'den dashboard'a tüm yığın bende.",
         "projects.sametei.subtitle": "AI Destekli İK Doküman Yönetim Platformu",
         "projects.sametei.description": "LibreChat çerçevesi üzerine inşa edilmiş, insan kaynakları doküman yönetimini yapay zeka ile otomatikleştiren kurumsal ölçekte platform. İK ekiplerinin doküman işleme süresini %70 azalttı.",
         "projects.hireai.subtitle": "AI Destekli CV & Portföy Analiz Platformu",
@@ -136,16 +201,16 @@ const translations = {
         "projects.bitcoin.description": "n8n workflow automation ile geliştirilmiş Bitcoin teknik analiz sistemi. Binance API'den otomatik veri toplayarak 15+ teknik gösterge analizi yapar (SMA, EMA, RSI, MACD, Bollinger Bands, VWAP, ATR). DeepSeek R1 AI modeli ile piyasa yorumları oluşturur ve profesyonel HTML raporlarını her 4 saatte bir otomatik olarak email ile gönderir.",
         "projects.fruit.title": "Meyve Olgunluk Tespiti",
         "projects.fruit.subtitle": "Makine Öğrenmesi & Computer Vision",
-        "projects.fruit.description": "Görüntü işleme ve 5 farklı ML algoritması (SVM, Random Forest, Gradient Boosting, Logistic Regression, Ensemble) kullanarak meyve olgunluğunu tespit eden pattern recognition projesi.",
+        "projects.fruit.description": "Görüntü işleme ile meyve olgunluk tespiti yapan pattern recognition çalışması. SVM, Random Forest, Gradient Boosting, Logistic Regression ve Ensemble — beş farklı ML algoritmasını yan yana koyan bitirme projem; sınıflandırma temellerini öğreten tür.",
         "projects.news.subtitle": "Modern Haber Toplayıcı Platform",
-        "projects.news.description": "ASP.NET ile geliştirilmiş modern haber toplayıcı. RSS feed'lerini akıllı kategorizasyon ile çeker ve düzenli bir şekilde kullanıcılara sunar.",
+        "projects.news.description": "ASP.NET ile yazılmış haber toplayıcı — RSS akışlarını kategori clustering ile derleyip kullanıcıya sunar. C# döneminden kalan yapım, sonradan neden Python'a geçtiğimi anlatan bir referans noktası.",
         "projects.link": "GitHub'da Görüntüle",
         "projects.link.gitlab": "GitLab'da Görüntüle",
         "contact.title": "İletişim",
         "contact.eyebrow": "İLETİŞİME GEÇ",
         "contact.statement.line1": "Birlikte bir şey",
         "contact.statement.line2": "inşa edelim.",
-        "contact.lead": "Yeni fırsatlara ve işbirliklerine her zaman açığım. Hızla dönüş yaparım.",
+        "contact.lead": "Yeni fırsatlara ve işbirliklerine açığım. Bir mesaj atın — hızla dönerim.",
         "contact.copy": "kopyala",
         "contact.email.copied": "Email kopyalandı!",
         "hero.meta.role": "ROL",
@@ -174,8 +239,10 @@ const translations = {
         "visitor.weekly": "SON 7 GÜN",
         "visitor.weekly.cta": "7 günlük dağılımı gör",
         "visitor.reset.note": "Veriler 16 Mart 2026 tarihinde sıfırlanmıştır.",
-        "footer.tagline": "AI/ML & Cloud çözümleri ile geleceği inşa ediyorum.",
-        "footer.signature": "Görüşmek üzere.",
+        "footer.tagline": "Sıfırdan vanilla JS ile yazıldı. Framework yok, kısa yol yok, sadece niyet var.",
+        "footer.copyright": "© 2026 Samet Soysal. Tüm hakları saklıdır.",
+        "footer.made": "Niyetle yazıldı",
+        "footer.signature": "Sonraki build'de görüşürüz.",
         "footer.uptop": "Başa dön",
         "footer.status": "Yeni fırsatlara açık",
         "footer.nav.title": "Sayfalar",
@@ -198,21 +265,37 @@ const translations = {
         "hero.badge": "AI/ML Engineer & Full-Stack Developer",
         "hero.subtitle.prefix": "I specialize in",
         "hero.subtitle": "Artificial Intelligence | Machine Learning | NLP Specialist",
-        "hero.description": "I develop RAG systems, OCR technologies, and multi-model AI solutions. I specialize in designing and integrating production-ready artificial intelligence systems in corporate projects.",
+        "hero.description": "Computer Engineer building production AI — RAG pipelines, Multi-LLM orchestrations, and MCP-driven agents. End-to-end systems with millisecond retrieval, bridging models with real data engineering.",
         "hero.btn.projects": "My Projects",
         "hero.btn.github": "My GitHub Profile",
         "hero.btn.contact": "Contact",
         "hero.btn.cv.view": "View CV",
         "hero.btn.cv.download": "Download CV",
         "about.title": "About Me",
-        "about.intro": "I design end-to-end <span class='kw'>AI systems</span> — from data to model, prototype to production, <span class='kw'>scalable</span> and measurable.",
-        "about.description": "Graduated from Eskişehir Osmangazi University with a BSc in Computer Engineering. I have a proven track record of designing end-to-end <span class='kw'>AI architectures</span>, high-performance <span class='kw'>RAG pipelines</span>, and <span class='kw'>Multi-LLM</span> orchestrations. My core strength lies in bridging complex machine learning models with scalable <span class='kw'>full-stack</span> development (<span class='kw'>React</span>, <span class='kw'>FastAPI</span>, <span class='kw'>PostgreSQL</span>) to deliver data-driven solutions with millisecond-level latency and over <span class='kw'>95% accuracy</span>.",
+        "about.intro": "<span class='kw'>Production AI is mostly engineering.</span> Models impress in demos — systems survive in production. I build the systems.",
+        "about.origin": "Computer Engineer, graduated from <span class='kw'>Eskişehir Osmangazi University</span>. Built my engineering foundation across machine learning, pattern recognition, and graph theory — then shifted the focus to applied LLM systems where the work actually shipped to users.",
+        "about.focus": "I build production AI: <span class='kw'>RAG pipelines</span> at sub-300ms latency, <span class='kw'>Multi-LLM orchestrations</span> with cloud + local fallback, and <span class='kw'>MCP-driven agents</span> that bridge real data engineering. The interesting work happens where the model meets the bus.",
+        "about.impact": "FinBERT-driven sentiment with <span class='kw'>91.1% accuracy</span> at FinSenti; LangGraph agents that cut job-application time from hours to minutes (NextHire); <span class='kw'>70% acceleration</span> on enterprise HR document workflows at SAMETEI. Scale + engineering + a bit of stubbornness.",
+        "about.dossier.role": "Role",
+        "about.dossier.roleVal": "AI/ML Engineer",
+        "about.dossier.edu": "Education",
+        "about.dossier.eduVal": "Eskişehir Osmangazi University · BSc Computer Engineering",
+        "about.dossier.based": "Based",
+        "about.dossier.basedVal": "Eskişehir, Türkiye",
+        "about.dossier.recent": "Recent",
+        "about.dossier.recentVal": "IC İçtaş · TEI · Powintec",
+        "about.dossier.focus": "Focus",
+        "about.dossier.focusVal": "RAG · Multi-LLM · MCP · Vector Search",
+        "about.dossier.lang": "Languages",
+        "about.dossier.langVal": "Turkish · English (B2)",
+        "about.dossier.status": "Status",
+        "about.dossier.statusVal": "Open to opportunities",
         "about.stats.years": "Years of Experience",
-        "about.stats.projects": "Completed Projects",
+        "about.stats.projects": "Shipped Projects",
         "about.stats.technologies": "Technologies",
         "education.title": "Education",
         "education.degree": "BSc in Computer Engineering",
-        "education.school": "Eskisehir Osmangazi University",
+        "education.school": "Eskişehir Osmangazi University",
         "education.date": "2020 - 2026",
         "education.detail": "Specializing in Artificial Intelligence, Machine Learning and NLP. Capstone project: HIREAI — AI-powered CV analysis platform.",
         "education.cert.title": "English Language Schools",
@@ -238,7 +321,7 @@ const translations = {
         "experience.icictas.achievements.3": "Optimized SQLAlchemy ORM queries with B-tree indexing for substantial perf gains.",
         "experience.icictas.achievements.4": "Designed real-time analytical dashboards for managers with Material UI.",
         "experience.tei.title": "Data Science & AI Intern",
-        "experience.tei.company": "<a href='https://www.tei.com.tr/en' target='_blank' class='company-link company-tei'>TEI – TUSAS Engine Industries Inc. | Eskisehir, Turkey</a>",
+        "experience.tei.company": "<a href='https://www.tei.com.tr/en' target='_blank' class='company-link company-tei'>TEI – TUSAS Engine Industries Inc. | Eskişehir, Türkiye</a>",
         "experience.tei.date": "Aug – Sep 2025",
         "experience.tei.desc": "I conducted R&D on secure data transmission and system architectures in isolated networks at TEI. I managed the prototyping process of 'SAMETEI', an LLM-based AI assistant for the HR department, integrating OpenRouter and Local LLMs. Furthermore, I developed autonomous workflows for financial metric analysis using n8n and created RPA solutions using Playwright to automate e-commerce processes.",
         "experience.tei.metrics.1": "Multi-LLM prototype",
@@ -280,6 +363,42 @@ const translations = {
         "projects.status.wip": "In active development",
         "projects.wip": "Currently building",
         "projects.smtbot.subtitle": "Reinforcement Learning Trading Bot",
+        "projects.smtbot.casebtn": "Read the case",
+        "case.smtbot.h1": "case study.",
+        "case.smtbot.cover.problem": "Discretionary trading: the rules live in your head, the results don't. The only way to systemise it is a bot that reads the same charts you do — and places orders while you sleep.",
+        "case.smtbot.cover.status": "Bybit V5 demo · 746 tests passing",
+        "case.smtbot.stat1.k": "Strategy",
+        "case.smtbot.stat2.k": "Entry · HTF",
+        "case.smtbot.stat3.k": "Tests",
+        "case.smtbot.stat4.k": "Mode",
+        "case.smtbot.arch.tag": "01 · Architecture",
+        "case.smtbot.arch.h": "TradingView is the eyes. Python is the brain. Bybit is the hands.",
+        "case.smtbot.arch.lead": "Three actors, one decision loop. Pine indicators (smt_overlay + smt_oscillator) read the chart. An MCP daemon ferries those readings into Python via TradingView Desktop's debug port. Python runs the VMC planner, applies the risk manager, and routes orders to Bybit V5 over pybit. SQLite is the async journal. Pine settle status is checked every cycle — no settled bar, no trade.",
+        "case.smtbot.stack.tag": "02 · Stack",
+        "case.smtbot.stack.h": "What the bot is made of.",
+        "case.smtbot.stack.lead": "Every component picked for one reason: it has to survive a 24/7 loop without you watching it. No frameworks for show, no abstractions that aren't paying for themselves.",
+        "case.smtbot.stack.eyes": "Eyes",
+        "case.smtbot.stack.brain": "Brain",
+        "case.smtbot.stack.hands": "Hands",
+        "case.smtbot.stack.tooling": "AI Tooling &amp; Tests",
+        "case.smtbot.stack.eyes.list": "<li><strong>TradingView Desktop</strong> <span>chart engine + Pine runtime, headless via CDP</span></li><li><strong>Pine Script v5</strong> <span>smt_overlay + smt_oscillator (custom indicators, settle-aware)</span></li><li><strong>CDP debug</strong> <span>Chrome DevTools Protocol :9222 — read-only chart access</span></li>",
+        "case.smtbot.stack.brain.list": "<li><strong>Python 3.11+</strong> <span>asyncio core; pydantic-typed config models</span></li><li><strong>Node.js 18+</strong> <span>MCP daemon — CDP client bridging TV → Python</span></li><li><strong>pandas · numpy · ta</strong> <span>vectorised analysis primitives, no external ML calls</span></li><li><strong>pydantic · pyyaml</strong> <span>typed config + env overrides, schema validation at boot</span></li><li><strong>httpx · loguru · rich</strong> <span>async HTTP, structured JSON logs, terminal UI</span></li><li><strong>FastAPI + uvicorn</strong> <span>read-only journal viewer at localhost:8000</span></li><li><strong>aiosqlite</strong> <span>append-only async journal — every cycle, every order, every breaker fire</span></li>",
+        "case.smtbot.stack.hands.list": "<li><strong>Bybit V5 REST</strong> <span>futures trading via pybit (V5 endpoints, hedge-aware)</span></li><li><strong>websockets</strong> <span>live position monitor + fill confirmations</span></li><li><strong>UTA + hedge mode</strong> <span>Unified Trading Account, cross-margin USDT/USDC</span></li><li><strong>Limit + SL</strong> <span>no market entries, ever — risk bounded by stop</span></li>",
+        "case.smtbot.stack.tooling.list": "<li><strong>Claude Code</strong> <span>pair-programming AI — codes, tunes parameters, audits logs (decisions stay in Python)</span></li><li><strong>Skills</strong> <span>custom Markdown Skills for codebase patterns (risk math, Pine bridge, Bybit ops)</span></li><li><strong>Agents</strong> <span>sub-agent invocations for code review, audit passes, regression checks</span></li><li><strong>MCP</strong> <span>TradingView protocol bridge — read-only chart state into Python</span></li><li><strong>pytest</strong> <span>746 cases pinning every breaker edge, every settle path</span></li><li><strong>Optuna TPE</strong> <span>walk-forward Bayesian tune (Pass 3, planned)</span></li><li><strong>stable-baselines3</strong> <span>RL roadmap (Phase 6) — currently rule-based VMC</span></li>",
+        "case.smtbot.problems.tag": "03 · Problems",
+        "case.smtbot.problems.h": "Three hard problems.",
+        "case.smtbot.p1.h": "Bridging Pine and Python without lying.",
+        "case.smtbot.p1.body": "Standard webhook approaches lose half the signal. I went with TradingView Desktop in headless-debug mode (<em>--remote-debugging-port=9222</em>) and an MCP daemon that reads Pine output tables straight off the rendered chart. Pine settle status is checked every cycle — if the indicator hasn't finalised the bar, the cycle skips. <em>No settled bar, no trade.</em> The bot becomes deterministic with the chart, not despite it.",
+        "case.smtbot.p2.h": "Risk circuit breakers that actually fire.",
+        "case.smtbot.p2.body": "Three independent breakers live in <em>risk_manager.py</em>: cumulative drawdown (resets daily), consecutive losses (caps hot streaks of bad luck), and a daily R-budget (forces a stop after N units of risk are spent). Each fires synchronously before order routing. The 746-case pytest suite pins every breaker's edge — stops inside the deadband, breakers triggered by stale data, demo-only paths protected from accidental live calls (<em>BybitClient</em> constructor refuses live unless <em>allow_live=True</em> is passed explicitly).",
+        "case.smtbot.p3.h": "Demo → live transition without surprise.",
+        "case.smtbot.p3.body": "Going live isn't flipping <em>BYBIT_DEMO=0</em>. It's a multi-step ritual: a separate sub-account, a fresh API key with read+trade only (never withdrawal), IP whitelisting, and that explicit <em>allow_live=True</em> flag. There's also a Turkish ISP layer — certain CloudFront IPs that Bybit's edge sits behind get DPI-dropped at TCP-443 by some Turkish carriers. The bot probes DNS at startup and pins to a reachable edge. If you see <em>bybit_demo_dns_pin_failed</em> in the logs, you fight the ISP, not the bot.",
+        "case.smtbot.learnings.tag": "04 · What I learned",
+        "case.smtbot.learnings.h": "Three lines I'd write on a Post-it.",
+        "case.smtbot.learn1": "<em>Pine is the source of truth, Python is the executor.</em> Don't argue with the chart — settle status exists for a reason.",
+        "case.smtbot.learn2": "<em>Tests are not excessive when the bot trades on its own.</em> 746 cases is the cost of trusting a process to lose money without you watching.",
+        "case.smtbot.learn3": "<em>TR ISP egress is an architecture concern, not a config quirk.</em> Build the failover at startup or your bot will silently die at 3am.",
+        "case.smtbot.back": "Back to portfolio",
         "projects.smtbot.description": "An end-to-end trading bot that fuses my own discretionary experience with reinforcement learning. PPO agents on Stable Baselines3 train on features engineered from Pine Script signals, get validated across out-of-sample walk-forward windows, and stream live decisions through an MCP server. The goal: a measurable, risk-aware autonomous trader that has internalized the way I read markets.",
         "projects.smtbot.metric": "PPO · Stable Baselines3 · Walk-Forward Optimization",
         "projects.finsenti.subtitle": "Financial Sentiment Analysis MLOps Pipeline",
@@ -289,9 +408,9 @@ const translations = {
         "projects.nexthire.description": "Multi-step AI agent system built with LangGraph. Upload your CV, paste a job posting — the agent automatically calculates ATS score, identifies skill gaps, generates a personalized cover letter, and adds the application to a kanban board. Optimizes cost-performance with multi-model routing.",
         "projects.nexthire.metric": "LangGraph · Multi-model routing",
         "projects.awsai.subtitle": "Intelligent Document Q&A System on AWS",
-        "projects.awsai.description": "Serverless document question-answering system built on AWS cloud services. PDFs are uploaded to S3, text is automatically extracted via Textract, and Claude AI model on Bedrock answers natural language questions. Fully designed as Infrastructure as Code with API Gateway, Lambda, DynamoDB, SNS, and CDK.",
+        "projects.awsai.description": "Fully serverless document Q&A — PDFs in S3, text via Textract, Claude on Bedrock answers natural-language questions. The whole stack as Infrastructure as Code (CDK), living in version control instead of a console. API Gateway + Lambda + DynamoDB + SNS.",
         "projects.swiftlink.subtitle": "Fast & Modern URL Shortener Service",
-        "projects.swiftlink.description": "Modern URL shortener application built with FastAPI, containerized with Docker, and automatically tested via GitHub Actions CI/CD pipeline. Provides click analytics and real-time statistics for shortened links.",
+        "projects.swiftlink.description": "End-to-end URL shortener built with FastAPI — Docker-containerized, CI-tested via GitHub Actions. Click analytics, real-time stats, custom slugs. Owned the whole stack from API to dashboard.",
         "projects.sametei.subtitle": "AI-Powered HR Document Management Platform",
         "projects.sametei.description": "Built on LibreChat framework, a corporate-scale platform that automates human resources document management with artificial intelligence. Reduced HR teams' document processing time by 70%.",
         "projects.hireai.subtitle": "AI-Powered CV & Portfolio Analysis Platform",
@@ -301,16 +420,16 @@ const translations = {
         "projects.bitcoin.description": "Bitcoin technical analysis system built with n8n workflow automation. Automatically collects data from Binance API and performs 15+ technical indicator analysis (SMA, EMA, RSI, MACD, Bollinger Bands, VWAP, ATR). Generates market insights with DeepSeek R1 AI model and automatically sends professional HTML reports via email every 4 hours.",
         "projects.fruit.title": "Fruit Ripeness Detection",
         "projects.fruit.subtitle": "Machine Learning & Computer Vision",
-        "projects.fruit.description": "Pattern recognition project that detects fruit ripeness using image processing and 5 different ML algorithms (SVM, Random Forest, Gradient Boosting, Logistic Regression, Ensemble).",
+        "projects.fruit.description": "Pattern recognition study that compares 5 ML algorithms — SVM, Random Forest, Gradient Boosting, Logistic Regression, and an Ensemble — on fruit ripeness images. Senior project; the kind that drills classification fundamentals.",
         "projects.news.subtitle": "Modern News Aggregator Platform",
-        "projects.news.description": "Modern news aggregator developed with ASP.NET. Pulls RSS feeds with smart categorization and presents them in an organized manner.",
+        "projects.news.description": "ASP.NET news aggregator — pulls RSS feeds, clusters them by category, presents them cleanly. From my C# era; a reference point for why I moved to Python afterwards.",
         "projects.link": "View on GitHub",
         "projects.link.gitlab": "View on GitLab",
         "contact.title": "Contact",
         "contact.eyebrow": "GET IN TOUCH",
         "contact.statement.line1": "Let's build",
         "contact.statement.line2": "something together.",
-        "contact.lead": "I'm always open to new opportunities and collaborations. I get back to you fast.",
+        "contact.lead": "Open to new opportunities and collaborations. Drop a line — I respond quickly.",
         "contact.copy": "copy",
         "contact.email.copied": "Email copied!",
         "hero.meta.role": "ROLE",
@@ -325,7 +444,7 @@ const translations = {
         "about.stats.metatech": "STACK",
         "about.specs.ataGlance": "AT A GLANCE",
         "about.specs.basedIn": "BASED IN",
-        "about.specs.basedInVal": "Eskisehir, Türkiye",
+        "about.specs.basedInVal": "Eskişehir, Türkiye",
         "about.specs.openTo": "OPEN TO",
         "about.specs.openToVal": "Full-time · Contract · Remote",
         "about.specs.focus": "FOCUS",
@@ -339,7 +458,9 @@ const translations = {
         "visitor.weekly": "LAST 7 DAYS",
         "visitor.weekly.cta": "View 7-day breakdown",
         "visitor.reset.note": "Data was reset on March 16, 2026.",
-        "footer.tagline": "Building the future with AI/ML & Cloud solutions.",
+        "footer.tagline": "Crafted from scratch in vanilla JS. No frameworks, no shortcuts, all intent.",
+        "footer.copyright": "© 2026 Samet Soysal. All rights reserved.",
+        "footer.made": "Crafted with intent",
         "footer.signature": "See you on the next build.",
         "footer.uptop": "Back to top",
         "footer.status": "Open to new opportunities",
@@ -377,6 +498,12 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
 
             // Update HTML lang attribute
             document.documentElement.lang = lang;
+
+            // Announce to screen readers
+            const langLive = document.getElementById('langLive');
+            if (langLive) {
+                langLive.textContent = lang === 'tr' ? 'Dil: Türkçe' : 'Language: English';
+            }
 
             // Save preference
             localStorage.setItem('preferredLang', lang);
@@ -456,14 +583,29 @@ themeToggle.addEventListener('click', () => {
     }, 250);
 });
 
-// Update language function
+// Update language function — FLIP-lite (fade-swap, no flicker)
 function updateLanguage(lang) {
-    document.querySelectorAll('[data-tr]').forEach(element => {
-        const key = element.getAttribute('data-tr');
-        if (translations[lang] && translations[lang][key]) {
-            element.innerHTML = translations[lang][key];
-        }
-    });
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const swap = () => {
+        document.querySelectorAll('[data-tr]').forEach(element => {
+            const key = element.getAttribute('data-tr');
+            if (translations[lang] && translations[lang][key]) {
+                element.innerHTML = translations[lang][key];
+            }
+        });
+    };
+    if (reduced){
+        swap();
+        return;
+    }
+    document.body.classList.add('lang-swapping');
+    // Wait for opacity transition to land, then swap
+    setTimeout(() => {
+        swap();
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => document.body.classList.remove('lang-swapping'));
+        });
+    }, 160);
 }
 
 // Scroll reveal animation
@@ -478,7 +620,7 @@ const scrollRevealFn = () => {
     });
 };
 
-// Stat count-up animation
+// Stat count-up animation — RAF + easeOutCubic
 const statCountedUp = new Set();
 const countUpStats = () => {
     document.querySelectorAll('.stat-value[data-count]').forEach(el => {
@@ -486,17 +628,17 @@ const countUpStats = () => {
         const rect = el.getBoundingClientRect();
         if (rect.top < window.innerHeight - 100) {
             statCountedUp.add(el);
-            const target = parseInt(el.getAttribute('data-count'));
-            let current = 0;
-            const step = Math.max(1, Math.floor(target / 30));
-            const timer = setInterval(() => {
-                current += step;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                el.textContent = current + '+';
-            }, 40);
+            const target = parseInt(el.getAttribute('data-count'), 10);
+            const duration = 1400; // ms
+            const start = performance.now();
+            const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+            const tick = (now) => {
+                const t = Math.min(1, (now - start) / duration);
+                const value = Math.round(target * easeOutCubic(t));
+                el.textContent = value + '+';
+                if (t < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
         }
     });
 };
@@ -577,22 +719,10 @@ navScrollFn();
         tag.classList.add(cls);
     });
 
-    // --- Staggered tag animation delay ---
+    // --- Staggered tag animation: index only, delay is CSS-driven ---
     document.querySelectorAll('.project-card').forEach(card => {
         card.querySelectorAll('.card-tags span').forEach((tag, i) => {
-            tag.style.transitionDelay = (i * 20) + 'ms';
-        });
-        // Reset delay on mouse leave
-        card.addEventListener('mouseleave', () => {
-            card.querySelectorAll('.card-tags span').forEach(tag => {
-                tag.style.transitionDelay = '0ms';
-            });
-            // Re-set after transition completes for next hover
-            setTimeout(() => {
-                card.querySelectorAll('.card-tags span').forEach((tag, i) => {
-                    tag.style.transitionDelay = (i * 20) + 'ms';
-                });
-            }, 400);
+            tag.style.setProperty('--i', i);
         });
     });
 
@@ -1106,6 +1236,25 @@ navScrollFn();
         if (!lRunning) { lRunning = true; lRafId = requestAnimationFrame(lightningLoop); }
     }
 
+    // --- Scroll-zone gating: hero+content=active, footer=quiet ---
+    // Bolts are part of the cyberpunk HUD identity — active from page load.
+    let boltsActive = true;
+    let boltsBoosted = false;
+    const projectsEl = document.getElementById('projects');
+    const footerEl = document.querySelector('.footer-v3') || document.querySelector('.footer-v2');
+    if ('IntersectionObserver' in window) {
+        if (projectsEl){
+            new IntersectionObserver((entries) => {
+                entries.forEach(e => { boltsBoosted = e.intersectionRatio > 0.2; });
+            }, { threshold: [0, 0.2] }).observe(projectsEl);
+        }
+        if (footerEl){
+            new IntersectionObserver((entries) => {
+                entries.forEach(e => { boltsActive = e.intersectionRatio <= 0.2; });
+            }, { threshold: [0, 0.2] }).observe(footerEl);
+        }
+    }
+
     function spawnBolt(side, dirHint) {
         bolts.push(generateBolt(
             side || (Math.random() > 0.5 ? 'left' : 'right'),
@@ -1113,13 +1262,24 @@ navScrollFn();
         ));
         ensureLRun();
     }
+    // Expose for cheat mode boost (read by konami easter egg)
+    window.__lightningSpawn = () => spawnBolt();
 
-    // --- Ambient loop ---
+    // --- Opening kickoff (signals the HUD is alive in hero) ---
+    setTimeout(() => { if (boltsActive) spawnBolt('left'); }, 1300);
+    setTimeout(() => { if (boltsActive) spawnBolt('right'); }, 2100);
+
+    // --- Ambient loop (gated; respects scroll zone) ---
     function ambientLoop() {
-        const delay = isMobile ? 4000 + Math.random() * 6000 : 2000 + Math.random() * 3000;
-        setTimeout(() => { spawnBolt(); ambientLoop(); }, delay);
+        const baseMin = isMobile ? 4000 : 2000;
+        const baseMax = isMobile ? 10000 : 5000;
+        const boostFactor = boltsBoosted ? 0.55 : 1;
+        const delay = (baseMin + Math.random() * (baseMax - baseMin)) * boostFactor;
+        setTimeout(() => {
+            if (boltsActive) spawnBolt();
+            ambientLoop();
+        }, delay);
     }
-    setTimeout(() => { spawnBolt('left'); spawnBolt('right'); }, 1000);
     ambientLoop();
 
     // --- Scroll-triggered bolts ---
@@ -1306,9 +1466,8 @@ async function initVisitorCounter() {
 
     // Check if Firebase is available
     if (!database) {
-        console.error('Firebase not available');
-        counterElement.textContent = '--';
-        dailyCounterElement.textContent = '--';
+        console.warn('Firebase not available — visitor counter offline');
+        markVisitorChipOffline();
         return;
     }
 
@@ -1369,10 +1528,21 @@ async function initVisitorCounter() {
         setTimeout(initWeeklyVisitorChart, 1000); // Small delay to let other counters finish
 
     } catch (error) {
-        console.error('Visitor counter error:', error);
-        counterElement.textContent = 'Error';
-        dailyCounterElement.textContent = 'Error';
+        console.warn('Visitor counter offline:', error && error.message ? error.message : error);
+        markVisitorChipOffline();
     }
+}
+
+// Mark the visitor chip as offline — subtle inline hint, page stays alive
+function markVisitorChipOffline(){
+    const chip = document.getElementById('visitorChip');
+    if (!chip) return;
+    chip.classList.add('chip-offline-state');
+    chip.setAttribute('title', 'Stats temporarily unavailable — main content is live.');
+    const counterEl = document.getElementById('visitorCount');
+    const dailyEl = document.getElementById('dailyVisitorCount');
+    if (counterEl) counterEl.textContent = '—';
+    if (dailyEl) dailyEl.textContent = '—';
 }
 
 let weeklyChartInstance = null;
@@ -1422,22 +1592,51 @@ async function initWeeklyVisitorChart() {
 }
 
 function renderWeeklyChart(ctx, labels, data) {
-    // Determine colors based on current theme
     const isLightMode = document.body.classList.contains('light-mode');
-    
-    // Theme colors
-    const textColor = isLightMode ? '#24211e' : '#a8acbe';
-    const gridColor = isLightMode ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.05)';
-    const barGradientStart = isLightMode ? '#7c3aed' : '#2dd4bf';
-    const barGradientEnd = isLightMode ? '#2dd4bf' : '#7c3aed';
 
-    // Create gradient (vertical → bar top to bottom)
-    const gradient = ctx.createLinearGradient(0, 0, 0, 80);
-    gradient.addColorStop(0, barGradientStart);
-    gradient.addColorStop(1, barGradientEnd);
+    // Theme palette — more saturated, polished gradients
+    const palette = isLightMode ? {
+        text: '#3d3934',
+        textHi: '#0c0a08',
+        grid: 'rgba(0,0,0,0.05)',
+        baseline: 'rgba(0,0,0,0.12)',
+        barTop: '#6d28d9',
+        barMid: '#0d7d72',
+        barBottom: 'rgba(13,125,114,0.08)',
+        hoverGlow: 'rgba(109,40,217,0.18)',
+        tooltipBg: '#14110e',
+        tooltipText: '#ffffff',
+        tooltipAccent: '#5eead4',
+        tooltipBorder: 'rgba(255,255,255,0.14)'
+    } : {
+        text: '#c4c8d4',
+        textHi: '#ffffff',
+        grid: 'rgba(255,255,255,0.05)',
+        baseline: 'rgba(255,255,255,0.12)',
+        barTop: '#a78bfa',
+        barMid: '#5eead4',
+        barBottom: 'rgba(45,212,191,0.18)',
+        hoverGlow: 'rgba(124,58,237,0.32)',
+        tooltipBg: '#0c0a18',
+        tooltipText: '#ffffff',
+        tooltipAccent: '#5eead4',
+        tooltipBorder: 'rgba(124,58,237,0.32)'
+    };
+
+    // Multi-stop vertical gradient
+    const barGradient = ctx.createLinearGradient(0, 0, 0, 100);
+    barGradient.addColorStop(0, palette.barTop);
+    barGradient.addColorStop(0.55, palette.barMid);
+    barGradient.addColorStop(1, palette.barBottom);
+
+    // Hover gradient — slightly brighter
+    const hoverGradient = ctx.createLinearGradient(0, 0, 0, 100);
+    hoverGradient.addColorStop(0, palette.barTop);
+    hoverGradient.addColorStop(0.5, palette.barMid);
+    hoverGradient.addColorStop(1, palette.hoverGlow);
 
     Chart.defaults.font.family = "'JetBrains Mono', monospace";
-    
+
     if (weeklyChartInstance) {
         weeklyChartInstance.destroy();
     }
@@ -1448,29 +1647,37 @@ function renderWeeklyChart(ctx, labels, data) {
             labels: labels,
             datasets: [{
                 data: data,
-                backgroundColor: gradient,
-                borderRadius: 4,
+                backgroundColor: barGradient,
+                hoverBackgroundColor: hoverGradient,
+                borderRadius: 6,
                 borderSkipped: false,
-                barThickness: 12
+                barThickness: 'flex',
+                maxBarThickness: 18,
+                categoryPercentage: 0.78,
+                barPercentage: 0.85
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            layout: { padding: { top: 6, right: 2, bottom: 0, left: 2 } },
             plugins: {
                 legend: { display: false },
                 tooltip: {
-                    backgroundColor: isLightMode ? '#14110e' : 'rgba(15,23,42,0.9)',
-                    titleColor: isLightMode ? '#ffffff' : '#f8fafc',
-                    bodyColor: isLightMode ? '#ffffff' : '#2dd4bf',
-                    borderColor: isLightMode ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.1)',
+                    backgroundColor: palette.tooltipBg,
+                    titleColor: palette.tooltipText,
+                    titleFont: { size: 10, weight: '600', family: "'JetBrains Mono', monospace" },
+                    bodyColor: palette.tooltipAccent,
+                    bodyFont: { size: 11, weight: '600', family: "'JetBrains Mono', monospace" },
+                    borderColor: palette.tooltipBorder,
                     borderWidth: 1,
-                    padding: 8,
+                    padding: { top: 8, right: 12, bottom: 8, left: 12 },
+                    cornerRadius: 8,
                     displayColors: false,
                     callbacks: {
-                        title: () => null, // Hide title
+                        title: (items) => items[0].label,
                         label: (context) => {
-                            const label = currentLang === 'tr' ? 'ziyaretçi' : 'visitors';
+                            const label = (typeof currentLang !== 'undefined' && currentLang === 'tr') ? 'ziyaretçi' : 'visitors';
                             return `${context.raw} ${label}`;
                         }
                     }
@@ -1479,20 +1686,27 @@ function renderWeeklyChart(ctx, labels, data) {
             scales: {
                 x: {
                     grid: { display: false, drawBorder: false },
+                    border: { display: false },
                     ticks: {
-                        color: textColor,
-                        font: { size: 9 },
-                        padding: 0
+                        color: palette.text,
+                        font: { size: 9, weight: '500', family: "'JetBrains Mono', monospace" },
+                        padding: 4
                     }
                 },
                 y: {
                     display: false,
-                    beginAtZero: true
+                    beginAtZero: true,
+                    grid: { display: false, drawBorder: false },
+                    border: { display: false }
                 }
             },
             animation: {
-                duration: 1500,
-                easing: 'easeOutQuart'
+                duration: 1300,
+                easing: 'easeOutCubic'
+            },
+            interaction: {
+                mode: 'index',
+                intersect: false
             }
         }
     });
@@ -1937,6 +2151,60 @@ document.head.appendChild(style);
 // Experience section slider functions removed as the layout changed to a vertical roadmap.
 
 // ============================================
+// MODAL ACCESSIBILITY — focus trap + return-focus
+// ============================================
+const modalA11y = (function(){
+    let lastFocused = null;
+    let activeModal = null;
+
+    function getFocusable(modal){
+        return Array.from(modal.querySelectorAll(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"]), input:not([disabled]), textarea:not([disabled])'
+        )).filter(el => el.offsetParent !== null);
+    }
+
+    function onKey(e){
+        if (!activeModal || e.key !== 'Tab') return;
+        const items = getFocusable(activeModal);
+        if (!items.length) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first){
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last){
+            e.preventDefault();
+            first.focus();
+        }
+    }
+
+    return {
+        activate(modal){
+            lastFocused = document.activeElement;
+            activeModal = modal;
+            modal.setAttribute('aria-modal', 'true');
+            if (!modal.hasAttribute('role')) modal.setAttribute('role', 'dialog');
+            const items = getFocusable(modal);
+            if (items.length){
+                requestAnimationFrame(() => items[0].focus());
+            }
+            document.addEventListener('keydown', onKey);
+        },
+        deactivate(modal){
+            modal.removeAttribute('aria-modal');
+            document.removeEventListener('keydown', onKey);
+            if (activeModal === modal) activeModal = null;
+            const restore = lastFocused;
+            lastFocused = null;
+            if (restore && typeof restore.focus === 'function'){
+                requestAnimationFrame(() => restore.focus());
+            }
+        },
+        isActive(){ return activeModal !== null; }
+    };
+})();
+
+// ============================================
 // CERTIFICATE MODAL
 // ============================================
 function showCertificateModal() {
@@ -1947,6 +2215,7 @@ function showCertificateModal() {
         modal.classList.add('show');
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
+        modalA11y.activate(modal);
     }
 }
 
@@ -1956,6 +2225,7 @@ function closeCertificateModal() {
         modal.classList.remove('show');
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
+        modalA11y.deactivate(modal);
     }
 }
 
@@ -1979,6 +2249,7 @@ window.showLogoModal = function(imgSrc) {
         modal.classList.add('show');
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
+        modalA11y.activate(modal);
     }
 }
 
@@ -1988,16 +2259,19 @@ window.closeLogoModal = function() {
         modal.classList.remove('show');
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
+        modalA11y.deactivate(modal);
     }
 }
 
-// Close modal on ESC key
+// Close modal on ESC key — only the visible one
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        closeCertificateModal();
-        closeEnglishCertModal();
-        closeLogoModal();
-    }
+    if (e.key !== 'Escape') return;
+    const cert = document.getElementById('certificateModal');
+    const logo = document.getElementById('logoModal');
+    const eng = document.getElementById('englishCertModal');
+    if (cert && cert.classList.contains('show')) closeCertificateModal();
+    else if (eng && eng.classList.contains('show')) closeEnglishCertModal();
+    else if (logo && logo.classList.contains('show')) closeLogoModal();
 });
 
 // English Certificate Modal Functions
@@ -2009,6 +2283,7 @@ window.showEnglishCertModal = function(imgSrc) {
         modal.classList.add('show');
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
+        modalA11y.activate(modal);
     }
 }
 
@@ -2018,6 +2293,7 @@ window.closeEnglishCertModal = function() {
         modal.classList.remove('show');
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
+        modalA11y.deactivate(modal);
     }
 }
 
@@ -2030,42 +2306,55 @@ window.closeCertificate = closeCertificateModal;
 (function initHeroMicro(){
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // --- Local time (Istanbul) ---
+    // --- Local time (Istanbul) — 12h AM/PM, GMT+3 label is separate ---
     const localTimeEl = document.getElementById('localTime');
-    if (localTimeEl){
-        const fmt = new Intl.DateTimeFormat('en-GB',{
-            hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Europe/Istanbul'
+    if (localTimeEl) {
+        const fmt = new Intl.DateTimeFormat('en-US', {
+            hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'Europe/Istanbul'
         });
-        const tick = () => { localTimeEl.textContent = fmt.format(new Date()) + ' GMT+3'; };
-        tick(); setInterval(tick, 30000);
+        const tick = () => { localTimeEl.textContent = fmt.format(new Date()); };
+        tick();
+        setInterval(tick, 30000);
     }
 
     if (reduced) return;
 
-    // --- Magnetic buttons ---
-    const magnets = document.querySelectorAll('[data-magnetic]');
-    magnets.forEach((el) => {
-        let raf = null;
-        const onMove = (e) => {
-            const r = el.getBoundingClientRect();
-            const cx = r.left + r.width/2;
-            const cy = r.top + r.height/2;
-            const dx = e.clientX - cx;
-            const dy = e.clientY - cy;
-            const dist = Math.hypot(dx, dy);
-            if (dist > 90) return;
-            if (raf) cancelAnimationFrame(raf);
-            raf = requestAnimationFrame(() => {
-                el.style.transform = `translate(${dx*0.22}px, ${dy*0.22}px)`;
-            });
-        };
-        const onLeave = () => {
-            if (raf) cancelAnimationFrame(raf);
-            el.style.transform = '';
-        };
-        el.addEventListener('mousemove', onMove);
-        el.addEventListener('mouseleave', onLeave);
-    });
+    // --- Magnetic buttons (eased falloff, hover-only) ---
+    const supportsHover = window.matchMedia('(hover: hover)').matches;
+    if (supportsHover) {
+        const RADIUS = 50;
+        const MAX_PULL = 0.32;
+        const magnets = document.querySelectorAll('[data-magnetic]');
+        magnets.forEach((el) => {
+            let raf = null;
+            const onMove = (e) => {
+                const r = el.getBoundingClientRect();
+                const cx = r.left + r.width/2;
+                const cy = r.top + r.height/2;
+                const dx = e.clientX - cx;
+                const dy = e.clientY - cy;
+                const dist = Math.hypot(dx, dy);
+                if (dist > RADIUS) {
+                    if (el.style.transform) el.style.transform = '';
+                    return;
+                }
+                // Eased falloff: 1 at center, 0 at edge
+                const t = 1 - (dist / RADIUS);
+                const eased = t * t; // quadratic in
+                const pull = eased * MAX_PULL;
+                if (raf) cancelAnimationFrame(raf);
+                raf = requestAnimationFrame(() => {
+                    el.style.transform = `translate(${dx * pull}px, ${dy * pull}px)`;
+                });
+            };
+            const onLeave = () => {
+                if (raf) cancelAnimationFrame(raf);
+                el.style.transform = '';
+            };
+            el.addEventListener('mousemove', onMove);
+            el.addEventListener('mouseleave', onLeave);
+        });
+    }
 
     // --- Orb scroll parallax (uses margin-top to avoid clobbering orbDrift transform) ---
     const orbs = document.querySelectorAll('.gradient-orb');
@@ -2435,4 +2724,89 @@ window.closeCertificate = closeCertificateModal;
     };
     tick();
     setInterval(tick, 1000);
+})();
+
+/* ── EASTER EGG: Konami code ⚡ ── */
+(function konamiCode(){
+    const seq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+    let idx = 0;
+    let active = false;
+    document.addEventListener('keydown', (e) => {
+        const k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+        if (k === seq[idx]) {
+            idx++;
+            if (idx === seq.length) {
+                idx = 0;
+                if (active) return;
+                active = true;
+                triggerCheatMode();
+            }
+        } else {
+            idx = (k === seq[0]) ? 1 : 0;
+        }
+    });
+    function triggerCheatMode(){
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        document.body.classList.add('cheat-mode');
+        try {
+            console.log('%c⚡ Cheat mode: ON', 'color:#2dd4bf; font: 700 16px "JetBrains Mono", monospace; padding:4px;');
+            console.log('%cLightning intensified for 8 seconds. Enjoy.', 'color:#a8acbe; font: 12px "JetBrains Mono", monospace;');
+        } catch (_) {}
+        // Toast (subtle)
+        const toast = document.createElement('div');
+        toast.className = 'konami-toast';
+        toast.textContent = '⚡ cheat mode';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.classList.add('show'), 20);
+        // Boost lightning by spawning extra bolts at intervals
+        let boostInterval = null;
+        if (!reduced && typeof window.__lightningSpawn === 'function'){
+            boostInterval = setInterval(() => window.__lightningSpawn(), 350);
+        }
+        setTimeout(() => {
+            document.body.classList.remove('cheat-mode');
+            if (boostInterval) clearInterval(boostInterval);
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 600);
+            active = false;
+        }, 8000);
+    }
+})();
+
+/* ── EASTER EGG: Logo 5× rapid-click → bracket flip + emoji ── */
+(function logoClicker(){
+    const logo = document.querySelector('.logo');
+    if (!logo) return;
+    let clicks = 0;
+    let timer = null;
+    logo.addEventListener('click', (e) => {
+        clicks++;
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(() => { clicks = 0; }, 3000);
+        if (clicks >= 5) {
+            e.preventDefault();
+            clicks = 0;
+            triggerBracketFlip();
+        }
+    });
+    function triggerBracketFlip(){
+        const brackets = logo.querySelectorAll('.logo-bracket');
+        if (!brackets.length) return;
+        const originals = Array.from(brackets).map(b => b.textContent);
+        brackets[0].textContent = '/>';
+        if (brackets[1]) brackets[1].textContent = '<';
+        const emoji = document.createElement('span');
+        emoji.className = 'logo-egg';
+        emoji.textContent = '👀';
+        document.body.appendChild(emoji);
+        setTimeout(() => emoji.classList.add('show'), 20);
+        try {
+            console.log('%c👀 You found me. Brackets briefly mirrored.', 'color:#f472b6; font: 12px "JetBrains Mono", monospace;');
+        } catch (_) {}
+        setTimeout(() => {
+            brackets.forEach((b, i) => b.textContent = originals[i]);
+            emoji.classList.remove('show');
+            setTimeout(() => emoji.remove(), 500);
+        }, 1100);
+    }
 })();

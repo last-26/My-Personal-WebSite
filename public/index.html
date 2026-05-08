@@ -1,23 +1,75 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Samet Soysal — AI/ML Engineer</title>
     <meta name="description" content="Samet Soysal - Computer Engineer specializing in AI, NLP, LLMs, RAG Pipelines. Portfolio showcasing enterprise-grade AI projects.">
+
+    <!-- Canonical & language alternates -->
+    <link rel="canonical" href="https://last-26.web.app/">
+    <link rel="alternate" hreflang="en" href="https://last-26.web.app/?lang=en">
+    <link rel="alternate" hreflang="tr" href="https://last-26.web.app/?lang=tr">
+    <link rel="alternate" hreflang="x-default" href="https://last-26.web.app/">
+
+    <!-- Theme color (mobile chrome / PWA) -->
+    <meta name="theme-color" content="#06060e" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ebe8e1" media="(prefers-color-scheme: light)">
+    <meta name="color-scheme" content="dark light">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://last-26.web.app/">
+    <meta property="og:title" content="Samet Soysal — AI/ML Engineer">
+    <meta property="og:description" content="Production AI is 90% engineering, 10% model. RAG pipelines, OCR systems, multi-model orchestrations — from data to product.">
+    <meta property="og:image" content="https://last-26.web.app/og-cover.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Samet Soysal — AI/ML Engineer portfolio">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="tr_TR">
+    <meta property="og:site_name" content="Samet Soysal">
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Samet Soysal — AI/ML Engineer">
+    <meta name="twitter:description" content="Production AI is 90% engineering, 10% model. RAG pipelines, OCR systems, multi-model orchestrations — from data to product.">
+    <meta name="twitter:image" content="https://last-26.web.app/og-cover.png">
+
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=36">
-    
+    <link rel="stylesheet" href="styles.css?v=56">
+
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-    
+
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- JSON-LD Person schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Samet Soysal",
+      "alternateName": "last-26",
+      "jobTitle": "AI/ML Engineer",
+      "url": "https://last-26.web.app",
+      "email": "a.sametsoysal@gmail.com",
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Eskişehir Osmangazi University"
+      },
+      "knowsAbout": ["RAG", "NLP", "LLMs", "OCR", "FastAPI", "React", "Computer Vision", "Multi-LLM Orchestration"],
+      "sameAs": [
+        "https://github.com/last-26"
+      ]
+    }
+    </script>
 </head>
 <body>
     <!-- Scroll progress bar -->
@@ -44,12 +96,12 @@
             </a>
             <div class="nav-right">
                 <div class="nav-links">
-                    <a href="#about" data-tr="nav.about">Hakkımda</a>
-                    <a href="#education" data-tr="nav.education">Eğitim</a>
-                    <a href="#experience" data-tr="nav.experience">Deneyim</a>
-                    <a href="#projects" data-tr="nav.projects">Projeler</a>
-                    <a href="#skills" data-tr="nav.skills">Yetenekler</a>
-                    <a href="#contact" data-tr="nav.contact">İletişim</a>
+                    <a href="#about" data-tr="nav.about">About</a>
+                    <a href="#education" data-tr="nav.education">Education</a>
+                    <a href="#experience" data-tr="nav.experience">Experience</a>
+                    <a href="#projects" data-tr="nav.projects">Projects</a>
+                    <a href="#skills" data-tr="nav.skills">Skills</a>
+                    <a href="#contact" data-tr="nav.contact">Contact</a>
                 </div>
                 <div class="nav-actions">
                     <div class="lang-switcher" data-active="en">
@@ -90,6 +142,10 @@
         </div>
     </nav>
 
+    <!-- Screen-reader live region for language switch announcements -->
+    <div class="sr-only" id="langLive" aria-live="polite" aria-atomic="true"></div>
+
+    <main id="main">
     <!-- ==================== HERO ==================== -->
     <section class="hero" id="hero">
         <div class="hero-bg">
@@ -99,9 +155,67 @@
         </div>
         <div class="particles" id="particles"></div>
 
-        <div class="hero-grid container">
-            <!-- Left column: editorial title stack -->
-            <div class="hero-main">
+        <!-- Floating side panel — pinned to viewport right edge, outside container -->
+        <aside class="hero-side-panel reveal" aria-label="Live stats">
+            <div class="widget-chart widget-chart-side" id="weeklyChartContainer">
+                <div class="chart-header">
+                    <span class="chart-header-label">
+                        <i class="fas fa-chart-line"></i>
+                        <span data-tr="visitor.weekly">LAST 7 DAYS</span>
+                    </span>
+                    <span class="chart-header-pulse" aria-hidden="true" title="live"></span>
+                </div>
+                <div class="chart-canvas">
+                    <canvas id="weeklyVisitorChart"></canvas>
+                </div>
+                <!-- Total + Today stats (right below the chart) -->
+                <div class="chart-stats" id="visitorChip" role="status" aria-live="polite" aria-atomic="false">
+                    <div class="chart-stat chart-stat-total">
+                        <span class="chart-stat-icon" aria-hidden="true">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                        <div class="chart-stat-body">
+                            <span class="chart-stat-num" id="visitorCount">0</span>
+                            <span class="chart-stat-label" data-tr="visitor.total">total</span>
+                        </div>
+                    </div>
+                    <span class="chart-stat-divider" aria-hidden="true"></span>
+                    <div class="chart-stat chart-stat-daily">
+                        <span class="chart-stat-icon chart-stat-icon-accent" aria-hidden="true">
+                            <i class="fas fa-bolt"></i>
+                        </span>
+                        <div class="chart-stat-body">
+                            <span class="chart-stat-num chart-stat-num-daily">+<span id="dailyVisitorCount">0</span></span>
+                            <span class="chart-stat-label" data-tr="visitor.daily">today</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-note">
+                    <i class="fas fa-info-circle" aria-hidden="true"></i>
+                    <span data-tr="visitor.reset.note">Veriler 16 Mart 2026 tarihinde sıfırlanmıştır.</span>
+                </div>
+            </div>
+            <!-- Digital clock widget — Istanbul / GMT+3 -->
+            <div class="hero-side-clock">
+                <span class="hero-side-clock-icon" aria-hidden="true">
+                    <i class="fas fa-clock"></i>
+                </span>
+                <div class="hero-side-clock-display">
+                    <span class="hero-side-clock-time" id="localTime">—:—</span>
+                    <span class="hero-side-clock-zone">GMT+3</span>
+                </div>
+            </div>
+        </aside>
+
+        <div class="hero-grid hero-grid-centered container">
+            <div class="hero-main hero-main-centered">
+                <!-- Profile photo with gradient ring -->
+                <div class="hero-photo reveal" aria-hidden="true">
+                    <span class="hero-photo-glow"></span>
+                    <span class="hero-photo-ring"></span>
+                    <img src="pp.jpg" alt="" loading="eager" decoding="async">
+                </div>
+
                 <h1 class="hero-title reveal">
                     <span class="title-line title-glitch" data-text="SAMET">SAMET</span>
                     <span class="title-line title-outline title-glitch" data-text="SOYSAL">SOYSAL</span>
@@ -111,8 +225,7 @@
                     <span class="typewriter-wrapper"><span class="typewriter" id="typewriter"></span><span class="typewriter-cursor">|</span></span>
                 </p>
                 <p class="hero-desc reveal" data-tr="hero.description">
-                    RAG sistemleri, OCR teknolojileri ve çok modelli AI çözümleri geliştiriyorum.
-                    Kurumsal projelerde production-ready yapay zeka sistemleri tasarlama ve entegrasyon konularında uzmanım.
+                    Computer Engineer building production AI — RAG pipelines, Multi-LLM orchestrations, and MCP-driven agents. End-to-end systems with millisecond retrieval, bridging models with real data engineering.
                 </p>
                 <div class="hero-buttons reveal">
                     <a href="#projects" class="btn-hero btn-glow" data-magnetic>
@@ -134,58 +247,6 @@
                     </a>
                 </div>
             </div>
-
-            <!-- Right column: editorial meta strip -->
-            <aside class="hero-meta reveal">
-                <div class="meta-row">
-                    <span class="meta-key" data-tr="hero.meta.role">ROLE</span>
-                    <span class="meta-val">AI / ML Engineer</span>
-                </div>
-                <div class="meta-row">
-                    <span class="meta-key" data-tr="hero.meta.location">LOCATION</span>
-                    <span class="meta-val">Eskişehir, TR</span>
-                </div>
-                <div class="meta-row">
-                    <span class="meta-key" data-tr="hero.meta.time">LOCAL TIME</span>
-                    <span class="meta-val" id="localTime">—</span>
-                </div>
-                <div class="meta-row">
-                    <span class="meta-key" data-tr="hero.meta.status">STATUS</span>
-                    <span class="meta-val meta-live">
-                        <span class="meta-live-dot"></span>
-                        <span data-tr="hero.meta.available">Available for work</span>
-                    </span>
-                </div>
-
-                <div class="meta-divider"></div>
-
-                <!-- Compact visitor chip (preserves all analytic IDs) -->
-                <div class="visitor-counter">
-                    <div class="visitor-chip" id="visitorChip">
-                        <span class="chip-dot"></span>
-                        <span class="chip-label" data-tr="visitor.header">VISITORS</span>
-                        <span class="chip-sep">·</span>
-                        <span class="chip-num"><span id="visitorCount">0</span></span>
-                        <span class="chip-meta" data-tr="visitor.total">total</span>
-                        <span class="chip-sep">·</span>
-                        <span class="chip-num chip-num-accent">+<span id="dailyVisitorCount">0</span></span>
-                        <span class="chip-meta" data-tr="visitor.daily">today</span>
-                    </div>
-                    <div class="widget-chart widget-chart-inline" id="weeklyChartContainer">
-                        <div class="chart-header">
-                            <i class="fas fa-chart-bar"></i>
-                            <span data-tr="visitor.weekly">LAST 7 DAYS</span>
-                        </div>
-                        <div class="chart-canvas">
-                            <canvas id="weeklyVisitorChart"></canvas>
-                        </div>
-                        <div class="chart-note">
-                            <i class="fas fa-info-circle"></i>
-                            <span data-tr="visitor.reset.note">Veriler 16 Mart 2026 tarihinde sıfırlanmıştır.</span>
-                        </div>
-                    </div>
-                </div>
-            </aside>
         </div>
 
         <div class="scroll-indicator">
@@ -204,45 +265,85 @@
             </div>
             <div class="about-lede reveal">
                 <span class="about-eyebrow" data-tr="about.eyebrow">WHO I AM</span>
-                <h3 class="about-quote" data-tr="about.intro">Uçtan uca <span class="kw">AI sistemleri</span> tasarlıyorum — veriden modele, prototipten üretime, <span class="kw">ölçeklenebilir</span> ve ölçülebilir.</h3>
+                <h3 class="about-quote" data-tr="about.intro"><span class="kw">Production AI is mostly engineering.</span> Models impress in demos — systems survive in production. I build the systems.</h3>
             </div>
 
-            <div class="about-body">
-                <div class="about-prose reveal">
-                    <p class="about-text" data-tr="about.description">
-                        Eskişehir Osmangazi Üniversitesi Bilgisayar Mühendisliği mezunuyum.
-                        Uçtan uca <span class="kw">AI mimarileri</span>, yüksek performanslı <span class="kw">RAG pipeline</span>'ları ve <span class="kw">Multi-LLM</span> orkestrasyonları tasarlama konusunda kanıtlanmış deneyime sahibim.
-                        Temel gücüm, karmaşık makine öğrenmesi modellerini ölçeklenebilir <span class="kw">full-stack</span> geliştirme (<span class="kw">React</span>, <span class="kw">FastAPI</span>, <span class="kw">PostgreSQL</span>) ile birleştirerek
-                        milisaniye düzeyinde gecikme ve <span class="kw">%95+ doğruluk</span> oranıyla veri odaklı çözümler sunmaktır.
-                    </p>
+            <!-- Editorial story (left) + terminal-style dossier (right) -->
+            <div class="about-grid">
+                <div class="about-story reveal">
+                    <article class="about-block">
+                        <span class="about-block-tag">// origin.txt</span>
+                        <p data-tr="about.origin">Computer Engineer, graduated from <span class="kw">Eskişehir Osmangazi University</span>. Built my engineering foundation across machine learning, pattern recognition, and graph theory — then shifted the focus to applied LLM systems where the work actually shipped to users.</p>
+                    </article>
+                    <article class="about-block">
+                        <span class="about-block-tag">// focus.txt</span>
+                        <p data-tr="about.focus">I build production AI: <span class="kw">RAG pipelines</span> at sub-300ms latency, <span class="kw">Multi-LLM orchestrations</span> with cloud + local fallback, and <span class="kw">MCP-driven agents</span> that bridge real data engineering. The interesting work happens where the model meets the bus.</p>
+                    </article>
+                    <article class="about-block">
+                        <span class="about-block-tag">// shipped.txt</span>
+                        <p data-tr="about.impact">FinBERT-driven sentiment with <span class="kw">91.1% accuracy</span> at FinSenti; LangGraph agents that cut job-application time from hours to minutes (NextHire); <span class="kw">70% acceleration</span> on enterprise HR document workflows at SAMETEI. Scale + engineering + a bit of stubbornness.</p>
+                    </article>
                 </div>
-                <aside class="about-specs reveal">
-                    <div class="spec-group spec-group--nums">
-                        <span class="spec-label" data-tr="about.specs.ataGlance">AT A GLANCE</span>
-                        <ul class="spec-list">
-                            <li class="spec-row">
-                                <span class="spec-num stat-value" data-count="2">0+</span>
-                                <span class="spec-desc" data-tr="about.stats.years">Yıl Deneyim</span>
-                            </li>
-                            <li class="spec-row">
-                                <span class="spec-num stat-value" data-count="10">0+</span>
-                                <span class="spec-desc" data-tr="about.stats.projects">Tamamlanan Proje</span>
-                            </li>
-                            <li class="spec-row">
-                                <span class="spec-num stat-value" data-count="25">0+</span>
-                                <span class="spec-desc" data-tr="about.stats.technologies">Teknoloji</span>
-                            </li>
-                        </ul>
+
+                <aside class="about-dossier reveal">
+                    <div class="dossier-head">
+                        <span class="dossier-prompt">$ whoami</span>
+                        <span class="dossier-cursor" aria-hidden="true">_</span>
                     </div>
-                    <div class="spec-group">
-                        <span class="spec-label" data-tr="about.specs.openTo">OPEN TO</span>
-                        <span class="spec-val" data-tr="about.specs.openToVal">Full-time · Contract · Remote</span>
-                    </div>
-                    <div class="spec-group">
-                        <span class="spec-label" data-tr="about.specs.focus">FOCUS</span>
-                        <span class="spec-val" data-tr="about.specs.focusVal">AI · ML · LLM · Production</span>
-                    </div>
+                    <ul class="dossier-list">
+                        <li class="dossier-row">
+                            <i class="fas fa-user-astronaut" aria-hidden="true"></i>
+                            <span class="dossier-k" data-tr="about.dossier.role">Role</span>
+                            <span class="dossier-v" data-tr="about.dossier.roleVal">AI/ML Engineer</span>
+                        </li>
+                        <li class="dossier-row">
+                            <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                            <span class="dossier-k" data-tr="about.dossier.edu">Education</span>
+                            <span class="dossier-v" data-tr="about.dossier.eduVal">Eskişehir Osmangazi University · BSc Computer Engineering</span>
+                        </li>
+                        <li class="dossier-row">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            <span class="dossier-k" data-tr="about.dossier.based">Based</span>
+                            <span class="dossier-v" data-tr="about.dossier.basedVal">Eskişehir, Türkiye</span>
+                        </li>
+                        <li class="dossier-row">
+                            <i class="fas fa-briefcase" aria-hidden="true"></i>
+                            <span class="dossier-k" data-tr="about.dossier.recent">Recent</span>
+                            <span class="dossier-v" data-tr="about.dossier.recentVal">IC İçtaş · TEI · Powintec</span>
+                        </li>
+                        <li class="dossier-row">
+                            <i class="fas fa-bullseye" aria-hidden="true"></i>
+                            <span class="dossier-k" data-tr="about.dossier.focus">Focus</span>
+                            <span class="dossier-v" data-tr="about.dossier.focusVal">RAG · Multi-LLM · MCP · Vector Search</span>
+                        </li>
+                        <li class="dossier-row">
+                            <i class="fas fa-language" aria-hidden="true"></i>
+                            <span class="dossier-k" data-tr="about.dossier.lang">Languages</span>
+                            <span class="dossier-v" data-tr="about.dossier.langVal">Turkish · English (B2)</span>
+                        </li>
+                        <li class="dossier-row dossier-status">
+                            <i class="fas fa-circle" aria-hidden="true"></i>
+                            <span class="dossier-k" data-tr="about.dossier.status">Status</span>
+                            <span class="dossier-v dossier-v-live" data-tr="about.dossier.statusVal">Open to opportunities</span>
+                        </li>
+                    </ul>
                 </aside>
+            </div>
+
+            <!-- Quick stats row (count-up) -->
+            <div class="about-stats-row reveal">
+                <div class="about-stat-card">
+                    <span class="about-stat-num stat-value" data-count="2">0+</span>
+                    <span class="about-stat-label" data-tr="about.stats.years">Years of Experience</span>
+                </div>
+                <div class="about-stat-card">
+                    <span class="about-stat-num stat-value" data-count="10">0+</span>
+                    <span class="about-stat-label" data-tr="about.stats.projects">Shipped Projects</span>
+                </div>
+                <div class="about-stat-card">
+                    <span class="about-stat-num stat-value" data-count="25">0+</span>
+                    <span class="about-stat-label" data-tr="about.stats.technologies">Technologies</span>
+                </div>
             </div>
 
             <!-- Tech marquee -->
@@ -298,6 +399,7 @@
             </div>
             <div class="education-list">
                 <article class="education-card reveal">
+                    <span class="edu-top-neon" aria-hidden="true"></span>
                     <div class="edu-icon-wrap"><i class="fas fa-graduation-cap"></i></div>
                     <div class="edu-content">
                         <div class="edu-top">
@@ -318,6 +420,7 @@
                 </article>
 
                 <article class="education-card reveal">
+                    <span class="edu-top-neon" aria-hidden="true"></span>
                     <div class="edu-icon-wrap"><i class="fas fa-language"></i></div>
                     <div class="edu-content">
                         <div class="edu-top">
@@ -538,34 +641,37 @@
                     <div class="card-wip-row">
                         <span class="card-wip-badge">
                             <span class="wip-dot"></span>
-                            <span data-tr="projects.wip">Şu an üzerinde çalışıyorum</span>
+                            <span data-tr="projects.wip">Currently building</span>
                         </span>
                         <span class="card-showcase-tag" data-tr="projects.badge.rl">RL / TRADING</span>
                     </div>
                     <div class="showcase-grid">
                         <div class="showcase-left">
                             <div class="card-meta">
-                                <span class="card-status card-status-wip"><span data-tr="projects.status.wip">Aktif geliştirme</span></span>
+                                <span class="card-status card-status-wip"><span data-tr="projects.status.wip">Active development</span></span>
                             </div>
                             <div class="card-top">
                                 <div class="card-icon"><i class="fas fa-chart-line"></i></div>
                                 <div class="card-title-group">
                                     <h3>SMTbot</h3>
-                                    <p class="card-tagline" data-tr="projects.smtbot.subtitle">Reinforcement Learning Trading Bot'u</p>
+                                    <p class="card-tagline" data-tr="projects.smtbot.subtitle">Reinforcement Learning Trading Bot</p>
                                 </div>
                             </div>
                             <div class="card-highlight" data-tr="projects.smtbot.metric">PPO · Stable Baselines3 · Walk-Forward Optimization</div>
                             <div class="card-content project-body">
                                 <p class="card-desc" data-tr="projects.smtbot.description">
-                                    Kişisel trading deneyimimi pekiştirmeli öğrenme ile birleştiren uçtan uca bir bot. PPO + Stable Baselines3 ajanları Pine Script sinyallerinden özellik mühendisliği yapılmış veriler üzerinde eğitiliyor, walk-forward optimization ile out-of-sample dönemlerde doğrulanıyor ve MCP server aracılığıyla canlı sinyallere bağlanıyor. Kendi tecrübemi içselleştirmiş, ölçülebilir ve risk kontrollü bir otonom trader üretmeyi hedefliyor.
+                                    An end-to-end bot that fuses my own discretionary trading experience with reinforcement learning. PPO + Stable Baselines3 agents train on feature-engineered Pine Script signals, get validated out-of-sample via walk-forward optimization, and connect to live signals through an MCP server. Goal: an autonomous trader that internalises hard-won judgment with measurable, risk-controlled behavior.
                                 </p>
                                 <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
                                 <div class="card-tags">
-                                    <span class="tag-backend">Python</span><span class="tag-ai">PPO</span><span class="tag-ai">Stable Baselines3</span><span class="tag-ai">Reinforcement Learning</span><span class="tag-devops">MLOps</span><span class="tag-devops">MCP Server</span><span class="tag-backend">Pine Script</span><span class="tag-ai">Walk-Forward Opt.</span>
+                                    <span class="tag-backend">Python</span><span class="tag-backend">Pine Script</span><span class="tag-cloud">Bybit V5</span><span class="tag-backend">pybit</span><span class="tag-devops">MCP</span><span class="tag-backend">FastAPI</span><span class="tag-devops">pytest</span><span class="tag-backend">SQLite</span><span class="tag-ai">VMC strategy</span>
                                 </div>
-                                <div class="card-footer">
+                                <div class="card-footer card-footer-multi">
+                                    <a href="case-smtbot.html" class="card-link card-case-link">
+                                        <i class="fas fa-book-open"></i> <span data-tr="projects.smtbot.casebtn">Read the case</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                                    </a>
                                     <a href="https://github.com/last-26/SMTbot" target="_blank" class="card-link">
-                                        <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                                        <i class="fab fa-github"></i> <span data-tr="projects.link">View on GitHub</span> <i class="fas fa-arrow-right card-link-arrow"></i>
                                     </a>
                                     <span class="card-year">2026</span>
                                 </div>
@@ -581,7 +687,9 @@
                                     <span class="showcase-live-price" id="sc-btc-price">—</span>
                                 </div>
                                 <div class="showcase-chart-wrap">
-                                    <svg class="showcase-chart" viewBox="0 0 200 100" preserveAspectRatio="none">
+                                    <svg class="showcase-chart" viewBox="0 0 200 100" preserveAspectRatio="none" role="img" aria-labelledby="btcChartTitle btcChartDesc">
+                                        <title id="btcChartTitle">Live Bitcoin Price — last 24 hours</title>
+                                        <desc id="btcChartDesc">Sparkline of BTC/USDT close prices for the last 24 hours, with high and low markers. Updates every 20 seconds.</desc>
                                         <defs>
                                             <linearGradient id="smtFill" x1="0" y1="0" x2="0" y2="1">
                                                 <stop offset="0%" stop-color="#fb923c" stop-opacity="0.35"/>
@@ -700,11 +808,11 @@
                     </div>
                     <div class="card-content project-body">
                         <p class="card-desc" data-tr="projects.awsai.description">
-                            AWS bulut servisleri üzerine inşa edilmiş serverless doküman soru-cevap sistemi. PDF dokümanları S3'e yüklenir, Textract ile otomatik metin çıkarımı yapılır ve Bedrock üzerindeki Claude AI modeli ile doğal dilde sorulara yanıt verilir. API Gateway, Lambda, DynamoDB, SNS ve CDK ile tamamen Infrastructure as Code olarak tasarlanmıştır.
+                            Fully serverless document Q&A — PDFs in S3, text via Textract, Claude on Bedrock answers natural-language questions. The whole stack as Infrastructure as Code (CDK), living in version control instead of a console. API Gateway + Lambda + DynamoDB + SNS.
                         </p>
                         <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
-                            <span>AWS CDK</span><span>Lambda</span><span>S3</span><span>Textract</span><span>Bedrock</span><span>DynamoDB</span><span>API Gateway</span><span>SNS</span><span>Python</span>
+                            <span>AWS CDK</span><span>Lambda</span><span>S3</span><span>Textract</span><span>Bedrock</span><span>Claude Haiku 4.5</span><span>DynamoDB</span><span>API Gateway</span><span>Python</span>
                         </div>
                         <div class="card-footer">
                             <a href="https://github.com/last-26/aws-ai-project" target="_blank" class="card-link">
@@ -729,11 +837,11 @@
                     </div>
                     <div class="card-content project-body">
                         <p class="card-desc" data-tr="projects.swiftlink.description">
-                            FastAPI ile geliştirilmiş, Docker ile konteynerize edilmiş ve GitHub Actions CI/CD pipeline'ı ile otomatik test edilen modern URL kısaltma uygulaması. Kısaltılmış linkler için tıklama analitiği ve gerçek zamanlı istatistikler sunar.
+                            End-to-end URL shortener built with FastAPI — Docker-containerized, CI-tested via GitHub Actions. Click analytics, real-time stats, custom slugs. Owned the whole stack from API to dashboard.
                         </p>
                         <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
-                            <span>FastAPI</span><span>Docker</span><span>GitHub Actions</span><span>SQLAlchemy</span><span>pytest</span><span>Python</span>
+                            <span>FastAPI</span><span>SQLite</span><span>Docker</span><span>GitHub Actions</span><span>pytest</span><span>Python</span>
                         </div>
                         <div class="card-footer">
                             <a href="https://github.com/last-26/SwiftLink" target="_blank" class="card-link">
@@ -763,7 +871,7 @@
                         </p>
                         <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
-                            <span>LibreChat UI</span><span>LLM</span><span>OCR</span><span>RAG</span><span>Docker</span><span>MongoDB</span><span>FastAPI</span><span>Python</span>
+                            <span>LibreChat</span><span>Multi-LLM</span><span>RAG</span><span>ChromaDB</span><span>Ollama</span><span>Hugging Face</span><span>OCR · Qwen 2.5-VL</span><span>Node.js</span><span>MongoDB</span>
                         </div>
                         <div class="card-footer">
                             <a href="https://github.com/last-26/SAMETEI" target="_blank" class="card-link">
@@ -793,7 +901,7 @@
                         </p>
                         <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
-                            <span>Flask-RESTX</span><span>Sentence Transformers</span><span>PostgreSQL</span><span>React.js</span><span>TailwindCSS</span><span>NLP</span>
+                            <span>React.js</span><span>Flask-RESTX</span><span>PostgreSQL</span><span>Sentence Transformers</span><span>spaCy</span><span>NLTK</span><span>TF-IDF</span><span>TailwindCSS</span>
                         </div>
                         <div class="card-footer">
                             <a href="https://gitlab.com/last-26/cv-analysis" target="_blank" class="card-link">
@@ -846,7 +954,7 @@
                     </div>
                     <div class="card-content project-body">
                         <p class="card-desc" data-tr="projects.fruit.description">
-                            Görüntü işleme ve 5 farklı ML algoritması kullanarak meyve olgunluğunu tespit eden pattern recognition projesi.
+                            Pattern recognition study that compares 5 ML algorithms — SVM, Random Forest, Gradient Boosting, Logistic Regression, and an Ensemble — on fruit ripeness images. Senior project; the kind that drills classification fundamentals.
                         </p>
                         <div class="card-footer">
                             <a href="https://github.com/last-26/fruit-ripeness-detection" target="_blank" class="card-link">
@@ -870,7 +978,7 @@
                     </div>
                     <div class="card-content project-body">
                         <p class="card-desc" data-tr="projects.news.description">
-                            ASP.NET ile geliştirilmiş modern haber toplayıcı. RSS feed'lerini akıllı kategorizasyon ile çeker.
+                            ASP.NET news aggregator — pulls RSS feeds, clusters them by category, presents them cleanly. From my C# era; a reference point for why I moved to Python afterwards.
                         </p>
                         <div class="card-footer">
                             <a href="https://github.com/last-26/Global-News-Hub" target="_blank" class="card-link">
@@ -991,10 +1099,10 @@
             <div class="contact-editorial">
                 <p class="contact-eyebrow reveal" data-tr="contact.eyebrow">GET IN TOUCH</p>
                 <h3 class="contact-statement reveal reveal-fade">
-                    <span data-tr="contact.statement.line1">Birlikte bir şey</span>
-                    <em data-tr="contact.statement.line2">inşa edelim.</em>
+                    <span data-tr="contact.statement.line1">Let's build</span>
+                    <em data-tr="contact.statement.line2">something together.</em>
                 </h3>
-                <p class="contact-lead reveal" data-tr="contact.lead">Yeni fırsatlara ve işbirliklerine her zaman açığım. Hızla dönüş yaparım.</p>
+                <p class="contact-lead reveal" data-tr="contact.lead">Open to new opportunities and collaborations. Drop a line — I respond quickly.</p>
                 <div class="contact-email-wrap reveal reveal-scale">
                     <button type="button" id="email-card" class="contact-email" onclick="copyEmail()" aria-label="Copy email">
                         <span class="contact-email-text">a.sametsoysal@gmail.com</span>
@@ -1021,78 +1129,57 @@
             </div>
         </div>
     </section>
+    </main>
 
-    <!-- Footer -->
-    <footer class="footer-v2">
-        <div class="footer-top-glow" aria-hidden="true"></div>
-        <div class="container">
-            <div class="footer-hero">
-                <div class="footer-hero-left">
-                    <span class="footer-eyebrow">// end.signature</span>
-                    <h2 class="footer-signature" data-tr="footer.signature">Görüşmek üzere.</h2>
+    <!-- Footer (redesigned) -->
+    <footer class="footer-v3">
+        <div class="footer-bg" aria-hidden="true">
+            <div class="footer-orb footer-orb-1"></div>
+            <div class="footer-orb footer-orb-2"></div>
+            <div class="footer-scanlines"></div>
+        </div>
+
+        <div class="container footer-inner">
+
+            <!-- HERO: editorial signature -->
+            <div class="footer-hero-v3">
+                <div class="footer-hero-text">
+                    <span class="footer-eyebrow">// end_of_session.txt</span>
+                    <h2 class="footer-signature" data-tr="footer.signature">See you on the next build.</h2>
                 </div>
-                <a href="#hero" class="footer-uptop" aria-label="Back to top">
-                    <span data-tr="footer.uptop">Başa dön</span>
-                    <i class="fas fa-arrow-up"></i>
+                <a href="#hero" class="footer-uptop-v3" aria-label="Back to top">
+                    <span class="up-icon" aria-hidden="true"><i class="fas fa-arrow-up"></i></span>
+                    <span data-tr="footer.uptop">Back to top</span>
                 </a>
             </div>
 
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="#" class="footer-logo">
-                        <span class="logo-bracket">&lt;</span><span class="logo-mark">SAMET</span><span class="logo-bracket">/&gt;</span>
-                    </a>
-                    <p class="footer-tagline" data-tr="footer.tagline">AI/ML & Cloud çözümleri ile geleceği inşa ediyorum.</p>
-                    <div class="footer-status">
-                        <span class="fs-dot"></span>
-                        <span data-tr="footer.status">Yeni fırsatlara açık</span>
-                    </div>
-                </div>
-
-                <div class="footer-nav">
-                    <h4 data-tr="footer.nav.title">Sayfalar</h4>
-                    <a href="#about" data-tr="nav.about">Hakkımda</a>
-                    <a href="#education" data-tr="nav.education">Eğitim</a>
-                    <a href="#experience" data-tr="nav.experience">Deneyim</a>
-                    <a href="#projects" data-tr="nav.projects">Projeler</a>
-                    <a href="#skills" data-tr="nav.skills">Yetenekler</a>
-                </div>
-
-                <div class="footer-social">
-                    <h4 data-tr="footer.social.title">Bağlantılar</h4>
-                    <a href="mailto:a.sametsoysal@gmail.com"><i class="fas fa-envelope"></i> Email</a>
-                    <a href="https://www.linkedin.com/in/samet-soysal/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                    <a href="https://github.com/last-26" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
-                </div>
-
-                <div class="footer-meta">
-                    <h4 data-tr="footer.meta.title">Meta</h4>
-                    <div class="fm-row">
-                        <span class="fm-k" data-tr="footer.meta.time">Yerel saat</span>
-                        <span class="fm-v" id="footerTime">--:--:--</span>
-                    </div>
-                    <div class="fm-row">
-                        <span class="fm-k" data-tr="footer.meta.loc">Konum</span>
-                        <span class="fm-v">Eskişehir, TR</span>
-                    </div>
-                    <div class="fm-row">
-                        <span class="fm-k" data-tr="footer.meta.stack">Stack</span>
-                        <span class="fm-v">HTML · CSS · JS</span>
-                    </div>
-                    <div class="fm-row">
-                        <span class="fm-k" data-tr="footer.meta.host">Hosting</span>
-                        <span class="fm-v">Firebase</span>
-                    </div>
-                </div>
+            <!-- RAIL: thin monospace status row -->
+            <div class="footer-rail">
+                <span class="rail-item">
+                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                    <span>Eskişehir, TR</span>
+                </span>
+                <span class="rail-sep" aria-hidden="true">·</span>
+                <span class="rail-item">
+                    <i class="fas fa-clock" aria-hidden="true"></i>
+                    <span id="footerTime">--:--:--</span>
+                </span>
+                <span class="rail-sep" aria-hidden="true">·</span>
+                <span class="rail-item">
+                    <i class="fas fa-cube" aria-hidden="true"></i>
+                    <span>vanilla js · firebase</span>
+                </span>
             </div>
 
-            <div class="footer-bottom">
-                <p data-tr="footer.copyright">&copy; 2026 Samet Soysal. Tüm hakları saklıdır.</p>
-                <div class="footer-badges">
-                    <span class="fb-chip"><span class="fb-chip-dot"></span><span data-tr="footer.made">Tutkuyla kodlanmıştır</span></span>
-                    <span class="fb-chip fb-chip-mono">v1.0.0 · no frameworks</span>
-                </div>
+            <!-- BOTTOM: minimal copyright with logo mark -->
+            <div class="footer-bottom-v3">
+                <a href="#" class="fb-mark" aria-label="Top">
+                    <span class="logo-bracket">&lt;</span><span class="logo-mark">SAMET</span><span class="logo-bracket">/&gt;</span>
+                </a>
+                <span class="fb-copy" data-tr="footer.copyright">© 2026 Samet Soysal · All rights reserved.</span>
+                <span class="fb-version">v1.0.0</span>
             </div>
+
         </div>
     </footer>
 
@@ -1107,6 +1194,6 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <script src="script.js?v=28"></script>
+    <script src="script.js?v=40"></script>
 </body>
 </html>
