@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMTbot — Case Study | Samet Soysal</title>
+    <meta name="description" content="A deep technical case study on SMTbot — an end-to-end Bybit V5 futures trading bot. TradingView Pine indicators, MCP-bridged Python brain, and risk circuit breakers that actually fire.">
+
+    <link rel="canonical" href="https://last-26.web.app/case-smtbot.html">
+    <meta name="theme-color" content="#06060e" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ebe8e1" media="(prefers-color-scheme: light)">
+    <meta name="color-scheme" content="dark light">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://last-26.web.app/case-smtbot.html">
+    <meta property="og:title" content="SMTbot Case Study — Bybit V5 Trading Bot">
+    <meta property="og:description" content="TradingView is the eyes, Python is the brain, Bybit is the hands. Three hard problems, one autonomous trader.">
+    <meta property="og:image" content="https://last-26.web.app/og-cover.png">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="tr_TR">
+
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=56">
+    <link rel="stylesheet" href="case-smtbot.css?v=2">
+
+    <!-- Firebase SDK (analytics consistency with main site) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+</head>
+<body>
+    <!-- Atmosphere -->
+    <div class="noise-overlay"></div>
+    <canvas id="cursorCanvas"></canvas>
+    <canvas id="lightningCanvas"></canvas>
+    <div class="cyber-edge cyber-edge-left"></div>
+    <div class="cyber-edge cyber-edge-right"></div>
+
+    <!-- Minimal nav -->
+    <nav class="navbar case-nav" id="navbar">
+        <div class="nav-container container">
+            <a href="index.html" class="logo case-back" aria-label="Back to portfolio">
+                <i class="fas fa-arrow-left"></i>
+                <span class="logo-bracket">&lt;</span><span class="logo-mark">SAMET</span><span class="logo-bracket">/&gt;</span>
+            </a>
+            <div class="nav-right">
+                <div class="nav-actions">
+                    <div class="lang-switcher" data-active="en">
+                        <div class="lang-indicator"></div>
+                        <button class="lang-btn" data-lang="tr" aria-label="Türkçe" title="Türkçe">
+                            <svg class="flag" viewBox="0 0 24 24" aria-hidden="true">
+                                <defs><clipPath id="flagTRC"><circle cx="12" cy="12" r="12"/></clipPath></defs>
+                                <g clip-path="url(#flagTRC)">
+                                    <rect width="24" height="24" fill="#E30A17"/>
+                                    <circle cx="10.2" cy="12" r="4.2" fill="#fff"/>
+                                    <circle cx="11.1" cy="12" r="3.4" fill="#E30A17"/>
+                                    <polygon fill="#fff" points="14.2,10.4 14.61,11.43 15.72,11.51 14.87,12.22 15.14,13.29 14.2,12.7 13.26,13.29 13.53,12.22 12.68,11.51 13.79,11.43"/>
+                                </g>
+                            </svg>
+                        </button>
+                        <button class="lang-btn active" data-lang="en" aria-label="English" title="English">
+                            <svg class="flag" viewBox="0 0 24 24" aria-hidden="true">
+                                <defs><clipPath id="flagENC"><circle cx="12" cy="12" r="12"/></clipPath></defs>
+                                <g clip-path="url(#flagENC)">
+                                    <rect width="24" height="24" fill="#012169"/>
+                                    <path d="M0,0 L24,24 M24,0 L0,24" stroke="#fff" stroke-width="3.2"/>
+                                    <path d="M0,0 L24,24 M24,0 L0,24" stroke="#C8102E" stroke-width="1.6"/>
+                                    <path d="M12,0 V24 M0,12 H24" stroke="#fff" stroke-width="4.5"/>
+                                    <path d="M12,0 V24 M0,12 H24" stroke="#C8102E" stroke-width="2.6"/>
+                                </g>
+                            </svg>
+                        </button>
+                    </div>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <span class="tt-ring" aria-hidden="true"></span>
+                        <span class="tt-halo" aria-hidden="true"></span>
+                        <span class="tt-core">
+                            <i class="fas fa-sun"></i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Screen-reader live region -->
+    <div class="sr-only" id="langLive" aria-live="polite" aria-atomic="true"></div>
+
+    <main id="main" class="case-main">
+
+        <!-- ==================== COVER ==================== -->
+        <section class="case-cover">
+            <div class="case-bg" aria-hidden="true">
+                <div class="gradient-orb orb-1"></div>
+                <div class="gradient-orb orb-2"></div>
+                <div class="gradient-orb orb-3"></div>
+            </div>
+            <div class="container case-cover-grid">
+                <div class="case-cover-main">
+                    <span class="case-eyebrow">// case_study/smtbot.md</span>
+                    <h1 class="case-h1">
+                        <span class="case-h1-line">SMTbot</span>
+                        <span class="case-h1-line case-h1-italic" data-tr="case.smtbot.h1">case study.</span>
+                    </h1>
+                    <p class="case-cover-problem" data-tr="case.smtbot.cover.problem">
+                        Discretionary trading: the rules live in your head, the results don't. The only way to systemise it is a bot that reads the same charts you do — and places orders while you sleep.
+                    </p>
+                    <div class="case-status-chip">
+                        <span class="now-pulse" aria-hidden="true"></span>
+                        <span data-tr="case.smtbot.cover.status">Bybit V5 demo · 746 tests passing</span>
+                    </div>
+                </div>
+                <aside class="case-cover-meta" aria-label="Quick stats">
+                    <div class="case-stat">
+                        <span class="case-stat-k" data-tr="case.smtbot.stat1.k">Strategy</span>
+                        <span class="case-stat-v">VMC</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-k" data-tr="case.smtbot.stat2.k">Entry · HTF</span>
+                        <span class="case-stat-v">5m · 15m</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-k" data-tr="case.smtbot.stat3.k">Tests</span>
+                        <span class="case-stat-v">746 ✓</span>
+                    </div>
+                    <div class="case-stat">
+                        <span class="case-stat-k" data-tr="case.smtbot.stat4.k">Mode</span>
+                        <span class="case-stat-v">UTA Demo</span>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- ==================== ARCHITECTURE ==================== -->
+        <section class="case-section case-section-arch">
+            <div class="container case-narrative">
+                <span class="case-tag" data-tr="case.smtbot.arch.tag">01 · Architecture</span>
+                <h2 class="case-h2" data-tr="case.smtbot.arch.h">TradingView is the eyes. Python is the brain. Bybit is the hands.</h2>
+                <p class="case-body case-body-lead" data-tr="case.smtbot.arch.lead">
+                    Three actors, one decision loop. Pine indicators (smt_overlay + smt_oscillator) read the chart. An MCP daemon ferries those readings into Python via TradingView Desktop's debug port. Python runs the VMC planner, applies the risk manager, and routes orders to Bybit V5 over pybit. SQLite is the async journal. Pine settle status is checked every cycle — no settled bar, no trade.
+                </p>
+                <div class="case-arch-diagram">
+                    <svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SMTbot system architecture: TradingView Pine indicators feed Python brain via MCP, which routes orders to Bybit V5 with SQLite journal underneath">
+                        <defs>
+                            <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <path d="M0,0 L0,6 L9,3 z" fill="currentColor"/>
+                            </marker>
+                            <linearGradient id="tvGrad" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.05"/>
+                            </linearGradient>
+                            <linearGradient id="pyGrad" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0.05"/>
+                            </linearGradient>
+                            <linearGradient id="byGrad" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#fb923c" stop-opacity="0.32"/>
+                                <stop offset="100%" stop-color="#fb923c" stop-opacity="0.06"/>
+                            </linearGradient>
+                            <linearGradient id="dbGrad" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#f472b6" stop-opacity="0.25"/>
+                                <stop offset="100%" stop-color="#f472b6" stop-opacity="0.04"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- TradingView (eyes) -->
+                        <g class="case-arch-block">
+                            <rect x="40" y="80" width="180" height="160" rx="14" fill="url(#tvGrad)" stroke="#7c3aed" stroke-width="1.5"/>
+                            <text x="130" y="115" text-anchor="middle" fill="#a78bfa" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1.5">EYES · TV</text>
+                            <text x="130" y="155" text-anchor="middle" fill="#fff" font-family="Instrument Serif, serif" font-size="22" font-style="italic">TradingView</text>
+                            <text x="130" y="180" text-anchor="middle" fill="#a8acbe" font-family="JetBrains Mono, monospace" font-size="10">smt_overlay.pine</text>
+                            <text x="130" y="200" text-anchor="middle" fill="#a8acbe" font-family="JetBrains Mono, monospace" font-size="10">smt_oscillator.pine</text>
+                            <text x="130" y="225" text-anchor="middle" fill="#a8acbe" font-family="JetBrains Mono, monospace" font-size="9">CDP :9222</text>
+                        </g>
+
+                        <!-- Python (brain) -->
+                        <g class="case-arch-block">
+                            <rect x="310" y="60" width="200" height="200" rx="14" fill="url(#pyGrad)" stroke="#2dd4bf" stroke-width="1.5"/>
+                            <text x="410" y="95" text-anchor="middle" fill="#5eead4" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1.5">BRAIN · PY</text>
+                            <text x="410" y="135" text-anchor="middle" fill="#fff" font-family="Instrument Serif, serif" font-size="22" font-style="italic">Python bot</text>
+                            <text x="410" y="160" text-anchor="middle" fill="#a8acbe" font-family="JetBrains Mono, monospace" font-size="10">MCP daemon</text>
+                            <text x="410" y="180" text-anchor="middle" fill="#a8acbe" font-family="JetBrains Mono, monospace" font-size="10">VMC entry/exit planner</text>
+                            <text x="410" y="200" text-anchor="middle" fill="#a8acbe" font-family="JetBrains Mono, monospace" font-size="10">risk manager</text>
+                            <text x="410" y="220" text-anchor="middle" fill="#a8acbe" font-family="JetBrains Mono, monospace" font-size="10">order router</text>
+                            <text x="410" y="245" text-anchor="middle" fill="#a8acbe" font-family="JetBrains Mono, monospace" font-size="9">FastAPI dashboard (read-only)</text>
+                        </g>
+
+                        <!-- Bybit (hands) -->
+                        <g class="case-arch-block">
+                            <rect x="600" y="80" width="160" height="160" rx="14" fill="url(#byGrad)" stroke="#fb923c" stroke-width="1.5"/>
+                            <text x="680" y="115" text-anchor="middle" fill="#fb923c" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1.5">HANDS · BYBIT</text>
+                            <text x="680" y="155" text-anchor="middle" fill="#fff" font-family="Instrument Serif, serif" font-size="22" font-style="italic">Bybit V5</text>
+                            <text x="680" y="180" text-anchor="middle" fill="#a8acbe" font-family="JetBrains Mono, monospace" font-size="10">pybit REST</text>
+                            <text x="680" y="200" text-anchor="middle" fill="#a8acbe" font-family="JetBrains Mono, monospace" font-size="10">UTA · hedge mode</text>
+                            <text x="680" y="220" text-anchor="middle" fill="#a8acbe" font-family="JetBrains Mono, monospace" font-size="9">limit + SL only</text>
+                        </g>
+
+                        <!-- SQLite journal beneath -->
+                        <g class="case-arch-block">
+                            <rect x="290" y="290" width="240" height="50" rx="10" fill="url(#dbGrad)" stroke="#f472b6" stroke-width="1.3" stroke-dasharray="4 3"/>
+                            <text x="410" y="312" text-anchor="middle" fill="#f9a8d4" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1.5">JOURNAL · SQLITE</text>
+                            <text x="410" y="328" text-anchor="middle" fill="#a8acbe" font-family="JetBrains Mono, monospace" font-size="9">aiosqlite · every cycle, every order</text>
+                        </g>
+
+                        <!-- Connector: TV → Python (Pine readings) -->
+                        <line x1="220" y1="150" x2="305" y2="150" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrow)"/>
+                        <text x="263" y="142" text-anchor="middle" fill="#a78bfa" font-family="JetBrains Mono, monospace" font-size="9">pine readings</text>
+
+                        <!-- Connector: Python → Bybit (orders) -->
+                        <line x1="510" y1="150" x2="595" y2="150" stroke="#5eead4" stroke-width="1.5" marker-end="url(#arrow)"/>
+                        <text x="553" y="142" text-anchor="middle" fill="#5eead4" font-family="JetBrains Mono, monospace" font-size="9">limit + sl</text>
+
+                        <!-- Connector: Bybit → Python (fills/state) -->
+                        <line x1="595" y1="190" x2="510" y2="190" stroke="#fb923c" stroke-width="1.5" marker-end="url(#arrow)"/>
+                        <text x="553" y="205" text-anchor="middle" fill="#fb923c" font-family="JetBrains Mono, monospace" font-size="9">fills · state</text>
+
+                        <!-- Connector: Python → SQLite (journal write) -->
+                        <line x1="410" y1="260" x2="410" y2="285" stroke="#f9a8d4" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrow)"/>
+                        <text x="455" y="278" text-anchor="middle" fill="#f9a8d4" font-family="JetBrains Mono, monospace" font-size="9">write</text>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== STACK ==================== -->
+        <section class="case-section">
+            <div class="container case-narrative">
+                <span class="case-tag" data-tr="case.smtbot.stack.tag">02 · Stack</span>
+                <h2 class="case-h2" data-tr="case.smtbot.stack.h">What the bot is made of.</h2>
+                <p class="case-body" data-tr="case.smtbot.stack.lead">
+                    Every component picked for one reason: it has to survive a 24/7 loop without you watching it. No frameworks for show, no abstractions that aren't paying for themselves.
+                </p>
+                <div class="case-stack-grid">
+                    <div class="case-stack-col">
+                        <div class="case-stack-head">
+                            <i class="fas fa-eye" aria-hidden="true"></i>
+                            <span data-tr="case.smtbot.stack.eyes">Eyes</span>
+                        </div>
+                        <ul class="case-stack-list" data-tr="case.smtbot.stack.eyes.list">
+                            <li><strong>TradingView Desktop</strong> <span>chart engine + Pine runtime, headless via CDP</span></li>
+                            <li><strong>Pine Script v5</strong> <span>smt_overlay + smt_oscillator (custom indicators, settle-aware)</span></li>
+                            <li><strong>CDP debug</strong> <span>Chrome DevTools Protocol :9222 — read-only chart access</span></li>
+                        </ul>
+                    </div>
+                    <div class="case-stack-col">
+                        <div class="case-stack-head">
+                            <i class="fas fa-brain" aria-hidden="true"></i>
+                            <span data-tr="case.smtbot.stack.brain">Brain</span>
+                        </div>
+                        <ul class="case-stack-list" data-tr="case.smtbot.stack.brain.list">
+                            <li><strong>Python 3.11+</strong> <span>asyncio core; pydantic-typed config models</span></li>
+                            <li><strong>Node.js 18+</strong> <span>MCP daemon — CDP client bridging TV → Python</span></li>
+                            <li><strong>pandas · numpy · ta</strong> <span>vectorised analysis primitives, no external ML calls</span></li>
+                            <li><strong>pydantic · pyyaml</strong> <span>typed config + env overrides, schema validation at boot</span></li>
+                            <li><strong>httpx · loguru · rich</strong> <span>async HTTP, structured JSON logs, terminal UI</span></li>
+                            <li><strong>FastAPI + uvicorn</strong> <span>read-only journal viewer at localhost:8000</span></li>
+                            <li><strong>aiosqlite</strong> <span>append-only async journal — every cycle, every order, every breaker fire</span></li>
+                        </ul>
+                    </div>
+                    <div class="case-stack-col">
+                        <div class="case-stack-head">
+                            <i class="fas fa-arrow-right-arrow-left" aria-hidden="true"></i>
+                            <span data-tr="case.smtbot.stack.hands">Hands</span>
+                        </div>
+                        <ul class="case-stack-list" data-tr="case.smtbot.stack.hands.list">
+                            <li><strong>Bybit V5 REST</strong> <span>futures trading via pybit (V5 endpoints, hedge-aware)</span></li>
+                            <li><strong>websockets</strong> <span>live position monitor + fill confirmations</span></li>
+                            <li><strong>UTA + hedge mode</strong> <span>Unified Trading Account, cross-margin USDT/USDC</span></li>
+                            <li><strong>Limit + SL</strong> <span>no market entries, ever — risk bounded by stop</span></li>
+                        </ul>
+                    </div>
+                    <div class="case-stack-col">
+                        <div class="case-stack-head">
+                            <i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i>
+                            <span data-tr="case.smtbot.stack.tooling">AI Tooling &amp; Tests</span>
+                        </div>
+                        <ul class="case-stack-list" data-tr="case.smtbot.stack.tooling.list">
+                            <li><strong>Claude Code</strong> <span>pair-programming AI — codes, tunes parameters, audits logs (decisions stay in Python)</span></li>
+                            <li><strong>Skills</strong> <span>custom Markdown Skills for codebase patterns (risk math, Pine bridge, Bybit ops)</span></li>
+                            <li><strong>Agents</strong> <span>sub-agent invocations for code review, audit passes, regression checks</span></li>
+                            <li><strong>MCP</strong> <span>TradingView protocol bridge — read-only chart state into Python</span></li>
+                            <li><strong>pytest</strong> <span>746 cases pinning every breaker edge, every settle path</span></li>
+                            <li><strong>Optuna TPE</strong> <span>walk-forward Bayesian tune (Pass 3, planned)</span></li>
+                            <li><strong>stable-baselines3</strong> <span>RL roadmap (Phase 6) — currently rule-based VMC</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== THREE HARD PROBLEMS ==================== -->
+        <section class="case-section case-section-arch">
+            <div class="container case-narrative">
+                <span class="case-tag" data-tr="case.smtbot.problems.tag">03 · Problems</span>
+                <h2 class="case-h2" data-tr="case.smtbot.problems.h">Three hard problems.</h2>
+                <div class="case-problems-grid">
+                    <article class="case-problem">
+                        <span class="case-problem-num">P1</span>
+                        <h3 class="case-problem-h" data-tr="case.smtbot.p1.h">Bridging Pine and Python without lying.</h3>
+                        <p class="case-problem-body" data-tr="case.smtbot.p1.body">
+                            Standard webhook approaches lose half the signal. I went with TradingView Desktop in headless-debug mode (<em>--remote-debugging-port=9222</em>) and an MCP daemon that reads Pine output tables straight off the rendered chart. Pine settle status is checked every cycle — if the indicator hasn't finalised the bar, the cycle skips. <em>No settled bar, no trade.</em> The bot becomes deterministic with the chart, not despite it.
+                        </p>
+                    </article>
+                    <article class="case-problem">
+                        <span class="case-problem-num">P2</span>
+                        <h3 class="case-problem-h" data-tr="case.smtbot.p2.h">Risk circuit breakers that actually fire.</h3>
+                        <p class="case-problem-body" data-tr="case.smtbot.p2.body">
+                            Three independent breakers live in <em>risk_manager.py</em>: cumulative drawdown (resets daily), consecutive losses (caps hot streaks of bad luck), and a daily R-budget (forces a stop after N units of risk are spent). Each fires synchronously before order routing. The 746-case pytest suite pins every breaker's edge — stops inside the deadband, breakers triggered by stale data, demo-only paths protected from accidental live calls (<em>BybitClient</em> constructor refuses live unless <em>allow_live=True</em> is passed explicitly).
+                        </p>
+                    </article>
+                    <article class="case-problem">
+                        <span class="case-problem-num">P3</span>
+                        <h3 class="case-problem-h" data-tr="case.smtbot.p3.h">Demo → live transition without surprise.</h3>
+                        <p class="case-problem-body" data-tr="case.smtbot.p3.body">
+                            Going live isn't flipping <em>BYBIT_DEMO=0</em>. It's a multi-step ritual: a separate sub-account, a fresh API key with read+trade only (never withdrawal), IP whitelisting, and that explicit <em>allow_live=True</em> flag. There's also a Turkish ISP layer — certain CloudFront IPs that Bybit's edge sits behind get DPI-dropped at TCP-443 by some Turkish carriers. The bot probes DNS at startup and pins to a reachable edge. If you see <em>bybit_demo_dns_pin_failed</em> in the logs, you fight the ISP, not the bot.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== LEARNINGS ==================== -->
+        <section class="case-section">
+            <div class="container case-narrative">
+                <span class="case-tag" data-tr="case.smtbot.learnings.tag">04 · What I learned</span>
+                <h2 class="case-h2" data-tr="case.smtbot.learnings.h">Three lines I'd write on a Post-it.</h2>
+                <ul class="case-learnings">
+                    <li>
+                        <span class="case-learn-mark" aria-hidden="true">↪</span>
+                        <span data-tr="case.smtbot.learn1"><em>Pine is the source of truth, Python is the executor.</em> Don't argue with the chart — settle status exists for a reason.</span>
+                    </li>
+                    <li>
+                        <span class="case-learn-mark" aria-hidden="true">↪</span>
+                        <span data-tr="case.smtbot.learn2"><em>Tests are not excessive when the bot trades on its own.</em> 746 cases is the cost of trusting a process to lose money without you watching.</span>
+                    </li>
+                    <li>
+                        <span class="case-learn-mark" aria-hidden="true">↪</span>
+                        <span data-tr="case.smtbot.learn3"><em>TR ISP egress is an architecture concern, not a config quirk.</em> Build the failover at startup or your bot will silently die at 3am.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ==================== BACK ==================== -->
+        <section class="case-section case-section-back">
+            <div class="container">
+                <a href="index.html#projects" class="case-back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    <span data-tr="case.smtbot.back">Back to portfolio</span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Minimal footer -->
+    <footer class="footer-v3 case-footer">
+        <div class="container footer-inner">
+            <div class="footer-bottom-v3">
+                <a href="index.html" class="fb-mark" aria-label="Portfolio">
+                    <span class="logo-bracket">&lt;</span><span class="logo-mark">SAMET</span><span class="logo-bracket">/&gt;</span>
+                </a>
+                <span class="fb-copy">© 2026 Samet Soysal · case_study/smtbot</span>
+                <span class="fb-version">v1.0.0 · case_smtbot.md</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Reuse global script (theme, lang, cursor canvas, lightning) -->
+    <script src="script.js?v=40"></script>
+</body>
+</html>
