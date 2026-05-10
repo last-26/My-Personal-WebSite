@@ -5218,3 +5218,44 @@ body.light-mode .card-case-link:hover{
     background:linear-gradient(135deg, rgba(234,88,12,.22), rgba(234,88,12,.1));
     color:#9a3412;
 }
+
+/* ── Wave 2 — custom hover cursor for project cards (Proxio hybrid) ── */
+.see-project-cursor{
+    position:fixed;top:0;left:0;
+    pointer-events:none;
+    z-index:var(--z-cursor);
+    transform:translate3d(-9999px,-9999px,0); /* off-screen until first move */
+    will-change:transform;
+}
+.see-project-cursor-inner{
+    display:inline-block;
+    padding:8px 16px;
+    background:var(--accent);
+    color:#fff;
+    font-family:var(--font-sans);
+    font-size:.78rem;
+    font-weight:600;
+    letter-spacing:.04em;
+    border-radius:var(--radius-pill);
+    box-shadow:0 8px 24px rgba(124,58,237,.35);
+    opacity:0;
+    transform:translate(-50%, -50%) scale(.6);
+    transform-origin:center;
+    transition:opacity .2s var(--ease-out), transform .2s var(--ease-spring);
+    white-space:nowrap;
+}
+.see-project-cursor.is-visible .see-project-cursor-inner{
+    opacity:1;
+    transform:translate(-50%, -50%) scale(1);
+}
+@media (hover: none){
+    .see-project-cursor{display:none !important}
+}
+@media (prefers-reduced-motion: reduce){
+    .see-project-cursor{display:none !important}
+    .card-featured:hover,
+    .card-mini-featured:hover{
+        opacity:.95;
+        transition:opacity .25s var(--ease-out);
+    }
+}

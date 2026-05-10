@@ -2473,6 +2473,92 @@ window.closeCertificate = closeCertificateModal;
     setInterval(tick, 1000);
 })();
 
+/* Custom hover cursor — "Read the case" pill following pointer over project cards
+   (Wave 2: Proxio hybrid study). Position uses direct transform so the pill tracks
+   the pointer 1:1; scale-in animates via CSS .is-visible toggle. */
+(function initSeeProjectCursor(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(hover: none)').matches) return;
+
+    const SELECTOR = '.card-featured, .card-mini-featured';
+    const LABEL_TR = 'Vakayı oku →';
+    const LABEL_EN = 'Read the case →';
+
+    let cursorEl = null;
+    let innerEl = null;
+    let rafId = null;
+    let pendingX = 0, pendingY = 0;
+    let visible = false;
+
+    function getLabel(card){
+        const override = card.dataset.cursorLabel;
+        if (override) return override;
+        const lang = localStorage.getItem('preferredLang') || 'en';
+        return lang === 'tr' ? LABEL_TR : LABEL_EN;
+    }
+
+    function ensureCursor(){
+        if (cursorEl) return;
+        cursorEl = document.createElement('div');
+        cursorEl.className = 'see-project-cursor';
+        cursorEl.setAttribute('aria-hidden', 'true');
+        innerEl = document.createElement('span');
+        innerEl.className = 'see-project-cursor-inner';
+        cursorEl.appendChild(innerEl);
+        document.body.appendChild(cursorEl);
+    }
+
+    function show(card){
+        ensureCursor();
+        innerEl.textContent = getLabel(card);
+        cursorEl.classList.add('is-visible');
+        visible = true;
+    }
+
+    function hide(){
+        if (!cursorEl) return;
+        cursorEl.classList.remove('is-visible');
+        visible = false;
+        if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+        }
+    }
+
+    document.addEventListener('mouseover', (e) => {
+        const card = e.target.closest(SELECTOR);
+        if (!card) return;
+        show(card);
+    });
+
+    document.addEventListener('mouseout', (e) => {
+        const card = e.target.closest(SELECTOR);
+        if (!card) return;
+        const rel = e.relatedTarget;
+        if (rel && card.contains(rel)) return;
+        if (rel && rel.closest && rel.closest(SELECTOR)) return;
+        hide();
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!visible) return;
+        pendingX = e.clientX;
+        pendingY = e.clientY;
+        if (rafId) return;
+        rafId = requestAnimationFrame(() => {
+            cursorEl.style.transform = `translate3d(${pendingX}px, ${pendingY}px, 0)`;
+            rafId = null;
+        });
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') hide();
+    });
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) hide();
+    });
+})();
+
 /* ── EASTER EGG: Konami code ⚡ ── */
 (function konamiCode(){
     const seq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
