@@ -51,18 +51,21 @@ const translations = {
         "hero.badge": "AI/ML Mühendisi & Full-Stack Developer",
         "hero.subtitle.prefix": "Uzmanlık alanım:",
         "hero.subtitle": "Yapay Zeka | Makine Öğrenmesi | NLP Uzmanı",
-        "hero.description": "Üretim ortamı için AI inşa eden bir Bilgisayar Mühendisi — RAG hatları, çok-modelli orkestrasyonlar ve MCP tabanlı ajanlar. Uçtan uca sistemler, milisaniyelik veri çekimiyle modelleri gerçek veri mühendisliğine bağlıyor.",
+        "hero.description": "Üretim ortamı için AI sistemleri kuran bir Bilgisayar Mühendisiyim — RAG pipeline'ları, birden fazla LLM'i birlikte çalıştıran orkestrasyonlar ve MCP üzerinden veri katmanına bağlanan ajanlar. Modeli gerçek veri mühendisliğiyle buluşturan, milisaniye gecikmeli uçtan uca sistemler.",
         "hero.btn.projects": "Projelerim",
         "hero.btn.github": "GitHub Profilim",
         "hero.btn.contact": "İletişim",
         "hero.btn.cv.view": "Görüntüle",
         "hero.btn.cv.download": "İndir",
+        "cvmodal.title": "Özgeçmiş",
+        "cvmodal.newtab": "Yeni sekmede",
+        "cvmodal.download": "İndir",
         "about.title.main": "Hakkımda",
         "about.title.soft": "",
-        "about.intro": "<span class='kw'>Üretim ortamındaki AI'ın büyük kısmı mühendislik işidir.</span> Modeller demoda göz boyar — sistemler sahada ayakta kalır. Ben sistemleri inşa ederim.",
-        "about.origin": "<span class='kw'>Eskişehir Osmangazi Üniversitesi</span> mezunu bir Bilgisayar Mühendisiyim. Mühendislik temelimi makine öğrenmesi, örüntü tanıma ve graf teorisi üzerine kurdum — sonra odağı, gerçekten kullanıcının eline ulaşan uygulamalı LLM sistemlerine kaydırdım.",
-        "about.focus": "Üretim ortamı için AI inşa ediyorum: <span class='kw'>RAG hatları</span> 300ms altı gecikmeyle, <span class='kw'>çok-modelli orkestrasyonlar</span> bulut + yerel modellerin yedekli kombinasyonuyla, ve gerçek veri mühendisliğine bağlanan <span class='kw'>MCP tabanlı ajanlar</span>. İşin asıl ilginç tarafı, modelin veri akışıyla kesiştiği yerde.",
-        "about.impact": "FinSenti'de FinBERT ile <span class='kw'>%91.1 doğruluk</span>; iş başvuru süresini saatlerden dakikalara indiren LangGraph ajanları (NextHire); SAMETEI'de kurumsal İK doküman süreçlerinde <span class='kw'>%70 hızlanma</span>. Ölçek + mühendislik + biraz da inat.",
+        "about.intro": "<span class='kw'>Kod yazmak artık işin küçük bir parçası.</span> Vaktimin çoğu doğru soruyu sormaya, mimariye karar vermeye, &ldquo;bunu daha iyi nasıl yapardık&rdquo; diye durup düşünmeye, kodu incelemeye ve modelin atladığını yakalayan testleri yazmaya gidiyor. <span class='kw'>Daha az yazmak, daha çok düşünmek</span> — asıl mesele, mühendisin bu döngünün neresinde durduğu.",
+        "about.origin": "<span class='kw'>Eskişehir Osmangazi Üniversitesi</span> mezunu bir Bilgisayar Mühendisiyim. Mühendislik temelimi makine öğrenmesi, örüntü tanıma ve graf teorisi üzerine attım — sonra odağı, gerçekten kullanıcının eline ulaşan LLM sistemlerine kaydırdım.",
+        "about.focus": "Üretim ortamı için AI inşa ediyorum: 300 ms altı gecikmeyle çalışan <span class='kw'>RAG pipeline'ları</span>, bulut ve yerel modelleri birlikte koşturan <span class='kw'>çoklu-LLM orkestrasyonu</span> ve gerçek veri mühendisliğine bağlanan <span class='kw'>MCP tabanlı ajanlar</span>. İşin en ilginç kısmı, modelin veri akışıyla kesiştiği o nokta.",
+        "about.impact": "FinSenti'de FinBERT ile <span class='kw'>%91.1 doğruluk</span>; iş başvuru sürecini saatlerden dakikalara indiren LangGraph ajanları (NextHire); SAMETEI'de kurumsal İK doküman süreçlerinde <span class='kw'>%70 hızlanma</span>. Ölçek, mühendislik ve biraz da inat.",
         "about.dossier.role": "Rol",
         "about.dossier.roleVal": "AI/ML Mühendisi",
         "about.dossier.edu": "Eğitim",
@@ -74,7 +77,7 @@ const translations = {
         "about.dossier.focus": "Odak",
         "about.dossier.focusVal": "RAG · Çok-model · MCP · Vector Search",
         "about.dossier.lang": "Diller",
-        "about.dossier.langVal": "Türkçe · İngilizce (B2)",
+        "about.dossier.langVal": "Türkçe · İngilizce (C1)",
         "about.dossier.status": "Durum",
         "about.dossier.statusVal": "Yeni fırsatlara açık",
         "about.stats.years": "Yıl Deneyim",
@@ -82,53 +85,57 @@ const translations = {
         "about.stats.technologies": "Teknoloji",
         "education.title.main": "Eğitim",
         "education.title.soft": "",
-        "education.degree": "Bilgisayar Mühendisliği Lisans",
+        "education.degree": "Bilgisayar Mühendisliği Lisansı",
         "education.school": "Eskişehir Osmangazi Üniversitesi",
         "education.date": "2020 - 2026",
         "education.detail": "Yapay Zeka, Makine Öğrenmesi ve Doğal Dil İşleme alanlarında uzmanlaşma. Mezuniyet projesi: HIREAI — AI destekli CV analiz platformu.",
         "education.cert.title": "İngilizce Dil Okulları",
         "education.cert.school": "American Cultural Language Schools",
         "education.cert.date": "2022 - 2024",
-        "education.cert.detail": "Okuma, yazma, dinleme ve konuşma (Spoken Interaction & Production) alanlarında profesyonel yeterlilik eğitimi ve sertifikasyonu.",
+        "education.cert.detail": "Okuma, yazma, dinleme ve konuşma (Spoken Interaction & Production) alanlarında profesyonel yeterlilik eğitimi ve sertifika.",
         "education.cert.c1.btn": "C1 Sertifikası",
         "education.cert.b2.btn": "B2 Sertifikası",
+        "education.track.label": "DÖNEM · YIL",
+        "education.cert.label": "DOĞRULANMIŞ SERTİFİKALAR",
         "experience.title.main": "Deneyim",
         "experience.title.soft": "",
         "experience.certificate": "Sertifika",
         "experience.more": "Daha fazla göster",
         "experience.less": "Daha az göster",
+        "experience.status.active": "AKTİF",
+        "experience.status.done": "TAMAMLANDI",
         "experience.achievementsLabel": "ÖNEMLİ KAZANIMLAR",
         "experience.icictas.title": "Yazılım Geliştirme Stajyeri",
         "experience.icictas.company": "<a href='https://www.ictasnukleer.com.tr' target='_blank' class='company-link'>IC İçtaş Nükleer ve Endüstriyel Tesisler İnşaat A.Ş.</a>",
         "experience.icictas.date": "Oca 2026",
-        "experience.icictas.desc": "Akkuyu Nükleer Santral sahasından gelen verileri analiz etmek için React.js, FastAPI ve PostgreSQL kullanarak uçtan uca İSG Takip Paneli geliştirdim. Backend tarafında Passlib ve JWT ile güvenli kimlik doğrulama sistemleri kurarken, SQLAlchemy ORM ile veritabanı yönetimini optimize ettim. Ayrıca yüksek kardinaliteli verilerde B-tree indeksleme stratejileri uygulayarak sorgu performansını artırdım ve Material UI ile yöneticiler için gerçek zamanlı analitik dashboard'lar tasarladım.",
-        "experience.icictas.metrics.1": "Full-stack stack",
-        "experience.icictas.metrics.2": "Gerçek zamanlı dashboard",
+        "experience.icictas.desc": "Akkuyu Nükleer Santral sahasından gelen verileri analiz etmek için React.js, FastAPI ve PostgreSQL ile uçtan uca İSG Takip Paneli geliştirdim. Backend tarafında Passlib ve JWT ile güvenli kimlik doğrulama akışı kurdum, SQLAlchemy ORM ile veritabanı yönetimini optimize ettim. Yüksek kardinaliteli verilerde B-tree indeksleme uygulayarak sorgu performansını gözle görülür şekilde artırdım; Material UI ile yöneticiler için gerçek zamanlı analitik panolar tasarladım.",
+        "experience.icictas.metrics.1": "Full-stack mimari",
+        "experience.icictas.metrics.2": "Gerçek zamanlı pano",
         "experience.icictas.metrics.3": "B-tree indeksleme",
         "experience.icictas.achievements.1": "Akkuyu Nükleer sahası için React + FastAPI ile uçtan uca İSG Takip Paneli geliştirdim.",
         "experience.icictas.achievements.2": "Passlib ve JWT tabanlı güvenli kimlik doğrulama akışı kurdum.",
         "experience.icictas.achievements.3": "SQLAlchemy ORM ile yazılmış sorgularda B-tree indeksleme uygulayarak performansı önemli ölçüde artırdım.",
-        "experience.icictas.achievements.4": "Material UI ile yöneticiler için gerçek zamanlı analitik dashboard'lar tasarladım.",
+        "experience.icictas.achievements.4": "Material UI ile yöneticiler için gerçek zamanlı analitik panolar tasarladım.",
         "experience.tei.title": "Data Science & AI Stajyeri",
         "experience.tei.company": "<a href='https://www.tei.com.tr' target='_blank' class='company-link company-tei'>TEI – TUSAŞ Motor Sanayii A.Ş. | Eskişehir</a>",
         "experience.tei.date": "Ağu – Eyl 2025",
-        "experience.tei.desc": "TEI bünyesinde izole ağlarda güvenli veri iletimi ve sistem mimarileri üzerine Ar-Ge çalışmaları yürüttüm. İnsan Kaynakları departmanı için LLM tabanlı 'SAMETEI' yapay zeka asistanının prototipleme sürecini yöneterek OpenRouter ve Local LLM entegrasyonlarını gerçekleştirdim. Ayrıca n8n ile finansal metrikleri analiz eden otonom iş akışları ve Playwright kullanarak e-ticaret süreçlerini otomatize eden RPA çözümleri geliştirdim.",
-        "experience.tei.metrics.1": "Multi-LLM prototip",
-        "experience.tei.metrics.2": "n8n otomasyonları",
+        "experience.tei.desc": "TEI'de izole ağlarda güvenli veri iletimi ve sistem mimarileri üzerine Ar-Ge yaptım. İnsan Kaynakları için LLM tabanlı 'SAMETEI' yapay zeka asistanının prototipini yönettim; OpenRouter ve yerel LLM entegrasyonlarını kurdum. Ayrıca n8n ile finansal metrikleri analiz eden otonom iş akışları ve Playwright ile e-ticaret süreçlerini otomatize eden RPA çözümleri geliştirdim.",
+        "experience.tei.metrics.1": "Çoklu-LLM prototipi",
+        "experience.tei.metrics.2": "n8n otomasyonu",
         "experience.tei.metrics.3": "İzole ağ Ar-Ge",
-        "experience.tei.achievements.1": "LLM tabanlı 'SAMETEI' İK asistanı prototipini OpenRouter + Local LLM entegrasyonuyla yönettim.",
+        "experience.tei.achievements.1": "LLM tabanlı 'SAMETEI' İK asistanı prototipini OpenRouter ve yerel LLM entegrasyonuyla yönettim.",
         "experience.tei.achievements.2": "n8n ile finansal metrikleri analiz eden otonom iş akışları geliştirdim.",
         "experience.tei.achievements.3": "Playwright ile e-ticaret süreçlerini otomatize eden RPA çözümleri kurdum.",
         "experience.tei.achievements.4": "İzole ağlarda güvenli veri iletimi üzerine Ar-Ge notları hazırladım.",
         "experience.powintec.title": "Part-Time Yazılım Geliştirici (Remote)",
         "experience.powintec.company": "Powintec Engineering | Wireless Charging of Small Electric Vehicles",
         "experience.powintec.date": "Tem 2023 – Tem 2025",
-        "experience.powintec.desc": "Kablosuz şarj sistemlerinden gelen hizalama, sıcaklık ve verimlilik verilerini anlık olarak izlemek amacıyla React.js, TailwindCSS ve WebSockets tabanlı bir yönetim paneli hazırladım. WebSocket üzerinden gelen yoğun veri akışının UI performansını etkilememesi için state yönetimini optimize ederek milisaniye düzeyinde gecikme ile veri işleme sağladım. Donanım bağlantı kopmalarına karşı hata yönetim mekanizmaları geliştirerek sistem kararlılığını artırdım.",
-        "experience.powintec.metrics.1": "Kablosuz şarj UI",
-        "experience.powintec.metrics.2": "WebSocket stream",
-        "experience.powintec.metrics.3": "< ms latency",
+        "experience.powintec.desc": "Kablosuz şarj sistemlerinden gelen hizalama, sıcaklık ve verimlilik verilerini anlık izlemek için React.js, TailwindCSS ve WebSockets tabanlı bir yönetim paneli hazırladım. WebSocket'ten gelen yoğun veri akışının arayüz performansını düşürmemesi için state yönetimini optimize ettim; veriyi milisaniye düzeyinde gecikmeyle işledim. Donanım bağlantı kopmalarına karşı hata yönetim mekanizmaları geliştirerek sistem kararlılığını artırdım.",
+        "experience.powintec.metrics.1": "Kablosuz şarj arayüzü",
+        "experience.powintec.metrics.2": "WebSocket akışı",
+        "experience.powintec.metrics.3": "< 1 ms gecikme",
         "experience.powintec.achievements.1": "React + TailwindCSS + WebSocket tabanlı kablosuz şarj izleme paneli hazırladım.",
-        "experience.powintec.achievements.2": "Yüksek frekanslı WebSocket verisinde state yönetimini optimize ederek UI jank'ini giderdim.",
+        "experience.powintec.achievements.2": "Yüksek frekanslı WebSocket verisinde state yönetimini optimize ederek arayüz takılmalarını giderdim.",
         "experience.powintec.achievements.3": "Donanım bağlantı kopmalarına karşı hata yönetim mekanizmaları geliştirdim.",
         "skills.title.main": "Tech Stack",
         "skills.title.soft": "",
@@ -147,68 +154,70 @@ const translations = {
         "projects.status.live": "Canlı",
         "projects.status.archive": "Arşiv",
         "projects.status.wip": "Aktif geliştirme",
-        "projects.wip": "Şu an üzerinde çalışıyorum",
-        "projects.smtbot.subtitle": "Reinforcement Learning Trading Bot'u",
+        "projects.wip": "Şu an geliştiriliyor",
+        "projects.smtbot.subtitle": "Pekiştirmeli Öğrenmeli Trading Botu",
         "projects.smtbot.casebtn": "Vakayı oku",
         "case.smtbot.h1": "vaka çalışması.",
         "case.smtbot.cover.problem": "Sezgisel trading: kurallar kafanda, sonuçlar kayda geçmiyor. Sistemleştirmenin tek yolu — senin baktığın grafiklere bakan ve sen uyurken emir veren bir bot.",
-        "case.smtbot.cover.status": "Bybit V5 demo · 746 test geçer",
+        "case.smtbot.cover.status": "Bybit V5 demo · 746 test başarılı",
         "case.smtbot.stat1.k": "Strateji",
         "case.smtbot.stat2.k": "Giriş · HTF",
         "case.smtbot.stat3.k": "Testler",
         "case.smtbot.stat4.k": "Mod",
         "case.smtbot.arch.tag": "01 · Mimari",
-        "case.smtbot.arch.h": "TradingView gözler. Python beyin. Bybit eller.",
-        "case.smtbot.arch.lead": "Üç aktör, tek karar döngüsü. Pine indikatörleri (smt_overlay + smt_oscillator) grafiği okur. Bir MCP daemon, TradingView Desktop'un debug portu üzerinden bu okumaları Python'a taşır. Python VMC planlayıcısını çalıştırır, risk yöneticisini uygular ve emirleri pybit üzerinden Bybit V5'e yönlendirir. SQLite ise async jurnal. Pine settle durumu her döngüde kontrol edilir — bar kapanmadıysa döngü atlanır.",
+        "case.smtbot.arch.h": "TradingView görür. Python düşünür. Bybit yapar.",
+        "case.smtbot.arch.lead": "Üç aktör, tek karar döngüsü. Pine indikatörleri (smt_overlay + smt_oscillator) grafiği okur. Bir MCP daemon, TradingView Desktop'un debug portu üzerinden bu okumaları Python'a taşır. Python, VMC planlayıcıyı çalıştırır, risk yöneticisini devreye sokar ve emirleri pybit üzerinden Bybit V5'e gönderir. SQLite, async kayıt defteri görevini görür. Her döngüde Pine'ın bar kapanış durumu kontrol edilir — bar kapanmadıysa o döngü atlanır.",
         "case.smtbot.stack.tag": "02 · Yığın",
         "case.smtbot.stack.h": "Bot neyden yapılı?",
-        "case.smtbot.stack.lead": "Her bileşen tek bir gerekçeyle seçildi: 7/24 döngüde sen izlemezken ayakta kalmalı. Gösteriş için framework yok, kendini ödemeyen soyutlama yok.",
+        "case.smtbot.stack.lead": "Her bileşen tek bir gerekçeyle seçildi: 7/24 döngüde, sen izlemezken ayakta kalmak zorunda. Gösteriş için framework yok, faydası tartışmalı soyutlama yok.",
         "case.smtbot.stack.eyes": "Gözler",
         "case.smtbot.stack.brain": "Beyin",
         "case.smtbot.stack.hands": "Eller",
-        "case.smtbot.stack.tooling": "AI Aletleri &amp; Testler",
-        "case.smtbot.stack.eyes.list": "<li><strong>TradingView Desktop</strong> <span>chart motoru + Pine runtime, CDP üzerinden headless</span></li><li><strong>Pine Script v5</strong> <span>smt_overlay + smt_oscillator (özel indikatörler, settle-aware)</span></li><li><strong>CDP debug</strong> <span>Chrome DevTools Protocol :9222 — chart'a salt-okunur erişim</span></li>",
-        "case.smtbot.stack.brain.list": "<li><strong>Python 3.11+</strong> <span>asyncio çekirdek; pydantic ile tipli yapılandırma modelleri</span></li><li><strong>Node.js 18+</strong> <span>MCP daemon — TV → Python CDP istemcisi</span></li><li><strong>pandas · numpy · ta</strong> <span>vektörize analiz primitif'leri, dış ML çağrısı yok</span></li><li><strong>pydantic · pyyaml</strong> <span>tipli yapılandırma + env değişkeni; açılışta şema doğrulaması</span></li><li><strong>httpx · loguru · rich</strong> <span>async HTTP, yapılandırılmış JSON log, terminal UI</span></li><li><strong>FastAPI + uvicorn</strong> <span>localhost:8000'da salt-okunur jurnal görüntüleyici</span></li><li><strong>aiosqlite</strong> <span>append-only async jurnal — her cycle, her emir, her breaker tetiklemesi</span></li>",
-        "case.smtbot.stack.hands.list": "<li><strong>Bybit V5 REST</strong> <span>pybit ile vadeli işlem (V5 endpoint, hedge-aware)</span></li><li><strong>websockets</strong> <span>canlı pozisyon takibi + fill onayları</span></li><li><strong>UTA + hedge mode</strong> <span>Unified Trading Account, cross-margin USDT/USDC</span></li><li><strong>Limit + SL</strong> <span>asla market emir yok — risk stop'la sınırlı</span></li>",
-        "case.smtbot.stack.tooling.list": "<li><strong>Claude Code</strong> <span>çift-yönlü AI eşi — kodu yazar, parametreleri tune eder, logları analiz eder (kararlar Python tarafında)</span></li><li><strong>Skills</strong> <span>kod tabanı örüntüleri için özel Markdown Skill'leri (risk matematiği, Pine köprüsü, Bybit operasyonları)</span></li><li><strong>Agents</strong> <span>kod gözden geçirme, denetim ve regresyon için alt-ajan çağrıları</span></li><li><strong>MCP</strong> <span>TradingView protokol köprüsü — chart durumunu Python'a salt-okunur taşır</span></li><li><strong>pytest</strong> <span>746 vaka, her breaker sınırını ve her settle yolunu sabitliyor</span></li><li><strong>Optuna TPE</strong> <span>walk-forward Bayesian tune (Pass 3, planlanan)</span></li><li><strong>stable-baselines3</strong> <span>RL yol haritası (Phase 6) — şu an kural-bazlı VMC</span></li>",
+        "case.smtbot.stack.tooling": "AI Araçları &amp; Testler",
+        "case.smtbot.stack.eyes.list": "<li><strong>TradingView Desktop</strong> <span>grafik motoru + Pine runtime, CDP üzerinden headless</span></li><li><strong>Pine Script v5</strong> <span>smt_overlay + smt_oscillator (özel indikatörler, bar kapanışına duyarlı)</span></li><li><strong>CDP debug</strong> <span>Chrome DevTools Protocol :9222 — grafiğe salt-okunur erişim</span></li>",
+        "case.smtbot.stack.brain.list": "<li><strong>Python 3.11+</strong> <span>asyncio çekirdek; pydantic ile tipli yapılandırma modelleri</span></li><li><strong>Node.js 18+</strong> <span>MCP daemon — TV → Python yönünde CDP istemcisi</span></li><li><strong>pandas · numpy · ta</strong> <span>vektörize analiz primitifleri, dış ML çağrısı yok</span></li><li><strong>pydantic · pyyaml</strong> <span>tipli yapılandırma + env değişkenleri; açılışta şema doğrulaması</span></li><li><strong>httpx · loguru · rich</strong> <span>async HTTP, yapılandırılmış JSON log, terminal arayüzü</span></li><li><strong>FastAPI + uvicorn</strong> <span>localhost:8000'da salt-okunur kayıt defteri görüntüleyici</span></li><li><strong>aiosqlite</strong> <span>append-only async kayıt defteri — her döngü, her emir, her breaker tetiklemesi</span></li>",
+        "case.smtbot.stack.hands.list": "<li><strong>Bybit V5 REST</strong> <span>pybit ile vadeli işlem (V5 endpoint, hedge moduna uyumlu)</span></li><li><strong>websockets</strong> <span>canlı pozisyon takibi + fill onayları</span></li><li><strong>UTA + hedge mode</strong> <span>Unified Trading Account, cross-margin USDT/USDC</span></li><li><strong>Limit + SL</strong> <span>asla market emir yok — risk her zaman stop ile sınırlı</span></li>",
+        "case.smtbot.stack.tooling.list": "<li><strong>Claude Code</strong> <span>AI eş programlama partneri — kod yazar, parametre ayarlar, log analizi yapar (kararlar Python tarafında kalır)</span></li><li><strong>Skills</strong> <span>kod tabanına özgü kalıplar için Markdown Skill'leri (risk matematiği, Pine köprüsü, Bybit operasyonları)</span></li><li><strong>Agents</strong> <span>kod incelemesi, denetim ve regresyon için alt-ajan çağrıları</span></li><li><strong>MCP</strong> <span>TradingView protokol köprüsü — chart durumunu Python'a salt-okunur biçimde taşır</span></li><li><strong>pytest</strong> <span>746 vaka, her breaker sınırını ve her settle yolunu doğruluyor</span></li><li><strong>Optuna TPE</strong> <span>walk-forward Bayesçi parametre arama (Pass 3, planlanan)</span></li><li><strong>stable-baselines3</strong> <span>RL yol haritası (Faz 6) — şu an kural tabanlı VMC</span></li>",
         "case.smtbot.problems.tag": "03 · Problemler",
         "case.smtbot.problems.h": "Üç zor problem.",
-        "case.smtbot.p1.h": "Pine ile Python'u dürüstçe köprülemek.",
-        "case.smtbot.p1.body": "Standart webhook yaklaşımları sinyalin yarısını kaybeder. TradingView Desktop'u headless-debug modunda (<em>--remote-debugging-port=9222</em>) açıyorum, Pine çıktı tablolarını render edilmiş grafikten doğrudan okuyan bir MCP daemon ekliyorum. Pine settle durumu her döngüde kontrol ediliyor — indikatör barı kapatmadıysa döngü atlanır. <em>Settle olmamış bar = işlem yok.</em> Bot, grafiğe rağmen değil, grafikle birlikte deterministik hâle geliyor.",
-        "case.smtbot.p2.h": "Gerçekten ateşleyen risk devre kesicileri.",
-        "case.smtbot.p2.body": "<em>risk_manager.py</em> içinde üç bağımsız devre kesici var: kümülatif drawdown (günlük sıfırlanır), ardışık kayıp (kötü şans serilerini sınırlar) ve günlük R-bütçesi (N R kaybedildikten sonra zorunlu durur). Hepsi emir gönderiminden önce eşzamanlı çalışır. 746 vakalık pytest suite her kesicinin sınırını sabitliyor — eşik içindeki stop'lar, eski veriden tetiklenen kesiciler, sadece-demo yollarının kazara canlı çağrılarından korunması (<em>BybitClient</em> constructor'ı, <em>allow_live=True</em> açıkça verilmediği sürece canlıyı reddeder).",
-        "case.smtbot.p3.h": "Demo → canlı geçişi sürpriz olmadan.",
-        "case.smtbot.p3.body": "Canlıya geçmek <em>BYBIT_DEMO=0</em>'ı çevirmek değil. Çok adımlı bir ritüel: ayrı bir alt-hesap, sadece read+trade yetkili (asla çekim yetkisi yok!) yeni API anahtarı, IP whitelist'i ve o açık <em>allow_live=True</em> bayrağı. Bir de Türk ISP katmanı var — Bybit'in edge'inin oturduğu bazı CloudFront IP'leri, bazı Türk operatörleri tarafından TCP-443'te DPI ile düşürülüyor. Bot, açılışta DNS'i probe edip ulaşılabilir bir edge'e pinler. Loglarda <em>bybit_demo_dns_pin_failed</em> görürsen, savaşacağın bot değil ISP.",
+        "case.smtbot.p1.h": "Pine ile Python'u — yalan söylemeden — köprülemek.",
+        "case.smtbot.p1.body": "Standart webhook yaklaşımları sinyalin yarısını kaybediyor. TradingView Desktop'u headless-debug modunda (<em>--remote-debugging-port=9222</em>) açıyorum; Pine'ın çıktı tablolarını render edilmiş grafikten doğrudan okuyan bir MCP daemon kuruyorum. Pine'ın bar kapanış durumu her döngüde kontrol ediliyor — indikatör barı kapatmadıysa döngü atlanıyor. <em>Kapanmamış bar = işlem yok.</em> Böylece bot, grafiğe rağmen değil, grafikle birlikte deterministik çalışıyor.",
+        "case.smtbot.p2.h": "Gerçekten tetiklenen risk devre kesicileri.",
+        "case.smtbot.p2.body": "<em>risk_manager.py</em> içinde üç bağımsız devre kesici var: kümülatif drawdown (gün sonunda sıfırlanır), ardışık kayıp (kötü şans serilerini sınırlar) ve günlük R-bütçesi (belirli sayıda R kaybedildiğinde sistemi durdurur). Üçü de emir gönderiminden önce eşzamanlı çalışır. 746 vakalık pytest test takımı her kesicinin sınırını doğruluyor — eşik içindeki stop'lar, eski veriden tetiklenen kesiciler, demo yollarının kazara canlıya çağrı atmasına karşı koruma (<em>BybitClient</em> constructor'ı, <em>allow_live=True</em> açıkça verilmediği sürece canlı modu reddediyor).",
+        "case.smtbot.p3.h": "Demo → canlıya, sürpriz olmadan.",
+        "case.smtbot.p3.body": "Canlıya geçmek <em>BYBIT_DEMO=0</em>'ı çevirmekle bitmiyor. Çok adımlı bir ritüel: ayrı bir alt-hesap, sadece okuma + işlem yetkili (asla çekim yetkisi yok) yeni API anahtarı, IP whitelist'i ve o açık <em>allow_live=True</em> bayrağı. Bir de Türk ISP katmanı var — Bybit'in edge sunucularının arkasındaki bazı CloudFront IP'leri, bazı Türk operatörleri tarafından TCP-443'te DPI ile düşürülüyor. Bot, açılışta DNS'i yokluyor ve ulaşılabilir bir edge'e sabitleniyor. Loglarda <em>bybit_demo_dns_pin_failed</em> görürsen, savaşacağın bot değil ISP.",
         "case.smtbot.learnings.tag": "04 · Öğrendiklerim",
         "case.smtbot.learnings.h": "Post-it'e yazacağım üç satır.",
-        "case.smtbot.learn1": "<em>Pine kaynak gerçeklik, Python uygulayıcı.</em> Grafikle tartışma — settle durumu boşuna yok.",
-        "case.smtbot.learn2": "<em>Bot kendi başına işlem açıyorsa testler asla fazla değildir.</em> 746 vaka, sen izlemezken para kaybetmeye güvendiğin bir sürecin bedeli.",
-        "case.smtbot.learn3": "<em>TR ISP egress bir mimari meselesi, ayar tuhaflığı değil.</em> Failover'ı açılışta kur — yoksa botun gece 3'te sessizce ölür.",
+        "case.smtbot.learn1": "<em>Pine doğruluğun kaynağı, Python uygulayıcı.</em> Grafikle tartışma — bar kapanış durumu boşuna orada değil.",
+        "case.smtbot.learn2": "<em>Bot kendi başına işlem açıyorsa hiçbir test fazla değildir.</em> 746 vaka, sen başında değilken para riskine güvenmenin bedeli.",
+        "case.smtbot.learn3": "<em>Türkiye ISP'lerinden çıkış, bir ayar tuhaflığı değil; mimari karar.</em> Failover'ı açılışta kur — yoksa botun gece 3'te sessizce ölür.",
         "case.smtbot.back": "Portföye dön",
-        "projects.smtbot.description": "Kişisel trading deneyimimi pekiştirmeli öğrenme ile birleştiren uçtan uca bir bot. PPO + Stable Baselines3 ajanları Pine Script sinyallerinden özellik mühendisliği yapılmış veriler üzerinde eğitiliyor, walk-forward optimization ile out-of-sample dönemlerde doğrulanıyor ve MCP server aracılığıyla canlı sinyallere bağlanıyor. Kendi tecrübemi içselleştirmiş, ölçülebilir ve risk kontrollü bir otonom trader üretmeyi hedefliyor.",
+        "projects.smtbot.description": "Kendi trading deneyimimi pekiştirmeli öğrenmeyle birleştiren uçtan uca bir bot. PPO + Stable Baselines3 ajanları, Pine Script sinyallerinden özellik mühendisliğiyle hazırlanmış veriler üzerinde eğitiliyor; walk-forward optimization ile örneklem dışı dönemlerde doğrulanıyor; MCP server üzerinden canlı sinyallere bağlanıyor. Hedef: zor kazanılmış sezgiyi içselleştirmiş, ölçülebilir ve risk kontrollü otonom bir trader.",
         "projects.smtbot.metric": "PPO · Stable Baselines3 · Walk-Forward Optimization",
         "projects.finsenti.subtitle": "Finansal Duygu Analizi MLOps Pipeline'ı",
-        "projects.finsenti.description": "Finansal metin duygu analizi için uçtan uca MLOps pipeline'ı. FinBERT ve distilBERT modellerini LoRA adaptörleri ile fine-tune eder, deneyleri MLflow ile takip eder ve tahminleri FastAPI + Next.js ile sunar. FinBERT + LoRA modeli %91.1 doğruluk ve 0.90 F1 skoru elde etti.",
+        "projects.finsenti.description": "Finansal metinlerde duygu analizi için uçtan uca bir MLOps pipeline'ı. FinBERT ve distilBERT modellerini LoRA adaptörleriyle fine-tune ediyor, deneyleri MLflow ile takip ediyor, tahminleri FastAPI + Next.js üzerinden sunuyor. FinBERT + LoRA modeli %91.1 doğruluk ve 0.90 F1 skoruna ulaştı.",
         "projects.finsenti.metric": "%91.1 doğruluk · FinBERT + LoRA",
         "projects.nexthire.subtitle": "AI Destekli İş Başvuru Ajanı",
-        "projects.nexthire.description": "LangGraph tabanlı çok adımlı AI agent sistemi. CV yükle, iş ilanı yapıştır — agent otomatik olarak ATS skoru hesaplar, eksik yetkinlikleri belirler, kişiselleştirilmiş ön yazı oluşturur ve başvuruyu kanban panosuna ekler. Multi-model routing ile maliyet-performans optimizasyonu sağlar.",
-        "projects.nexthire.metric": "LangGraph · Çoklu-model yönlendirme",
+        "projects.nexthire.description": "LangGraph tabanlı, çok adımlı bir AI ajan sistemi. CV'yi yükle, iş ilanını yapıştır — ajan otomatik olarak ATS skorunu hesaplar, eksik yetkinlikleri belirler, kişiselleştirilmiş bir ön yazı üretir ve başvuruyu kanban panosuna ekler. Çoklu-model yönlendirmesi ile maliyet-performans dengesini kurar.",
+        "projects.nexthire.metric": "LangGraph · Çoklu-model yönlendirmesi",
         "projects.awsai.subtitle": "AWS ile Akıllı Doküman Soru-Cevap Sistemi",
-        "projects.awsai.description": "Tamamen serverless doküman Q&A — PDF'ler S3'te, metin Textract'tan, doğal dil cevapları Bedrock üzerindeki Claude'dan. Tüm yığın Infrastructure as Code (CDK) ile yazıldı; konsolda değil version control'de yaşıyor. API Gateway + Lambda + DynamoDB + SNS.",
+        "projects.awsai.description": "Tamamen serverless doküman soru-cevap sistemi — PDF'ler S3'te, metin Textract'tan, doğal dilde cevaplar Bedrock üzerindeki Claude'dan geliyor. Tüm yığın Infrastructure as Code (CDK) ile yazıldı; AWS konsolunda değil, sürüm kontrolünde yaşıyor. API Gateway + Lambda + DynamoDB + SNS.",
         "projects.swiftlink.subtitle": "Hızlı & Modern URL Kısaltma Servisi",
-        "projects.swiftlink.description": "FastAPI ile uçtan uca URL kısaltıcı — Docker ile konteynerize, GitHub Actions ile CI test. Tıklama analitiği, gerçek zamanlı istatistik, özel slug. API'den dashboard'a tüm yığın bende.",
+        "projects.swiftlink.description": "FastAPI ile uçtan uca URL kısaltıcı — Docker ile konteynerize, GitHub Actions ile CI testleri. Tıklama analitiği, gerçek zamanlı istatistikler, özel slug. API'den panoya kadar tüm yığını ben yazdım.",
         "projects.sametei.subtitle": "AI Destekli İK Doküman Yönetim Platformu",
-        "projects.sametei.description": "LibreChat çerçevesi üzerine inşa edilmiş, insan kaynakları doküman yönetimini yapay zeka ile otomatikleştiren kurumsal ölçekte platform. İK ekiplerinin doküman işleme süresini %70 azalttı.",
+        "projects.sametei.description": "LibreChat çerçevesi üzerine inşa edilmiş, insan kaynakları doküman yönetimini yapay zekâ ile otomatikleştiren kurumsal ölçekli bir platform. İK ekiplerinin doküman işleme süresini %70 azalttı.",
         "projects.hireai.subtitle": "AI Destekli CV & Portföy Analiz Platformu",
-        "projects.hireai.description": "ATS tabanlı CV analiz ve optimizasyon platformu. CV'leri iş tanımlarına göre analiz eder, ATS uyumlu skorlar ve iyileştirme önerileri sunar. İK ekiplerinin ön eleme süresini %50 azalttı.",
+        "projects.hireai.description": "ATS tabanlı CV analizi ve optimizasyon platformu. CV'leri iş tanımlarına göre değerlendirir, ATS uyumlu puanlar ve iyileştirme önerileri sunar. İK ekiplerinin ön eleme süresini %50 azalttı.",
         "projects.link": "GitHub'da Görüntüle",
         "projects.link.gitlab": "GitLab'da Görüntüle",
         "contact.title": "İletişim",
         "contact.eyebrow": "İLETİŞİME GEÇ",
+        "contact.status": "Yeni işlere açığım",
         "contact.statement.line1": "Birlikte bir şey",
         "contact.statement.line2": "inşa edelim.",
-        "contact.lead": "Yeni fırsatlara ve işbirliklerine açığım. Bir mesaj atın — hızla dönerim.",
+        "contact.lead": "Yeni fırsatlara ve işbirliklerine açığım. Yazın — bir gün içinde dönerim.",
         "contact.copy": "kopyala",
+        "contact.email.label": "E-POSTA",
         "contact.email.copied": "Email kopyalandı!",
         "hero.meta.role": "ROL",
         "hero.meta.location": "KONUM",
@@ -272,9 +281,12 @@ const translations = {
         "hero.btn.contact": "Contact",
         "hero.btn.cv.view": "View",
         "hero.btn.cv.download": "Download",
+        "cvmodal.title": "Curriculum Vitae",
+        "cvmodal.newtab": "New tab",
+        "cvmodal.download": "Download",
         "about.title.main": "About Me",
         "about.title.soft": "",
-        "about.intro": "<span class='kw'>Production AI is mostly engineering.</span> Models impress in demos — systems survive in production. I build the systems.",
+        "about.intro": "<span class='kw'>Writing code is the small part of the job now.</span> The work moved up the stack: asking the sharper question, owning the architecture, the &ldquo;how do we make this better?&rdquo; instinct, the review that catches what looks fine, the test that pins what the model missed. <span class='kw'>Less typing, more thinking</span> — and where the engineer stands in the loop is the real question.",
         "about.origin": "Computer Engineer, graduated from <span class='kw'>Eskişehir Osmangazi University</span>. Built my engineering foundation across machine learning, pattern recognition, and graph theory — then shifted the focus to applied LLM systems where the work actually shipped to users.",
         "about.focus": "I build production AI: <span class='kw'>RAG pipelines</span> at sub-300ms latency, <span class='kw'>Multi-LLM orchestrations</span> with cloud + local fallback, and <span class='kw'>MCP-driven agents</span> that bridge real data engineering. The interesting work happens where the model meets the bus.",
         "about.impact": "FinBERT-driven sentiment with <span class='kw'>91.1% accuracy</span> at FinSenti; LangGraph agents that cut job-application time from hours to minutes (NextHire); <span class='kw'>70% acceleration</span> on enterprise HR document workflows at SAMETEI. Scale + engineering + a bit of stubbornness.",
@@ -289,7 +301,7 @@ const translations = {
         "about.dossier.focus": "Focus",
         "about.dossier.focusVal": "RAG · Multi-LLM · MCP · Vector Search",
         "about.dossier.lang": "Languages",
-        "about.dossier.langVal": "Turkish · English (B2)",
+        "about.dossier.langVal": "Turkish · English (C1)",
         "about.dossier.status": "Status",
         "about.dossier.statusVal": "Open to opportunities",
         "about.stats.years": "Years of Experience",
@@ -307,11 +319,15 @@ const translations = {
         "education.cert.detail": "Professional proficiency training and certification in reading, writing, listening, and spoken interaction/production.",
         "education.cert.c1.btn": "C1 Certificate",
         "education.cert.b2.btn": "B2 Certificate",
+        "education.track.label": "PERIOD · YEARS",
+        "education.cert.label": "VERIFIED CERTIFICATES",
         "experience.title.main": "Experience",
         "experience.title.soft": "",
         "experience.certificate": "Certificate",
         "experience.more": "Show more",
         "experience.less": "Show less",
+        "experience.status.active": "ACTIVE",
+        "experience.status.done": "COMPLETED",
         "experience.achievementsLabel": "KEY ACHIEVEMENTS",
         "experience.icictas.title": "Software Development Intern",
         "experience.icictas.company": "<a href='https://www.ictasnukleer.com.tr/en/' target='_blank' class='company-link'>IC Ictas Nuclear and Industrial Facilities Construction Inc.</a>",
@@ -420,10 +436,12 @@ const translations = {
         "projects.link.gitlab": "View on GitLab",
         "contact.title": "Contact",
         "contact.eyebrow": "GET IN TOUCH",
+        "contact.status": "Available for new work",
         "contact.statement.line1": "Let's build",
         "contact.statement.line2": "something together.",
-        "contact.lead": "Open to new opportunities and collaborations. Drop a line — I respond quickly.",
+        "contact.lead": "Open to new opportunities and collaborations. Drop a line — I respond within a day.",
         "contact.copy": "copy",
+        "contact.email.label": "EMAIL",
         "contact.email.copied": "Email copied!",
         "hero.meta.role": "ROLE",
         "hero.meta.location": "LOCATION",
@@ -508,11 +526,11 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
     });
 });
 
-// Update CV buttons based on language
+// Update CV buttons based on language — both buttons point at the PDF
 function updateCVButtons(lang) {
     const cvViewBtn = document.getElementById('cvViewBtn');
     const cvDownloadBtn = document.getElementById('cvDownloadBtn');
-    
+
     if (cvViewBtn && cvDownloadBtn) {
         const cvFile = lang === 'tr' ? 'CV_TR.pdf' : 'CV_EN.pdf';
         cvViewBtn.href = cvFile;
@@ -737,10 +755,14 @@ navScrollFn();
 (function() {
     const cCanvas = document.getElementById('cursorCanvas');
     const lCanvas = document.getElementById('lightningCanvas');
+    const rCanvas = document.getElementById('rainCanvas');
+    const flashEl = document.getElementById('lightningFlash');
     if (!cCanvas || !lCanvas) return;
     const cCtx = cCanvas.getContext('2d');
     const lCtx = lCanvas.getContext('2d');
+    const rCtx = rCanvas ? rCanvas.getContext('2d') : null;
     const isMobile = window.innerWidth < 768;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // --- Shared Config ---
     const COLORS_DARK = [
@@ -785,9 +807,26 @@ navScrollFn();
     function resize() {
         cCanvas.width = lCanvas.width = window.innerWidth;
         cCanvas.height = lCanvas.height = window.innerHeight;
+        if (rCanvas) {
+            rCanvas.width = window.innerWidth;
+            rCanvas.height = window.innerHeight;
+        }
     }
     resize();
     window.addEventListener('resize', resize);
+
+    // --- Lightning screen-flash (briefly illuminates the page on a strike) ---
+    let _flashClearId = null;
+    function triggerFlash(intensity){
+        if (!flashEl || reducedMotion) return;
+        // Stronger strikes peak higher; CSS .flash hits opacity:1 in ~35ms then fades over 280ms
+        flashEl.style.setProperty('--flash-peak', String(Math.min(1, Math.max(0.25, intensity))));
+        flashEl.classList.add('flash');
+        if (_flashClearId) clearTimeout(_flashClearId);
+        _flashClearId = setTimeout(() => {
+            flashEl.classList.remove('flash');
+        }, 60 + Math.random() * 70);
+    }
 
     // --- Card cache (shared) ---
     function cacheCards() {
@@ -1023,14 +1062,29 @@ navScrollFn();
     function generateBolt(side, direction) {
         const W = lCanvas.width, H = lCanvas.height;
         const color = pickColor();
-        const segLen = 15 + Math.random() * 15;
-        const totalSegs = 8 + Math.floor(Math.random() * 10);
-        let sx = side === 'left' ? Math.random() * EDGE_ZONE : W - Math.random() * EDGE_ZONE;
-        let sy = direction === 1 ? Math.random() * H * 0.3 : H - Math.random() * H * 0.3;
+        // Bigger storm-scale bolts: longer segments, more of them
+        const segLen = 22 + Math.random() * 22;          // was 15-30 → now 22-44
+        const totalSegs = 14 + Math.floor(Math.random() * 14); // was 8-18 → now 14-28
+        // Scale factor: a few really tall hero strikes
+        const heroStrike = Math.random() < 0.35;
+        const scale = heroStrike ? 1.25 + Math.random() * 0.35 : 1;
 
-        // Card attraction
+        let sx, sy;
+        if (side === 'top') {
+            // From the sky: random horizontal anywhere, just above viewport
+            sx = W * (0.15 + Math.random() * 0.7);
+            sy = -20 - Math.random() * 80;
+        } else if (side === 'left') {
+            sx = Math.random() * EDGE_ZONE;
+            sy = direction === 1 ? Math.random() * H * 0.3 : H - Math.random() * H * 0.3;
+        } else { // right
+            sx = W - Math.random() * EDGE_ZONE;
+            sy = direction === 1 ? Math.random() * H * 0.3 : H - Math.random() * H * 0.3;
+        }
+
+        // Card attraction (only edge-side bolts target cards; top bolts roam free)
         let attractTarget = null;
-        if (!isMobile && cachedCards.length > 0 && Math.random() < 0.55) {
+        if (side !== 'top' && !isMobile && cachedCards.length > 0 && Math.random() < 0.45) {
             const cands = cachedCards.filter(c =>
                 side === 'left' ? c.left < W * 0.4 : c.right > W * 0.6
             );
@@ -1039,7 +1093,7 @@ navScrollFn();
 
         // Lightning rod: is mouse near this edge?
         let rodTarget = null;
-        if (!isMobile) {
+        if (side !== 'top' && !isMobile) {
             const mNearL = side === 'left' && mouse.x < ROD_ZONE;
             const mNearR = side === 'right' && mouse.x > W - ROD_ZONE;
             if (mNearL || mNearR) {
@@ -1052,9 +1106,10 @@ navScrollFn();
         // Build main path
         const points = [{ x: sx, y: sy }];
         let cx = sx, cy = sy;
+        const horizSpread = side === 'top' ? 60 : 50;
         for (let i = 0; i < totalSegs; i++) {
-            let dx = (Math.random() - 0.5) * 40;
-            let dy = direction * segLen;
+            let dx = (Math.random() - 0.5) * horizSpread;
+            let dy = (side === 'top' ? 1 : direction) * segLen * scale;
             if (attractTarget && i > totalSegs * 0.3) {
                 const tx = side === 'left' ? attractTarget.left - 10 : attractTarget.right + 10;
                 const ty = (attractTarget.top + attractTarget.bottom) / 2;
@@ -1063,22 +1118,25 @@ navScrollFn();
                 dy += (ty - cy) * prog * 0.6 * 0.1;
             }
             cx += dx; cy += dy;
-            if (side === 'left') cx = Math.max(-5, Math.min(cx, W * 0.25));
-            else cx = Math.max(W * 0.75, Math.min(cx, W + 5));
+            if (side === 'left') cx = Math.max(-5, Math.min(cx, W * 0.3));
+            else if (side === 'right') cx = Math.max(W * 0.7, Math.min(cx, W + 5));
+            else /* top */ cx = Math.max(20, Math.min(cx, W - 20));
             points.push({ x: cx, y: cy });
         }
 
-        // Normal branches
+        // Normal branches — bigger bolts get more & longer branches
         const branches = [];
+        const branchProb = side === 'top' ? 0.42 : 0.32;
         for (let i = 2; i < points.length - 1; i++) {
-            if (Math.random() < 0.3) {
+            if (Math.random() < branchProb) {
                 const bp = points[i];
                 const bPts = [{ x: bp.x, y: bp.y }];
                 let bx = bp.x, by = bp.y;
-                const n = 3 + Math.floor(Math.random() * 3);
+                const n = 3 + Math.floor(Math.random() * 5);  // was 3-5 → now 3-7
+                const bDir = side === 'top' ? 1 : direction;
                 for (let j = 0; j < n; j++) {
-                    bx += (Math.random() - 0.5) * 25;
-                    by += direction * (8 + Math.random() * 12);
+                    bx += (Math.random() - 0.5) * 32;
+                    by += bDir * (10 + Math.random() * 16);
                     bPts.push({ x: bx, y: by });
                 }
                 branches.push(bPts);
@@ -1111,9 +1169,10 @@ navScrollFn();
 
         return {
             points, branches, color, attractTarget, rodTarget, side,
+            scale, hero: heroStrike,
             birth: performance.now(),
-            fadeInDur: 100 + Math.random() * 100,
-            fadeOutDur: 300 + Math.random() * 200,
+            fadeInDur: 90 + Math.random() * 110,
+            fadeOutDur: 380 + Math.random() * 280,
             opacity: 0, phase: 'in', done: false, rodHitDone: false
         };
     }
@@ -1128,6 +1187,9 @@ navScrollFn();
             if (elapsed >= bolt.fadeInDur) {
                 bolt.phase = 'out';
                 bolt.fadeStart = t;
+                // Strike! Briefly illuminate the page (hero strikes are brighter)
+                const baseFlash = bolt.hero ? 0.85 : 0.5;
+                triggerFlash(baseFlash + Math.random() * 0.25);
                 if (bolt.attractTarget) {
                     bolt.attractTarget.el.classList.add('lightning-hit');
                     setTimeout(() => bolt.attractTarget.el.classList.remove('lightning-hit'), 120);
@@ -1157,48 +1219,85 @@ navScrollFn();
 
         const a = bolt.opacity * om;
         const c = bolt.color;
+        const sc = bolt.scale || 1;
 
-        // Ambient glow
+        // Path helper (avoids re-walking the points array for every stroke pass)
+        const tracePath = () => {
+            lCtx.beginPath();
+            lCtx.moveTo(bolt.points[0].x, bolt.points[0].y);
+            for (let i = 1; i < bolt.points.length; i++) lCtx.lineTo(bolt.points[i].x, bolt.points[i].y);
+        };
+
+        // Ambient glow — bigger radius for hero strikes
         if (bolt.phase === 'in' || bolt.opacity > 0.5) {
             const mid = bolt.points[Math.floor(bolt.points.length / 2)];
-            const g = lCtx.createRadialGradient(mid.x, mid.y, 0, mid.x, mid.y, 120);
-            g.addColorStop(0, rgba(c, 0.08 * a));
+            const r = 180 * sc;
+            const g = lCtx.createRadialGradient(mid.x, mid.y, 0, mid.x, mid.y, r);
+            g.addColorStop(0, rgba(c, 0.16 * a));
+            g.addColorStop(0.5, rgba(c, 0.06 * a));
             g.addColorStop(1, rgba(c, 0));
             lCtx.fillStyle = g;
-            lCtx.fillRect(mid.x - 120, mid.y - 120, 240, 240);
+            lCtx.fillRect(mid.x - r, mid.y - r, r * 2, r * 2);
         }
 
         lCtx.save();
         lCtx.lineCap = 'round'; lCtx.lineJoin = 'round';
 
-        // Main bolt
-        lCtx.shadowColor = rgba(c, 0.7 * a);
-        lCtx.shadowBlur = 18;
-        lCtx.strokeStyle = rgba(c, 0.9 * a);
-        lCtx.lineWidth = 2.5;
-        lCtx.beginPath();
-        lCtx.moveTo(bolt.points[0].x, bolt.points[0].y);
-        for (let i = 1; i < bolt.points.length; i++) lCtx.lineTo(bolt.points[i].x, bolt.points[i].y);
+        // 1) Outer atmospheric halo — wide, low opacity, big shadow
+        lCtx.shadowColor = rgba(c, 0.6 * a);
+        lCtx.shadowBlur = 42 * sc;
+        lCtx.strokeStyle = rgba(c, 0.18 * a);
+        lCtx.lineWidth = 7 * sc;
+        tracePath();
         lCtx.stroke();
 
-        // White core
-        lCtx.shadowBlur = 8;
-        lCtx.strokeStyle = `rgba(255,255,255,${0.5 * a})`;
-        lCtx.lineWidth = 1;
-        lCtx.beginPath();
-        lCtx.moveTo(bolt.points[0].x, bolt.points[0].y);
-        for (let i = 1; i < bolt.points.length; i++) lCtx.lineTo(bolt.points[i].x, bolt.points[i].y);
+        // 2) Main bolt body
+        lCtx.shadowColor = rgba(c, 0.85 * a);
+        lCtx.shadowBlur = 22 * sc;
+        lCtx.strokeStyle = rgba(c, 0.95 * a);
+        lCtx.lineWidth = 3 * sc;
+        tracePath();
         lCtx.stroke();
 
-        // Branches
-        lCtx.shadowBlur = 10;
-        lCtx.shadowColor = rgba(c, 0.5 * a);
-        lCtx.strokeStyle = rgba(c, 0.6 * a);
-        lCtx.lineWidth = 1.2;
+        // 3) Inner bright core — near-white with tint
+        lCtx.shadowBlur = 10 * sc;
+        lCtx.strokeStyle = `rgba(255,255,255,${0.75 * a})`;
+        lCtx.lineWidth = 1.4 * sc;
+        tracePath();
+        lCtx.stroke();
+
+        // 4) Crisp white spine (no shadow, sharp)
+        lCtx.shadowBlur = 0;
+        lCtx.strokeStyle = `rgba(255,255,255,${0.9 * a})`;
+        lCtx.lineWidth = 0.6 * sc;
+        tracePath();
+        lCtx.stroke();
+
+        // Branches — same multi-pass treatment, lighter
         bolt.branches.forEach(br => {
-            lCtx.beginPath();
-            lCtx.moveTo(br[0].x, br[0].y);
-            for (let i = 1; i < br.length; i++) lCtx.lineTo(br[i].x, br[i].y);
+            const traceBranch = () => {
+                lCtx.beginPath();
+                lCtx.moveTo(br[0].x, br[0].y);
+                for (let i = 1; i < br.length; i++) lCtx.lineTo(br[i].x, br[i].y);
+            };
+            // outer halo
+            lCtx.shadowColor = rgba(c, 0.45 * a);
+            lCtx.shadowBlur = 18 * sc;
+            lCtx.strokeStyle = rgba(c, 0.24 * a);
+            lCtx.lineWidth = 3.4 * sc;
+            traceBranch();
+            lCtx.stroke();
+            // body
+            lCtx.shadowBlur = 9 * sc;
+            lCtx.strokeStyle = rgba(c, 0.72 * a);
+            lCtx.lineWidth = 1.4 * sc;
+            traceBranch();
+            lCtx.stroke();
+            // bright core
+            lCtx.shadowBlur = 0;
+            lCtx.strokeStyle = `rgba(255,255,255,${0.5 * a})`;
+            lCtx.lineWidth = 0.7 * sc;
+            traceBranch();
             lCtx.stroke();
         });
 
@@ -1242,45 +1341,126 @@ navScrollFn();
         }
     }
 
+    // Pick a side weighted toward the top so most strikes feel "from the sky"
+    function pickRandomSide() {
+        const r = Math.random();
+        if (r < 0.55) return 'top';
+        return r < 0.78 ? 'left' : 'right';
+    }
     function spawnBolt(side, dirHint) {
-        bolts.push(generateBolt(
-            side || (Math.random() > 0.5 ? 'left' : 'right'),
-            dirHint || (Math.random() > 0.5 ? 1 : -1)
-        ));
+        const s = side || pickRandomSide();
+        const dir = dirHint || (s === 'top' ? 1 : (Math.random() > 0.7 ? -1 : 1));
+        bolts.push(generateBolt(s, dir));
         ensureLRun();
     }
     // Expose for cheat mode boost (read by konami easter egg)
     window.__lightningSpawn = () => spawnBolt();
 
-    // --- Opening kickoff (signals the HUD is alive in hero) ---
-    setTimeout(() => { if (boltsActive) spawnBolt('left'); }, 1300);
-    setTimeout(() => { if (boltsActive) spawnBolt('right'); }, 2100);
+    // --- Opening kickoff (one welcoming strike from the sky) ---
+    setTimeout(() => { if (boltsActive) spawnBolt('top'); }, 1500);
 
-    // --- Ambient loop (gated; respects scroll zone) ---
+    // --- Ambient loop: long random gaps, occasional double-strike ---
+    // No scroll-triggered bolts — the sky decides when it strikes.
     function ambientLoop() {
-        const baseMin = isMobile ? 4000 : 2000;
-        const baseMax = isMobile ? 10000 : 5000;
-        const boostFactor = boltsBoosted ? 0.55 : 1;
+        const baseMin = isMobile ? 5500 : 3500;
+        const baseMax = isMobile ? 13000 : 8000;
+        const boostFactor = boltsBoosted ? 0.65 : 1;
         const delay = (baseMin + Math.random() * (baseMax - baseMin)) * boostFactor;
         setTimeout(() => {
-            if (boltsActive) spawnBolt();
+            if (boltsActive) {
+                spawnBolt();
+                // 1-in-4 chance of a quick second strike (storm "rumble")
+                if (Math.random() < 0.25) {
+                    setTimeout(() => { if (boltsActive) spawnBolt(); }, 180 + Math.random() * 220);
+                }
+            }
             ambientLoop();
         }, delay);
     }
     ambientLoop();
 
-    // --- Scroll-triggered bolts ---
-    if (!isMobile) {
-        let scrollCD = 0;
-        setInterval(() => {
-            if (scrollSpeed < 2) return;
-            const now = Date.now();
-            if (now < scrollCD) return;
-            scrollCD = now + Math.max(200, 1200 - scrollSpeed * 40);
-            const s = Math.random() > 0.5 ? 'left' : 'right';
-            spawnBolt(s, scrollDir);
-            if (scrollSpeed > 15) spawnBolt(s === 'left' ? 'right' : 'left', scrollDir);
-        }, 100);
+    // ========== RAIN SYSTEM (rCanvas) — multi-layer parallax storm ==========
+    if (rCanvas && rCtx && !reducedMotion) {
+        // Three depth layers: distant (slow/thin), mid, foreground (fast/thick).
+        // Far drops are tinier and dimmer → near drops are longer and brighter.
+        const layers = isMobile ? [
+            { count: 18, sMin: 3.0, sMax: 4.4, lMin: 8,  lMax: 16, width: 0.7, alphaBase: 0.18, parallax: 0.5 },
+            { count: 22, sMin: 5.0, sMax: 7.0, lMin: 14, lMax: 24, width: 1.0, alphaBase: 0.32, parallax: 0.85 },
+        ] : [
+            { count: 50, sMin: 2.6, sMax: 4.0, lMin: 8,  lMax: 18, width: 0.55, alphaBase: 0.16, parallax: 0.45 }, // distant
+            { count: 60, sMin: 4.6, sMax: 6.6, lMin: 14, lMax: 26, width: 1.0,  alphaBase: 0.30, parallax: 0.75 }, // mid
+            { count: 32, sMin: 7.5, sMax: 10.5, lMin: 24, lMax: 40, width: 1.55, alphaBase: 0.46, parallax: 1.0  }, // near
+        ];
+
+        let dropsByLayer = [];
+        // Global wind: slow base + sinusoidal sway → all drops drift together (feels real)
+        let windBase = -0.35;
+        let windPhase = Math.random() * Math.PI * 2;
+
+        function makeDrop(L, fillViewport){
+            return {
+                x: Math.random() * (rCanvas.width + 80) - 40,
+                y: fillViewport ? Math.random() * rCanvas.height : -10 - Math.random() * 60,
+                len: L.lMin + Math.random() * (L.lMax - L.lMin),
+                speed: L.sMin + Math.random() * (L.sMax - L.sMin),
+                alpha: L.alphaBase * (0.7 + Math.random() * 0.6),
+            };
+        }
+        function seedAllDrops(){
+            dropsByLayer = layers.map(L => {
+                const arr = [];
+                for (let i = 0; i < L.count; i++) arr.push(makeDrop(L, true));
+                return arr;
+            });
+        }
+        seedAllDrops();
+        window.addEventListener('resize', seedAllDrops);
+
+        function drawRain(){
+            if (!rCanvas.width || !rCanvas.height) {
+                requestAnimationFrame(drawRain); return;
+            }
+            rCtx.clearRect(0, 0, rCanvas.width, rCanvas.height);
+            // Wind sway oscillates slowly so drops never look mechanical
+            windPhase += 0.0032;
+            const wDrift = windBase + Math.sin(windPhase) * 0.22;
+            const light = isLight();
+            const baseColor = light ? '70,90,130' : '170,195,228';
+            rCtx.lineCap = 'round';
+
+            for (let li = 0; li < layers.length; li++){
+                const L = layers[li];
+                rCtx.lineWidth = light ? L.width * 0.85 : L.width;
+                const drops = dropsByLayer[li];
+                for (let i = 0; i < drops.length; i++){
+                    const d = drops[i];
+                    const dx2 = d.x + wDrift * d.len * 0.55;
+                    const dy2 = d.y + d.len;
+                    // Motion-blur tail: head is transparent, tail is bright
+                    const grad = rCtx.createLinearGradient(d.x, d.y, dx2, dy2);
+                    grad.addColorStop(0, `rgba(${baseColor},0)`);
+                    grad.addColorStop(0.45, `rgba(${baseColor},${d.alpha * 0.35})`);
+                    grad.addColorStop(1, `rgba(${baseColor},${d.alpha})`);
+                    rCtx.strokeStyle = grad;
+                    rCtx.beginPath();
+                    rCtx.moveTo(d.x, d.y);
+                    rCtx.lineTo(dx2, dy2);
+                    rCtx.stroke();
+
+                    d.x += wDrift * L.parallax;
+                    d.y += d.speed;
+                    if (d.y > rCanvas.height + 14){
+                        d.x = Math.random() * (rCanvas.width + 80) - 40;
+                        d.y = -d.len - Math.random() * 20;
+                    } else if (d.x < -60 || d.x > rCanvas.width + 60){
+                        // Drifted off-side — wrap around
+                        d.x = d.x < 0 ? rCanvas.width + 30 : -30;
+                    }
+                }
+            }
+            requestAnimationFrame(drawRain);
+        }
+        drawRain();
     }
 })();
 
@@ -1350,18 +1530,15 @@ function initCVTracking() {
         return;
     }
     
-    // Add tracking event listeners with preventDefault
+    // View → open PDF inside an in-page modal viewer after tracking
     cvViewBtn.addEventListener('click', async (e) => {
-        e.preventDefault(); // Prevent default link behavior
-        const cvFile = cvViewBtn.href;
-        
+        e.preventDefault();
+        const cvFile = cvViewBtn.getAttribute('href');
+
         console.log('🔵 CV View button clicked, language:', currentLang);
-        
-        // Track the action
+
         await trackCVAction('view', currentLang);
-        
-        // Open CV in new tab after tracking
-        window.open(cvFile, '_blank');
+        openCVModal(cvFile, currentLang);
     });
     
     cvDownloadBtn.addEventListener('click', async (e) => {
@@ -1441,6 +1618,51 @@ async function trackCVAction(action, language) {
         console.error('Error details:', error.message, error.stack);
     }
 }
+
+// ============================================
+// CV PDF MODAL — in-page popup viewer
+// ============================================
+let _cvModalEscBound = false;
+function _cvModalEscHandler(e){
+    if (e.key === 'Escape') closeCVModal();
+}
+window.openCVModal = function(cvFile, lang) {
+    const modal = document.getElementById('cvPdfModal');
+    const frame = document.getElementById('cvPdfFrame');
+    const filename = document.getElementById('cvPdfFilename');
+    const newtab = document.getElementById('cvPdfNewtab');
+    const dl = document.getElementById('cvPdfDownload');
+    if (!modal || !frame) return;
+    // PDF.js viewers honour #zoom=page-width — works in Chromium + Firefox.
+    frame.src = cvFile + '#view=FitH';
+    if (filename) filename.textContent = cvFile;
+    if (newtab) newtab.href = cvFile;
+    if (dl) {
+        dl.href = cvFile;
+        dl.download = `Samet_Soysal_CV_${(lang || 'EN').toUpperCase()}.pdf`;
+    }
+    modal.classList.add('show');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (!_cvModalEscBound) {
+        document.addEventListener('keydown', _cvModalEscHandler);
+        _cvModalEscBound = true;
+    }
+};
+window.closeCVModal = function() {
+    const modal = document.getElementById('cvPdfModal');
+    const frame = document.getElementById('cvPdfFrame');
+    if (!modal) return;
+    modal.classList.remove('show');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    // Stop loading the PDF when closed (releases memory)
+    if (frame) frame.src = 'about:blank';
+    if (_cvModalEscBound) {
+        document.removeEventListener('keydown', _cvModalEscHandler);
+        _cvModalEscBound = false;
+    }
+};
 
 // ============================================
 // VISITOR COUNTER - Firebase Realtime Database
@@ -2473,6 +2695,41 @@ window.closeCertificate = closeCertificateModal;
     setInterval(tick, 1000);
 })();
 
+/* Hero name reveal — char-by-char cascade for "SAMET SOYSAL" + period pop.
+   Splits the name into individual <span class="char"> elements with a stagger
+   index, then unlocks the title's CSS animation override. Reduced-motion users
+   keep the static rendering via the CSS guard. */
+(function initHeroNameReveal(){
+    const titleEl = document.querySelector('.hero-grid-split .hero-title');
+    const nameEl  = titleEl && titleEl.querySelector('.hero-title-name');
+    if (!titleEl || !nameEl) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const text = nameEl.textContent;
+    nameEl.textContent = '';
+    let idx = 0;
+    const frag = document.createDocumentFragment();
+    for (const ch of text){
+        const span = document.createElement('span');
+        if (ch === ' ') {
+            span.className = 'char char-space';
+            span.innerHTML = '&nbsp;';
+        } else {
+            span.className = 'char';
+            span.textContent = ch;
+        }
+        span.style.setProperty('--char-i', idx);
+        frag.appendChild(span);
+        idx++;
+    }
+    nameEl.appendChild(frag);
+
+    // Period pops in just after the last character finishes its rise
+    const periodDelay = 180 + (idx * 55) + 220; // ms
+    titleEl.style.setProperty('--period-delay', periodDelay + 'ms');
+    titleEl.classList.add('hero-title-revealed');
+})();
+
 /* Custom hover cursor — "Read the case" pill following pointer over project cards
    (Wave 2: Proxio hybrid study). Position uses direct transform so the pill tracks
    the pointer 1:1; scale-in animates via CSS .is-visible toggle. */
@@ -2480,7 +2737,8 @@ window.closeCertificate = closeCertificateModal;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (window.matchMedia('(hover: none)').matches) return;
 
-    const SELECTOR = '.card-featured, .card-mini-featured';
+    // Opt-in: only fires on project cards that explicitly declare data-case-href.
+    const SELECTOR = '.project-card[data-case-href]';
     const LABEL_TR = 'Vakayı oku →';
     const LABEL_EN = 'Read the case →';
 

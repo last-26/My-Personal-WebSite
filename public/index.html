@@ -41,7 +41,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=64">
+    <link rel="stylesheet" href="styles.css?v=81">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -78,8 +78,14 @@
     <!-- Cursor trail canvas -->
     <canvas id="cursorCanvas"></canvas>
 
+    <!-- Rain canvas (storm ambient layer) -->
+    <canvas id="rainCanvas" aria-hidden="true"></canvas>
+
     <!-- Lightning canvas -->
     <canvas id="lightningCanvas"></canvas>
+
+    <!-- Lightning strike screen-flash overlay -->
+    <div id="lightningFlash" aria-hidden="true"></div>
 
     <!-- Cyberpunk edge effects -->
     <div class="cyber-edge cyber-edge-left"></div>
@@ -168,7 +174,7 @@
                     <span class="hero-title-name">Samet Soysal</span><span class="hero-title-period" aria-hidden="true">.</span>
                 </h1>
                 <p class="hero-role" aria-hidden="true">
-                    <span class="hero-role-prefix">AI</span><span class="hero-role-slash">/</span><span class="hero-role-prefix">ML</span>
+                    <span class="hero-role-prefix">AI</span><span class="hero-role-amp" aria-hidden="true">&amp;</span><span class="hero-role-prefix">ML</span>
                     <em class="hero-role-noun">Engineer</em>
                 </p>
                 <p class="hero-subtitle">
@@ -191,14 +197,16 @@
                     </a>
                 </div>
                 <div class="cv-row reveal">
-                    <i class="fas fa-file-lines cv-row-icon" aria-hidden="true"></i>
-                    <span class="cv-row-label">CV</span>
-                    <span class="cv-row-sep" aria-hidden="true">·</span>
-                    <a href="#" id="cvViewBtn" class="cv-row-link" target="_blank">
+                    <span class="cv-row-label">
+                        <i class="fas fa-file-lines cv-row-icon" aria-hidden="true"></i>
+                        <span class="cv-row-label-text">CV</span>
+                    </span>
+                    <a href="#" id="cvViewBtn" class="cv-row-link cv-row-link-primary" target="_blank" rel="noopener">
+                        <i class="fas fa-eye" aria-hidden="true"></i>
                         <span data-tr="hero.btn.cv.view">Görüntüle</span>
                     </a>
-                    <span class="cv-row-sep" aria-hidden="true">·</span>
                     <a href="#" id="cvDownloadBtn" class="cv-row-link" download>
+                        <i class="fas fa-arrow-down" aria-hidden="true"></i>
                         <span data-tr="hero.btn.cv.download">İndir</span>
                     </a>
                 </div>
@@ -230,14 +238,9 @@
     <section class="section" id="about">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-tag">01<span class="section-tag-sep" aria-hidden="true">·</span><span class="section-tag-label" data-tr="section.about.label">About</span></span>
+                <span class="section-tag" aria-hidden="true">01</span>
                 <h2 class="section-title"><span class="h2-main" data-tr="about.title.main">Hakkımda</span><em class="h2-soft" data-tr="about.title.soft"></em></h2>
             </div>
-            <div class="about-lede reveal">
-                <span class="about-eyebrow" data-tr="about.eyebrow">WHO I AM</span>
-                <h3 class="about-quote" data-tr="about.intro"><span class="kw">Production AI is mostly engineering.</span> Models impress in demos — systems survive in production. I build the systems.</h3>
-            </div>
-
             <!-- Editorial story (left) + terminal-style dossier (right) -->
             <div class="about-grid">
                 <div class="about-story reveal">
@@ -364,59 +367,63 @@
     <section class="section" id="education">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-tag">02<span class="section-tag-sep" aria-hidden="true">·</span><span class="section-tag-label" data-tr="section.education.label">Education</span></span>
+                <span class="section-tag" aria-hidden="true">02</span>
                 <h2 class="section-title"><span class="h2-main" data-tr="education.title.main">Eğitim</span><em class="h2-soft" data-tr="education.title.soft"></em></h2>
             </div>
             <div class="education-list">
-                <article class="education-card reveal">
-                    <span class="edu-top-neon" aria-hidden="true"></span>
-                    <div class="edu-icon-wrap"><i class="fas fa-graduation-cap"></i></div>
-                    <div class="edu-content">
-                        <div class="edu-top">
-                            <h3 class="edu-degree" data-tr="education.degree">Bilgisayar Mühendisliği Lisans</h3>
-                            <span class="edu-badge" data-tr="education.badge.bsc">BSc</span>
+                <article class="education-card edu-bsc reveal">
+                    <span class="edu-rail" aria-hidden="true"></span>
+                    <header class="edu-eyebrow">
+                        <span class="edu-stamp" aria-hidden="true"><i class="fas fa-graduation-cap"></i></span>
+                        <span class="edu-badge" data-tr="education.badge.bsc">BSc</span>
+                        <span class="edu-years" aria-hidden="true">2020 — 2025</span>
+                    </header>
+                    <h3 class="edu-degree" data-tr="education.degree">Bilgisayar Mühendisliği Lisans</h3>
+                    <p class="edu-school">
+                        <span class="edu-school-mark" aria-hidden="true"></span>
+                        <span class="edu-school-name" data-tr="education.school">Eskişehir Osmangazi Üniversitesi</span>
+                    </p>
+                    <p class="edu-detail" data-tr="education.detail">Yapay Zeka, Makine Öğrenmesi ve Doğal Dil İşleme alanlarında uzmanlaşma. Mezuniyet projesi: HIREAI — AI destekli CV analiz platformu.</p>
+                    <div class="edu-timeline" aria-hidden="true">
+                        <div class="edu-timeline-track">
+                            <div class="edu-timeline-fill" style="--fill-start:0%;--fill-end:100%"></div>
                         </div>
-                        <p class="edu-school" data-tr="education.school">Eskişehir Osmangazi Üniversitesi</p>
-                        <p class="edu-detail" data-tr="education.detail">Yapay Zeka, Makine Öğrenmesi ve Doğal Dil İşleme alanlarında uzmanlaşma. Mezuniyet projesi: HIREAI — AI destekli CV analiz platformu.</p>
-                        <div class="edu-timeline" aria-hidden="true">
-                            <div class="edu-timeline-track">
-                                <div class="edu-timeline-fill" style="--fill-start:0%;--fill-end:100%"></div>
-                            </div>
-                            <div class="edu-timeline-labels">
-                                <span>2020</span><span>2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>2026</span>
-                            </div>
+                        <div class="edu-timeline-labels">
+                            <span>2020</span><span>2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>2026</span>
                         </div>
                     </div>
                 </article>
 
-                <article class="education-card reveal">
-                    <span class="edu-top-neon" aria-hidden="true"></span>
-                    <div class="edu-icon-wrap"><i class="fas fa-language"></i></div>
-                    <div class="edu-content">
-                        <div class="edu-top">
-                            <h3 class="edu-degree" data-tr="education.cert.title">İngilizce Dil Okulları</h3>
-                            <span class="edu-badge" data-tr="education.badge.lang">LANG</span>
+                <article class="education-card edu-lang reveal">
+                    <span class="edu-rail" aria-hidden="true"></span>
+                    <header class="edu-eyebrow">
+                        <span class="edu-stamp" aria-hidden="true"><i class="fas fa-language"></i></span>
+                        <span class="edu-badge" data-tr="education.badge.lang">LANG</span>
+                        <span class="edu-years" aria-hidden="true">2022 — 2025</span>
+                    </header>
+                    <h3 class="edu-degree" data-tr="education.cert.title">İngilizce Dil Okulları</h3>
+                    <p class="edu-school">
+                        <span class="edu-school-mark" aria-hidden="true"></span>
+                        <span class="edu-school-name" data-tr="education.cert.school">American Cultural Language Schools</span>
+                    </p>
+                    <p class="edu-detail" data-tr="education.cert.detail">Okuma, yazma, dinleme ve konuşma (Spoken Interaction & Production) alanlarında profesyonel yeterlilik eğitimi ve sertifikasyonu.</p>
+                    <div class="edu-timeline" aria-hidden="true">
+                        <div class="edu-timeline-track">
+                            <div class="edu-timeline-fill" style="--fill-start:28.5%;--fill-end:71.5%"></div>
                         </div>
-                        <p class="edu-school" data-tr="education.cert.school">American Cultural Language Schools</p>
-                        <p class="edu-detail" data-tr="education.cert.detail">Okuma, yazma, dinleme ve konuşma (Spoken Interaction & Production) alanlarında profesyonel yeterlilik eğitimi ve sertifikasyonu.</p>
-                        <div class="edu-timeline" aria-hidden="true">
-                            <div class="edu-timeline-track">
-                                <div class="edu-timeline-fill" style="--fill-start:28.5%;--fill-end:71.5%"></div>
-                            </div>
-                            <div class="edu-timeline-labels">
-                                <span>2020</span><span>2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>2026</span>
-                            </div>
+                        <div class="edu-timeline-labels">
+                            <span>2020</span><span>2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>2026</span>
                         </div>
-                        <div class="edu-proofs">
-                            <button class="proof-chip" onclick="showEnglishCertModal('c1.jpg')" type="button">
-                                <i class="fas fa-award"></i>
-                                <span data-tr="education.cert.c1.btn">C1 Sertifikası</span>
-                            </button>
-                            <button class="proof-chip" onclick="showEnglishCertModal('b2.jpg')" type="button">
-                                <i class="fas fa-award"></i>
-                                <span data-tr="education.cert.b2.btn">B2 Sertifikası</span>
-                            </button>
-                        </div>
+                    </div>
+                    <div class="edu-proofs">
+                        <button class="proof-chip" onclick="showEnglishCertModal('c1.jpg')" type="button">
+                            <i class="fas fa-check-double"></i>
+                            <span data-tr="education.cert.c1.btn">C1 Sertifikası</span>
+                        </button>
+                        <button class="proof-chip" onclick="showEnglishCertModal('b2.jpg')" type="button">
+                            <i class="fas fa-check-double"></i>
+                            <span data-tr="education.cert.b2.btn">B2 Sertifikası</span>
+                        </button>
                     </div>
                 </article>
             </div>
@@ -437,7 +444,7 @@
     <section class="section" id="experience">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-tag">03<span class="section-tag-sep" aria-hidden="true">·</span><span class="section-tag-label" data-tr="section.experience.label">Experience</span></span>
+                <span class="section-tag" aria-hidden="true">03</span>
                 <h2 class="section-title"><span class="h2-main" data-tr="experience.title.main">Deneyim</span><em class="h2-soft" data-tr="experience.title.soft"></em></h2>
             </div>
             <div class="experience-roadmap">
@@ -454,12 +461,18 @@
                     </div>
                     <div class="roadmap-card">
                         <div class="roadmap-card-stripe"></div>
+                        <div class="roadmap-meta-strip">
+                            <span class="roadmap-status roadmap-status-done">
+                                <span class="rs-dot" aria-hidden="true"></span>
+                                <span data-tr="experience.status.done">TAMAMLANDI</span>
+                            </span>
+                        </div>
                         <img class="roadmap-watermark" src="ic-logo.png" alt="" aria-hidden="true">
                         <button class="roadmap-logo-link" onclick="showLogoModal('ic-logo.png')" type="button"><img class="roadmap-logo" src="ic-logo.png" alt="IC İçtaş"></button>
                         <div class="roadmap-header">
                             <div class="roadmap-info">
                                 <h3 class="roadmap-title" data-tr="experience.icictas.title">Yazılım Geliştirme Stajyeri</h3>
-                                <p class="roadmap-company" data-tr="experience.icictas.company">IC İçtaş Nükleer ve Endüstriyel Tesisler İnşaat A.Ş.</p>
+                                <p class="roadmap-company"><span class="rc-dot" aria-hidden="true"></span><span data-tr="experience.icictas.company">IC İçtaş Nükleer ve Endüstriyel Tesisler İnşaat A.Ş.</span></p>
                             </div>
                         </div>
                         <div class="roadmap-desc" data-tr="experience.icictas.desc">
@@ -498,12 +511,18 @@
                     </div>
                     <div class="roadmap-card">
                         <div class="roadmap-card-stripe"></div>
+                        <div class="roadmap-meta-strip">
+                            <span class="roadmap-status roadmap-status-done">
+                                <span class="rs-dot" aria-hidden="true"></span>
+                                <span data-tr="experience.status.done">TAMAMLANDI</span>
+                            </span>
+                        </div>
                         <img class="roadmap-watermark" src="tei-logo.png" alt="" aria-hidden="true">
                         <button class="roadmap-logo-link" onclick="showLogoModal('tei-logo.png')" type="button"><img class="roadmap-logo" src="tei-logo.png" alt="TEI"></button>
                         <div class="roadmap-header">
                             <div class="roadmap-info">
                                 <h3 class="roadmap-title" data-tr="experience.tei.title">Data Science & AI Stajyeri</h3>
-                                <p class="roadmap-company" data-tr="experience.tei.company">TEI – TUSAŞ Motor Sanayii A.Ş. | Eskişehir</p>
+                                <p class="roadmap-company"><span class="rc-dot" aria-hidden="true"></span><span data-tr="experience.tei.company">TEI – TUSAŞ Motor Sanayii A.Ş. | Eskişehir</span></p>
                             </div>
                         </div>
                         <div class="roadmap-desc" data-tr="experience.tei.desc">
@@ -546,10 +565,16 @@
                     </div>
                     <div class="roadmap-card">
                         <div class="roadmap-card-stripe"></div>
+                        <div class="roadmap-meta-strip">
+                            <span class="roadmap-status roadmap-status-done">
+                                <span class="rs-dot" aria-hidden="true"></span>
+                                <span data-tr="experience.status.done">TAMAMLANDI</span>
+                            </span>
+                        </div>
                         <div class="roadmap-header">
                             <div class="roadmap-info">
                                 <h3 class="roadmap-title" data-tr="experience.powintec.title">Part-Time Yazılım Geliştirici (Remote)</h3>
-                                <p class="roadmap-company" data-tr="experience.powintec.company">Powintec Engineering | Wireless Charging of Small Electric Vehicles</p>
+                                <p class="roadmap-company"><span class="rc-dot" aria-hidden="true"></span><span data-tr="experience.powintec.company">Powintec Engineering | Wireless Charging of Small Electric Vehicles</span></p>
                             </div>
                         </div>
                         <div class="roadmap-desc" data-tr="experience.powintec.desc">
@@ -598,11 +623,43 @@
         </div>
     </div>
 
+    <!-- CV PDF Preview Modal -->
+    <div id="cvPdfModal" class="cv-pdf-modal" role="dialog" aria-modal="true" aria-labelledby="cvPdfTitle" aria-hidden="true">
+        <div class="cv-pdf-backdrop" onclick="closeCVModal()"></div>
+        <div class="cv-pdf-viewer" role="document">
+            <header class="cv-pdf-bar">
+                <div class="cv-pdf-bar-left">
+                    <span class="cv-pdf-bar-icon"><i class="fas fa-file-lines" aria-hidden="true"></i></span>
+                    <div class="cv-pdf-bar-titles">
+                        <span id="cvPdfTitle" class="cv-pdf-title" data-tr="cvmodal.title">Özgeçmiş</span>
+                        <span class="cv-pdf-sub" id="cvPdfFilename">CV_EN.pdf</span>
+                    </div>
+                </div>
+                <div class="cv-pdf-bar-actions">
+                    <a id="cvPdfNewtab" class="cv-pdf-action" href="#" target="_blank" rel="noopener">
+                        <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        <span data-tr="cvmodal.newtab">Yeni sekmede</span>
+                    </a>
+                    <a id="cvPdfDownload" class="cv-pdf-action cv-pdf-action-primary" href="#" download>
+                        <i class="fas fa-arrow-down" aria-hidden="true"></i>
+                        <span data-tr="cvmodal.download">İndir</span>
+                    </a>
+                    <button class="cv-pdf-close" onclick="closeCVModal()" type="button" aria-label="Kapat">
+                        <i class="fas fa-xmark" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </header>
+            <div class="cv-pdf-frame">
+                <iframe id="cvPdfFrame" src="about:blank" title="Curriculum Vitae" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+
     <!-- ==================== PROJECTS ==================== -->
     <section class="section" id="projects">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-tag">04<span class="section-tag-sep" aria-hidden="true">·</span><span class="section-tag-label" data-tr="section.projects.label">Projects</span></span>
+                <span class="section-tag" aria-hidden="true">04</span>
                 <h2 class="section-title"><span class="h2-main" data-tr="projects.title.main">Projeler</span><em class="h2-soft" data-tr="projects.title.soft"></em></h2>
             </div>
             <div class="projects-grid projects-magazine">
@@ -908,7 +965,7 @@
     <section class="section" id="skills">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-tag">05<span class="section-tag-sep" aria-hidden="true">·</span><span class="section-tag-label" data-tr="section.skills.label">Skills</span></span>
+                <span class="section-tag" aria-hidden="true">05</span>
                 <h2 class="section-title"><span class="h2-main" data-tr="skills.title.main">Tech Stack</span><em class="h2-soft" data-tr="skills.title.soft"></em></h2>
             </div>
 
@@ -1030,18 +1087,23 @@
     <section class="section section-contact" id="contact">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-tag">06</span>
+                <span class="section-tag" aria-hidden="true">06</span>
                 <h2 class="section-title" data-tr="contact.title">İletişim</h2>
             </div>
+            <a href="#hero" class="contact-uptop reveal" aria-label="Back to top">
+                <span class="contact-uptop-icon" aria-hidden="true"><i class="fas fa-arrow-up"></i></span>
+                <span class="contact-uptop-label" data-tr="footer.uptop">Back to top</span>
+            </a>
             <div class="contact-editorial">
-                <p class="contact-eyebrow reveal" data-tr="contact.eyebrow">GET IN TOUCH</p>
-                <h3 class="contact-statement reveal reveal-fade">
-                    <span data-tr="contact.statement.line1">Let's build</span>
-                    <em data-tr="contact.statement.line2">something together.</em>
-                </h3>
-                <p class="contact-lead reveal" data-tr="contact.lead">Open to new opportunities and collaborations. Drop a line — I respond quickly.</p>
+                <p class="contact-essay reveal reveal-fade" data-tr="about.intro">
+                    <span class="kw">Writing code is the small part of the job now.</span> The work moved up the stack: asking the sharper question, owning the architecture, the &ldquo;how do we make this better?&rdquo; instinct, the review that catches what looks fine, the test that pins what the model missed. <span class="kw">Less typing, more thinking</span> — and where the engineer stands in the loop is the real question.
+                </p>
                 <div class="contact-email-wrap reveal reveal-scale">
                     <button type="button" id="email-card" class="contact-email" onclick="copyEmail()" aria-label="Copy email">
+                        <span class="contact-email-prefix" aria-hidden="true">
+                            <i class="fas fa-paper-plane"></i>
+                            <span data-tr="contact.email.label">EMAIL</span>
+                        </span>
                         <span class="contact-email-text">a.sametsoysal@gmail.com</span>
                         <span class="contact-email-action">
                             <i class="fas fa-copy"></i>
@@ -1078,18 +1140,6 @@
 
         <div class="container footer-inner">
 
-            <!-- HERO: editorial signature -->
-            <div class="footer-hero-v3">
-                <div class="footer-hero-text">
-                    <span class="footer-eyebrow">// end_of_session.txt</span>
-                    <h2 class="footer-signature" data-tr="footer.signature">See you on the next build.</h2>
-                </div>
-                <a href="#hero" class="footer-uptop-v3" aria-label="Back to top">
-                    <span class="up-icon" aria-hidden="true"><i class="fas fa-arrow-up"></i></span>
-                    <span data-tr="footer.uptop">Back to top</span>
-                </a>
-            </div>
-
             <!-- RAIL: thin monospace status row -->
             <div class="footer-rail" id="visitorChip" role="status" aria-live="polite" aria-atomic="false">
                 <span class="rail-item">
@@ -1120,13 +1170,13 @@
                 </span>
             </div>
 
-            <!-- BOTTOM: minimal copyright with logo mark -->
+            <!-- BOTTOM: brand · copyright · uptop + version -->
             <div class="footer-bottom-v3">
-                <a href="#" class="fb-mark" aria-label="Top">
+                <a href="#hero" class="fb-mark" aria-label="Back to top">
                     <span class="logo-bracket">&lt;</span><span class="logo-mark">SAMET</span><span class="logo-bracket">/&gt;</span>
                 </a>
                 <span class="fb-copy" data-tr="footer.copyright">© 2026 Samet Soysal · All rights reserved.</span>
-                <span class="fb-version">v1.0.0</span>
+                <span class="fb-version">v1.0.2</span>
             </div>
 
         </div>
@@ -1143,6 +1193,6 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <script src="script.js?v=64"></script>
+    <script src="script.js?v=82"></script>
 </body>
 </html>
