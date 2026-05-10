@@ -4468,7 +4468,7 @@ body.light-mode .principle-watermark{color:#6b655e;opacity:.55}
         linear-gradient(135deg, rgba(124,58,237,.04) 0%, rgba(45,212,191,.025) 100%),
         var(--surface-2);
     border:1px solid var(--border-subtle);
-    border-radius:var(--radius-md);
+    border-radius:var(--radius-card);
     padding:var(--space-7) var(--space-7) var(--space-6);
     position:relative;overflow:hidden;
     transition:border-color .4s var(--ease-out),
