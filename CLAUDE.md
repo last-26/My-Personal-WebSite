@@ -33,18 +33,18 @@ The top of `styles.css` defines a `:root` token block: `--surface-0..3`, `--text
 - **Mono / terminal eyebrows / chips / numeric eyebrows**: `--font-mono` → JetBrains Mono.
 
 ### Section anatomy
-- **Hero** (`#hero`): asymmetric split — left column = editorial title stack + typewriter + description + CTAs; right column = meta strip with role / location / live visitor chip / weekly chart disclosure panel
+- **Hero** (`#hero`): v4 split layout — left column = Cormorant masthead (`hero-title-name` + `.hero-title-period` accent) + italic role line (`.hero-role` AI / ML pills + Engineer noun) + typewriter subtitle + description + 3 CTAs (Projects / GitHub / Contact) + demoted `.cv-row` mono text-link (View · Download). Right column = `.hero-photo-aside` circular profile photo with shield/lock overlays + accent gradient ring. Behind both columns: ambient `<img class="hero-background">` (local-only asset, see "Assets excluded from git"), with dark gradient overlay via `.hero::after` for text legibility
 - **About** (`#about`): asymmetric bento with a main AI block (left span 8), 3 stat cards (right span 4), full-width tech marquee (span 12)
 - **Education** (`#education`): 2 cards with year-marker timeline indicator, colored badge variants (`[data-tr="education.badge.bsc"]` purple, `[data-tr="education.badge.lang"]` teal)
 - **Experience** (`#experience`): sticky-date roadmap with 3 items; each card expands to reveal `.roadmap-achievements` and `.roadmap-metrics`; scroll-tracked progress dot on the center timeline
-- **Projects** (`#projects`): 12-column magazine grid, 4 tiers:
+- **Projects** (`#projects`): 12-column magazine grid. Sub-grouping eyebrows separate post-graduate vs academic milestones. Tiers:
   - `.card-showcase` — span 12, SMTbot WIP card with live BTC panel
   - `.card-featured` — span 6 (FinSenti, NextHire)
   - `.card-standard` — span 4 (AWS AI Doc QA, SwiftLink, SAMETEI)
-  - `.card-mini-featured` — span 6 (HIREAI, Bitcoin Automation)
-  - `.card-archive` — span 6 compact (Fruit Ripeness, Global News Hub)
+  - `.card-mini-featured` — span 6 (HIREAI only currently; rule retained for future re-adds)
+  - `.card-archive` — span 6 compact (currently no DOM cards; rule retained defensively)
 - **Skills** (`#skills`): "Tech Stack" panel — single `.stack-grid` (`role="list"`) with 25 `.stack-cell`s arranged 5×5. Each cell is `.stack-icon` (mostly `cdn.simpleicons.org` images; a few Font Awesome variants tagged `.stack-icon-fa`) + `.stack-name`. Categories grouped per row (HTML-commented): AI/ML core → AI tooling + vision → Backend & data → Cloud & ops → Frontend.
-- **Contact** (`#contact`): editorial "Let's build something." statement, large copyable email, mini social links
+- **Contact** (`#contact`): editorial "Let's build something." statement, large copyable email, mini social links. Section pill stays as just "06" (opted out of the labeled-pill pattern; see "Section pill format" below)
 - **Footer** (`.footer-v2`): signature + back-to-top + 4-column grid (brand/status, nav, social, live clock) + bottom chip row
 
 ### script.js organization
@@ -60,12 +60,35 @@ The top of `styles.css` defines a `:root` token block: `--surface-0..3`, `--text
    - `initRoadmapProgress` — scroll-tracked progress dot on the experience timeline
    - `initSMTbotLiveBTC` — polls Binance `/klines` (20s) + `/ticker/24hr` (5s), renders SVG line chart, positions HTML high/low labels via `%` offsets, flashes price on change
    - `initFooterClock` — ticks `#footerTime` every 1s
+   - `initSeeProjectCursor` — custom hover cursor ("Read the case →" / "Vakayı oku →") that follows the pointer over `.card-featured` and `.card-mini-featured`. rAF-throttled `mousemove` with cleanup on `mouseout`, ESC + `visibilitychange` force-hide, lazy-injected DOM. Showcase card excluded (live BTC chart needs its hover surface). Disabled under `(prefers-reduced-motion: reduce)` and `(hover: none)` via early-exit + CSS fallback
 
 ### Multi-language system
 - Language (`en`/`tr`) stored in `localStorage.preferredLang`
 - All translatable elements have `data-tr="key"` attributes
 - Switching language calls `updateLanguage(lang)` which walks `[data-tr]` elements and swaps `innerHTML`
 - Navbar shows circular SVG flags with a sliding gradient pill indicator. Active flag pops with saturation + shadow; inactive is desaturated.
+
+### Hybrid design system patterns (Wave 2)
+Additive design tokens declared in the `:root` "Wave 2" block:
+- `--radius-card: 16px` — mid-tier card radius (`.card-featured`, `.card-mini-featured`, `.card-standard`)
+- `--text-soft: var(--text-muted)` — H2 two-tone helper alias
+- `--pill-bg` / `--pill-border` — accent-tinted section pill values, both modes (single source of truth for `.section-tag`)
+- `--rhythm-section: clamp(96px, 12vw, 160px)` — between-section vertical rhythm
+- `--z-cursor: 9999` — custom hover cursor stacking (above noise overlay z:9998, below modals z:10000)
+
+Three-tier card radius hierarchy:
+- Showcase (20px / `--radius-lg`): `.card-showcase`
+- Mid (16px / `--radius-card`): `.card-featured`, `.card-mini-featured`, `.card-standard`, `.education-card`
+- Compact (12px / `--radius-md`): `.card-archive`, `.roadmap-card`
+
+Section pill format ("Variant A" labeled chip):
+- 5 sections (about, education, experience, projects, skills) render as `01 · About` — numeric span + `.section-tag-sep` + `.section-tag-label` (canonical short name, mirrors nav). Translation keys: `section.{slug}.label`.
+- Contact opts out — its `.section-tag` stays as just "06" (bespoke gradient italic heading carries the section weight instead).
+
+Two-tone H2 helper (`.h2-main` / `.h2-soft`):
+- All 5 in-scope section H2s wrap into `<span class="h2-main">{main}</span> <em class="h2-soft">{soft}</em>` template. `.h2-soft` styled gray italic Instrument Serif via `--text-soft` + `--font-display`.
+- Soft slots are intentionally empty strings ("") in the dictionary — refactor landed structurally; user fills the soft copy in a later commit. Whitespace between spans is injected only when soft is populated, via `.h2-main + .h2-soft:not(:empty)::before { content: " "; }`.
+- Contact is opt-out (its existing inline gradient italic span is preserved; do NOT migrate it to `.h2-soft`).
 
 ### Theme system
 - CSS custom properties on `:root` — overridden by `.light-mode` on `<body>`
@@ -82,7 +105,7 @@ The top of `styles.css` defines a `:root` token block: `--surface-0..3`, `--text
 ## Key Conventions
 
 - **Don't break analytics contracts**: every Firebase path, every `localStorage` key, every ID/class that JS hooks into is sacred. The full list is enumerated in the "Firebase Realtime Database structure" subsection above, plus the inline `onclick` handlers, `#cvViewBtn` / `#cvDownloadBtn` IDs (CV analytics), and the theme-toggle child wrappers (`.tt-ring` / `.tt-halo` / `.tt-core`).
-- **Assets excluded from git** (see `.gitignore`): CV PDFs, certificate images (`TEI_*.png`, `c1.jpg`, `b2.jpg`), `.claude/` local settings
+- **Assets excluded from git** (see `.gitignore`): CV PDFs, certificate images (`TEI_*.png`, `c1.jpg`, `b2.jpg`), profile photo (`pp.jpg`), hero background (`public/background.png`), `.claude/` local settings. Firebase Hosting picks up everything in `public/` regardless of `.gitignore`, so locally-only assets still ship via `firebase deploy`.
 - **Firebase project ID**: `last-26`; database region: `europe-west1`
 - **Section IDs match nav hrefs**: `#hero`, `#about`, `#education`, `#experience`, `#projects`, `#skills`, `#contact`
 - **Inline JS onclick handlers** (from HTML) must stay globally accessible: `copyEmail`, `showCertificateModal`, `closeCertificateModal`, `showLogoModal`, `closeLogoModal`, `showEnglishCertModal`, `closeEnglishCertModal`
