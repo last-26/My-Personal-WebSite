@@ -223,6 +223,12 @@ body.light-mode .nav-links a::after {
     font-family: var(--font-display);
     font-weight: inherit;
 }
+/* Inject a single space between .h2-main and .h2-soft only when soft has content,
+   so the markup can stay <span></span><em></em> with no literal whitespace
+   between siblings (would otherwise render a stray space when soft is empty). */
+.h2-main + .h2-soft:not(:empty)::before {
+    content: " ";
+}
 
 /* ── Reset ── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
