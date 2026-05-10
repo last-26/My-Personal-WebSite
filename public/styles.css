@@ -122,9 +122,9 @@
     /* H2 two-tone helper alias */
     --text-soft: var(--text-muted);
 
-    /* Section pill (numeric eyebrow shared by .section-tag) */
-    --pill-bg: rgba(255,255,255,0.04);
-    --pill-border: rgba(255,255,255,0.08);
+    /* Section pill (accent-tinted; .section-tag and future section-level pills share these) */
+    --pill-bg: rgba(124,58,237,0.10);
+    --pill-border: rgba(124,58,237,0.15);
 
     /* Vertical rhythm token reserved for between-section gaps */
     --rhythm-section: clamp(96px, 12vw, 160px);
@@ -166,8 +166,8 @@ body.light-mode {
     --border-strong: rgba(109,40,217,0.34);
 
     /* Wave 2 — Proxio hybrid study (light-mode mirror) */
-    --pill-bg: rgba(0,0,0,0.04);
-    --pill-border: rgba(0,0,0,0.08);
+    --pill-bg: rgba(109,40,217,0.08);
+    --pill-border: rgba(109,40,217,0.16);
     /* --text-soft inherits --text-muted from this block automatically (no override needed) */
 }
 body.light-mode .card, body.light-mode .project-card, body.light-mode .contact-item, body.light-mode .education-card, body.light-mode .timeline-item, body.light-mode .bento-card {
