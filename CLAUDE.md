@@ -26,6 +26,12 @@ Files are served directly from `/public/`. No build step required. Cache-busting
 ### Design tokens
 The top of `styles.css` defines a `:root` token block: `--surface-0..3`, `--text-hi/mid/lo/muted`, `--border-*`, accent palette (`--accent` purple, `--accent-2` teal, plus pink/orange/sky/lavender), `--space-1..12` 4pt scale, `--radius-*`, easings (`--ease-out`, `--ease-in-out`, `--ease-spring`), durations, fluid type scale (`--fs-hero` uses `clamp(3.4rem, 9.4vw, 9rem)` etc.), font stacks (`--font-sans`, `--font-mono`, `--font-display`). `body.light-mode` overrides the subset that needs theming. Prefer reading tokens over hard-coded colors.
 
+### Typography hierarchy
+- **Hero title** (`.hero-grid-split .hero-title`, styles.css:618): explicit `'Cormorant Garamond', 'PT Serif', Georgia, serif` override — does NOT use `--font-display`. Verified rendering width ≈ 564px for "SAMET SOYSAL" at 80px (Cormorant), vs 420px if it were Instrument.
+- **Mid display** (`.about-quote`, `.contact-statement`, footer `// end_of_session.txt` sign-off): `--font-display` → Instrument Serif.
+- **Body / UI text**: `--font-sans` → Space Grotesk.
+- **Mono / terminal eyebrows / chips / numeric eyebrows**: `--font-mono` → JetBrains Mono.
+
 ### Section anatomy
 - **Hero** (`#hero`): asymmetric split — left column = editorial title stack + typewriter + description + CTAs; right column = meta strip with role / location / live visitor chip / weekly chart disclosure panel
 - **About** (`#about`): asymmetric bento with a main AI block (left span 8), 3 stat cards (right span 4), full-width tech marquee (span 12)
@@ -37,7 +43,7 @@ The top of `styles.css` defines a `:root` token block: `--surface-0..3`, `--text
   - `.card-standard` — span 4 (AWS AI Doc QA, SwiftLink, SAMETEI)
   - `.card-mini-featured` — span 6 (HIREAI, Bitcoin Automation)
   - `.card-archive` — span 6 compact (Fruit Ripeness, Global News Hub)
-- **Skills** (`#skills`): terminal UI with 6 `.term-block`s — each is `$ cat <file>.txt` + pill output. Left→right type-wipe reveal, CRT scanline overlay, hover focus-dim on other blocks, animated `::before` proficiency bar on `.pill[data-level]`. A `.term-summary` block at the bottom renders `$ wc -l *.txt` with auto-counted stats (total skills, advanced count, files, compiled status).
+- **Skills** (`#skills`): "Tech Stack" panel — single `.stack-grid` (`role="list"`) with 25 `.stack-cell`s arranged 5×5. Each cell is `.stack-icon` (mostly `cdn.simpleicons.org` images; a few Font Awesome variants tagged `.stack-icon-fa`) + `.stack-name`. Categories grouped per row (HTML-commented): AI/ML core → AI tooling + vision → Backend & data → Cloud & ops → Frontend.
 - **Contact** (`#contact`): editorial "Let's build something." statement, large copyable email, mini social links
 - **Footer** (`.footer-v2`): signature + back-to-top + 4-column grid (brand/status, nav, social, live clock) + bottom chip row
 
@@ -49,8 +55,9 @@ The top of `styles.css` defines a `:root` token block: `--surface-0..3`, `--text
 5. **Project click counters** — atomic Firebase transactions per project link via `incrementProjectCounter`
 6. **UI logic** — theme toggle (mutates icon class, not innerHTML — keeps `.tt-ring`/`.tt-halo` wrappers intact), language switcher, scroll animations, particles, typewriter, weekly chart
 7. **Interaction IIFEs** (end of file):
-   - `initTerminalTyping` — Intersection Observer adds `.term-animated` to stagger the type-wipe
-   - `initSkillsSummary` — auto-counts pills, runs count-up animation on the summary block when it scrolls in
+   - `initHeroMicro` — hero micro-interactions
+   - `initRoadmapExpand` — expand/collapse experience cards (achievements/metrics)
+   - `initRoadmapProgress` — scroll-tracked progress dot on the experience timeline
    - `initSMTbotLiveBTC` — polls Binance `/klines` (20s) + `/ticker/24hr` (5s), renders SVG line chart, positions HTML high/low labels via `%` offsets, flashes price on change
    - `initFooterClock` — ticks `#footerTime` every 1s
 
@@ -74,7 +81,7 @@ The top of `styles.css` defines a `:root` token block: `--surface-0..3`, `--text
 
 ## Key Conventions
 
-- **Don't break analytics contracts**: every Firebase path, every `localStorage` key, every ID/class that JS hooks into is sacred. See the "Preservation Manifest" section of `.claude/plans/portfolio-redesign-brief-eager-minsky.md` for the full list if in doubt.
+- **Don't break analytics contracts**: every Firebase path, every `localStorage` key, every ID/class that JS hooks into is sacred. The full list is enumerated in the "Firebase Realtime Database structure" subsection above, plus the inline `onclick` handlers, `#cvViewBtn` / `#cvDownloadBtn` IDs (CV analytics), and the theme-toggle child wrappers (`.tt-ring` / `.tt-halo` / `.tt-core`).
 - **Assets excluded from git** (see `.gitignore`): CV PDFs, certificate images (`TEI_*.png`, `c1.jpg`, `b2.jpg`), `.claude/` local settings
 - **Firebase project ID**: `last-26`; database region: `europe-west1`
 - **Section IDs match nav hrefs**: `#hero`, `#about`, `#education`, `#experience`, `#projects`, `#skills`, `#contact`
