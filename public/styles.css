@@ -111,6 +111,28 @@
     --grad-accent-soft: linear-gradient(135deg, var(--accent-6), var(--accent-2));
     --neon-border: linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent);
     --timeline-x: 138.5px;
+
+    /* Wave 2 — Proxio hybrid study */
+    /* Card radius middle-tier (between --radius-md: 12px and --radius-lg: 20px) */
+    --radius-card: 16px;        /* mid tier: .card-featured, .card-mini-featured (currently active mid-tier elements) */
+    /* Existing --radius-lg: 20px stays for: .card-showcase */
+    /* Existing --radius-md: 12px stays for: .card-archive (defensive — no cards present), .education-card, .roadmap-card, small chips */
+    /* Existing --radius-pill: 999px stays for: buttons, chips, badges */
+
+    /* H2 two-tone helper alias */
+    --text-soft: var(--text-muted);
+
+    /* Section pill (numeric eyebrow shared by .section-tag) */
+    --pill-bg: rgba(255,255,255,0.04);
+    --pill-border: rgba(255,255,255,0.08);
+
+    /* Vertical rhythm token reserved for between-section gaps */
+    --rhythm-section: clamp(96px, 12vw, 160px);
+
+    /* Z-index for custom hover cursor — sits at noise-overlay level (9999); DOM order
+       must place .see-project-cursor AFTER .noise-overlay so it stacks above it.
+       Below .modal-overlay (10000) and toasts (10001) so modals/toasts cut through. */
+    --z-cursor: 9999;
 }
 
 body.light-mode {
@@ -142,6 +164,11 @@ body.light-mode {
     --border-subtle: rgba(0,0,0,0.08);
     --border-default: rgba(0,0,0,0.14);
     --border-strong: rgba(109,40,217,0.34);
+
+    /* Wave 2 — Proxio hybrid study (light-mode mirror) */
+    --pill-bg: rgba(0,0,0,0.04);
+    --pill-border: rgba(0,0,0,0.08);
+    /* --text-soft inherits --text-muted from this block automatically (no override needed) */
 }
 body.light-mode .card, body.light-mode .project-card, body.light-mode .contact-item, body.light-mode .education-card, body.light-mode .timeline-item, body.light-mode .bento-card {
     box-shadow: 0 4px 15px rgba(0,0,0,0.04);
@@ -184,6 +211,18 @@ body.light-mode .nav-links a:hover {
 }
 body.light-mode .nav-links a::after {
     background: var(--accent);
+}
+
+/* ── Wave 2 helpers — two-tone H2 ── */
+.h2-main {
+    font: inherit;
+    color: inherit;
+}
+.h2-soft {
+    color: var(--text-soft);
+    font-style: italic;
+    font-family: var(--font-display);
+    font-weight: inherit;
 }
 
 /* ── Reset ── */
