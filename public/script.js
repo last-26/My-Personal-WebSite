@@ -122,18 +122,13 @@ const translations = {
         "experience.powintec.achievements.1": "React + TailwindCSS + WebSocket tabanlı kablosuz şarj izleme paneli hazırladım.",
         "experience.powintec.achievements.2": "Yüksek frekanslı WebSocket verisinde state yönetimini optimize ederek UI jank'ini giderdim.",
         "experience.powintec.achievements.3": "Donanım bağlantı kopmalarına karşı hata yönetim mekanizmaları geliştirdim.",
-        "skills.title": "Yetenekler",
-        "skills.terminal.title": "samet@portfolyo:~/yetenekler",
-        "skills.languages.turkish": "Türkçe (Ana Dil)",
-        "skills.languages.english": "İngilizce (B2 - Profesyonel Yeterlilik)",
-        "skills.summary.unit": "yetenek",
-        "skills.summary.files": "dosya",
-        "skills.summary.advanced": "ileri",
-        "skills.summary.compiled": "derlendi",
+        "skills.title": "Tech Stack",
         "projects.title": "Projeler",
         "projects.badge.corporate": "KURUMSAL",
         "projects.badge.graduation": "MEZUN. PROJESİ",
-        "projects.badge.automation": "OTOMASYON",
+        "projects.badge.internship": "STAJ · TEI",
+        "projects.group.postgrad": "mezuniyet sonrası",
+        "projects.group.academic": "akademik dönem",
         "projects.badge.cloud": "BULUT",
         "projects.badge.devops": "DEVOPS",
         "projects.badge.agent": "AI AJAN",
@@ -196,14 +191,6 @@ const translations = {
         "projects.sametei.description": "LibreChat çerçevesi üzerine inşa edilmiş, insan kaynakları doküman yönetimini yapay zeka ile otomatikleştiren kurumsal ölçekte platform. İK ekiplerinin doküman işleme süresini %70 azalttı.",
         "projects.hireai.subtitle": "AI Destekli CV & Portföy Analiz Platformu",
         "projects.hireai.description": "ATS tabanlı CV analiz ve optimizasyon platformu. CV'leri iş tanımlarına göre analiz eder, ATS uyumlu skorlar ve iyileştirme önerileri sunar. İK ekiplerinin ön eleme süresini %50 azalttı.",
-        "projects.bitcoin.title": "Bitcoin Teknik Analiz Otomasyonu",
-        "projects.bitcoin.subtitle": "AI Destekli Kripto Para Analiz & Raporlama Sistemi",
-        "projects.bitcoin.description": "n8n workflow automation ile geliştirilmiş Bitcoin teknik analiz sistemi. Binance API'den otomatik veri toplayarak 15+ teknik gösterge analizi yapar (SMA, EMA, RSI, MACD, Bollinger Bands, VWAP, ATR). DeepSeek R1 AI modeli ile piyasa yorumları oluşturur ve profesyonel HTML raporlarını her 4 saatte bir otomatik olarak email ile gönderir.",
-        "projects.fruit.title": "Meyve Olgunluk Tespiti",
-        "projects.fruit.subtitle": "Makine Öğrenmesi & Computer Vision",
-        "projects.fruit.description": "Görüntü işleme ile meyve olgunluk tespiti yapan pattern recognition çalışması. SVM, Random Forest, Gradient Boosting, Logistic Regression ve Ensemble — beş farklı ML algoritmasını yan yana koyan bitirme projem; sınıflandırma temellerini öğreten tür.",
-        "projects.news.subtitle": "Modern Haber Toplayıcı Platform",
-        "projects.news.description": "ASP.NET ile yazılmış haber toplayıcı — RSS akışlarını kategori clustering ile derleyip kullanıcıya sunar. C# döneminden kalan yapım, sonradan neden Python'a geçtiğimi anlatan bir referans noktası.",
         "projects.link": "GitHub'da Görüntüle",
         "projects.link.gitlab": "GitLab'da Görüntüle",
         "contact.title": "İletişim",
@@ -232,7 +219,6 @@ const translations = {
         "about.specs.focusVal": "AI · ML · LLM · Production",
         "education.badge.bsc": "LİSANS",
         "education.badge.lang": "DİL",
-        "skills.terminal.status": "bağlı",
         "visitor.header": "Ziyaretçi",
         "visitor.total": "toplam",
         "visitor.daily": "bugün",
@@ -341,18 +327,13 @@ const translations = {
         "experience.powintec.achievements.1": "Shipped a React + TailwindCSS + WebSocket dashboard for live wireless-charging telemetry.",
         "experience.powintec.achievements.2": "Optimized state management on high-frequency WebSocket traffic, eliminating UI jank.",
         "experience.powintec.achievements.3": "Hardened the app with error-handling mechanisms against hardware disconnects.",
-        "skills.title": "Skills",
-        "skills.terminal.title": "samet@portfolio:~/skills",
-        "skills.summary.unit": "skills",
-        "skills.summary.files": "files",
-        "skills.summary.advanced": "advanced",
-        "skills.summary.compiled": "compiled",
-        "skills.languages.turkish": "Turkish (Native)",
-        "skills.languages.english": "English (B2 - Professional Proficiency)",
+        "skills.title": "Tech Stack",
         "projects.title": "Projects",
         "projects.badge.corporate": "CORPORATE",
         "projects.badge.graduation": "CAPSTONE",
-        "projects.badge.automation": "AUTOMATION",
+        "projects.badge.internship": "INTERNSHIP · TEI",
+        "projects.group.postgrad": "post-graduate work",
+        "projects.group.academic": "academic milestones",
         "projects.badge.cloud": "CLOUD",
         "projects.badge.devops": "DEVOPS",
         "projects.badge.agent": "AI AGENT",
@@ -415,14 +396,6 @@ const translations = {
         "projects.sametei.description": "Built on LibreChat framework, a corporate-scale platform that automates human resources document management with artificial intelligence. Reduced HR teams' document processing time by 70%.",
         "projects.hireai.subtitle": "AI-Powered CV & Portfolio Analysis Platform",
         "projects.hireai.description": "ATS-based CV analysis and optimization platform. Analyzes CVs according to job descriptions and provides ATS-compliant scores and improvement suggestions. Reduced HR teams' pre-screening time by 50%.",
-        "projects.bitcoin.title": "Bitcoin Technical Analysis Automation",
-        "projects.bitcoin.subtitle": "AI-Powered Cryptocurrency Analysis & Reporting System",
-        "projects.bitcoin.description": "Bitcoin technical analysis system built with n8n workflow automation. Automatically collects data from Binance API and performs 15+ technical indicator analysis (SMA, EMA, RSI, MACD, Bollinger Bands, VWAP, ATR). Generates market insights with DeepSeek R1 AI model and automatically sends professional HTML reports via email every 4 hours.",
-        "projects.fruit.title": "Fruit Ripeness Detection",
-        "projects.fruit.subtitle": "Machine Learning & Computer Vision",
-        "projects.fruit.description": "Pattern recognition study that compares 5 ML algorithms — SVM, Random Forest, Gradient Boosting, Logistic Regression, and an Ensemble — on fruit ripeness images. Senior project; the kind that drills classification fundamentals.",
-        "projects.news.subtitle": "Modern News Aggregator Platform",
-        "projects.news.description": "ASP.NET news aggregator — pulls RSS feeds, clusters them by category, presents them cleanly. From my C# era; a reference point for why I moved to Python afterwards.",
         "projects.link": "View on GitHub",
         "projects.link.gitlab": "View on GitLab",
         "contact.title": "Contact",
@@ -451,7 +424,6 @@ const translations = {
         "about.specs.focusVal": "AI · ML · LLM · Production",
         "education.badge.bsc": "BSc",
         "education.badge.lang": "LANG",
-        "skills.terminal.status": "connected",
         "visitor.header": "Visitors",
         "visitor.total": "total",
         "visitor.daily": "today",
@@ -575,11 +547,6 @@ themeToggle.addEventListener('click', () => {
             });
         }
         setTimeout(()=>themeToggle.classList.remove('is-switching'), 650);
-
-        // Update weekly chart theme if it exists
-        if (weeklyChartInstance && weeklyChartInstance.data.datasets[0].data.length > 0) {
-            renderWeeklyChart(document.getElementById('weeklyVisitorChart').getContext('2d'), weeklyChartInstance.data.labels, weeklyChartInstance.data.datasets[0].data);
-        }
     }, 250);
 });
 
@@ -1524,9 +1491,6 @@ async function initVisitorCounter() {
             dailyCounterElement.textContent = dailyCount.toLocaleString();
         });
 
-        // Initialize Weekly Chart
-        setTimeout(initWeeklyVisitorChart, 1000); // Small delay to let other counters finish
-
     } catch (error) {
         console.warn('Visitor counter offline:', error && error.message ? error.message : error);
         markVisitorChipOffline();
@@ -1543,173 +1507,6 @@ function markVisitorChipOffline(){
     const dailyEl = document.getElementById('dailyVisitorCount');
     if (counterEl) counterEl.textContent = '—';
     if (dailyEl) dailyEl.textContent = '—';
-}
-
-let weeklyChartInstance = null;
-
-async function initWeeklyVisitorChart() {
-    if (!database) return;
-    
-    const chartContainer = document.getElementById('weeklyChartContainer');
-    const ctx = document.getElementById('weeklyVisitorChart');
-    if (!chartContainer || !ctx) return;
-
-    try {
-        const labels = [];
-        const dataPoints = [];
-        
-        // Generate last 7 days dates (oldest to newest)
-        for (let i = 6; i >= 0; i--) {
-            const date = new Date();
-            date.setDate(date.getDate() - i);
-            const dateString = date.toDateString();
-            
-            // Format label as ShortDay (e.g., 'Mon' in EN, 'Pzt' in TR)
-            const daysTR = ['Paz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt'];
-            const daysEN = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            const label = currentLang === 'tr' ? daysTR[date.getDay()] : daysEN[date.getDay()];
-            labels.push(label);
-            
-            // Fetch daily count
-            const dailyRef = database.ref(`visitors/daily/${dateString}`);
-            const snapshot = await dailyRef.once('value');
-            const dailyData = snapshot.val() || {};
-            const count = Object.keys(dailyData).length;
-            dataPoints.push(count);
-        }
-
-        // Render the chart inline if we have data. Hide the container if not.
-        if (dataPoints.some(count => count > 0)) {
-            renderWeeklyChart(ctx.getContext('2d'), labels, dataPoints);
-            chartContainer.classList.add('show');
-        } else {
-            chartContainer.style.display = 'none';
-        }
-
-    } catch (error) {
-        console.error('Weekly visitor chart error:', error);
-    }
-}
-
-function renderWeeklyChart(ctx, labels, data) {
-    const isLightMode = document.body.classList.contains('light-mode');
-
-    // Theme palette — more saturated, polished gradients
-    const palette = isLightMode ? {
-        text: '#3d3934',
-        textHi: '#0c0a08',
-        grid: 'rgba(0,0,0,0.05)',
-        baseline: 'rgba(0,0,0,0.12)',
-        barTop: '#6d28d9',
-        barMid: '#0d7d72',
-        barBottom: 'rgba(13,125,114,0.08)',
-        hoverGlow: 'rgba(109,40,217,0.18)',
-        tooltipBg: '#14110e',
-        tooltipText: '#ffffff',
-        tooltipAccent: '#5eead4',
-        tooltipBorder: 'rgba(255,255,255,0.14)'
-    } : {
-        text: '#c4c8d4',
-        textHi: '#ffffff',
-        grid: 'rgba(255,255,255,0.05)',
-        baseline: 'rgba(255,255,255,0.12)',
-        barTop: '#a78bfa',
-        barMid: '#5eead4',
-        barBottom: 'rgba(45,212,191,0.18)',
-        hoverGlow: 'rgba(124,58,237,0.32)',
-        tooltipBg: '#0c0a18',
-        tooltipText: '#ffffff',
-        tooltipAccent: '#5eead4',
-        tooltipBorder: 'rgba(124,58,237,0.32)'
-    };
-
-    // Multi-stop vertical gradient
-    const barGradient = ctx.createLinearGradient(0, 0, 0, 100);
-    barGradient.addColorStop(0, palette.barTop);
-    barGradient.addColorStop(0.55, palette.barMid);
-    barGradient.addColorStop(1, palette.barBottom);
-
-    // Hover gradient — slightly brighter
-    const hoverGradient = ctx.createLinearGradient(0, 0, 0, 100);
-    hoverGradient.addColorStop(0, palette.barTop);
-    hoverGradient.addColorStop(0.5, palette.barMid);
-    hoverGradient.addColorStop(1, palette.hoverGlow);
-
-    Chart.defaults.font.family = "'JetBrains Mono', monospace";
-
-    if (weeklyChartInstance) {
-        weeklyChartInstance.destroy();
-    }
-
-    weeklyChartInstance = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                data: data,
-                backgroundColor: barGradient,
-                hoverBackgroundColor: hoverGradient,
-                borderRadius: 6,
-                borderSkipped: false,
-                barThickness: 'flex',
-                maxBarThickness: 18,
-                categoryPercentage: 0.78,
-                barPercentage: 0.85
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            layout: { padding: { top: 6, right: 2, bottom: 0, left: 2 } },
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    backgroundColor: palette.tooltipBg,
-                    titleColor: palette.tooltipText,
-                    titleFont: { size: 10, weight: '600', family: "'JetBrains Mono', monospace" },
-                    bodyColor: palette.tooltipAccent,
-                    bodyFont: { size: 11, weight: '600', family: "'JetBrains Mono', monospace" },
-                    borderColor: palette.tooltipBorder,
-                    borderWidth: 1,
-                    padding: { top: 8, right: 12, bottom: 8, left: 12 },
-                    cornerRadius: 8,
-                    displayColors: false,
-                    callbacks: {
-                        title: (items) => items[0].label,
-                        label: (context) => {
-                            const label = (typeof currentLang !== 'undefined' && currentLang === 'tr') ? 'ziyaretçi' : 'visitors';
-                            return `${context.raw} ${label}`;
-                        }
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    grid: { display: false, drawBorder: false },
-                    border: { display: false },
-                    ticks: {
-                        color: palette.text,
-                        font: { size: 9, weight: '500', family: "'JetBrains Mono', monospace" },
-                        padding: 4
-                    }
-                },
-                y: {
-                    display: false,
-                    beginAtZero: true,
-                    grid: { display: false, drawBorder: false },
-                    border: { display: false }
-                }
-            },
-            animation: {
-                duration: 1300,
-                easing: 'easeOutCubic'
-            },
-            interaction: {
-                mode: 'index',
-                intersect: false
-            }
-        }
-    });
 }
 
 // ============================================
@@ -2377,92 +2174,6 @@ window.closeCertificate = closeCertificateModal;
     }
 })();
 
-// ============================================
-// Turn 2 — Terminal typing reveal
-// ============================================
-(function initTerminalTyping(){
-    const blocks = document.querySelectorAll('#skills .term-block');
-    if (!blocks.length) return;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    blocks.forEach((b, i) => {
-        b.setAttribute('data-type-ready','');
-        b.style.setProperty('--type-delay', `${i * 0.18}s`);
-    });
-
-    if (reduced){
-        blocks.forEach(b => b.classList.add('term-animated'));
-        return;
-    }
-
-    if (!('IntersectionObserver' in window)){
-        blocks.forEach(b => b.classList.add('term-animated'));
-        return;
-    }
-
-    const io = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add('term-animated');
-            io.unobserve(entry.target);
-        });
-    }, { threshold: 0.2, rootMargin: '0px 0px -80px 0px' });
-
-    blocks.forEach(b => io.observe(b));
-})();
-
-// ============================================
-// Skills summary — auto-count pills, count-up on reveal
-// ============================================
-(function initSkillsSummary(){
-    const host = document.querySelector('#skills');
-    if (!host) return;
-    const total = host.querySelectorAll('.term-block:not(.term-summary):not(.term-end) .pill').length;
-    const advanced = host.querySelectorAll('.term-block:not(.term-summary):not(.term-end) .pill[data-level="Advanced"]').length;
-
-    const elTotal = document.getElementById('skillTotal');
-    const elAdv = document.getElementById('skillAdvanced');
-    const elMini = document.getElementById('skillTotalMini');
-    if (elTotal) elTotal.dataset.count = total;
-    if (elMini) elMini.dataset.count = total;
-    if (elAdv) elAdv.dataset.count = advanced;
-
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const setNow = (el,n)=>{ if(el) el.textContent = n; };
-
-    if (reduced || !('IntersectionObserver' in window)){
-        setNow(elTotal,total); setNow(elAdv,advanced); setNow(elMini,total);
-        return;
-    }
-
-    const countUp = (el, target, dur=900) => {
-        if (!el) return;
-        const start = performance.now();
-        const tick = (now) => {
-            const p = Math.min(1, (now - start) / dur);
-            const eased = 1 - Math.pow(1 - p, 3);
-            el.textContent = Math.round(target * eased);
-            if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-    };
-
-    const summary = host.querySelector('.term-summary');
-    if (!summary) return;
-    const io = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-            if (!e.isIntersecting) return;
-            setTimeout(()=>{
-                countUp(elTotal, total);
-                countUp(elMini, total);
-                countUp(elAdv, advanced, 700);
-            }, 200);
-            io.unobserve(e.target);
-        });
-    }, { threshold: 0.4 });
-    io.observe(summary);
-})();
-
 /* ── EXPERIENCE: expand/collapse cards ── */
 (function initRoadmapExpand(){
     const buttons = document.querySelectorAll('.roadmap-more-btn');
@@ -2711,6 +2422,22 @@ window.closeCertificate = closeCertificateModal;
     drawTicker();
     setInterval(drawChart, 20_000);
     setInterval(drawTicker, 5_000);
+})();
+
+/* Profile photo — block drag, right-click and selection (best-effort copy protection) */
+(function lockHeroPhoto(){
+    const photo = document.querySelector('.hero-photo-locked');
+    if (!photo) return;
+    const block = (e) => { e.preventDefault(); return false; };
+    photo.addEventListener('contextmenu', block);
+    photo.addEventListener('dragstart', block);
+    photo.addEventListener('selectstart', block);
+    const img = photo.querySelector('img');
+    if (img) {
+        img.addEventListener('contextmenu', block);
+        img.addEventListener('dragstart', block);
+        img.addEventListener('mousedown', (e) => { if (e.button === 2) e.preventDefault(); });
+    }
 })();
 
 /* Footer live local-time ticker */

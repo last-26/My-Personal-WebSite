@@ -41,14 +41,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=56">
+    <link rel="stylesheet" href="styles.css?v=62">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- JSON-LD Person schema -->
     <script type="application/ld+json">
@@ -155,72 +152,17 @@
         </div>
         <div class="particles" id="particles"></div>
 
-        <!-- Floating side panel — pinned to viewport right edge, outside container -->
-        <aside class="hero-side-panel reveal" aria-label="Live stats">
-            <div class="widget-chart widget-chart-side" id="weeklyChartContainer">
-                <div class="chart-header">
-                    <span class="chart-header-label">
-                        <i class="fas fa-chart-line"></i>
-                        <span data-tr="visitor.weekly">LAST 7 DAYS</span>
-                    </span>
-                    <span class="chart-header-pulse" aria-hidden="true" title="live"></span>
-                </div>
-                <div class="chart-canvas">
-                    <canvas id="weeklyVisitorChart"></canvas>
-                </div>
-                <!-- Total + Today stats (right below the chart) -->
-                <div class="chart-stats" id="visitorChip" role="status" aria-live="polite" aria-atomic="false">
-                    <div class="chart-stat chart-stat-total">
-                        <span class="chart-stat-icon" aria-hidden="true">
-                            <i class="fas fa-eye"></i>
-                        </span>
-                        <div class="chart-stat-body">
-                            <span class="chart-stat-num" id="visitorCount">0</span>
-                            <span class="chart-stat-label" data-tr="visitor.total">total</span>
-                        </div>
-                    </div>
-                    <span class="chart-stat-divider" aria-hidden="true"></span>
-                    <div class="chart-stat chart-stat-daily">
-                        <span class="chart-stat-icon chart-stat-icon-accent" aria-hidden="true">
-                            <i class="fas fa-bolt"></i>
-                        </span>
-                        <div class="chart-stat-body">
-                            <span class="chart-stat-num chart-stat-num-daily">+<span id="dailyVisitorCount">0</span></span>
-                            <span class="chart-stat-label" data-tr="visitor.daily">today</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="chart-note">
-                    <i class="fas fa-info-circle" aria-hidden="true"></i>
-                    <span data-tr="visitor.reset.note">Veriler 16 Mart 2026 tarihinde sıfırlanmıştır.</span>
-                </div>
-            </div>
-            <!-- Digital clock widget — Istanbul / GMT+3 -->
-            <div class="hero-side-clock">
-                <span class="hero-side-clock-icon" aria-hidden="true">
-                    <i class="fas fa-clock"></i>
-                </span>
-                <div class="hero-side-clock-display">
-                    <span class="hero-side-clock-time" id="localTime">—:—</span>
-                    <span class="hero-side-clock-zone">GMT+3</span>
-                </div>
-            </div>
-        </aside>
-
-        <div class="hero-grid hero-grid-centered container">
-            <div class="hero-main hero-main-centered">
-                <!-- Profile photo with gradient ring -->
-                <div class="hero-photo reveal" aria-hidden="true">
-                    <span class="hero-photo-glow"></span>
-                    <span class="hero-photo-ring"></span>
-                    <img src="pp.jpg" alt="" loading="eager" decoding="async">
-                </div>
-
-                <h1 class="hero-title reveal">
-                    <span class="title-line title-glitch" data-text="SAMET">SAMET</span>
-                    <span class="title-line title-outline title-glitch" data-text="SOYSAL">SOYSAL</span>
+        <div class="hero-grid hero-grid-split container">
+            <div class="hero-main hero-main-split">
+                <h1 class="hero-title">
+                    <span class="hero-title-name">Samet Soysal</span><span class="hero-title-period" aria-hidden="true">.</span>
                 </h1>
-                <p class="hero-subtitle reveal">
+                <p class="hero-role" aria-hidden="true">
+                    <span class="hero-role-prefix">AI</span><span class="hero-role-slash">/</span><span class="hero-role-prefix">ML</span>
+                    <em class="hero-role-noun">Engineer</em>
+                </p>
+                <p class="hero-subtitle">
+                    <span class="hero-subtitle-mark" aria-hidden="true"></span>
                     <span data-tr="hero.subtitle.prefix">I specialize in</span>
                     <span class="typewriter-wrapper"><span class="typewriter" id="typewriter"></span><span class="typewriter-cursor">|</span></span>
                 </p>
@@ -247,6 +189,20 @@
                     </a>
                 </div>
             </div>
+
+            <!-- Profile photo column -->
+            <aside class="hero-photo-aside reveal" aria-hidden="true">
+                <div class="hero-photo hero-photo-locked" oncontextmenu="return false;">
+                    <span class="hero-photo-glow"></span>
+                    <span class="hero-photo-ring"></span>
+                    <img src="pp.jpg" alt="" loading="eager" decoding="async"
+                         draggable="false"
+                         oncontextmenu="return false;"
+                         ondragstart="return false;"
+                         onmousedown="return false;">
+                    <span class="hero-photo-shield" aria-hidden="true"></span>
+                </div>
+            </aside>
         </div>
 
         <div class="scroll-indicator">
@@ -636,6 +592,15 @@
                 <h2 class="section-title" data-tr="projects.title">Projeler</h2>
             </div>
             <div class="projects-grid projects-magazine">
+                <!-- ── Group divider: post-graduate work ── -->
+                <div class="projects-eyebrow projects-eyebrow-first reveal" aria-hidden="true">
+                    <span class="projects-eyebrow-tag">
+                        <span class="eyebrow-num">01</span>
+                        <span class="eyebrow-text" data-tr="projects.group.postgrad">post-graduate work</span>
+                    </span>
+                    <span class="projects-eyebrow-line"></span>
+                </div>
+
                 <!-- 00 · SMTbot — Showcase (currently building) -->
                 <article class="project-card card-showcase card-theme-orange reveal">
                     <div class="card-wip-row">
@@ -794,8 +759,8 @@
                     </div>
                 </article>
 
-                <!-- 03 · AWS AI Doc QA — Standard -->
-                <article class="project-card card-standard card-theme-blue reveal">
+                <!-- 03 · AWS AI Doc QA — Mini-featured (post-graduate) -->
+                <article class="project-card card-mini-featured card-theme-blue reveal">
                     <div class="card-meta">
                         <span class="card-badge" data-tr="projects.badge.cloud">BULUT</span>
                     </div>
@@ -823,8 +788,8 @@
                     </div>
                 </article>
 
-                <!-- 04 · SwiftLink — Standard -->
-                <article class="project-card card-standard card-theme-teal reveal">
+                <!-- 04 · SwiftLink — Mini-featured (post-graduate) -->
+                <article class="project-card card-mini-featured card-theme-teal reveal">
                     <div class="card-meta">
                         <span class="card-badge" data-tr="projects.badge.devops">DEVOPS</span>
                     </div>
@@ -852,10 +817,19 @@
                     </div>
                 </article>
 
-                <!-- 05 · SAMETEI — Standard -->
-                <article class="project-card card-standard card-theme-purple reveal">
+                <!-- ── Group divider: academic milestones ── -->
+                <div class="projects-eyebrow reveal" aria-hidden="true">
+                    <span class="projects-eyebrow-tag">
+                        <span class="eyebrow-num">02</span>
+                        <span class="eyebrow-text" data-tr="projects.group.academic">academic milestones</span>
+                    </span>
+                    <span class="projects-eyebrow-line"></span>
+                </div>
+
+                <!-- 05 · SAMETEI — Mini-featured (internship · TEI) -->
+                <article class="project-card card-mini-featured card-theme-purple reveal">
                     <div class="card-meta">
-                        <span class="card-badge" data-tr="projects.badge.corporate">KURUMSAL</span>
+                        <span class="card-badge" data-tr="projects.badge.internship">STAJ · TEI</span>
                     </div>
                     <div class="card-top">
                         <div class="card-icon"><i class="fas fa-building"></i></div>
@@ -882,7 +856,7 @@
                     </div>
                 </article>
 
-                <!-- 06 · HIREAI — Mini-featured -->
+                <!-- 06 · HIREAI — Mini-featured (graduation thesis) -->
                 <article class="project-card card-mini-featured card-theme-lavender reveal">
                     <div class="card-meta">
                         <span class="card-badge" data-tr="projects.badge.graduation">MEZUN. PROJESİ</span>
@@ -912,83 +886,6 @@
                     </div>
                 </article>
 
-                <!-- 07 · Bitcoin Automation — Mini-featured -->
-                <article class="project-card card-mini-featured card-theme-orange reveal">
-                    <div class="card-meta">
-                        <span class="card-badge" data-tr="projects.badge.automation">OTOMASYON</span>
-                    </div>
-                    <div class="card-top">
-                        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
-                        <div class="card-title-group">
-                            <h3 data-tr="projects.bitcoin.title">Bitcoin Teknik Analiz Otomasyonu</h3>
-                            <p class="card-tagline" data-tr="projects.bitcoin.subtitle">AI Destekli Kripto Para Analiz & Raporlama Sistemi</p>
-                        </div>
-                    </div>
-                    <div class="card-content project-body">
-                        <p class="card-desc" data-tr="projects.bitcoin.description">
-                            n8n workflow automation ile geliştirilmiş Bitcoin teknik analiz sistemi. Binance API'den otomatik veri toplayarak 15+ teknik gösterge analizi yapar.
-                        </p>
-                        <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
-                        <div class="card-tags">
-                            <span>n8n</span><span>Binance API</span><span>DeepSeek R1</span><span>Technical Analysis</span><span>Gmail API</span>
-                        </div>
-                        <div class="card-footer">
-                            <a href="https://github.com/last-26/Bitcoin-Daily-Report-Automation" target="_blank" class="card-link">
-                                <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
-                            </a>
-                            <span class="card-year">2025</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 08 · Fruit Ripeness — Archive -->
-                <article class="project-card card-archive card-theme-purple reveal">
-                    <div class="card-meta">
-                        <span class="card-status card-status-archive" data-tr="projects.status.archive">Archived</span>
-                    </div>
-                    <div class="card-top">
-                        <div class="card-title-group">
-                            <h3 data-tr="projects.fruit.title">Meyve Olgunluk Tespiti</h3>
-                            <p class="card-tagline" data-tr="projects.fruit.subtitle">Makine Öğrenmesi & Computer Vision</p>
-                        </div>
-                    </div>
-                    <div class="card-content project-body">
-                        <p class="card-desc" data-tr="projects.fruit.description">
-                            Pattern recognition study that compares 5 ML algorithms — SVM, Random Forest, Gradient Boosting, Logistic Regression, and an Ensemble — on fruit ripeness images. Senior project; the kind that drills classification fundamentals.
-                        </p>
-                        <div class="card-footer">
-                            <a href="https://github.com/last-26/fruit-ripeness-detection" target="_blank" class="card-link">
-                                <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub</span> <i class="fas fa-arrow-right card-link-arrow"></i>
-                            </a>
-                            <span class="card-year">2023</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 09 · News Hub — Archive -->
-                <article class="project-card card-archive card-theme-blue reveal">
-                    <div class="card-meta">
-                        <span class="card-status card-status-archive" data-tr="projects.status.archive">Archived</span>
-                    </div>
-                    <div class="card-top">
-                        <div class="card-title-group">
-                            <h3>Global News Hub</h3>
-                            <p class="card-tagline" data-tr="projects.news.subtitle">Modern Haber Toplayıcı Platform</p>
-                        </div>
-                    </div>
-                    <div class="card-content project-body">
-                        <p class="card-desc" data-tr="projects.news.description">
-                            ASP.NET news aggregator — pulls RSS feeds, clusters them by category, presents them cleanly. From my C# era; a reference point for why I moved to Python afterwards.
-                        </p>
-                        <div class="card-footer">
-                            <a href="https://github.com/last-26/Global-News-Hub" target="_blank" class="card-link">
-                                <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub</span> <i class="fas fa-arrow-right card-link-arrow"></i>
-                            </a>
-                            <span class="card-year">2023</span>
-                        </div>
-                    </div>
-                </article>
-
             </div>
         </div>
     </section>
@@ -998,92 +895,118 @@
         <div class="container">
             <div class="section-header reveal">
                 <span class="section-tag">05</span>
-                <h2 class="section-title" data-tr="skills.title">Yetenekler</h2>
+                <h2 class="section-title" data-tr="skills.title">Tech Stack</h2>
             </div>
-            <div class="terminal reveal">
-                <div class="terminal-bar">
-                    <div class="terminal-dots">
-                        <span class="dot dot-red"></span>
-                        <span class="dot dot-yellow"></span>
-                        <span class="dot dot-green"></span>
-                    </div>
-                    <span class="terminal-title" data-tr="skills.terminal.title">samet@portfolio:~/skills</span>
-                    <span class="terminal-status">
-                        <span class="terminal-status-dot"></span>
-                        <span data-tr="skills.terminal.status">connected</span>
-                    </span>
+
+            <div class="stack-grid reveal" role="list">
+                <!-- Row 1 — AI/ML core -->
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/python" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">Python</span>
                 </div>
-                <div class="terminal-body">
-                    <div class="term-block">
-                        <div class="term-cmd"><span class="term-cat-icon">🧠</span><span class="term-prompt">$</span> cat <span class="term-file">ai_data_science.txt</span><span class="term-badge">CORE</span></div>
-                        <div class="term-output cat-ai">
-                            <span class="pill" data-level="Advanced" style="--i:0">Python</span><span class="pill" style="--i:1">Pandas</span><span class="pill" style="--i:2">NumPy</span>
-                            <span class="pill" style="--i:3">Scikit-learn</span><span class="pill" data-level="Advanced" style="--i:4">NLP</span><span class="pill" data-level="Advanced" style="--i:5">LLMs</span>
-                            <span class="pill" data-level="Advanced" style="--i:6">RAG Pipelines</span><span class="pill" data-level="Intermediate" style="--i:7">Hugging Face</span><span class="pill" style="--i:8">Ollama</span>
-                            <span class="pill" style="--i:9">Vector Search (ChromaDB)</span>
-                        </div>
-                    </div>
-                    <div class="term-block">
-                        <div class="term-cmd"><span class="term-cat-icon">👁️</span><span class="term-prompt">$</span> cat <span class="term-file">computer_vision.txt</span></div>
-                        <div class="term-output cat-cv">
-                            <span class="pill" style="--i:0">OpenCV</span><span class="pill" style="--i:1">Tesseract</span><span class="pill" style="--i:2">PyMuPDF</span>
-                            <span class="pill" style="--i:3">PIL/Pillow</span><span class="pill" style="--i:4">scikit-image</span><span class="pill" style="--i:5">pdf2image</span>
-                        </div>
-                    </div>
-                    <div class="term-block">
-                        <div class="term-cmd"><span class="term-cat-icon">⚙️</span><span class="term-prompt">$</span> cat <span class="term-file">backend_infra.txt</span></div>
-                        <div class="term-output cat-be">
-                            <span class="pill" data-level="Advanced" style="--i:0">FastAPI</span><span class="pill" style="--i:1">Flask</span><span class="pill" style="--i:2">Node.js</span>
-                            <span class="pill" data-level="Advanced" style="--i:3">PostgreSQL</span><span class="pill" style="--i:4">MongoDB</span><span class="pill" data-level="Intermediate" style="--i:5">Docker</span>
-                            <span class="pill" style="--i:6">JWT</span><span class="pill" style="--i:7">SQLAlchemy</span><span class="pill" data-level="Intermediate" style="--i:8">AWS</span>
-                        </div>
-                    </div>
-                    <div class="term-block">
-                        <div class="term-cmd"><span class="term-cat-icon">🎨</span><span class="term-prompt">$</span> cat <span class="term-file">frontend_tools.txt</span></div>
-                        <div class="term-output cat-fe">
-                            <span class="pill" style="--i:0">JavaScript</span><span class="pill" data-level="Intermediate" style="--i:1">TypeScript</span><span class="pill" data-level="Advanced" style="--i:2">React.js</span><span class="pill" data-level="Intermediate" style="--i:3">Next.js</span>
-                            <span class="pill" style="--i:4">TailwindCSS</span><span class="pill" style="--i:5">Material UI</span><span class="pill" style="--i:6">Recharts</span><span class="pill" style="--i:7">HTML5/CSS3</span>
-                        </div>
-                    </div>
-                    <div class="term-block">
-                        <div class="term-cmd"><span class="term-cat-icon">🤖</span><span class="term-prompt">$</span> cat <span class="term-file">automation_devops.txt</span></div>
-                        <div class="term-output cat-do">
-                            <span class="pill" data-level="Intermediate" style="--i:0">n8n</span><span class="pill" style="--i:1">Docker</span><span class="pill" data-level="Intermediate" style="--i:2">Playwright</span>
-                            <span class="pill" style="--i:3">Selenium</span><span class="pill" style="--i:4">Web Scraping</span><span class="pill" style="--i:5">CI/CD</span>
-                            <span class="pill" style="--i:6">GitHub Actions</span>
-                        </div>
-                    </div>
-                    <div class="term-block">
-                        <div class="term-cmd"><span class="term-cat-icon">🌍</span><span class="term-prompt">$</span> cat <span class="term-file">languages.txt</span></div>
-                        <div class="term-output cat-lang">
-                            <span class="pill" data-tr="skills.languages.turkish" style="--i:0">Türkçe (Ana Dil)</span>
-                            <span class="pill" data-tr="skills.languages.english" style="--i:1">İngilizce (B2 - Profesyonel Yeterlilik)</span>
-                        </div>
-                    </div>
-                    <div class="term-block term-summary">
-                        <div class="term-cmd"><span class="term-cat-icon">📊</span><span class="term-prompt">$</span> wc -l <span class="term-file">*.txt</span></div>
-                        <div class="term-output term-summary-out">
-                            <div class="term-sum-stat">
-                                <span class="sm-num" id="skillTotal" data-count="42">—</span>
-                                <span class="sm-unit" data-tr="skills.summary.unit">yetenek</span>
-                            </div>
-                            <div class="term-sum-stat">
-                                <span class="sm-num">6</span>
-                                <span class="sm-unit" data-tr="skills.summary.files">dosya</span>
-                            </div>
-                            <div class="term-sum-stat">
-                                <span class="sm-num"><span id="skillAdvanced">—</span><span class="sm-num-slash">/</span><span id="skillTotalMini">—</span></span>
-                                <span class="sm-unit" data-tr="skills.summary.advanced">ileri</span>
-                            </div>
-                            <div class="term-sum-stat sm-status">
-                                <span class="sm-status-dot"></span>
-                                <span class="sm-label" data-tr="skills.summary.compiled">derlendi</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="term-block term-end">
-                        <div class="term-cmd"><span class="term-prompt">$</span> <span class="term-cursor">_</span></div>
-                    </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon stack-icon-fa"><i class="fa-solid fa-brain" aria-hidden="true"></i></span>
+                    <span class="stack-name">LLMs</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon stack-icon-fa"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></span>
+                    <span class="stack-name">RAG</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/langchain" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">LangChain</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/huggingface" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">Hugging Face</span>
+                </div>
+
+                <!-- Row 2 — AI tooling + vision -->
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/anthropic" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">Claude Code</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon stack-icon-fa"><i class="fa-solid fa-terminal" aria-hidden="true"></i></span>
+                    <span class="stack-name">Codex</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/ollama" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">Ollama</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon stack-icon-fa"><i class="fa-solid fa-cube" aria-hidden="true"></i></span>
+                    <span class="stack-name">ChromaDB</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/opencv" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">OpenCV</span>
+                </div>
+
+                <!-- Row 3 — Backend & data -->
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/fastapi" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">FastAPI</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/nodedotjs" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">Node.js</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/postgresql" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">PostgreSQL</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/mongodb" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">MongoDB</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/docker" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">Docker</span>
+                </div>
+
+                <!-- Row 4 — Cloud & ops -->
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon stack-icon-fa"><i class="fa-brands fa-aws" aria-hidden="true"></i></span>
+                    <span class="stack-name">AWS</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/firebase" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">Firebase</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/n8n" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">n8n</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/githubactions" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">GitHub Actions</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/git" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">Git</span>
+                </div>
+
+                <!-- Row 5 — Frontend -->
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/javascript" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">JavaScript</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/typescript" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">TypeScript</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/react" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">React</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/nextdotjs" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">Next.js</span>
+                </div>
+                <div class="stack-cell" role="listitem">
+                    <span class="stack-icon"><img src="https://cdn.simpleicons.org/tailwindcss" alt="" width="24" height="24" loading="lazy"></span>
+                    <span class="stack-name">Tailwind</span>
                 </div>
             </div>
         </div>
@@ -1154,7 +1077,7 @@
             </div>
 
             <!-- RAIL: thin monospace status row -->
-            <div class="footer-rail">
+            <div class="footer-rail" id="visitorChip" role="status" aria-live="polite" aria-atomic="false">
                 <span class="rail-item">
                     <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                     <span>Eskişehir, TR</span>
@@ -1163,6 +1086,18 @@
                 <span class="rail-item">
                     <i class="fas fa-clock" aria-hidden="true"></i>
                     <span id="footerTime">--:--:--</span>
+                </span>
+                <span class="rail-sep" aria-hidden="true">·</span>
+                <span class="rail-item rail-stat">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                    <span class="rail-stat-num" id="visitorCount">0</span>
+                    <span class="rail-stat-label" data-tr="visitor.total">total</span>
+                </span>
+                <span class="rail-sep" aria-hidden="true">·</span>
+                <span class="rail-item rail-stat rail-stat-accent">
+                    <i class="fas fa-bolt" aria-hidden="true"></i>
+                    <span class="rail-stat-num">+<span id="dailyVisitorCount">0</span></span>
+                    <span class="rail-stat-label" data-tr="visitor.daily">today</span>
                 </span>
                 <span class="rail-sep" aria-hidden="true">·</span>
                 <span class="rail-item">
@@ -1194,6 +1129,6 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <script src="script.js?v=40"></script>
+    <script src="script.js?v=44"></script>
 </body>
 </html>
