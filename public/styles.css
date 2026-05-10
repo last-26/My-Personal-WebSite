@@ -570,8 +570,44 @@ body.light-mode .theme-toggle:hover i{
 .hero{
     min-height:100vh;display:flex;align-items:center;
     position:relative;padding:130px 0 96px;overflow:hidden;
+    isolation:isolate;
 }
 .hero-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+
+/* Wave 3 — ambient hero background image with gradient legibility overlay */
+.hero-background{
+    position:absolute;
+    inset:0;
+    width:100%;height:100%;
+    object-fit:cover;
+    z-index:0;
+    pointer-events:none;
+    user-select:none;
+    -webkit-user-drag:none;
+    opacity:0.55;
+}
+.hero::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        180deg,
+        rgba(0,0,0,0.2) 0%,
+        rgba(0,0,0,0.6) 70%,
+        var(--surface-0) 100%
+    );
+    z-index:0;
+    pointer-events:none;
+}
+body.light-mode .hero-background{ opacity:0.4; }
+body.light-mode .hero::after{
+    background:linear-gradient(
+        180deg,
+        rgba(255,255,255,0.2) 0%,
+        rgba(255,255,255,0.6) 70%,
+        var(--surface-0) 100%
+    );
+}
 .gradient-orb{
     position:absolute;border-radius:50%;filter:blur(80px);
     animation:orbDrift 20s ease-in-out infinite alternate;
@@ -640,6 +676,7 @@ body.light-mode .particle{background:rgba(124,58,237,.1)}
 /* ── Hero v4: refined editorial — balanced name + role, smaller portrait ── */
 .hero-grid-split{
     position: relative;
+    z-index: 1;
     grid-template-columns: minmax(0, 1.32fr) minmax(0, 0.68fr);
     align-items: center;
     gap: clamp(28px, 4.4vw, 64px);
