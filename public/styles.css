@@ -816,7 +816,7 @@ body.light-mode .hero-role-slash{
     opacity: 0;
     animation: heroFadeUp .9s var(--ease-out) .64s forwards;
 }
-.hero-grid-split .hero-buttons-cv{
+.hero-grid-split .cv-row{
     opacity: 0;
     animation: heroFadeUp .9s var(--ease-out) .78s forwards;
 }
@@ -830,7 +830,7 @@ body.light-mode .hero-role-slash{
     .hero-grid-split .hero-subtitle,
     .hero-grid-split .hero-desc,
     .hero-grid-split .hero-buttons,
-    .hero-grid-split .hero-buttons-cv{
+    .hero-grid-split .cv-row{
         opacity: 1;
         animation: none;
     }
@@ -1049,7 +1049,46 @@ body.light-mode .hero-tag{
     display:flex;gap:var(--space-3);flex-wrap:wrap;
     margin-bottom:var(--space-3);
 }
-.hero-buttons-cv{margin-top:var(--space-2)}
+/* CV row — demoted text-link group under hero buttons (Wave 2) */
+.cv-row{
+    display:flex;align-items:center;justify-content:center;
+    gap:10px;
+    margin-top:var(--space-3);
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--text-mid);
+    letter-spacing:.02em;
+}
+.cv-row-icon{
+    color:var(--text-lo);
+    font-size:14px;
+    opacity:.85;
+}
+.cv-row-label{
+    color:var(--text-lo);
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:11px;
+    font-weight:500;
+}
+.cv-row-sep{
+    color:var(--text-muted);
+    opacity:.7;
+}
+.cv-row-link{
+    color:var(--text-mid);
+    text-decoration:none;
+    transition:color .25s var(--ease-out);
+    cursor:pointer;
+    padding:2px 4px;
+    border-radius:4px;
+}
+.cv-row-link:hover{
+    color:var(--accent-2);
+}
+body.light-mode .cv-row-link:hover{
+    color:var(--accent);
+}
 .btn-hero{
     display:inline-flex;align-items:center;gap:8px;
     padding:12px 22px;border-radius:var(--radius-pill);
@@ -1091,23 +1130,6 @@ body.light-mode .btn-outline:hover{
     border-color:var(--border-strong);
     color:var(--accent);
     background:#fff;
-}
-
-.btn-ghost{
-    background:transparent;color:var(--text-lo);
-    border:1px solid var(--border-subtle);
-}
-.btn-ghost:hover{
-    color:var(--text-hi);
-    border-color:var(--border-default);
-    background:var(--surface-2);
-    transform:translateY(-2px);
-}
-body.light-mode .btn-ghost{
-    background:transparent;border-color:var(--border-default);color:var(--text-lo);
-}
-body.light-mode .btn-ghost:hover{
-    background:var(--surface-2);color:var(--text-hi);
 }
 
 /* ── Meta strip (right column) ── */
@@ -4939,7 +4961,6 @@ body:not(.light-mode){
     .btn-hero:active,
     .btn-glow:active,
     .btn-outline:active,
-    .btn-ghost:active,
     .lang-btn:active,
     .theme-toggle:active,
     .footer-uptop:active,
