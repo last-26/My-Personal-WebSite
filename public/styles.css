@@ -1979,7 +1979,7 @@ body.light-mode .rm-orange .roadmap-date-side { color: #c2410c; }
 .roadmap-card {
     background: var(--card-bg);
     border: 1px solid var(--glass-border);
-    border-radius: 14px;
+    border-radius: var(--radius-md);
     padding: 24px;
     padding-top: 32px;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -2408,7 +2408,7 @@ body.light-mode .roadmap-metric:hover {
 }
 /* Theme radial gradient overlay */
 .project-card::before{
-    content:'';position:absolute;inset:0;border-radius:var(--radius);
+    content:'';position:absolute;inset:0;border-radius:inherit;
     opacity:.04;transition:opacity .4s ease-in-out;z-index:0;pointer-events:none;
 }
 .card-theme-purple::before{background:radial-gradient(circle at 15% 15%,#7c3aed,transparent 60%)}
@@ -2665,10 +2665,10 @@ body.light-mode .card-expand-btn{color:var(--text-3)}
 }
 
 /* Tier spans */
-.projects-magazine .card-featured{grid-column:span 6;min-height:480px}
-.projects-magazine .card-standard{grid-column:span 4;min-height:380px}
-.projects-magazine .card-mini-featured{grid-column:span 6;min-height:380px}
-.projects-magazine .card-archive{grid-column:span 6;min-height:220px}
+.projects-magazine .card-featured{grid-column:span 6;min-height:480px;border-radius:var(--radius-card)}
+.projects-magazine .card-standard{grid-column:span 4;min-height:380px;border-radius:var(--radius-card)}
+.projects-magazine .card-mini-featured{grid-column:span 6;min-height:380px;border-radius:var(--radius-card)}
+.projects-magazine .card-archive{grid-column:span 6;min-height:220px;border-radius:var(--radius-md)}
 
 /* Editorial group dividers — full-width row that separates project tiers */
 .projects-magazine .projects-eyebrow{
@@ -2951,6 +2951,7 @@ body.light-mode .project-click-badge{
 .projects-magazine .card-showcase{
     grid-column:span 12;
     min-height:440px;
+    border-radius:var(--radius-lg);
     position:relative;
     border:1px solid rgba(251,146,60,.28);
     box-shadow:
@@ -4467,7 +4468,7 @@ body.light-mode .principle-watermark{color:#6b655e;opacity:.55}
         linear-gradient(135deg, rgba(124,58,237,.04) 0%, rgba(45,212,191,.025) 100%),
         var(--surface-2);
     border:1px solid var(--border-subtle);
-    border-radius:var(--radius-xl);
+    border-radius:var(--radius-md);
     padding:var(--space-7) var(--space-7) var(--space-6);
     position:relative;overflow:hidden;
     transition:border-color .4s var(--ease-out),
