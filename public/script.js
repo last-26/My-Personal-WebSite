@@ -1486,11 +1486,14 @@ updateCVButtons(savedLang);
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        // Skip placeholders and links whose href was rewritten to a real URL
+        // (e.g. CV modal action links start as href="#" then become CV_EN.pdf)
+        if (!href || href === '#' || !href.startsWith('#')) return;
+        const target = document.querySelector(href);
+        if (!target) return;
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 });
 
