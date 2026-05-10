@@ -186,7 +186,6 @@ body.light-mode .footer-tagline{color:var(--text-2)}
 body.light-mode .footer-nav h4,body.light-mode .footer-social h4{color:var(--text-2);letter-spacing:1.5px}
 body.light-mode .footer-bottom p{color:var(--text-2)}
 body.light-mode .stat-text{color:var(--text-2)}
-body.light-mode .section-tag{color:var(--accent);background:rgba(109,40,217,.08);border-color:rgba(109,40,217,.12)}
 body.light-mode .contact-item{border-color:rgba(13,125,114,.15)}
 body.light-mode .contact-item:hover{border-color:var(--accent-2);box-shadow:0 8px 30px rgba(13,125,114,.12)}
 body.light-mode .education-card{border-color:rgba(109,40,217,.12)}
@@ -1375,10 +1374,22 @@ body.light-mode .chart-note{color:var(--text-muted)}
     margin-bottom:3rem;
 }
 .section-tag{
+    display:inline-flex;align-items:baseline;
     font-family:var(--mono);font-size:.85rem;font-weight:600;
-    color:var(--accent);background:rgba(124,58,237,.1);
+    color:var(--accent);background:var(--pill-bg);
     padding:6px 14px;border-radius:8px;
-    border:1px solid rgba(124,58,237,.15);
+    border:1px solid var(--pill-border);
+}
+.section-tag-sep{
+    margin:0 8px;
+    opacity:.55;
+    color:var(--text-muted);
+}
+.section-tag-label{
+    font-family:var(--font-sans);
+    color:var(--text-mid);
+    font-weight:500;
+    letter-spacing:.04em;
 }
 .section-title{
     font-size:2.2rem;font-weight:700;letter-spacing:-1.5px;
