@@ -204,8 +204,8 @@ const translations = {
         "projects.awsai.description": "Tamamen serverless doküman soru-cevap sistemi — PDF'ler S3'te, metin Textract'tan, doğal dilde cevaplar Bedrock üzerindeki Claude'dan geliyor. Tüm yığın Infrastructure as Code (CDK) ile yazıldı; AWS konsolunda değil, sürüm kontrolünde yaşıyor. API Gateway + Lambda + DynamoDB + SNS.",
         "projects.swiftlink.subtitle": "Hızlı & Modern URL Kısaltma Servisi",
         "projects.swiftlink.description": "FastAPI ile uçtan uca URL kısaltıcı — Docker ile konteynerize, GitHub Actions ile CI testleri. Tıklama analitiği, gerçek zamanlı istatistikler, özel slug. API'den panoya kadar tüm yığını ben yazdım.",
-        "projects.sametei.subtitle": "AI Destekli İK Doküman Yönetim Platformu",
-        "projects.sametei.description": "LibreChat çerçevesi üzerine inşa edilmiş, insan kaynakları doküman yönetimini yapay zekâ ile otomatikleştiren kurumsal ölçekli bir platform. İK ekiplerinin doküman işleme süresini %70 azalttı.",
+        "projects.sametei.subtitle": "Kurum İçi Çalışan, RAG Tabanlı İK Asistanı",
+        "projects.sametei.description": "Dahili İK prosedürleri için LibreChat tabanlı bir asistan. MongoDB vektör arama, yerel Ollama LLM'leri ve Qwen 2.5-VL OCR'ı sunan bir FastAPI sidecar (Tesseract yedeği ile) üzerine kurulu bir RAG hattı, şirketin kendi politika ve doküman havuzundan kaynak göstererek cevap üretir — halüsinasyon yerine atıflı yanıtlar. OpenAI uyumlu katman, gerektiğinde host edilen modellere yönlendirme yapar; hassas İK verisi kurum ağının dışına çıkmaz. İK ekiplerinin doküman işleme süresini %70 azalttı.",
         "projects.hireai.subtitle": "AI Destekli CV & Portföy Analiz Platformu",
         "projects.hireai.description": "ATS tabanlı CV analizi ve optimizasyon platformu. CV'leri iş tanımlarına göre değerlendirir, ATS uyumlu puanlar ve iyileştirme önerileri sunar. İK ekiplerinin ön eleme süresini %50 azalttı.",
         "projects.link": "GitHub'da Görüntüle",
@@ -428,8 +428,8 @@ const translations = {
         "projects.awsai.description": "Fully serverless document Q&A — PDFs in S3, text via Textract, Claude on Bedrock answers natural-language questions. The whole stack as Infrastructure as Code (CDK), living in version control instead of a console. API Gateway + Lambda + DynamoDB + SNS.",
         "projects.swiftlink.subtitle": "Fast & Modern URL Shortener Service",
         "projects.swiftlink.description": "End-to-end URL shortener built with FastAPI — Docker-containerized, CI-tested via GitHub Actions. Click analytics, real-time stats, custom slugs. Owned the whole stack from API to dashboard.",
-        "projects.sametei.subtitle": "AI-Powered HR Document Management Platform",
-        "projects.sametei.description": "Built on LibreChat framework, a corporate-scale platform that automates human resources document management with artificial intelligence. Reduced HR teams' document processing time by 70%.",
+        "projects.sametei.subtitle": "On-Prem RAG Assistant for Enterprise HR",
+        "projects.sametei.description": "A LibreChat-based assistant for internal HR procedures. A RAG pipeline — MongoDB vector search, local Ollama LLMs, and a FastAPI sidecar serving Qwen 2.5-VL OCR with a Tesseract fallback — answers from the company's own policy and document corpus and returns cited sources instead of hallucinations. An OpenAI-compatible layer routes to hosted models when latency or quality calls for it; sensitive HR data never leaves the network. Cut HR teams' document handling time by 70%.",
         "projects.hireai.subtitle": "AI-Powered CV & Portfolio Analysis Platform",
         "projects.hireai.description": "ATS-based CV analysis and optimization platform. Analyzes CVs according to job descriptions and provides ATS-compliant scores and improvement suggestions. Reduced HR teams' pre-screening time by 50%.",
         "projects.link": "View on GitHub",
@@ -543,7 +543,7 @@ function updateCVButtons(lang) {
 const themeToggle = document.getElementById('themeToggle');
 const body = document.body;
 
-// Check for saved theme preference - Default: Dark Mode
+// Check for saved theme preference - Default: Light Mode
 const savedTheme = localStorage.getItem('theme');
 const themeIcon = themeToggle.querySelector('i');
 function setThemeIcon(light){
@@ -551,14 +551,14 @@ function setThemeIcon(light){
     themeIcon.classList.toggle('fa-moon', light);
     themeIcon.classList.toggle('fa-sun', !light);
 }
-if (savedTheme === 'light') {
-    body.classList.add('light-mode');
-    setThemeIcon(true);
-} else {
+if (savedTheme === 'dark') {
     body.classList.remove('light-mode');
     setThemeIcon(false);
+} else {
+    body.classList.add('light-mode');
+    setThemeIcon(true);
     if (!savedTheme) {
-        localStorage.setItem('theme', 'dark');
+        localStorage.setItem('theme', 'light');
     }
 }
 
@@ -878,6 +878,9 @@ navScrollFn();
         mouse.y = e.clientY;
         lastMouseMove = Date.now();
 
+        // Light mode is the calm/professional theme — no electric embers
+        if (isLight()) return;
+
         // Mouse velocity for directional streaks
         const dx = mouse.x - prevX;
         const dy = mouse.y - prevY;
@@ -961,7 +964,7 @@ navScrollFn();
     // --- Spark spawner ---
     let sparkCD = 0;
     function trySpawnSparks() {
-        if (isMobile || Date.now() - lastMouseMove > 500) return;
+        if (isMobile || isLight() || Date.now() - lastMouseMove > 500) return;
         const now = performance.now();
         if (now < sparkCD) return;
         sparkCD = now + 80 + Math.random() * 40;
@@ -1348,6 +1351,8 @@ navScrollFn();
         return r < 0.78 ? 'left' : 'right';
     }
     function spawnBolt(side, dirHint) {
+        // Light mode opts out of the cyberpunk lightning storm
+        if (isLight()) return;
         const s = side || pickRandomSide();
         const dir = dirHint || (s === 'top' ? 1 : (Math.random() > 0.7 ? -1 : 1));
         bolts.push(generateBolt(s, dir));
@@ -1420,12 +1425,17 @@ navScrollFn();
             if (!rCanvas.width || !rCanvas.height) {
                 requestAnimationFrame(drawRain); return;
             }
+            // Light mode is the calm theme — clear the canvas and skip the storm
+            if (isLight()) {
+                rCtx.clearRect(0, 0, rCanvas.width, rCanvas.height);
+                requestAnimationFrame(drawRain);
+                return;
+            }
             rCtx.clearRect(0, 0, rCanvas.width, rCanvas.height);
             // Wind sway oscillates slowly so drops never look mechanical
             windPhase += 0.0032;
             const wDrift = windBase + Math.sin(windPhase) * 0.22;
-            const light = isLight();
-            const baseColor = light ? '70,90,130' : '170,195,228';
+            const baseColor = '170,195,228';
             rCtx.lineCap = 'round';
 
             for (let li = 0; li < layers.length; li++){

@@ -41,7 +41,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=81">
+    <link rel="stylesheet" href="styles.css?v=92">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -68,7 +68,9 @@
     }
     </script>
 </head>
-<body>
+<body class="light-mode">
+    <!-- Pre-paint theme sync: avoid a light→dark flash for visitors who previously chose dark -->
+    <script>(function(){try{if(localStorage.getItem('theme')==='dark'){document.body.classList.remove('light-mode');}}catch(e){}})();</script>
     <!-- Scroll progress bar -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -137,7 +139,7 @@
                         <span class="tt-ring" aria-hidden="true"></span>
                         <span class="tt-halo" aria-hidden="true"></span>
                         <span class="tt-core">
-                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-moon"></i>
                         </span>
                     </button>
                 </div>
@@ -376,7 +378,7 @@
                     <header class="edu-eyebrow">
                         <span class="edu-stamp" aria-hidden="true"><i class="fas fa-graduation-cap"></i></span>
                         <span class="edu-badge" data-tr="education.badge.bsc">BSc</span>
-                        <span class="edu-years" aria-hidden="true">2020 — 2025</span>
+                        <span class="edu-years" aria-hidden="true">2020 — 2026</span>
                     </header>
                     <h3 class="edu-degree" data-tr="education.degree">Bilgisayar Mühendisliği Lisans</h3>
                     <p class="edu-school">
@@ -541,15 +543,17 @@
                                 <li data-tr="experience.tei.achievements.3">Playwright ile e-ticaret süreçlerini otomatize eden RPA çözümleri kurdum.</li>
                                 <li data-tr="experience.tei.achievements.4">İzole ağlarda güvenli veri iletimi üzerine Ar-Ge notları hazırladım.</li>
                             </ul>
+                        </div>
+                        <div class="roadmap-card-footer">
+                            <button class="roadmap-more-btn" type="button" aria-expanded="false">
+                                <span data-tr="experience.more">Daha fazla göster</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
                             <button class="certificate-btn" id="certificateBtn" type="button">
                                 <i class="fas fa-award"></i>
                                 <span data-tr="experience.certificate">Sertifika</span>
                             </button>
                         </div>
-                        <button class="roadmap-more-btn" type="button" aria-expanded="false">
-                            <span data-tr="experience.more">Daha fazla göster</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
                     </div>
                 </div>
 
@@ -906,17 +910,16 @@
                         <div class="card-icon"><i class="fas fa-building"></i></div>
                         <div class="card-title-group">
                             <h3>SAMETEI</h3>
-                            <p class="card-tagline" data-tr="projects.sametei.subtitle">AI Destekli İK Doküman Yönetim Platformu</p>
+                            <p class="card-tagline" data-tr="projects.sametei.subtitle">Kurum İçi Çalışan, RAG Tabanlı İK Asistanı</p>
                         </div>
                     </div>
                     <div class="card-content project-body">
                         <p class="card-desc" data-tr="projects.sametei.description">
-                            LibreChat çerçevesi üzerine inşa edilmiş, insan kaynakları doküman yönetimini yapay zeka ile otomatikleştiren kurumsal ölçekte platform.
-                            İK ekiplerinin doküman işleme süresini %70 azalttı.
+                            Dahili İK prosedürleri için LibreChat tabanlı bir asistan. MongoDB vektör arama, yerel Ollama LLM'leri ve Qwen 2.5-VL OCR'ı sunan bir FastAPI sidecar (Tesseract yedeği ile) üzerine kurulu bir RAG hattı, şirketin kendi politika ve doküman havuzundan kaynak göstererek cevap üretir — halüsinasyon yerine atıflı yanıtlar. OpenAI uyumlu katman, gerektiğinde host edilen modellere yönlendirme yapar; hassas İK verisi kurum ağının dışına çıkmaz. İK ekiplerinin doküman işleme süresini %70 azalttı.
                         </p>
                         <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
-                            <span>LibreChat</span><span>Multi-LLM</span><span>RAG</span><span>ChromaDB</span><span>Ollama</span><span>Hugging Face</span><span>OCR · Qwen 2.5-VL</span><span>Node.js</span><span>MongoDB</span>
+                            <span>LibreChat</span><span>RAG</span><span>MongoDB Vector Search</span><span>Multi-LLM</span><span>OCR · Qwen 2.5-VL</span><span>FastAPI</span><span>Node.js</span><span>Tesseract</span>
                         </div>
                         <div class="card-footer">
                             <a href="https://github.com/last-26/SAMETEI" target="_blank" class="card-link">
@@ -1193,6 +1196,6 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <script src="script.js?v=83"></script>
+    <script src="script.js?v=85"></script>
 </body>
 </html>
