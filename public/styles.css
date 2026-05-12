@@ -180,9 +180,30 @@ body.light-mode .card:hover, body.light-mode .project-card:hover, body.light-mod
 }
 /* Light mode text refinements */
 body.light-mode .hero-desc{
-    color:#1a1714;
-    font-size:1.08rem;
-    line-height:1.7;
+    color:#0c0a08;
+    font-size:1.16rem;
+    line-height:1.72;
+    font-weight:500;
+    letter-spacing:-.005em;
+}
+/* "I specialize in …" subtitle reads thin in light — bolder, larger, deeper */
+body.light-mode .hero-grid-split .hero-subtitle{
+    color:#0c0a08;
+    font-size:clamp(1rem, 1.35vw, 1.18rem);
+    font-weight:600;
+    letter-spacing:.005em;
+}
+body.light-mode .hero-subtitle-mark{
+    background:#0d7d72;
+    box-shadow:0 0 0 2px rgba(13,125,114,.18), 0 0 10px rgba(13,125,114,.45);
+}
+body.light-mode .typewriter{
+    color:#5b21b6;
+    font-weight:700;
+}
+body.light-mode .typewriter-cursor{
+    color:#5b21b6;
+    font-weight:500;
 }
 body.light-mode .contact-item h3{color:var(--text)}
 body.light-mode .contact-link{color:var(--accent);font-weight:600}
