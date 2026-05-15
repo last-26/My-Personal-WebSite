@@ -91,7 +91,7 @@
     --fs-h1: clamp(1.8rem, 3vw, 2.4rem);
     --fs-h2: clamp(1.4rem, 2.5vw, 1.8rem);
     --fs-h3: clamp(1.15rem, 1.8vw, 1.3rem);
-    --fs-body: clamp(0.95rem, 1.5vw, 1.05rem);
+    --fs-body: clamp(1rem, 1.5vw, 1.05rem);
     --fs-sm: 0.85rem;
     --fs-meta: 0.75rem;
 
@@ -275,6 +275,21 @@ img{max-width:100%;display:block}
     background:linear-gradient(90deg,var(--accent),var(--accent-2));
     transition:width .05s linear;
     box-shadow:0 0 8px var(--accent);
+}
+
+/* ── Skip-link (keyboard a11y) ── */
+.skip-link{
+    position:fixed;top:-100px;left:16px;z-index:10001;
+    background:var(--accent);color:#fff;
+    padding:10px 18px;border-radius:var(--radius-pill);
+    font-family:var(--font-mono);font-size:.78rem;
+    text-decoration:none;font-weight:500;letter-spacing:.04em;
+    box-shadow:0 6px 22px rgba(124,58,237,.35);
+    transition:top var(--dur-base) var(--ease-out);
+}
+.skip-link:focus,
+.skip-link:focus-visible{
+    top:16px;outline:2px solid var(--accent-2);outline-offset:3px;
 }
 
 /* ── Noise Overlay ── */
@@ -769,6 +784,8 @@ body.light-mode .particle{background:rgba(124,58,237,.1)}
     align-items: center;
     justify-content: center;
     min-width: 0;
+    /* 3D parallax stage for JS-driven mouse tilt */
+    perspective: 1000px;
 }
 
 /* Hero v4 — Title: single line, refined Cormorant masthead with accent period */
@@ -1026,13 +1043,18 @@ body.light-mode .hero-role-amp{
 /* Profile photo with gradient ring + bloom — column-anchored, smaller in v4 */
 .hero-photo{
     --photo-size: clamp(260px, 26vw, 380px);
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+    --tilt-scale: 1;
     position: relative;
     width: var(--photo-size);
     height: var(--photo-size);
     margin: 0;
     border-radius: 50%;
     isolation: isolate;
-    transition: transform .5s var(--ease-spring);
+    transform-style: preserve-3d;
+    transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) scale(var(--tilt-scale));
+    transition: transform .35s var(--ease-out);
     animation: fadeUp .8s var(--ease-out) both;
     animation-delay: .05s;
 }
@@ -1113,7 +1135,7 @@ body.light-mode .hero-role-amp{
     to   { opacity: 0.8; transform: scale(1.04); }
 }
 .hero-photo:hover{
-    transform: scale(1.04);
+    --tilt-scale: 1.04;
 }
 .hero-photo:hover img{
     filter: brightness(1.06) saturate(1.05);
@@ -1269,6 +1291,7 @@ body.light-mode .hero-tag{
 .cv-row-link{
     display:inline-flex;align-items:center;gap:8px;
     padding:10px 18px;
+    min-height:44px;
     color:var(--text-hi);
     text-decoration:none;
     background:var(--surface-2);
@@ -4043,11 +4066,14 @@ body.light-mode .gradient-orb{
 body.light-mode .particle{background:rgba(109,40,217,.2)}
 
 /* Cyberpunk / storm FX are suppressed in light mode for a calmer, HR-friendly read.
-   JS gates the spawn paths (bolts, sparks, embers, rain); CSS hides the pure-CSS layers. */
+   JS gates the spawn paths (bolts, sparks, embers, rain); CSS hides the pure-CSS layers.
+   Noise overlay stays — at 0.03 opacity it reads as paper grain in light mode. */
 body.light-mode .cyber-edge,
 body.light-mode #lightningCanvas,
 body.light-mode #lightningFlash,
-body.light-mode #rainCanvas{
+body.light-mode #rainCanvas,
+body.light-mode #cursorCanvas,
+body.light-mode #particles{
     display:none !important;
 }
 

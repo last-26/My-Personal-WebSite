@@ -37,6 +37,7 @@ const database = firebase.database?.();
 // Translations
 const translations = {
     tr: {
+        "a11y.skip": "Ana içeriğe atla",
         "nav.about": "Hakkımda",
         "nav.education": "Eğitim",
         "nav.experience": "Deneyim",
@@ -261,6 +262,7 @@ const translations = {
         "footer.made": "Tutkuyla kodlanmıştır"
     },
     en: {
+        "a11y.skip": "Skip to main content",
         "nav.about": "About",
         "nav.education": "Education",
         "nav.experience": "Experience",
@@ -498,9 +500,13 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
             updateLanguage(lang);
             updateCVButtons(lang);
 
-            // Update active button
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            // Update active button + aria-current (a11y)
+            document.querySelectorAll('.lang-btn').forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-current', 'false');
+            });
             this.classList.add('active');
+            this.setAttribute('aria-current', 'true');
 
             // Update sliding indicator
             const switcher = document.querySelector('.lang-switcher');
@@ -1479,8 +1485,15 @@ const savedLang = localStorage.getItem('preferredLang') || 'en';
 if (savedLang !== 'en') {
     currentLang = savedLang;
     updateLanguage(savedLang);
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector(`[data-lang="${savedLang}"]`).classList.add('active');
+    document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-current', 'false');
+    });
+    const activeBtn = document.querySelector(`[data-lang="${savedLang}"]`);
+    if (activeBtn) {
+        activeBtn.classList.add('active');
+        activeBtn.setAttribute('aria-current', 'true');
+    }
 } else {
     updateLanguage('en');
 }
@@ -2913,4 +2926,39 @@ window.closeCertificate = closeCertificateModal;
             setTimeout(() => emoji.remove(), 500);
         }, 1100);
     }
+})();
+
+/* ── Hero photo 3D mouse-tilt parallax ── */
+(function initHeroPhotoTilt(){
+    const photo = document.querySelector('.hero-photo');
+    const stage = document.querySelector('.hero-photo-aside');
+    if (!photo || !stage) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!window.matchMedia('(hover: hover)').matches) return;
+
+    const MAX_TILT = 9;   // degrees — keep subtle, editorial feel
+    let raf = null;
+
+    const onMove = (e) => {
+        const r = stage.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const cy = r.top + r.height / 2;
+        const nx = (e.clientX - cx) / (r.width / 2);
+        const ny = (e.clientY - cy) / (r.height / 2);
+        const cnx = Math.max(-1, Math.min(1, nx));
+        const cny = Math.max(-1, Math.min(1, ny));
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+            photo.style.setProperty('--tilt-y', `${cnx * MAX_TILT}deg`);
+            photo.style.setProperty('--tilt-x', `${-cny * MAX_TILT}deg`);
+        });
+    };
+    const onLeave = () => {
+        if (raf) cancelAnimationFrame(raf);
+        photo.style.setProperty('--tilt-x', '0deg');
+        photo.style.setProperty('--tilt-y', '0deg');
+    };
+
+    stage.addEventListener('mousemove', onMove);
+    stage.addEventListener('mouseleave', onLeave);
 })();

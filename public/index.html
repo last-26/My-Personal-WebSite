@@ -39,9 +39,9 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=99">
+    <link rel="stylesheet" href="styles.css?v=101">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -71,6 +71,10 @@
 <body class="light-mode">
     <!-- Pre-paint theme sync: avoid a light→dark flash for visitors who previously chose dark -->
     <script>(function(){try{if(localStorage.getItem('theme')==='dark'){document.body.classList.remove('light-mode');}}catch(e){}})();</script>
+
+    <!-- Skip to main content (keyboard a11y) -->
+    <a class="skip-link" href="#main" data-tr="a11y.skip">Skip to main content</a>
+
     <!-- Scroll progress bar -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -96,7 +100,7 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container container">
-            <a href="#" class="logo">
+            <a href="#hero" class="logo" aria-label="Back to top">
                 <span class="logo-bracket">&lt;</span><span class="logo-mark">SAMET</span><span class="logo-bracket">/&gt;</span>
             </a>
             <div class="nav-right">
@@ -111,7 +115,7 @@
                 <div class="nav-actions">
                     <div class="lang-switcher" data-active="en">
                         <div class="lang-indicator"></div>
-                        <button class="lang-btn" data-lang="tr" aria-label="Türkçe" title="Türkçe">
+                        <button class="lang-btn" data-lang="tr" aria-label="Türkçe" title="Türkçe" aria-current="false">
                             <svg class="flag" viewBox="0 0 24 24" aria-hidden="true">
                                 <defs><clipPath id="flagTR"><circle cx="12" cy="12" r="12"/></clipPath></defs>
                                 <g clip-path="url(#flagTR)">
@@ -122,7 +126,7 @@
                                 </g>
                             </svg>
                         </button>
-                        <button class="lang-btn active" data-lang="en" aria-label="English" title="English">
+                        <button class="lang-btn active" data-lang="en" aria-label="English" title="English" aria-current="true">
                             <svg class="flag" viewBox="0 0 24 24" aria-hidden="true">
                                 <defs><clipPath id="flagEN"><circle cx="12" cy="12" r="12"/></clipPath></defs>
                                 <g clip-path="url(#flagEN)">
@@ -175,7 +179,7 @@
                 <h1 class="hero-title">
                     <span class="hero-title-name">Samet Soysal</span><span class="hero-title-period" aria-hidden="true">.</span>
                 </h1>
-                <p class="hero-role" aria-hidden="true">
+                <p class="hero-role">
                     <span class="hero-role-acro">AI</span>
                     <span class="hero-role-amp" aria-hidden="true">&amp;</span>
                     <span class="hero-role-tail">
@@ -218,8 +222,8 @@
                 </div>
             </div>
 
-            <!-- Profile photo column -->
-            <aside class="hero-photo-aside reveal" aria-hidden="true">
+            <!-- Profile photo column (decorative — alt="" is intentional) -->
+            <aside class="hero-photo-aside reveal">
                 <div class="hero-photo hero-photo-locked" oncontextmenu="return false;">
                     <span class="hero-photo-glow"></span>
                     <span class="hero-photo-ring"></span>
@@ -1200,6 +1204,6 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <script src="script.js?v=85"></script>
+    <script src="script.js?v=87"></script>
 </body>
 </html>
