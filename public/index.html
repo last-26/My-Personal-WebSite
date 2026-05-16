@@ -41,7 +41,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=101">
+    <link rel="stylesheet" href="styles.css?v=102">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -702,23 +702,23 @@
                                 <div class="card-icon"><i class="fas fa-chart-line"></i></div>
                                 <div class="card-title-group">
                                     <h3>SMTbot</h3>
-                                    <p class="card-tagline" data-tr="projects.smtbot.subtitle">Reinforcement Learning Trading Bot</p>
+                                    <p class="card-tagline" data-tr="projects.smtbot.subtitle">Async 24/7 Crypto Futures Scalper — Bybit V5</p>
                                 </div>
                             </div>
-                            <div class="card-highlight" data-tr="projects.smtbot.metric">PPO · Stable Baselines3 · Walk-Forward Optimization</div>
+                            <div class="card-highlight" data-tr="projects.smtbot.metric">~24 ms cycle · 25 pairs · ~6700× speedup</div>
                             <div class="card-content project-body">
                                 <p class="card-desc" data-tr="projects.smtbot.description">
-                                    An end-to-end bot that fuses my own discretionary trading experience with reinforcement learning. PPO + Stable Baselines3 agents train on feature-engineered Pine Script signals, get validated out-of-sample via walk-forward optimization, and connect to live signals through an MCP server. Goal: an autonomous trader that internalises hard-won judgment with measurable, risk-controlled behavior.
+                                    A headless event-driven trading bot on Bybit V5. A two-day rewrite replaced a brittle TradingView-Desktop scraper chain with a native WebSocket pipeline + in-process Pine v6 emulator — cutting cycle latency from ~160 s to ~24 ms (~6700×). Bit-perfect indicator parity (10/10 first build), backtest cohort within ±0.01R post-cutover, three-path entry cascade with a single exit doctrine. The tuned weights are the edge — they stay in the private repo.
                                 </p>
                                 <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
                                 <div class="card-tags">
-                                    <span class="tag-backend">Python</span><span class="tag-backend">Pine Script</span><span class="tag-cloud">Bybit V5</span><span class="tag-backend">pybit</span><span class="tag-devops">MCP</span><span class="tag-backend">FastAPI</span><span class="tag-devops">pytest</span><span class="tag-backend">SQLite</span><span class="tag-ai">VMC strategy</span>
+                                    <span class="tag-backend">Python · asyncio</span><span class="tag-cloud">Bybit V5 WS</span><span class="tag-backend">pybit</span><span class="tag-ai">Pine v6 emulator</span><span class="tag-backend">aiosqlite</span><span class="tag-backend">FastAPI</span><span class="tag-devops">pytest</span><span class="tag-ai">Optuna (TPE + CMA-ES)</span><span class="tag-ai">VMC strategy</span>
                                 </div>
                                 <div class="card-footer card-footer-multi">
                                     <a href="case-smtbot.html" class="card-link card-case-link">
                                         <i class="fas fa-book-open"></i> <span data-tr="projects.smtbot.casebtn">Read the case</span> <i class="fas fa-arrow-right card-link-arrow"></i>
                                     </a>
-                                    <a href="https://github.com/last-26/SMTbot" target="_blank" class="card-link">
+                                    <a href="https://github.com/last-26/SMTbot-Demo" target="_blank" rel="noopener noreferrer" class="card-link">
                                         <i class="fab fa-github"></i> <span data-tr="projects.link">View on GitHub</span> <i class="fas fa-arrow-right card-link-arrow"></i>
                                     </a>
                                     <span class="card-year">2026</span>
@@ -1204,6 +1204,6 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <script src="script.js?v=87"></script>
+    <script src="script.js?v=89"></script>
 </body>
 </html>

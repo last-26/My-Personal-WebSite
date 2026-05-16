@@ -241,6 +241,181 @@ body.light-mode .case-arch-diagram{
 body.light-mode .case-arch-diagram svg text[fill="#fff"]{fill:#14110e}
 body.light-mode .case-arch-diagram svg text[fill="#a8acbe"]{fill:#3d3934}
 
+/* ── Architecture v2 — layered, class-driven ── */
+.case-arch-diagram-v2{
+    padding:18px 18px 14px;
+    background:
+      radial-gradient(800px 380px at 20% -10%, rgba(124,58,237,.06), transparent 60%),
+      radial-gradient(700px 340px at 100% 60%, rgba(45,212,191,.05), transparent 65%),
+      var(--surface-1);
+}
+body.light-mode .case-arch-diagram-v2{
+    background:
+      radial-gradient(800px 380px at 20% -10%, rgba(109,40,217,.07), transparent 60%),
+      radial-gradient(700px 340px at 100% 60%, rgba(13,148,136,.06), transparent 65%),
+      rgba(255,255,255,.7);
+}
+.case-arch-diagram-v2 svg{min-width:760px}
+
+/* Lane backgrounds */
+.case-arch-diagram-v2 .arch-lane{
+    fill:rgba(255,255,255,.012);
+    stroke:var(--border-subtle);
+    stroke-width:1;
+    stroke-dasharray:0;
+}
+.case-arch-diagram-v2 .arch-stage-ingest .arch-lane{fill:rgba(124,58,237,.05);stroke:rgba(124,58,237,.22)}
+.case-arch-diagram-v2 .arch-stage-indicator .arch-lane{fill:rgba(45,212,191,.05);stroke:rgba(45,212,191,.22)}
+.case-arch-diagram-v2 .arch-stage-decide .arch-lane{fill:rgba(251,191,36,.045);stroke:rgba(251,191,36,.22)}
+.case-arch-diagram-v2 .arch-stage-act .arch-lane{fill:rgba(251,146,60,.05);stroke:rgba(251,146,60,.22)}
+body.light-mode .case-arch-diagram-v2 .arch-stage-ingest .arch-lane{fill:rgba(109,40,217,.06);stroke:rgba(109,40,217,.3)}
+body.light-mode .case-arch-diagram-v2 .arch-stage-indicator .arch-lane{fill:rgba(13,148,136,.06);stroke:rgba(13,148,136,.3)}
+body.light-mode .case-arch-diagram-v2 .arch-stage-decide .arch-lane{fill:rgba(217,119,6,.06);stroke:rgba(217,119,6,.3)}
+body.light-mode .case-arch-diagram-v2 .arch-stage-act .arch-lane{fill:rgba(234,88,12,.06);stroke:rgba(234,88,12,.3)}
+
+/* Lane stage labels */
+.case-arch-diagram-v2 .arch-lane-tag{
+    font-family:'JetBrains Mono', ui-monospace, monospace;
+    font-size:11px;font-weight:700;
+    letter-spacing:.22em;
+}
+.case-arch-diagram-v2 .arch-tag-ingest{fill:#c4b5fd}
+.case-arch-diagram-v2 .arch-tag-indicator{fill:#5eead4}
+.case-arch-diagram-v2 .arch-tag-decide{fill:#fcd34d}
+.case-arch-diagram-v2 .arch-tag-act{fill:#fb923c}
+body.light-mode .case-arch-diagram-v2 .arch-tag-ingest{fill:#6d28d9}
+body.light-mode .case-arch-diagram-v2 .arch-tag-indicator{fill:#0d7d72}
+body.light-mode .case-arch-diagram-v2 .arch-tag-decide{fill:#b45309}
+body.light-mode .case-arch-diagram-v2 .arch-tag-act{fill:#c2410c}
+
+.case-arch-diagram-v2 .arch-lane-sub{
+    font-family:'JetBrains Mono', ui-monospace, monospace;
+    font-size:10px;letter-spacing:.08em;
+    fill:#8b8f99;
+}
+body.light-mode .case-arch-diagram-v2 .arch-lane-sub{fill:#5b5650}
+
+/* Node text */
+.case-arch-diagram-v2 .arch-eyebrow{
+    font-family:'JetBrains Mono', ui-monospace, monospace;
+    font-size:9.5px;letter-spacing:.22em;font-weight:600;
+    text-anchor:middle;
+}
+.case-arch-diagram-v2 .arch-eyebrow-ingest{fill:#c4b5fd}
+.case-arch-diagram-v2 .arch-eyebrow-indicator{fill:#5eead4}
+.case-arch-diagram-v2 .arch-eyebrow-decide{fill:#fcd34d}
+.case-arch-diagram-v2 .arch-eyebrow-act{fill:#fb923c}
+.case-arch-diagram-v2 .arch-eyebrow-journal{fill:#f9a8d4}
+.case-arch-diagram-v2 .arch-eyebrow-dash{fill:#7dd3fc}
+body.light-mode .case-arch-diagram-v2 .arch-eyebrow-ingest{fill:#6d28d9}
+body.light-mode .case-arch-diagram-v2 .arch-eyebrow-indicator{fill:#0d7d72}
+body.light-mode .case-arch-diagram-v2 .arch-eyebrow-decide{fill:#b45309}
+body.light-mode .case-arch-diagram-v2 .arch-eyebrow-act{fill:#c2410c}
+body.light-mode .case-arch-diagram-v2 .arch-eyebrow-journal{fill:#be185d}
+body.light-mode .case-arch-diagram-v2 .arch-eyebrow-dash{fill:#0369a1}
+
+.case-arch-diagram-v2 .arch-title{
+    font-family:'Instrument Serif', Georgia, serif;
+    font-style:italic;
+    font-size:22px;
+    fill:#ffffff;
+    text-anchor:middle;
+}
+.case-arch-diagram-v2 .arch-title-sm{
+    font-family:'Instrument Serif', Georgia, serif;
+    font-style:italic;
+    font-size:17px;
+    fill:#ffffff;
+    text-anchor:middle;
+}
+.case-arch-diagram-v2 .arch-title-xs{
+    font-family:'Instrument Serif', Georgia, serif;
+    font-style:italic;
+    font-size:15px;
+    fill:#ffffff;
+    text-anchor:middle;
+}
+body.light-mode .case-arch-diagram-v2 .arch-title,
+body.light-mode .case-arch-diagram-v2 .arch-title-sm,
+body.light-mode .case-arch-diagram-v2 .arch-title-xs{fill:#14110e}
+
+.case-arch-diagram-v2 .arch-mono{
+    font-family:'JetBrains Mono', ui-monospace, monospace;
+    font-size:10px;
+    fill:#a8acbe;
+    text-anchor:middle;
+}
+body.light-mode .case-arch-diagram-v2 .arch-mono{fill:#5b5650}
+.case-arch-diagram-v2 .arch-mono-accent2{fill:#5eead4;text-anchor:start}
+body.light-mode .case-arch-diagram-v2 .arch-mono-accent2{fill:#0d7d72}
+.case-arch-diagram-v2 .arch-mono-decide{fill:#fcd34d;text-anchor:start}
+body.light-mode .case-arch-diagram-v2 .arch-mono-decide{fill:#b45309}
+.case-arch-diagram-v2 .arch-mono-act{fill:#fb923c;text-anchor:start;font-weight:600;letter-spacing:.18em}
+body.light-mode .case-arch-diagram-v2 .arch-mono-act{fill:#c2410c}
+.case-arch-diagram-v2 .arch-mono-journal{fill:#f9a8d4;text-anchor:start}
+body.light-mode .case-arch-diagram-v2 .arch-mono-journal{fill:#be185d}
+
+.case-arch-diagram-v2 .arch-dec-label{
+    font-family:'JetBrains Mono', ui-monospace, monospace;
+    font-size:11.5px;font-weight:700;letter-spacing:.18em;
+    fill:#fef3c7;
+    text-anchor:middle;
+}
+body.light-mode .case-arch-diagram-v2 .arch-dec-label{fill:#78350f}
+
+.case-arch-diagram-v2 .arch-node rect,
+.case-arch-diagram-v2 .arch-node polygon{
+    transition:filter .35s var(--ease-out), transform .35s var(--ease-out);
+    transform-origin:center;
+    transform-box:fill-box;
+}
+.case-arch-diagram-v2 .arch-node:hover rect,
+.case-arch-diagram-v2 .arch-node:hover polygon{
+    filter:drop-shadow(0 4px 12px rgba(124,58,237,.18)) brightness(1.08);
+    transform:translateY(-1px);
+}
+
+/* Legend strip below diagram */
+.case-arch-legend{
+    display:flex;flex-wrap:wrap;gap:8px 10px;
+    margin-top:14px;padding:10px 12px;
+    background:var(--surface-2);
+    border:1px solid var(--border-subtle);
+    border-radius:var(--radius-pill);
+    justify-content:center;
+}
+.alg-chip{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:var(--font-mono);
+    font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;
+    padding:3px 10px 3px 8px;
+    border-radius:var(--radius-pill);
+    border:1px solid transparent;
+}
+.alg-dot{
+    width:7px;height:7px;border-radius:50%;
+    display:inline-block;
+    box-shadow:0 0 0 2px rgba(255,255,255,.04);
+}
+.alg-ingest{color:#c4b5fd;background:rgba(124,58,237,.1);border-color:rgba(124,58,237,.28)}
+.alg-ingest .alg-dot{background:#a78bfa}
+.alg-indicator{color:#5eead4;background:rgba(45,212,191,.1);border-color:rgba(45,212,191,.28)}
+.alg-indicator .alg-dot{background:#2dd4bf}
+.alg-decide{color:#fcd34d;background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.28)}
+.alg-decide .alg-dot{background:#fbbf24}
+.alg-act{color:#fdba74;background:rgba(251,146,60,.1);border-color:rgba(251,146,60,.28)}
+.alg-act .alg-dot{background:#fb923c}
+.alg-journal{color:#f9a8d4;background:rgba(244,114,182,.1);border-color:rgba(244,114,182,.28)}
+.alg-journal .alg-dot{background:#f472b6}
+.alg-dash{color:#7dd3fc;background:rgba(125,211,252,.1);border-color:rgba(125,211,252,.28)}
+.alg-dash .alg-dot{background:#7dd3fc}
+body.light-mode .alg-ingest{color:#6d28d9;background:rgba(109,40,217,.08);border-color:rgba(109,40,217,.3)}
+body.light-mode .alg-indicator{color:#0d7d72;background:rgba(13,148,136,.08);border-color:rgba(13,148,136,.3)}
+body.light-mode .alg-decide{color:#b45309;background:rgba(217,119,6,.08);border-color:rgba(217,119,6,.3)}
+body.light-mode .alg-act{color:#c2410c;background:rgba(234,88,12,.08);border-color:rgba(234,88,12,.3)}
+body.light-mode .alg-journal{color:#be185d;background:rgba(190,24,93,.08);border-color:rgba(190,24,93,.3)}
+body.light-mode .alg-dash{color:#0369a1;background:rgba(3,105,161,.08);border-color:rgba(3,105,161,.3)}
+
 /* ── Stack grid — 4 columns single row on desktop ── */
 .case-stack-grid{
     display:grid;
@@ -275,6 +450,22 @@ body.light-mode .case-arch-diagram svg text[fill="#a8acbe"]{fill:#3d3934}
     margin-bottom:12px;
 }
 .case-stack-head i{font-size:.7rem}
+
+/* Per-column accent variants — matches the architecture diagram lanes */
+.case-stack-head-ingest{color:#c4b5fd;background:rgba(124,58,237,.1);border-color:rgba(124,58,237,.28)}
+.case-stack-head-indicator{color:#5eead4;background:rgba(45,212,191,.1);border-color:rgba(45,212,191,.28)}
+.case-stack-head-act{color:#fdba74;background:rgba(251,146,60,.1);border-color:rgba(251,146,60,.28)}
+.case-stack-head-journal{color:#f9a8d4;background:rgba(244,114,182,.1);border-color:rgba(244,114,182,.28)}
+body.light-mode .case-stack-head-ingest{color:#6d28d9;background:rgba(109,40,217,.08);border-color:rgba(109,40,217,.3)}
+body.light-mode .case-stack-head-indicator{color:#0d7d72;background:rgba(13,148,136,.08);border-color:rgba(13,148,136,.3)}
+body.light-mode .case-stack-head-act{color:#c2410c;background:rgba(234,88,12,.08);border-color:rgba(234,88,12,.3)}
+body.light-mode .case-stack-head-journal{color:#be185d;background:rgba(190,24,93,.08);border-color:rgba(190,24,93,.3)}
+
+/* Per-column hover border tint to match the head */
+.case-stack-col:has(.case-stack-head-ingest):hover{border-color:rgba(124,58,237,.32)}
+.case-stack-col:has(.case-stack-head-indicator):hover{border-color:rgba(45,212,191,.32)}
+.case-stack-col:has(.case-stack-head-act):hover{border-color:rgba(251,146,60,.32)}
+.case-stack-col:has(.case-stack-head-journal):hover{border-color:rgba(244,114,182,.32)}
 .case-stack-list{
     list-style:none;padding:0;margin:0;
     display:flex;flex-direction:column;
