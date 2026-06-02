@@ -107,24 +107,24 @@
                         <span class="case-h1-line case-h1-italic" data-tr="case.smtbot.h1">showcase.</span>
                     </h1>
                     <p class="case-cover-problem" data-tr="case.smtbot.cover.problem">
-                        Private trading system, public engineering showcase. Architecture, risk controls, journal, dashboard, and validation are visible; the private research core stays closed.
+                        Private trading system. Public engineering showcase. The page shows architecture, risk controls, journal/dashboard layers, and validation without exposing the decision core.
                     </p>
                     <div class="case-status-chip">
                         <span class="now-pulse" aria-hidden="true"></span>
-                        <span data-tr="case.smtbot.cover.status">Bybit-native · 30 symbols x 6 TFs · ~975 pytest cases</span>
+                        <span data-tr="case.smtbot.cover.status">Bybit V5-native · 30 symbols x 6 TFs · ~975 pytest cases</span>
                     </div>
                 </div>
                 <aside class="case-cover-meta" aria-label="Quick stats">
                     <div class="case-stat">
-                        <span class="case-stat-k" data-tr="case.smtbot.stat1.k">Steady cycle</span>
+                        <span class="case-stat-k" data-tr="case.smtbot.stat1.k">Cycle time</span>
                         <span class="case-stat-v" data-tr="case.smtbot.stat1.v">~24 ms</span>
                     </div>
                     <div class="case-stat">
-                        <span class="case-stat-k" data-tr="case.smtbot.stat2.k">Market surface</span>
+                        <span class="case-stat-k" data-tr="case.smtbot.stat2.k">Coverage</span>
                         <span class="case-stat-v" data-tr="case.smtbot.stat2.v">30 x 6 TF</span>
                     </div>
                     <div class="case-stat">
-                        <span class="case-stat-k" data-tr="case.smtbot.stat3.k">Validation</span>
+                        <span class="case-stat-k" data-tr="case.smtbot.stat3.k">Test surface</span>
                         <span class="case-stat-v" data-tr="case.smtbot.stat3.v">63 / ~975</span>
                     </div>
                     <div class="case-stat">
@@ -139,9 +139,9 @@
         <section class="case-section case-section-arch">
             <div class="container case-narrative">
                 <span class="case-tag" data-tr="case.smtbot.arch.tag">01 · Architecture</span>
-                <h2 class="case-h2" data-tr="case.smtbot.arch.h">A full trading loop, shown at system level.</h2>
+                <h2 class="case-h2" data-tr="case.smtbot.arch.h">End-to-end trading loop, shown at system level.</h2>
                 <p class="case-body case-body-lead" data-tr="case.smtbot.arch.lead">
-                    A Bybit-native loop with a visible operating surface: data, private core boundary, risk authority, execution, journal, dashboard, and diagnostics.
+                    Read the flow as Bybit V5 API, data preparation, private decision boundary, risk authority, execution, and operations.
                 </p>
 
                 <div class="case-system-map" role="img" aria-labelledby="systemMapTitle">
@@ -153,7 +153,7 @@
                         </div>
                         <span class="system-node-k">01</span>
                         <h3 data-tr="case.smtbot.arch.exchange.h">Bybit V5</h3>
-                        <p data-tr="case.smtbot.arch.exchange.body">WS market data. REST orders and positions.</p>
+                        <p data-tr="case.smtbot.arch.exchange.body">Primary exchange interface for market data, orders, positions, and wallet state.</p>
                     </article>
                     <span class="system-arrow" aria-hidden="true"></span>
                     <article class="system-node node-data">
@@ -163,7 +163,7 @@
                         </div>
                         <span class="system-node-k">02</span>
                         <h3 data-tr="case.smtbot.arch.data.h">Data Plane</h3>
-                        <p data-tr="case.smtbot.arch.data.body">Async client, buffers, cache, state builder.</p>
+                        <p data-tr="case.smtbot.arch.data.body">Stream normalization, candle buffers, cache, and market-state assembly.</p>
                     </article>
                     <span class="system-arrow" aria-hidden="true"></span>
                     <article class="system-node node-core">
@@ -172,8 +172,8 @@
                             <span class="system-mask"></span>
                         </div>
                         <span class="system-node-k">03</span>
-                        <h3 data-tr="case.smtbot.arch.core.h">Private Research Core</h3>
-                        <p data-tr="case.smtbot.arch.core.body">Closed decision layer behind a public boundary.</p>
+                        <h3 data-tr="case.smtbot.arch.core.h">Private Decision Core</h3>
+                        <p data-tr="case.smtbot.arch.core.body">Decision logic stays closed; only its input/output boundary is shown.</p>
                     </article>
                     <span class="system-arrow" aria-hidden="true"></span>
                     <article class="system-node node-risk">
@@ -183,7 +183,7 @@
                         </div>
                         <span class="system-node-k">04</span>
                         <h3 data-tr="case.smtbot.arch.risk.h">Risk Authority</h3>
-                        <p data-tr="case.smtbot.arch.risk.body">RR, sizing, guardrails, breakers, lifecycle.</p>
+                        <p data-tr="case.smtbot.arch.risk.body">RR, sizing, exposure limits, circuit breakers, and position lifecycle gates.</p>
                     </article>
                     <span class="system-arrow" aria-hidden="true"></span>
                     <article class="system-node node-ops">
@@ -193,7 +193,7 @@
                         </div>
                         <span class="system-node-k">05</span>
                         <h3 data-tr="case.smtbot.arch.ops.h">Execution &amp; Ops</h3>
-                        <p data-tr="case.smtbot.arch.ops.body">Router, reconciliation, SQLite, dashboard, reports.</p>
+                        <p data-tr="case.smtbot.arch.ops.body">Order routing, reconciliation, SQLite records, dashboard, and diagnostic reports.</p>
                     </article>
                 </div>
             </div>
@@ -202,26 +202,26 @@
         <!-- ==================== BOUNDARY ==================== -->
         <section class="case-section">
             <div class="container case-narrative">
-                <span class="case-tag" data-tr="case.smtbot.boundary.tag">02 · Showcase Boundary</span>
-                <h2 class="case-h2" data-tr="case.smtbot.boundary.h">Enough signal to judge the build. Not enough to clone the edge.</h2>
+                <span class="case-tag" data-tr="case.smtbot.boundary.tag">02 · Public/Private Boundary</span>
+                <h2 class="case-h2" data-tr="case.smtbot.boundary.h">Open enough to evaluate the engineering. Closed enough to protect the strategy.</h2>
                 <p class="case-body" data-tr="case.smtbot.boundary.lead">
-                    The showcase is intentionally non-copyable: enough system signal for credibility, not enough detail to clone the edge.
+                    The showcase explains system quality, not trading decision logic, production parameters, or internal reports.
                 </p>
                 <div class="case-boundary-grid">
                     <article class="case-boundary-card boundary-public">
-                        <span class="boundary-label" data-tr="case.smtbot.boundary.public">Public in showcase</span>
+                        <span class="boundary-label" data-tr="case.smtbot.boundary.public">Visible in showcase</span>
                         <ul data-tr="case.smtbot.boundary.public.list">
-                            <li>Architecture and module map</li>
-                            <li>Runtime and dependency footprint</li>
-                            <li>Risk controls, workflow, dashboard, journal</li>
+                            <li>System architecture and module map</li>
+                            <li>Runtime model and technology footprint</li>
+                            <li>Risk controls, ops workflow, dashboard, and journal structure</li>
                         </ul>
                     </article>
                     <article class="case-boundary-card boundary-private">
-                        <span class="boundary-label" data-tr="case.smtbot.boundary.private">Private in SMTbot</span>
+                        <span class="boundary-label" data-tr="case.smtbot.boundary.private">Kept in private repo</span>
                         <ul data-tr="case.smtbot.boundary.private.list">
-                            <li>Research core implementation</li>
-                            <li>Production parameters and ranking rules</li>
-                            <li>Account records and internal reports</li>
+                            <li>Decision core implementation</li>
+                            <li>Production parameters and internal ranking logic</li>
+                            <li>Account records and private performance reports</li>
                         </ul>
                     </article>
                 </div>
@@ -231,10 +231,10 @@
         <!-- ==================== STACK ==================== -->
         <section class="case-section case-section-arch">
             <div class="container case-narrative">
-                <span class="case-tag" data-tr="case.smtbot.stack.tag">03 · Stack</span>
-                <h2 class="case-h2" data-tr="case.smtbot.stack.h">What the public surface can safely show.</h2>
+                <span class="case-tag" data-tr="case.smtbot.stack.tag">03 · Capability Map</span>
+                <h2 class="case-h2" data-tr="case.smtbot.stack.h">The visible technical surface is grouped by responsibility.</h2>
                 <p class="case-body" data-tr="case.smtbot.stack.lead">
-                    Lean runtime, exchange-native IO, SQLite memory, read-only dashboard, and tests around the private core.
+                    The exposed layers represent data, risk, execution, journal, dashboard, and test discipline without revealing strategy logic.
                 </p>
                 <div class="case-stack-grid">
                     <div class="case-stack-col">
@@ -243,9 +243,9 @@
                             <span data-tr="case.smtbot.stack.data">Data Plane</span>
                         </div>
                         <ul class="case-stack-list" data-tr="case.smtbot.stack.data.list">
-                            <li><strong>Bybit V5 WS</strong> <span>closed-candle market data</span></li>
-                            <li><strong>KlineBuffer + cache</strong> <span>rolling windows, reconnect recovery</span></li>
-                            <li><strong>MarketStateBuilder</strong> <span>state from raw exchange rows</span></li>
+                            <li><strong>Bybit V5 WS</strong> <span>closed-candle stream and market feed</span></li>
+                            <li><strong>KlineBuffer + cache</strong> <span>rolling windows and reconnect recovery</span></li>
+                            <li><strong>MarketStateBuilder</strong> <span>normalized state from raw exchange rows</span></li>
                         </ul>
                     </div>
                     <div class="case-stack-col">
@@ -254,9 +254,9 @@
                             <span data-tr="case.smtbot.stack.risk">Risk &amp; Portfolio</span>
                         </div>
                         <ul class="case-stack-list" data-tr="case.smtbot.stack.risk.list">
-                            <li><strong>RR system</strong> <span>standardized reward/risk math</span></li>
-                            <li><strong>Position sizing</strong> <span>equity-aware exposure control</span></li>
-                            <li><strong>Circuit breakers</strong> <span>loss, streak, drawdown, cooldown</span></li>
+                            <li><strong>RR system</strong> <span>standardized reward/risk calculation</span></li>
+                            <li><strong>Position sizing</strong> <span>equity and exposure-aware sizing</span></li>
+                            <li><strong>Circuit breakers</strong> <span>loss, streak, drawdown, and cooldown gates</span></li>
                         </ul>
                     </div>
                     <div class="case-stack-col">
@@ -265,9 +265,9 @@
                             <span data-tr="case.smtbot.stack.execution">Execution</span>
                         </div>
                         <ul class="case-stack-list" data-tr="case.smtbot.stack.execution.list">
-                            <li><strong>pybit V5 client</strong> <span>orders, positions, wallet, fills</span></li>
-                            <li><strong>Order router</strong> <span>single controlled execution path</span></li>
-                            <li><strong>Position monitor</strong> <span>exchange state reconciliation</span></li>
+                            <li><strong>pybit V5 client</strong> <span>order, position, wallet, and fill access</span></li>
+                            <li><strong>Order router</strong> <span>single controlled order gateway</span></li>
+                            <li><strong>Position monitor</strong> <span>reconciliation against exchange state</span></li>
                         </ul>
                     </div>
                     <div class="case-stack-col">
@@ -276,9 +276,9 @@
                             <span data-tr="case.smtbot.stack.ops">Ops &amp; Validation</span>
                         </div>
                         <ul class="case-stack-list" data-tr="case.smtbot.stack.ops.list">
-                            <li><strong>aiosqlite journal</strong> <span>audit trail for runtime events</span></li>
-                            <li><strong>FastAPI + uvicorn</strong> <span>read-only terminal dashboard</span></li>
-                            <li><strong>pytest</strong> <span>63 files, roughly 975 cases</span></li>
+                            <li><strong>aiosqlite journal</strong> <span>persistent records for runtime events</span></li>
+                            <li><strong>FastAPI + uvicorn</strong> <span>read-only operations dashboard</span></li>
+                            <li><strong>pytest</strong> <span>63 files, roughly 975 test cases</span></li>
                         </ul>
                     </div>
                 </div>
@@ -289,27 +289,27 @@
         <section class="case-section">
             <div class="container case-narrative">
                 <span class="case-tag" data-tr="case.smtbot.proof.tag">04 · Engineering Proof</span>
-                <h2 class="case-h2" data-tr="case.smtbot.proof.h">The impressive part is the operating surface.</h2>
+                <h2 class="case-h2" data-tr="case.smtbot.proof.h">The proof is visible operating quality, not exposed strategy detail.</h2>
                 <div class="case-proof-grid">
                     <article class="case-proof-card">
                         <span class="case-proof-icon" aria-hidden="true"><i class="fas fa-satellite-dish"></i></span>
-                        <h3 data-tr="case.smtbot.proof.data.h">Owned data path</h3>
-                        <p data-tr="case.smtbot.proof.data.body">No chart app, browser automation, or GUI dependency.</p>
+                        <h3 data-tr="case.smtbot.proof.data.h">API-owned data path</h3>
+                        <p data-tr="case.smtbot.proof.data.body">Market ingestion and state preparation are owned directly through exchange APIs.</p>
                     </article>
                     <article class="case-proof-card">
                         <span class="case-proof-icon" aria-hidden="true"><i class="fas fa-shield-halved"></i></span>
-                        <h3 data-tr="case.smtbot.proof.risk.h">Risk before execution</h3>
-                        <p data-tr="case.smtbot.proof.risk.body">RR, sizing, exposure, and breakers before execution.</p>
+                        <h3 data-tr="case.smtbot.proof.risk.h">Risk gate before orders</h3>
+                        <p data-tr="case.smtbot.proof.risk.body">RR, sizing, exposure, and cooldown checks run before order routing.</p>
                     </article>
                     <article class="case-proof-card">
                         <span class="case-proof-icon" aria-hidden="true"><i class="fas fa-database"></i></span>
-                        <h3 data-tr="case.smtbot.proof.ops.h">Operator-grade memory</h3>
-                        <p data-tr="case.smtbot.proof.ops.body">SQLite journal, dashboard, reports, and reconciliation.</p>
+                        <h3 data-tr="case.smtbot.proof.ops.h">Inspectable ops memory</h3>
+                        <p data-tr="case.smtbot.proof.ops.body">SQLite records and dashboard views keep actions, reconciliation, and reports auditable.</p>
                     </article>
                     <article class="case-proof-card">
                         <span class="case-proof-icon" aria-hidden="true"><i class="fas fa-vial-circle-check"></i></span>
-                        <h3 data-tr="case.smtbot.proof.validation.h">Validation footprint</h3>
-                        <p data-tr="case.smtbot.proof.validation.body">63 test files across runtime, risk, execution, and ops.</p>
+                        <h3 data-tr="case.smtbot.proof.validation.h">Test-guarded surface</h3>
+                        <p data-tr="case.smtbot.proof.validation.body">63 test files cover runtime, risk, execution, and operations flows.</p>
                     </article>
                 </div>
             </div>
@@ -319,18 +319,18 @@
         <section class="case-section case-section-arch">
             <div class="container case-narrative">
                 <span class="case-tag" data-tr="case.smtbot.workflow.tag">05 · Workflow</span>
-                <h2 class="case-h2" data-tr="case.smtbot.workflow.h">Demo-first, observable, reversible.</h2>
+                <h2 class="case-h2" data-tr="case.smtbot.workflow.h">Controlled demo path from connection to observation.</h2>
                 <p class="case-body" data-tr="case.smtbot.workflow.lead">
-                    Credentials, smoke test, dry run, dashboard, then traceable operation.
+                    The workflow validates API access first, then moves through configuration, connection checks, dry-run, and dashboard monitoring.
                 </p>
                 <div class="case-flow case-workflow-flow">
                     <span class="case-flow-step"><span class="case-flow-num">01</span><span data-tr="case.smtbot.workflow.step1">BYBIT API</span></span>
                     <span class="case-flow-arrow" aria-hidden="true">→</span>
                     <span class="case-flow-step"><span class="case-flow-num">02</span><span data-tr="case.smtbot.workflow.step2">config + env</span></span>
                     <span class="case-flow-arrow" aria-hidden="true">→</span>
-                    <span class="case-flow-step"><span class="case-flow-num">03</span><span data-tr="case.smtbot.workflow.step3">connection smoke</span></span>
+                    <span class="case-flow-step"><span class="case-flow-num">03</span><span data-tr="case.smtbot.workflow.step3">connection check</span></span>
                     <span class="case-flow-arrow" aria-hidden="true">→</span>
-                    <span class="case-flow-step"><span class="case-flow-num">04</span><span data-tr="case.smtbot.workflow.step4">dry-run once</span></span>
+                    <span class="case-flow-step"><span class="case-flow-num">04</span><span data-tr="case.smtbot.workflow.step4">dry-run pass</span></span>
                     <span class="case-flow-arrow" aria-hidden="true">→</span>
                     <span class="case-flow-step"><span class="case-flow-num">05</span><span data-tr="case.smtbot.workflow.step5">dashboard watch</span></span>
                 </div>
@@ -363,6 +363,6 @@
     </footer>
 
     <!-- Reuse global script (theme, lang, cursor canvas, lightning) -->
-    <script src="script.js?v=92"></script>
+    <script src="script.js?v=93"></script>
 </body>
 </html>
