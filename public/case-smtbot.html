@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMTbot — Case Study | Samet Soysal</title>
-    <meta name="description" content="A technical case study on SMTbot — an event-driven 24/7 Bybit V5 futures scalper. A two-day rewrite cut cycle latency from ~160s to ~24ms (~6700×) with bit-perfect Pine v6 parity.">
+    <title>SMTbot — Engineering Showcase | Samet Soysal</title>
+    <meta name="description" content="SMTbot engineering showcase: a private Bybit V5 research bot presented through its public architecture, runtime model, risk controls, journal, dashboard, and validation surface.">
 
     <link rel="canonical" href="https://last-26.web.app/case-smtbot.html">
     <meta name="theme-color" content="#06060e" media="(prefers-color-scheme: dark)">
@@ -14,8 +14,8 @@
     <!-- Open Graph -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://last-26.web.app/case-smtbot.html">
-    <meta property="og:title" content="SMTbot Case Study — Bybit V5 Native Trading Bot">
-    <meta property="og:description" content="The two-day rewrite that made the bot ~6700× faster — Bybit V5 WebSocket + Python-native Pine v6 emulator, with bit-perfect indicator parity.">
+    <meta property="og:title" content="SMTbot Engineering Showcase — Bybit V5 Native Research Bot">
+    <meta property="og:description" content="A public engineering view of a private trading system: Bybit-native data flow, risk authority, async journal, read-only dashboard, diagnostics, and validation.">
     <meta property="og:image" content="https://last-26.web.app/og-cover.png">
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="tr_TR">
@@ -25,14 +25,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=102">
-    <link rel="stylesheet" href="case-smtbot.css?v=4">
+    <link rel="stylesheet" href="styles.css?v=103">
+    <link rel="stylesheet" href="case-smtbot.css?v=7">
 
     <!-- Firebase SDK (analytics consistency with main site) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 </head>
-<body>
+<body data-case-id="smtbot">
     <!-- Atmosphere -->
     <div class="noise-overlay"></div>
     <canvas id="cursorCanvas"></canvas>
@@ -104,32 +104,32 @@
                     <span class="case-eyebrow">// case_study/smtbot.md</span>
                     <h1 class="case-h1">
                         <span class="case-h1-line">SMTbot</span>
-                        <span class="case-h1-line case-h1-italic" data-tr="case.smtbot.h1">case study.</span>
+                        <span class="case-h1-line case-h1-italic" data-tr="case.smtbot.h1">showcase.</span>
                     </h1>
                     <p class="case-cover-problem" data-tr="case.smtbot.cover.problem">
-                        A 24/7 crypto futures scalper on Bybit V5. The interesting story isn't the strategy — it's the two-day rewrite that replaced a brittle TradingView scraper chain with a native WebSocket pipeline, and the bot got ~6700× faster overnight without changing a single trade decision.
+                        Private trading system, public engineering showcase. Architecture, risk controls, journal, dashboard, and validation are visible; the private research core stays closed.
                     </p>
                     <div class="case-status-chip">
                         <span class="now-pulse" aria-hidden="true"></span>
-                        <span data-tr="case.smtbot.cover.status">Bybit V5 native · ~640 tests · ~24 ms cycle</span>
+                        <span data-tr="case.smtbot.cover.status">Bybit-native · 30 symbols x 6 TFs · ~975 pytest cases</span>
                     </div>
                 </div>
                 <aside class="case-cover-meta" aria-label="Quick stats">
                     <div class="case-stat">
-                        <span class="case-stat-k" data-tr="case.smtbot.stat1.k">Cycle latency</span>
-                        <span class="case-stat-v">~24 ms</span>
+                        <span class="case-stat-k" data-tr="case.smtbot.stat1.k">Steady cycle</span>
+                        <span class="case-stat-v" data-tr="case.smtbot.stat1.v">~24 ms</span>
                     </div>
                     <div class="case-stat">
-                        <span class="case-stat-k" data-tr="case.smtbot.stat2.k">Pairs scanned</span>
-                        <span class="case-stat-v">25</span>
+                        <span class="case-stat-k" data-tr="case.smtbot.stat2.k">Market surface</span>
+                        <span class="case-stat-v" data-tr="case.smtbot.stat2.v">30 x 6 TF</span>
                     </div>
                     <div class="case-stat">
-                        <span class="case-stat-k" data-tr="case.smtbot.stat3.k">Tests</span>
-                        <span class="case-stat-v">~640 ✓</span>
+                        <span class="case-stat-k" data-tr="case.smtbot.stat3.k">Validation</span>
+                        <span class="case-stat-v" data-tr="case.smtbot.stat3.v">63 / ~975</span>
                     </div>
                     <div class="case-stat">
                         <span class="case-stat-k" data-tr="case.smtbot.stat4.k">Strategy</span>
-                        <span class="case-stat-v">VMC</span>
+                        <span class="case-stat-v" data-tr="case.smtbot.stat4.v">Price Action</span>
                     </div>
                 </aside>
             </div>
@@ -139,297 +139,124 @@
         <section class="case-section case-section-arch">
             <div class="container case-narrative">
                 <span class="case-tag" data-tr="case.smtbot.arch.tag">01 · Architecture</span>
-                <h2 class="case-h2" data-tr="case.smtbot.arch.h">Event-driven, from bar boundary to order placement.</h2>
+                <h2 class="case-h2" data-tr="case.smtbot.arch.h">A full trading loop, shown at system level.</h2>
                 <p class="case-body case-body-lead" data-tr="case.smtbot.arch.lead">
-                    A Bybit V5 WebSocket fans live kline streams into a per-symbol buffer and a closed-bar scheduler. A Python-native Pine v6 emulator computes the indicators in-process — bit-perfect parity with the original TradingView readings, but at ~24 ms instead of ~160 s. The BotRunner cascades three entry paths through a single decision diamond; only TAKE reaches the Order Router. SQLite is the async journal underneath everything.
+                    A Bybit-native loop with a visible operating surface: data, private core boundary, risk authority, execution, journal, dashboard, and diagnostics.
                 </p>
-                <div class="case-arch-diagram case-arch-diagram-v2">
-                    <svg viewBox="0 0 1000 830" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="archTitle archDesc">
-                        <title id="archTitle">SMTbot architecture — four layers</title>
-                        <desc id="archDesc">A four-stage pipeline. Stage one ingests Bybit V5 WebSocket kline streams through a WS client into a per-symbol KlineBuffer and a CycleScheduler. Stage two computes indicators with a Python-native Pine v6 emulator (Heikin Ashi, WaveTrend, MFI, EMA200, VWAP) into a MarketState snapshot. Stage three runs a BotRunner that dispatches evaluate_entry across three cascade paths (cross-based, pre-cross, HA reversal) into a TAKE / NO_SETUP / REJECT decision. Stage four executes only on TAKE via an Order Router into Bybit V5 REST, while every cycle writes to a SQLite journal that a FastAPI dashboard reads.</desc>
-                        <defs>
-                            <marker id="archArrow" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
-                                <path d="M0,0 L0,6 L8,3 z" fill="context-stroke"/>
-                            </marker>
-                            <marker id="archArrowFB" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
-                                <path d="M0,0 L0,6 L8,3 z" fill="context-stroke"/>
-                            </marker>
-                            <linearGradient id="g-ingest" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.34"/>
-                                <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.06"/>
-                            </linearGradient>
-                            <linearGradient id="g-indicator" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.32"/>
-                                <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0.05"/>
-                            </linearGradient>
-                            <linearGradient id="g-decide" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.32"/>
-                                <stop offset="100%" stop-color="#fbbf24" stop-opacity="0.05"/>
-                            </linearGradient>
-                            <linearGradient id="g-act" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#fb923c" stop-opacity="0.32"/>
-                                <stop offset="100%" stop-color="#fb923c" stop-opacity="0.05"/>
-                            </linearGradient>
-                            <linearGradient id="g-journal" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#f472b6" stop-opacity="0.28"/>
-                                <stop offset="100%" stop-color="#f472b6" stop-opacity="0.04"/>
-                            </linearGradient>
-                            <linearGradient id="g-dash" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.26"/>
-                                <stop offset="100%" stop-color="#7dd3fc" stop-opacity="0.04"/>
-                            </linearGradient>
-                            <linearGradient id="g-dec" x1="0" y1="0" x2="1" y2="1">
-                                <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.42"/>
-                                <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.18"/>
-                            </linearGradient>
-                        </defs>
 
-                        <!-- ─────────── STAGE 01 · INGEST ─────────── -->
-                        <g class="arch-stage arch-stage-ingest">
-                            <rect class="arch-lane" x="20" y="30" width="960" height="180" rx="18"/>
-                            <text class="arch-lane-tag arch-tag-ingest" x="44" y="58">01 · DATA INGRESS</text>
-                            <text class="arch-lane-sub" x="180" y="58" data-tr="case.smtbot.arch.lane1">streams · 1m closed-bar · gap-fill</text>
-
-                            <!-- Bybit V5 WS -->
-                            <g class="arch-node">
-                                <rect x="40" y="80" width="190" height="110" rx="12" fill="url(#g-ingest)" stroke="#7c3aed" stroke-width="1.5"/>
-                                <text class="arch-eyebrow arch-eyebrow-ingest" x="135" y="105">SOURCE</text>
-                                <text class="arch-title" x="135" y="135">Bybit V5 WS</text>
-                                <text class="arch-mono" x="135" y="158">kline.{1,3,5,15}</text>
-                                <text class="arch-mono" x="135" y="174">.SYMBOL</text>
-                            </g>
-
-                            <!-- BybitWSClient -->
-                            <g class="arch-node">
-                                <rect x="270" y="80" width="180" height="110" rx="12" fill="url(#g-ingest)" stroke="#7c3aed" stroke-width="1.5"/>
-                                <text class="arch-eyebrow arch-eyebrow-ingest" x="360" y="105">CLIENT</text>
-                                <text class="arch-title" x="360" y="135">BybitWSClient</text>
-                                <text class="arch-mono" x="360" y="158">async subscribe</text>
-                                <text class="arch-mono" x="360" y="174">auto-reconnect</text>
-                            </g>
-
-                            <!-- KlineBuffer -->
-                            <g class="arch-node">
-                                <rect x="490" y="80" width="240" height="48" rx="10" fill="url(#g-ingest)" stroke="#7c3aed" stroke-width="1.5"/>
-                                <text class="arch-eyebrow arch-eyebrow-ingest" x="610" y="100">BUFFER</text>
-                                <text class="arch-title-sm" x="610" y="120">KlineBuffer · per-symbol deque</text>
-                            </g>
-                            <text class="arch-mono" x="610" y="143">gap-fill on reconnect</text>
-
-                            <!-- CycleScheduler -->
-                            <g class="arch-node">
-                                <rect x="490" y="155" width="240" height="48" rx="10" fill="url(#g-ingest)" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="5 3"/>
-                                <text class="arch-eyebrow arch-eyebrow-ingest" x="610" y="175">CLOCK</text>
-                                <text class="arch-title-sm" x="610" y="195">CycleScheduler · 1m closed-bar</text>
-                            </g>
-
-                            <!-- Right-side note -->
-                            <g class="arch-callout">
-                                <rect x="760" y="80" width="200" height="123" rx="12" fill="none" stroke="#a78bfa" stroke-width="1" stroke-dasharray="2 4" opacity="0.55"/>
-                                <text class="arch-eyebrow arch-eyebrow-ingest" x="860" y="108">HEARTBEAT</text>
-                                <text class="arch-title-xs" x="860" y="135">event-driven</text>
-                                <text class="arch-mono" x="860" y="158">no polling · no GUI</text>
-                                <text class="arch-mono" x="860" y="178">25 pairs in parallel</text>
-                            </g>
-
-                            <!-- Connectors -->
-                            <line x1="230" y1="135" x2="265" y2="135" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#archArrow)"/>
-                            <path d="M450,125 Q470,125 485,108" stroke="#a78bfa" stroke-width="1.6" fill="none" marker-end="url(#archArrow)"/>
-                            <path d="M450,150 Q470,150 485,177" stroke="#a78bfa" stroke-width="1.6" fill="none" marker-end="url(#archArrow)"/>
-                            <line x1="730" y1="105" x2="757" y2="105" stroke="#a78bfa" stroke-width="1" stroke-dasharray="2 3" opacity="0.55"/>
-                            <line x1="730" y1="180" x2="757" y2="180" stroke="#a78bfa" stroke-width="1" stroke-dasharray="2 3" opacity="0.55"/>
-                        </g>
-
-                        <!-- ─────────── STAGE 02 · INDICATOR ─────────── -->
-                        <g class="arch-stage arch-stage-indicator">
-                            <rect class="arch-lane" x="20" y="232" width="960" height="118" rx="18"/>
-                            <text class="arch-lane-tag arch-tag-indicator" x="44" y="260">02 · INDICATOR LAYER</text>
-                            <text class="arch-lane-sub" x="225" y="260" data-tr="case.smtbot.arch.lane2">in-process Pine v6 emulator · bit-perfect parity</text>
-
-                            <!-- MarketStateBuilder -->
-                            <g class="arch-node">
-                                <rect x="40" y="280" width="200" height="50" rx="10" fill="url(#g-indicator)" stroke="#2dd4bf" stroke-width="1.5"/>
-                                <text class="arch-eyebrow arch-eyebrow-indicator" x="140" y="300">BUILD</text>
-                                <text class="arch-title-sm" x="140" y="320">MarketStateBuilder</text>
-                            </g>
-
-                            <!-- PineEmulator -->
-                            <g class="arch-node">
-                                <rect x="280" y="270" width="400" height="70" rx="12" fill="url(#g-indicator)" stroke="#2dd4bf" stroke-width="1.5"/>
-                                <text class="arch-eyebrow arch-eyebrow-indicator" x="480" y="290">PINE v6 · EMULATOR</text>
-                                <text class="arch-title-sm" x="480" y="312">HA · WaveTrend · MFI · EMA200 · VWAP</text>
-                                <text class="arch-mono" x="480" y="331">10/10 bit-perfect diff vs TradingView</text>
-                            </g>
-
-                            <!-- MarketState -->
-                            <g class="arch-node">
-                                <rect x="720" y="280" width="220" height="50" rx="10" fill="url(#g-indicator)" stroke="#2dd4bf" stroke-width="1.5"/>
-                                <text class="arch-eyebrow arch-eyebrow-indicator" x="830" y="300">SNAPSHOT</text>
-                                <text class="arch-title-sm" x="830" y="320">MarketState</text>
-                            </g>
-
-                            <!-- Connectors -->
-                            <line x1="240" y1="305" x2="277" y2="305" stroke="#5eead4" stroke-width="1.6" marker-end="url(#archArrow)"/>
-                            <line x1="680" y1="305" x2="717" y2="305" stroke="#5eead4" stroke-width="1.6" marker-end="url(#archArrow)"/>
-
-                            <!-- Inter-stage: KlineBuffer → MarketStateBuilder -->
-                            <path d="M610,128 Q610,200 140,200 L140,278" stroke="#5eead4" stroke-width="1.6" fill="none" stroke-dasharray="0" marker-end="url(#archArrow)"/>
-                            <text class="arch-mono arch-mono-accent2" x="220" y="218">closed bars</text>
-                        </g>
-
-                        <!-- ─────────── STAGE 03 · DECISION ─────────── -->
-                        <g class="arch-stage arch-stage-decide">
-                            <rect class="arch-lane" x="20" y="372" width="960" height="298" rx="18"/>
-                            <text class="arch-lane-tag arch-tag-decide" x="44" y="400">03 · DECISION CASCADE</text>
-                            <text class="arch-lane-sub" x="240" y="400" data-tr="case.smtbot.arch.lane3">three entry paths · one decision · single exit doctrine</text>
-
-                            <!-- BotRunner -->
-                            <g class="arch-node">
-                                <rect x="340" y="420" width="320" height="56" rx="12" fill="url(#g-decide)" stroke="#fbbf24" stroke-width="1.5"/>
-                                <text class="arch-eyebrow arch-eyebrow-decide" x="500" y="441">PER-SYMBOL CYCLE</text>
-                                <text class="arch-title-sm" x="500" y="462">BotRunner._run_one_symbol</text>
-                            </g>
-
-                            <!-- evaluate_entry -->
-                            <g class="arch-node">
-                                <rect x="340" y="498" width="320" height="56" rx="12" fill="url(#g-decide)" stroke="#fbbf24" stroke-width="1.5"/>
-                                <text class="arch-eyebrow arch-eyebrow-decide" x="500" y="519">CASCADE DISPATCH</text>
-                                <text class="arch-title-sm" x="500" y="541">evaluate_entry()</text>
-                            </g>
-
-                            <!-- Three paths -->
-                            <g class="arch-node arch-node-path">
-                                <rect x="60" y="578" width="240" height="50" rx="10" fill="url(#g-decide)" stroke="#fbbf24" stroke-width="1.3"/>
-                                <text class="arch-eyebrow arch-eyebrow-decide" x="180" y="598">PATH 1</text>
-                                <text class="arch-title-xs" x="180" y="618">cross_based</text>
-                            </g>
-                            <g class="arch-node arch-node-path">
-                                <rect x="380" y="578" width="240" height="50" rx="10" fill="url(#g-decide)" stroke="#fbbf24" stroke-width="1.3"/>
-                                <text class="arch-eyebrow arch-eyebrow-decide" x="500" y="598">PATH 2 · fallback</text>
-                                <text class="arch-title-xs" x="500" y="618">pre_cross</text>
-                            </g>
-                            <g class="arch-node arch-node-path">
-                                <rect x="700" y="578" width="240" height="50" rx="10" fill="url(#g-decide)" stroke="#fbbf24" stroke-width="1.3"/>
-                                <text class="arch-eyebrow arch-eyebrow-decide" x="820" y="598">PATH 3 · fast</text>
-                                <text class="arch-title-xs" x="820" y="618">ha_reversal</text>
-                            </g>
-
-                            <!-- Decision diamond -->
-                            <g class="arch-node arch-node-dec">
-                                <polygon points="500,640 700,660 500,680 300,660" fill="url(#g-dec)" stroke="#fbbf24" stroke-width="1.8"/>
-                                <text class="arch-dec-label" x="500" y="666">TAKE · NO_SETUP · REJECT</text>
-                            </g>
-
-                            <!-- Connectors -->
-                            <line x1="500" y1="476" x2="500" y2="496" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#archArrow)"/>
-                            <path d="M420,554 Q420,565 180,575" stroke="#fbbf24" stroke-width="1.4" fill="none" marker-end="url(#archArrow)"/>
-                            <line x1="500" y1="554" x2="500" y2="575" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#archArrow)"/>
-                            <path d="M580,554 Q580,565 820,575" stroke="#fbbf24" stroke-width="1.4" fill="none" marker-end="url(#archArrow)"/>
-                            <path d="M180,628 Q180,650 320,656" stroke="#fbbf24" stroke-width="1.4" fill="none" marker-end="url(#archArrow)"/>
-                            <line x1="500" y1="628" x2="500" y2="638" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#archArrow)"/>
-                            <path d="M820,628 Q820,650 680,656" stroke="#fbbf24" stroke-width="1.4" fill="none" marker-end="url(#archArrow)"/>
-
-                            <!-- Inter-stage: CycleScheduler → BotRunner -->
-                            <path d="M610,205 Q610,232 500,418" stroke="#fbbf24" stroke-width="1.6" fill="none" marker-end="url(#archArrow)"/>
-                            <text class="arch-mono arch-mono-decide" x="618" y="230">1m tick</text>
-
-                            <!-- Inter-stage: MarketState → BotRunner -->
-                            <path d="M830,330 Q830,400 660,448" stroke="#fbbf24" stroke-width="1.6" fill="none" marker-end="url(#archArrow)"/>
-                            <text class="arch-mono arch-mono-decide" x="785" y="395">snapshot</text>
-                        </g>
-
-                        <!-- ─────────── STAGE 04 · EXECUTE + JOURNAL ─────────── -->
-                        <g class="arch-stage arch-stage-act">
-                            <rect class="arch-lane" x="20" y="692" width="960" height="120" rx="18"/>
-                            <text class="arch-lane-tag arch-tag-act" x="44" y="720">04 · EXECUTE + JOURNAL</text>
-                            <text class="arch-lane-sub" x="240" y="720" data-tr="case.smtbot.arch.lane4">TAKE only · append-only journal · out-of-band dashboard</text>
-
-                            <!-- Order Router -->
-                            <g class="arch-node">
-                                <rect x="40" y="740" width="200" height="56" rx="12" fill="url(#g-act)" stroke="#fb923c" stroke-width="1.5"/>
-                                <text class="arch-eyebrow arch-eyebrow-act" x="140" y="760">ROUTE</text>
-                                <text class="arch-title-sm" x="140" y="782">Order Router</text>
-                            </g>
-
-                            <!-- Bybit V5 REST -->
-                            <g class="arch-node">
-                                <rect x="270" y="740" width="220" height="56" rx="12" fill="url(#g-act)" stroke="#fb923c" stroke-width="1.5"/>
-                                <text class="arch-eyebrow arch-eyebrow-act" x="380" y="760">EXEC</text>
-                                <text class="arch-title-sm" x="380" y="782">Bybit V5 REST</text>
-                            </g>
-
-                            <!-- SQLite Journal -->
-                            <g class="arch-node">
-                                <rect x="540" y="740" width="200" height="56" rx="12" fill="url(#g-journal)" stroke="#f472b6" stroke-width="1.5" stroke-dasharray="5 3"/>
-                                <text class="arch-eyebrow arch-eyebrow-journal" x="640" y="760">JOURNAL · SQLITE</text>
-                                <text class="arch-title-sm" x="640" y="782">aiosqlite</text>
-                            </g>
-
-                            <!-- FastAPI Dashboard -->
-                            <g class="arch-node">
-                                <rect x="770" y="740" width="200" height="56" rx="12" fill="url(#g-dash)" stroke="#7dd3fc" stroke-width="1.5"/>
-                                <text class="arch-eyebrow arch-eyebrow-dash" x="870" y="760">OBSERVE · READ-ONLY</text>
-                                <text class="arch-title-sm" x="870" y="782">FastAPI Dashboard</text>
-                            </g>
-
-                            <!-- Connectors -->
-                            <line x1="240" y1="768" x2="267" y2="768" stroke="#fb923c" stroke-width="1.6" marker-end="url(#archArrow)"/>
-                            <line x1="770" y1="768" x2="743" y2="768" stroke="#7dd3fc" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#archArrowFB)"/>
-
-                            <!-- Inter-stage: DEC → Order Router (TAKE) -->
-                            <path d="M300,660 Q160,660 140,737" stroke="#fb923c" stroke-width="1.8" fill="none" marker-end="url(#archArrow)"/>
-                            <text class="arch-mono arch-mono-act" x="150" y="715">TAKE</text>
-
-                            <!-- Inter-stage: BotRunner → Journal (every cycle) -->
-                            <path d="M640,476 Q640,560 640,737" stroke="#f9a8d4" stroke-width="1.4" fill="none" stroke-dasharray="4 4" marker-end="url(#archArrow)"/>
-                            <text class="arch-mono arch-mono-journal" x="648" y="540">write · every cycle</text>
-                        </g>
-                    </svg>
+                <div class="case-system-map" role="img" aria-labelledby="systemMapTitle">
+                    <h3 id="systemMapTitle" class="sr-only">SMTbot system map</h3>
+                    <article class="system-node node-exchange">
+                        <div class="system-node-visual" aria-hidden="true">
+                            <i class="fas fa-server"></i>
+                            <span class="system-pulse-ring"></span>
+                        </div>
+                        <span class="system-node-k">01</span>
+                        <h3 data-tr="case.smtbot.arch.exchange.h">Bybit V5</h3>
+                        <p data-tr="case.smtbot.arch.exchange.body">WS market data. REST orders and positions.</p>
+                    </article>
+                    <span class="system-arrow" aria-hidden="true"></span>
+                    <article class="system-node node-data">
+                        <div class="system-node-visual" aria-hidden="true">
+                            <i class="fas fa-wave-square"></i>
+                            <span class="system-bars"><span></span><span></span><span></span></span>
+                        </div>
+                        <span class="system-node-k">02</span>
+                        <h3 data-tr="case.smtbot.arch.data.h">Data Plane</h3>
+                        <p data-tr="case.smtbot.arch.data.body">Async client, buffers, cache, state builder.</p>
+                    </article>
+                    <span class="system-arrow" aria-hidden="true"></span>
+                    <article class="system-node node-core">
+                        <div class="system-node-visual system-node-visual-lock" aria-hidden="true">
+                            <i class="fas fa-lock"></i>
+                            <span class="system-mask"></span>
+                        </div>
+                        <span class="system-node-k">03</span>
+                        <h3 data-tr="case.smtbot.arch.core.h">Private Research Core</h3>
+                        <p data-tr="case.smtbot.arch.core.body">Closed decision layer behind a public boundary.</p>
+                    </article>
+                    <span class="system-arrow" aria-hidden="true"></span>
+                    <article class="system-node node-risk">
+                        <div class="system-node-visual" aria-hidden="true">
+                            <i class="fas fa-shield-halved"></i>
+                            <span class="system-gauge"></span>
+                        </div>
+                        <span class="system-node-k">04</span>
+                        <h3 data-tr="case.smtbot.arch.risk.h">Risk Authority</h3>
+                        <p data-tr="case.smtbot.arch.risk.body">RR, sizing, guardrails, breakers, lifecycle.</p>
+                    </article>
+                    <span class="system-arrow" aria-hidden="true"></span>
+                    <article class="system-node node-ops">
+                        <div class="system-node-visual" aria-hidden="true">
+                            <i class="fas fa-chart-simple"></i>
+                            <span class="system-led-row"><span></span><span></span><span></span></span>
+                        </div>
+                        <span class="system-node-k">05</span>
+                        <h3 data-tr="case.smtbot.arch.ops.h">Execution &amp; Ops</h3>
+                        <p data-tr="case.smtbot.arch.ops.body">Router, reconciliation, SQLite, dashboard, reports.</p>
+                    </article>
                 </div>
-                <div class="case-arch-legend" aria-hidden="true">
-                    <span class="alg-chip alg-ingest"><span class="alg-dot"></span><span data-tr="case.smtbot.arch.legend.ingest">Data ingress</span></span>
-                    <span class="alg-chip alg-indicator"><span class="alg-dot"></span><span data-tr="case.smtbot.arch.legend.indicator">Indicator layer</span></span>
-                    <span class="alg-chip alg-decide"><span class="alg-dot"></span><span data-tr="case.smtbot.arch.legend.decide">Decision cascade</span></span>
-                    <span class="alg-chip alg-act"><span class="alg-dot"></span><span data-tr="case.smtbot.arch.legend.act">Execute</span></span>
-                    <span class="alg-chip alg-journal"><span class="alg-dot"></span><span data-tr="case.smtbot.arch.legend.journal">Journal</span></span>
-                    <span class="alg-chip alg-dash"><span class="alg-dot"></span><span data-tr="case.smtbot.arch.legend.dash">Dashboard (read-only)</span></span>
+            </div>
+        </section>
+
+        <!-- ==================== BOUNDARY ==================== -->
+        <section class="case-section">
+            <div class="container case-narrative">
+                <span class="case-tag" data-tr="case.smtbot.boundary.tag">02 · Showcase Boundary</span>
+                <h2 class="case-h2" data-tr="case.smtbot.boundary.h">Enough signal to judge the build. Not enough to clone the edge.</h2>
+                <p class="case-body" data-tr="case.smtbot.boundary.lead">
+                    The showcase is intentionally non-copyable: enough system signal for credibility, not enough detail to clone the edge.
+                </p>
+                <div class="case-boundary-grid">
+                    <article class="case-boundary-card boundary-public">
+                        <span class="boundary-label" data-tr="case.smtbot.boundary.public">Public in showcase</span>
+                        <ul data-tr="case.smtbot.boundary.public.list">
+                            <li>Architecture and module map</li>
+                            <li>Runtime and dependency footprint</li>
+                            <li>Risk controls, workflow, dashboard, journal</li>
+                        </ul>
+                    </article>
+                    <article class="case-boundary-card boundary-private">
+                        <span class="boundary-label" data-tr="case.smtbot.boundary.private">Private in SMTbot</span>
+                        <ul data-tr="case.smtbot.boundary.private.list">
+                            <li>Research core implementation</li>
+                            <li>Production parameters and ranking rules</li>
+                            <li>Account records and internal reports</li>
+                        </ul>
+                    </article>
                 </div>
             </div>
         </section>
 
         <!-- ==================== STACK ==================== -->
-        <section class="case-section">
+        <section class="case-section case-section-arch">
             <div class="container case-narrative">
-                <span class="case-tag" data-tr="case.smtbot.stack.tag">02 · Stack</span>
-                <h2 class="case-h2" data-tr="case.smtbot.stack.h">What the bot is made of.</h2>
+                <span class="case-tag" data-tr="case.smtbot.stack.tag">03 · Stack</span>
+                <h2 class="case-h2" data-tr="case.smtbot.stack.h">What the public surface can safely show.</h2>
                 <p class="case-body" data-tr="case.smtbot.stack.lead">
-                    Every component picked for one reason: it has to survive a 24/7 loop without you watching it. No frameworks for show, no abstractions that aren't paying for themselves.
+                    Lean runtime, exchange-native IO, SQLite memory, read-only dashboard, and tests around the private core.
                 </p>
                 <div class="case-stack-grid">
                     <div class="case-stack-col">
                         <div class="case-stack-head case-stack-head-ingest">
                             <i class="fas fa-wave-square" aria-hidden="true"></i>
-                            <span data-tr="case.smtbot.stack.streams">Streams</span>
+                            <span data-tr="case.smtbot.stack.data">Data Plane</span>
                         </div>
-                        <ul class="case-stack-list" data-tr="case.smtbot.stack.streams.list">
-                            <li><strong>Bybit V5 WebSocket</strong> <span>kline.{1,3,5,15}.SYMBOL subscriptions via <em>pybit</em></span></li>
-                            <li><strong>BybitWSClient</strong> <span>async subscribe + auto-reconnect, no GUI dependency</span></li>
-                            <li><strong>KlineBuffer</strong> <span>per-symbol deque with gap-fill on reconnect</span></li>
-                            <li><strong>CycleScheduler</strong> <span>1m closed-bar dispatch + heartbeat — event-driven, never polling</span></li>
+                        <ul class="case-stack-list" data-tr="case.smtbot.stack.data.list">
+                            <li><strong>Bybit V5 WS</strong> <span>closed-candle market data</span></li>
+                            <li><strong>KlineBuffer + cache</strong> <span>rolling windows, reconnect recovery</span></li>
+                            <li><strong>MarketStateBuilder</strong> <span>state from raw exchange rows</span></li>
                         </ul>
                     </div>
                     <div class="case-stack-col">
                         <div class="case-stack-head case-stack-head-indicator">
-                            <i class="fas fa-brain" aria-hidden="true"></i>
-                            <span data-tr="case.smtbot.stack.brain">Brain</span>
+                            <i class="fas fa-shield-halved" aria-hidden="true"></i>
+                            <span data-tr="case.smtbot.stack.risk">Risk &amp; Portfolio</span>
                         </div>
-                        <ul class="case-stack-list" data-tr="case.smtbot.stack.brain.list">
-                            <li><strong>Python 3.11+</strong> <span>fully async (<em>asyncio</em>), event-driven from bar boundary to order</span></li>
-                            <li><strong>Pine v6 emulator</strong> <span>HA · WaveTrend · MFI · EMA200 · VWAP — bit-perfect parity, in-process</span></li>
-                            <li><strong>evaluate_entry()</strong> <span>cascade dispatch: cross_based → pre_cross → ha_reversal</span></li>
-                            <li><strong>Exit doctrine</strong> <span>position-attached SL, post-only reduce-only TP, idempotent BE lock</span></li>
-                            <li><strong>pydantic · pyyaml</strong> <span>typed config + env overrides, schema validation at boot</span></li>
-                            <li><strong>FastAPI + uvicorn</strong> <span>read-only journal viewer, 5 s poll, live PnL ledger</span></li>
+                        <ul class="case-stack-list" data-tr="case.smtbot.stack.risk.list">
+                            <li><strong>RR system</strong> <span>standardized reward/risk math</span></li>
+                            <li><strong>Position sizing</strong> <span>equity-aware exposure control</span></li>
+                            <li><strong>Circuit breakers</strong> <span>loss, streak, drawdown, cooldown</span></li>
                         </ul>
                     </div>
                     <div class="case-stack-col">
@@ -438,79 +265,75 @@
                             <span data-tr="case.smtbot.stack.execution">Execution</span>
                         </div>
                         <ul class="case-stack-list" data-tr="case.smtbot.stack.execution.list">
-                            <li><strong>Bybit V5 REST</strong> <span>futures trading via <em>pybit</em> (V5 endpoints, hedge-aware)</span></li>
-                            <li><strong>Order Router</strong> <span>routes only on TAKE — NO_SETUP and REJECT short-circuit before the wire</span></li>
-                            <li><strong>UTA + hedge mode</strong> <span>Unified Trading Account, cross-margin USDT/USDC</span></li>
-                            <li><strong>Limit + SL doctrine</strong> <span>no market entries, ever — risk bounded by the stop, maker rebate by design</span></li>
+                            <li><strong>pybit V5 client</strong> <span>orders, positions, wallet, fills</span></li>
+                            <li><strong>Order router</strong> <span>single controlled execution path</span></li>
+                            <li><strong>Position monitor</strong> <span>exchange state reconciliation</span></li>
                         </ul>
                     </div>
                     <div class="case-stack-col">
                         <div class="case-stack-head case-stack-head-journal">
                             <i class="fas fa-database" aria-hidden="true"></i>
-                            <span data-tr="case.smtbot.stack.tooling">Tuning &amp; Tests</span>
+                            <span data-tr="case.smtbot.stack.ops">Ops &amp; Validation</span>
                         </div>
-                        <ul class="case-stack-list" data-tr="case.smtbot.stack.tooling.list">
-                            <li><strong>aiosqlite</strong> <span>append-only async journal — trades, decision log, position snapshots</span></li>
-                            <li><strong>pytest</strong> <span>~640 cases pinning strategy, data pipeline, journal, execution</span></li>
-                            <li><strong>Optuna (TPE + CMA-ES)</strong> <span>two-stage walk-forward tune — TPE for wide search, CMA-ES for refinement</span></li>
-                            <li><strong>Claude Code</strong> <span>pair-programming AI — codes, audits diffs (decisions stay in Python)</span></li>
-                            <li><strong>stable-baselines3</strong> <span>RL roadmap (Phase 6) — current bot is rule-based VMC</span></li>
+                        <ul class="case-stack-list" data-tr="case.smtbot.stack.ops.list">
+                            <li><strong>aiosqlite journal</strong> <span>audit trail for runtime events</span></li>
+                            <li><strong>FastAPI + uvicorn</strong> <span>read-only terminal dashboard</span></li>
+                            <li><strong>pytest</strong> <span>63 files, roughly 975 cases</span></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ==================== THREE HARD PROBLEMS ==================== -->
-        <section class="case-section case-section-arch">
+        <!-- ==================== ENGINEERING PROOF ==================== -->
+        <section class="case-section">
             <div class="container case-narrative">
-                <span class="case-tag" data-tr="case.smtbot.problems.tag">03 · Problems</span>
-                <h2 class="case-h2" data-tr="case.smtbot.problems.h">Three hard problems.</h2>
-                <div class="case-problems-grid">
-                    <article class="case-problem">
-                        <span class="case-problem-num">P1</span>
-                        <h3 class="case-problem-h" data-tr="case.smtbot.p1.h">The cutover — and what survives it.</h3>
-                        <p class="case-problem-body" data-tr="case.smtbot.p1.body">
-                            The first data layer was a chain of indirection: TradingView Desktop → Electron CDP → Node.js MCP daemon → Python bridge → cell-by-cell signal-table parser. It worked, but pinned the bot to a Windows machine with TV open, serial-swept 15 symbols in <em>~160 seconds</em>, and forced the strategy to think in 5-minute cadence. A two-day rewrite replaced the entire chain with a Bybit V5 WebSocket + Python-native Pine v6 emulator. The hard part wasn't speed — it was parity. A single off-by-one in the HA streak counter or a wrong sign in WaveTrend would silently change every entry decision. A diagnostic diffed every signal cell between the old and new pipelines: <em>10/10 bit-perfect on the first clean build.</em> Post-cutover backtest cohort matched the pre-cutover cohort within <em>±0.01R per trade.</em> No regression.
-                        </p>
+                <span class="case-tag" data-tr="case.smtbot.proof.tag">04 · Engineering Proof</span>
+                <h2 class="case-h2" data-tr="case.smtbot.proof.h">The impressive part is the operating surface.</h2>
+                <div class="case-proof-grid">
+                    <article class="case-proof-card">
+                        <span class="case-proof-icon" aria-hidden="true"><i class="fas fa-satellite-dish"></i></span>
+                        <h3 data-tr="case.smtbot.proof.data.h">Owned data path</h3>
+                        <p data-tr="case.smtbot.proof.data.body">No chart app, browser automation, or GUI dependency.</p>
                     </article>
-                    <article class="case-problem">
-                        <span class="case-problem-num">P2</span>
-                        <h3 class="case-problem-h" data-tr="case.smtbot.p2.h">Three cascade entry paths, one scoring engine.</h3>
-                        <p class="case-problem-body" data-tr="case.smtbot.p2.body">
-                            A mean-reversion entry that fires at the moment a trend exhausts: WaveTrend cross + Heikin Ashi color flip + a multi-timeframe soft factor stack. If the primary path (<em>cross_based</em>) doesn't fire, the bot falls through to a slope-based <em>pre_cross</em> detector, then to a fast <em>ha_reversal</em> detector. Each path feeds the <em>same</em> scoring engine against direction-aligned signals on 5m + 15m + 3m timeframes plus a BTC/ETH composite bias. The cascade short-circuits on the first TAKE — no double-counting, no path-fighting.
-                        </p>
+                    <article class="case-proof-card">
+                        <span class="case-proof-icon" aria-hidden="true"><i class="fas fa-shield-halved"></i></span>
+                        <h3 data-tr="case.smtbot.proof.risk.h">Risk before execution</h3>
+                        <p data-tr="case.smtbot.proof.risk.body">RR, sizing, exposure, and breakers before execution.</p>
                     </article>
-                    <article class="case-problem">
-                        <span class="case-problem-num">P3</span>
-                        <h3 class="case-problem-h" data-tr="case.smtbot.p3.h">A single exit doctrine.</h3>
-                        <p class="case-problem-body" data-tr="case.smtbot.p3.body">
-                            One position, three exits, no Python timers. <em>Position-attached SL</em> lives on Bybit, not in the bot — it fires even if the process is dead. <em>Post-only reduce-only TP limit</em> sits in the book, so a fill collects the maker rebate instead of paying taker. An <em>idempotent break-even lock</em> moves the stop to entry the moment unrealized P&amp;L crosses a threshold — and idempotent means: if the lock has already moved the stop, calling it again is a no-op. That property survives reconnects, crashes, clock skew, and the 3am cycle that overlaps a fill.
-                        </p>
+                    <article class="case-proof-card">
+                        <span class="case-proof-icon" aria-hidden="true"><i class="fas fa-database"></i></span>
+                        <h3 data-tr="case.smtbot.proof.ops.h">Operator-grade memory</h3>
+                        <p data-tr="case.smtbot.proof.ops.body">SQLite journal, dashboard, reports, and reconciliation.</p>
+                    </article>
+                    <article class="case-proof-card">
+                        <span class="case-proof-icon" aria-hidden="true"><i class="fas fa-vial-circle-check"></i></span>
+                        <h3 data-tr="case.smtbot.proof.validation.h">Validation footprint</h3>
+                        <p data-tr="case.smtbot.proof.validation.body">63 test files across runtime, risk, execution, and ops.</p>
                     </article>
                 </div>
             </div>
         </section>
 
-        <!-- ==================== LEARNINGS ==================== -->
-        <section class="case-section">
+        <!-- ==================== WORKFLOW ==================== -->
+        <section class="case-section case-section-arch">
             <div class="container case-narrative">
-                <span class="case-tag" data-tr="case.smtbot.learnings.tag">04 · What I learned</span>
-                <h2 class="case-h2" data-tr="case.smtbot.learnings.h">Three lines I'd write on a Post-it.</h2>
-                <ul class="case-learnings">
-                    <li>
-                        <span class="case-learn-mark" aria-hidden="true">↪</span>
-                        <span data-tr="case.smtbot.learn1"><em>Latency is architecture, not optimization.</em> The ~6700× speedup didn't come from tuning the chain — it came from replacing it. When the budget is two orders of magnitude, the answer is rarely a faster loop.</span>
-                    </li>
-                    <li>
-                        <span class="case-learn-mark" aria-hidden="true">↪</span>
-                        <span data-tr="case.smtbot.learn2"><em>Parity is a first-class requirement when you port a chart engine.</em> A 10/10 bit-perfect signal diff is what made the post-cutover backtest cohort credible. Without it, every divergence is a discussion instead of a fact.</span>
-                    </li>
-                    <li>
-                        <span class="case-learn-mark" aria-hidden="true">↪</span>
-                        <span data-tr="case.smtbot.learn3"><em>Publish the architecture, withhold the parameters.</em> The tuned weights — RR multiples, soft factor weights, per-symbol risk — are the edge. Publishing them turns a private signal into a crowded one. They live in the private repo, and they stay there.</span>
-                    </li>
-                </ul>
+                <span class="case-tag" data-tr="case.smtbot.workflow.tag">05 · Workflow</span>
+                <h2 class="case-h2" data-tr="case.smtbot.workflow.h">Demo-first, observable, reversible.</h2>
+                <p class="case-body" data-tr="case.smtbot.workflow.lead">
+                    Credentials, smoke test, dry run, dashboard, then traceable operation.
+                </p>
+                <div class="case-flow case-workflow-flow">
+                    <span class="case-flow-step"><span class="case-flow-num">01</span><span data-tr="case.smtbot.workflow.step1">BYBIT API</span></span>
+                    <span class="case-flow-arrow" aria-hidden="true">→</span>
+                    <span class="case-flow-step"><span class="case-flow-num">02</span><span data-tr="case.smtbot.workflow.step2">config + env</span></span>
+                    <span class="case-flow-arrow" aria-hidden="true">→</span>
+                    <span class="case-flow-step"><span class="case-flow-num">03</span><span data-tr="case.smtbot.workflow.step3">connection smoke</span></span>
+                    <span class="case-flow-arrow" aria-hidden="true">→</span>
+                    <span class="case-flow-step"><span class="case-flow-num">04</span><span data-tr="case.smtbot.workflow.step4">dry-run once</span></span>
+                    <span class="case-flow-arrow" aria-hidden="true">→</span>
+                    <span class="case-flow-step"><span class="case-flow-num">05</span><span data-tr="case.smtbot.workflow.step5">dashboard watch</span></span>
+                </div>
             </div>
         </section>
 
@@ -534,12 +357,12 @@
                     <span class="logo-bracket">&lt;</span><span class="logo-mark">SAMET</span><span class="logo-bracket">/&gt;</span>
                 </a>
                 <span class="fb-copy">© 2026 Samet Soysal · case_study/smtbot</span>
-                <span class="fb-version">v1.0.0 · case_smtbot.md</span>
+                <span class="fb-version">v2.0.0 · public_showcase.md</span>
             </div>
         </div>
     </footer>
 
     <!-- Reuse global script (theme, lang, cursor canvas, lightning) -->
-    <script src="script.js?v=89"></script>
+    <script src="script.js?v=92"></script>
 </body>
 </html>

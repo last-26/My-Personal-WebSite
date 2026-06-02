@@ -156,55 +156,72 @@ const translations = {
         "projects.status.archive": "Arşiv",
         "projects.status.wip": "Aktif geliştirme",
         "projects.wip": "Şu an geliştiriliyor",
-        "projects.smtbot.subtitle": "Async 7/24 Kripto Vadeli İşlem Scalper Botu — Bybit V5",
+        "projects.smtbot.subtitle": "Bybit V5 native özel araştırma botu",
         "projects.smtbot.casebtn": "Vakayı oku",
-        "case.smtbot.h1": "vaka çalışması.",
-        "case.smtbot.cover.problem": "Bybit V5 üzerinde 7/24 çalışan bir kripto vadeli işlem scalper botu. Asıl ilginç olan strateji değil — kırılgan TradingView scraper zincirini native bir WebSocket hattıyla değiştiren iki günlük yeniden yazım ve botun tek bir işlem kararını değiştirmeden bir gecede ~6700× hızlanması.",
-        "case.smtbot.cover.status": "Bybit V5 native · ~640 test · ~24 ms döngü",
-        "case.smtbot.stat1.k": "Döngü gecikmesi",
-        "case.smtbot.stat2.k": "Taranan parite",
-        "case.smtbot.stat3.k": "Testler",
+        "projects.smtbot.reads": "okuma",
+        "case.smtbot.h1": "showcase.",
+        "case.smtbot.cover.problem": "Private trading system, public engineering showcase. Mimari, risk kontrolleri, kayıt defteri, pano ve doğrulama görünür; özel araştırma çekirdeği kapalı kalır.",
+        "case.smtbot.cover.status": "Bybit-native · 30 sembol x 6 TF · ~975 pytest vakası",
+        "case.smtbot.stat1.k": "Sürekli döngü",
+        "case.smtbot.stat1.v": "~24 ms",
+        "case.smtbot.stat2.k": "Piyasa yüzeyi",
+        "case.smtbot.stat2.v": "30 x 6 TF",
+        "case.smtbot.stat3.k": "Doğrulama",
+        "case.smtbot.stat3.v": "63 / ~975",
         "case.smtbot.stat4.k": "Strateji",
+        "case.smtbot.stat4.v": "Price Action",
         "case.smtbot.arch.tag": "01 · Mimari",
-        "case.smtbot.arch.h": "Bar kapanışından emir gönderimine — olay tabanlı.",
-        "case.smtbot.arch.lead": "Bir Bybit V5 WebSocket'i, canlı kline akışlarını parite başına bir buffer'a ve kapanış-bar zamanlayıcısına yayar. Python-yerleşik bir Pine v6 emülatörü indikatörleri süreç-içi hesaplar — orijinal TradingView okumalarıyla bit düzeyinde tıpatıp, ama ~160 s yerine ~24 ms'de. BotRunner, üç giriş yolunu tek bir karar elması üzerinden ardışık çalıştırır; yalnızca TAKE kararı Order Router'a ulaşır. Tüm bu döngünün altında SQLite, async kayıt defteri olarak yatar.",
-        "case.smtbot.arch.lane1": "akışlar · 1m kapanış-bar · gap-fill",
-        "case.smtbot.arch.lane2": "süreç-içi Pine v6 emülatörü · bit düzeyinde parite",
-        "case.smtbot.arch.lane3": "üç giriş yolu · tek karar · tek çıkış doktrini",
-        "case.smtbot.arch.lane4": "yalnızca TAKE · append-only kayıt · ayrık pano",
-        "case.smtbot.arch.legend.ingest": "Veri girişi",
-        "case.smtbot.arch.legend.indicator": "İndikatör katmanı",
-        "case.smtbot.arch.legend.decide": "Karar şelalesi",
-        "case.smtbot.arch.legend.act": "Yürütme",
-        "case.smtbot.arch.legend.journal": "Kayıt defteri",
-        "case.smtbot.arch.legend.dash": "Pano (salt-okunur)",
-        "case.smtbot.stack.tag": "02 · Yığın",
-        "case.smtbot.stack.h": "Bot neyden yapılı?",
-        "case.smtbot.stack.lead": "Her bileşen tek bir gerekçeyle seçildi: 7/24 döngüde, sen izlemezken ayakta kalmak zorunda. Gösteriş için framework yok, faydası tartışmalı soyutlama yok.",
-        "case.smtbot.stack.streams": "Akışlar",
-        "case.smtbot.stack.brain": "Beyin",
+        "case.smtbot.arch.h": "Tam işlem döngüsü, sistem seviyesinde gösteriliyor.",
+        "case.smtbot.arch.lead": "Bybit-native bir döngü: veri, private çekirdek sınırı, risk otoritesi, yürütme, kayıt, pano ve diagnostikler.",
+        "case.smtbot.arch.exchange.h": "Bybit V5",
+        "case.smtbot.arch.exchange.body": "WS piyasa verisi. REST emirleri ve pozisyonlar.",
+        "case.smtbot.arch.data.h": "Veri Katmanı",
+        "case.smtbot.arch.data.body": "Async client, buffer, cache, state builder.",
+        "case.smtbot.arch.core.h": "Private Araştırma Çekirdeği",
+        "case.smtbot.arch.core.body": "Public sınır arkasında kapalı karar katmanı.",
+        "case.smtbot.arch.risk.h": "Risk Otoritesi",
+        "case.smtbot.arch.risk.body": "RR, sizing, guardrail, breaker, lifecycle.",
+        "case.smtbot.arch.ops.h": "Yürütme &amp; Operasyon",
+        "case.smtbot.arch.ops.body": "Router, mutabakat, SQLite, pano, raporlar.",
+        "case.smtbot.boundary.tag": "02 · Showcase Sınırı",
+        "case.smtbot.boundary.h": "Yapıyı değerlendirmek için yeterli sinyal. Edge'i kopyalamak için yeterli değil.",
+        "case.smtbot.boundary.lead": "Kopyalanamaz bir vitrin: güven verecek kadar sistem sinyali, edge'i kopyalatmayacak kadar az detay.",
+        "case.smtbot.boundary.public": "Showcase'te public",
+        "case.smtbot.boundary.public.list": "<li>Mimari ve modül haritası</li><li>Runtime ve bağımlılık ayak izi</li><li>Risk kontrolleri, iş akışı, pano, kayıt</li>",
+        "case.smtbot.boundary.private": "SMTbot içinde private",
+        "case.smtbot.boundary.private.list": "<li>Araştırma çekirdeği implementasyonu</li><li>Üretim parametreleri ve sıralama kuralları</li><li>Hesap kayıtları ve iç raporlar</li>",
+        "case.smtbot.stack.tag": "03 · Yığın",
+        "case.smtbot.stack.h": "Public yüzey güvenle ne gösterebilir?",
+        "case.smtbot.stack.lead": "Yalın runtime, exchange-native IO, SQLite hafıza, salt-okunur pano ve private çekirdeğin çevresinde testler.",
+        "case.smtbot.stack.data": "Veri Katmanı",
+        "case.smtbot.stack.data.list": "<li><strong>Bybit V5 WS</strong> <span>kapanmış mum verisi</span></li><li><strong>KlineBuffer + cache</strong> <span>rolling window, reconnect recovery</span></li><li><strong>MarketStateBuilder</strong> <span>ham exchange satırlarından state</span></li>",
+        "case.smtbot.stack.risk": "Risk &amp; Portföy",
+        "case.smtbot.stack.risk.list": "<li><strong>RR sistemi</strong> <span>standart reward/risk matematiği</span></li><li><strong>Pozisyon boyutu</strong> <span>equity-aware exposure kontrolü</span></li><li><strong>Devre kesiciler</strong> <span>kayıp, seri, drawdown, cooldown</span></li>",
         "case.smtbot.stack.execution": "Yürütme",
-        "case.smtbot.stack.tooling": "İnce Ayar &amp; Testler",
-        "case.smtbot.stack.streams.list": "<li><strong>Bybit V5 WebSocket</strong> <span><em>pybit</em> üzerinden kline.{1,3,5,15}.SYMBOL aboneliği</span></li><li><strong>BybitWSClient</strong> <span>async subscribe + oto-reconnect, GUI bağımlılığı yok</span></li><li><strong>KlineBuffer</strong> <span>parite başına deque; reconnect sırasında gap-fill</span></li><li><strong>CycleScheduler</strong> <span>1m kapanış-bar dağıtımı + heartbeat — olay tabanlı, polling yok</span></li>",
-        "case.smtbot.stack.brain.list": "<li><strong>Python 3.11+</strong> <span>tam async (<em>asyncio</em>); bar kapanışından emire kadar olay tabanlı</span></li><li><strong>Pine v6 emülatörü</strong> <span>HA · WaveTrend · MFI · EMA200 · VWAP — süreç-içi, bit düzeyinde parite</span></li><li><strong>evaluate_entry()</strong> <span>ardışık dağıtım: cross_based → pre_cross → ha_reversal</span></li><li><strong>Çıkış doktrini</strong> <span>pozisyona bağlı SL, post-only reduce-only TP, idempotent BE kilidi</span></li><li><strong>pydantic · pyyaml</strong> <span>tipli yapılandırma + env değişkenleri; açılışta şema doğrulaması</span></li><li><strong>FastAPI + uvicorn</strong> <span>salt-okunur kayıt görüntüleyici, 5 s poll, canlı PnL defteri</span></li>",
-        "case.smtbot.stack.execution.list": "<li><strong>Bybit V5 REST</strong> <span><em>pybit</em> ile vadeli işlem (V5 endpoint, hedge'e uyumlu)</span></li><li><strong>Order Router</strong> <span>yalnızca TAKE'de yönlendirir — NO_SETUP ve REJECT hatta dahi çıkmaz</span></li><li><strong>UTA + hedge mode</strong> <span>Unified Trading Account, cross-margin USDT/USDC</span></li><li><strong>Limit + SL doktrini</strong> <span>asla market giriş yok — risk stop ile sınırlı, maker rebate tasarımdan</span></li>",
-        "case.smtbot.stack.tooling.list": "<li><strong>aiosqlite</strong> <span>append-only async kayıt — işlemler, karar logu, pozisyon snapshot'ları</span></li><li><strong>pytest</strong> <span>~640 vaka; strateji, veri hattı, kayıt defteri, yürütme davranışını sabitler</span></li><li><strong>Optuna (TPE + CMA-ES)</strong> <span>iki aşamalı walk-forward — TPE geniş arama, CMA-ES rafine</span></li><li><strong>Claude Code</strong> <span>AI eş programlama — kod yazar, diff inceler (kararlar Python'da kalır)</span></li><li><strong>stable-baselines3</strong> <span>RL yol haritası (Faz 6) — şu an kural tabanlı VMC</span></li>",
-        "case.smtbot.problems.tag": "03 · Problemler",
-        "case.smtbot.problems.h": "Üç zor problem.",
-        "case.smtbot.p1.h": "Kesim — ve ondan sağ çıkan.",
-        "case.smtbot.p1.body": "İlk veri katmanı bir dolaylama zinciriydi: TradingView Desktop → Electron CDP → Node.js MCP daemon → Python köprüsü → hücre-hücre sinyal-tablosu parser'ı. Çalışıyordu, ama botu TV açık bir Windows makinesine bağlıyordu, 15 sembolü <em>~160 saniyede</em> seri tarıyordu ve stratejiyi 5 dakikalık ritimde düşünmeye zorluyordu. İki günlük bir yeniden yazım, tüm zinciri Bybit V5 WebSocket + Python-yerleşik Pine v6 emülatörüyle değiştirdi. Zor olan hız değildi — pariteydi. HA streak sayacındaki tek bir off-by-one ya da WaveTrend'de yanlış bir işaret, her giriş kararını sessizce değiştirirdi. Bir diagnostik script eski ve yeni hattın her sinyal hücresini farkladı: <em>ilk temiz build'de 10/10 bit düzeyinde tıpatıp.</em> Kesim sonrası backtest kohortu, kesim öncesi kohortla <em>işlem başına ±0.01R</em> içinde örtüştü. Hiçbir regresyon yok.",
-        "case.smtbot.p2.h": "Üç ardışık giriş yolu, tek skorlama motoru.",
-        "case.smtbot.p2.body": "Trend tükendiği anda tetiklenen bir mean-reversion girişi: WaveTrend cross + Heikin Ashi renk değişimi + çok zaman dilimli yumuşak faktör yığını. Birincil yol (<em>cross_based</em>) tetiklenmezse bot eğim tabanlı <em>pre_cross</em> dedektörüne, oradan da hızlı <em>ha_reversal</em> dedektörüne düşer. Her yol <em>aynı</em> skorlama motorunu yön-hizalı sinyaller üzerinde 5dk + 15dk + 3dk zaman dilimlerinde ve bir BTC/ETH bileşik bias'ıyla işletir. Şelale, ilk TAKE'de kısa devre yapar — çift sayım yok, yollar arası çatışma yok.",
-        "case.smtbot.p3.h": "Tek çıkış doktrini.",
-        "case.smtbot.p3.body": "Tek pozisyon, üç çıkış, Python timer'ı yok. <em>Pozisyona bağlı SL</em> bot tarafında değil Bybit tarafında — proses çökmüş olsa bile tetiklenir. <em>Post-only reduce-only TP limit</em> defterde bekler; dolum olursa taker yerine maker rebate toplanır. <em>İdempotent break-even kilidi</em>, gerçekleşmemiş P&amp;L bir eşiği aşar aşmaz stop'u girişe taşır — ve idempotent demek: kilit zaten stop'u taşıdıysa tekrar çağırmak no-op'tur. Bu özellik reconnect'lerden, çökmelerden, saat sapmasından ve bir doluma çakışan sabah 3 döngüsünden sağ çıkar.",
-        "case.smtbot.learnings.tag": "04 · Öğrendiklerim",
-        "case.smtbot.learnings.h": "Post-it'e yazacağım üç satır.",
-        "case.smtbot.learn1": "<em>Gecikme bir mimari meselesidir, optimizasyon değil.</em> ~6700× hızlanma zinciri ayarlamaktan değil, onu değiştirmekten geldi. Bütçe iki büyüklük mertebesi olduğunda, cevap nadiren daha hızlı bir döngüdür.",
-        "case.smtbot.learn2": "<em>Bir grafik motorunu port ediyorsan parite birinci sınıf gerekliliktir.</em> 10/10 bit düzeyinde sinyal diff'i, kesim sonrası backtest kohortunu inandırıcı kılan şeydir. Onsuz her sapma tartışma olur, gerçek değil.",
-        "case.smtbot.learn3": "<em>Mimariyi yayımla, parametreleri sakla.</em> Ayarlanmış ağırlıklar — RR çarpanları, yumuşak faktör ağırlıkları, parite başına risk — işin asıl üstünlüğüdür (edge). Onları yayımlamak, özel bir sinyali kalabalık bir sinyale çevirir. Private repoda yaşıyorlar, orada da kalacaklar.",
+        "case.smtbot.stack.execution.list": "<li><strong>pybit V5 client</strong> <span>order, position, wallet, fill</span></li><li><strong>Order router</strong> <span>tek kontrollü yürütme yolu</span></li><li><strong>Position monitor</strong> <span>exchange state mutabakatı</span></li>",
+        "case.smtbot.stack.ops": "Ops &amp; Doğrulama",
+        "case.smtbot.stack.ops.list": "<li><strong>aiosqlite journal</strong> <span>runtime olayları için audit trail</span></li><li><strong>FastAPI + uvicorn</strong> <span>salt-okunur terminal pano</span></li><li><strong>pytest</strong> <span>63 dosya, yaklaşık 975 vaka</span></li>",
+        "case.smtbot.proof.tag": "04 · Mühendislik Kanıtı",
+        "case.smtbot.proof.h": "Etkileyici olan operasyon yüzeyi.",
+        "case.smtbot.proof.data.h": "Sahip olunan veri yolu",
+        "case.smtbot.proof.data.body": "Chart uygulaması, browser automation veya GUI bağımlılığı yok.",
+        "case.smtbot.proof.risk.h": "Yürütmeden önce risk",
+        "case.smtbot.proof.risk.body": "RR, sizing, exposure ve breaker kontrolü yürütmeden önce gelir.",
+        "case.smtbot.proof.ops.h": "Operatör seviyesinde hafıza",
+        "case.smtbot.proof.ops.body": "SQLite journal, pano, raporlar ve exchange mutabakatı.",
+        "case.smtbot.proof.validation.h": "Doğrulama yüzeyi",
+        "case.smtbot.proof.validation.body": "Runtime, risk, yürütme ve ops üzerinde 63 test dosyası.",
+        "case.smtbot.workflow.tag": "05 · İş Akışı",
+        "case.smtbot.workflow.h": "Demo-first, gözlenebilir, geri alınabilir.",
+        "case.smtbot.workflow.lead": "Kimlik bilgileri, smoke test, dry run, pano ve izlenebilir operasyon.",
+        "case.smtbot.workflow.step1": "BYBIT API",
+        "case.smtbot.workflow.step2": "config + env",
+        "case.smtbot.workflow.step3": "connection smoke",
+        "case.smtbot.workflow.step4": "dry-run once",
+        "case.smtbot.workflow.step5": "dashboard izle",
         "case.smtbot.back": "Portföye dön",
-        "projects.smtbot.description": "Bybit V5 üzerinde başsız, olay tabanlı bir trading botu. İki günlük bir yeniden yazım, kırılgan bir TradingView-Desktop scraper zincirini native WebSocket hattı + süreç-içi Pine v6 emülatörüyle değiştirdi — döngü gecikmesini ~160 s'den ~24 ms'ye düşürdü (~6700×). İlk temiz build'de 10/10 bit düzeyinde indikatör paritesi, kesim sonrası backtest kohortu ±0.01R içinde, üç yollu giriş şelalesi ve tek çıkış doktrini. Ayarlanmış ağırlıklar işin asıl üstünlüğü — private repoda kalıyorlar.",
-        "projects.smtbot.metric": "~24 ms döngü · 25 parite · ~6700× hızlanma",
+        "projects.smtbot.description": "Bybit V5 üzerinde headless, event-driven çalışan özel bir araştırma botu. Public showcase yalnızca mimariyi, veri hattını, RR/risk ve portföy kontrollerini, yürütme katmanını, SQLite kayıt defterini, FastAPI panoyu ve doğrulama yüzeyini gösterir. Araştırma çekirdeği, üretim parametreleri ve hesap kayıtları private repoda kalır.",
+        "projects.smtbot.metric": "~24 ms döngü · 30 sembol x 6 TF · ~975 pytest",
         "projects.finsenti.subtitle": "Finansal Duygu Analizi MLOps Pipeline'ı",
         "projects.finsenti.description": "Finansal metinlerde duygu analizi için uçtan uca bir MLOps pipeline'ı. FinBERT ve distilBERT modellerini LoRA adaptörleriyle fine-tune ediyor, deneyleri MLflow ile takip ediyor, tahminleri FastAPI + Next.js üzerinden sunuyor. FinBERT + LoRA modeli %91.1 doğruluk ve 0.90 F1 skoruna ulaştı.",
         "projects.finsenti.metric": "%91.1 doğruluk · FinBERT + LoRA",
@@ -391,55 +408,72 @@ const translations = {
         "projects.status.archive": "Archive",
         "projects.status.wip": "In active development",
         "projects.wip": "Currently building",
-        "projects.smtbot.subtitle": "Async 24/7 Crypto Futures Scalper — Bybit V5",
+        "projects.smtbot.subtitle": "Bybit V5-native private research bot",
         "projects.smtbot.casebtn": "Read the case",
-        "case.smtbot.h1": "case study.",
-        "case.smtbot.cover.problem": "A 24/7 crypto futures scalper on Bybit V5. The interesting story isn't the strategy — it's the two-day rewrite that replaced a brittle TradingView scraper chain with a native WebSocket pipeline, and the bot got ~6700× faster overnight without changing a single trade decision.",
-        "case.smtbot.cover.status": "Bybit V5 native · ~640 tests · ~24 ms cycle",
-        "case.smtbot.stat1.k": "Cycle latency",
-        "case.smtbot.stat2.k": "Pairs scanned",
-        "case.smtbot.stat3.k": "Tests",
+        "projects.smtbot.reads": "reads",
+        "case.smtbot.h1": "showcase.",
+        "case.smtbot.cover.problem": "Private trading system, public engineering showcase. Architecture, risk controls, journal, dashboard, and validation are visible; the private research core stays closed.",
+        "case.smtbot.cover.status": "Bybit-native · 30 symbols x 6 TFs · ~975 pytest cases",
+        "case.smtbot.stat1.k": "Steady cycle",
+        "case.smtbot.stat1.v": "~24 ms",
+        "case.smtbot.stat2.k": "Market surface",
+        "case.smtbot.stat2.v": "30 x 6 TF",
+        "case.smtbot.stat3.k": "Validation",
+        "case.smtbot.stat3.v": "63 / ~975",
         "case.smtbot.stat4.k": "Strategy",
+        "case.smtbot.stat4.v": "Price Action",
         "case.smtbot.arch.tag": "01 · Architecture",
-        "case.smtbot.arch.h": "Event-driven, from bar boundary to order placement.",
-        "case.smtbot.arch.lead": "A Bybit V5 WebSocket fans live kline streams into a per-symbol buffer and a closed-bar scheduler. A Python-native Pine v6 emulator computes the indicators in-process — bit-perfect parity with the original TradingView readings, but at ~24 ms instead of ~160 s. The BotRunner cascades three entry paths through a single decision diamond; only TAKE reaches the Order Router. SQLite is the async journal underneath everything.",
-        "case.smtbot.arch.lane1": "streams · 1m closed-bar · gap-fill",
-        "case.smtbot.arch.lane2": "in-process Pine v6 emulator · bit-perfect parity",
-        "case.smtbot.arch.lane3": "three entry paths · one decision · single exit doctrine",
-        "case.smtbot.arch.lane4": "TAKE only · append-only journal · out-of-band dashboard",
-        "case.smtbot.arch.legend.ingest": "Data ingress",
-        "case.smtbot.arch.legend.indicator": "Indicator layer",
-        "case.smtbot.arch.legend.decide": "Decision cascade",
-        "case.smtbot.arch.legend.act": "Execute",
-        "case.smtbot.arch.legend.journal": "Journal",
-        "case.smtbot.arch.legend.dash": "Dashboard (read-only)",
-        "case.smtbot.stack.tag": "02 · Stack",
-        "case.smtbot.stack.h": "What the bot is made of.",
-        "case.smtbot.stack.lead": "Every component picked for one reason: it has to survive a 24/7 loop without you watching it. No frameworks for show, no abstractions that aren't paying for themselves.",
-        "case.smtbot.stack.streams": "Streams",
-        "case.smtbot.stack.brain": "Brain",
+        "case.smtbot.arch.h": "A full trading loop, shown at system level.",
+        "case.smtbot.arch.lead": "A Bybit-native loop with a visible operating surface: data, private core boundary, risk authority, execution, journal, dashboard, and diagnostics.",
+        "case.smtbot.arch.exchange.h": "Bybit V5",
+        "case.smtbot.arch.exchange.body": "WS market data. REST orders and positions.",
+        "case.smtbot.arch.data.h": "Data Plane",
+        "case.smtbot.arch.data.body": "Async client, buffers, cache, state builder.",
+        "case.smtbot.arch.core.h": "Private Research Core",
+        "case.smtbot.arch.core.body": "Closed decision layer behind a public boundary.",
+        "case.smtbot.arch.risk.h": "Risk Authority",
+        "case.smtbot.arch.risk.body": "RR, sizing, guardrails, breakers, lifecycle.",
+        "case.smtbot.arch.ops.h": "Execution &amp; Ops",
+        "case.smtbot.arch.ops.body": "Router, reconciliation, SQLite, dashboard, reports.",
+        "case.smtbot.boundary.tag": "02 · Showcase Boundary",
+        "case.smtbot.boundary.h": "Enough signal to judge the build. Not enough to clone the edge.",
+        "case.smtbot.boundary.lead": "An intentionally non-copyable showcase: enough system signal for credibility, not enough detail to clone the edge.",
+        "case.smtbot.boundary.public": "Public in showcase",
+        "case.smtbot.boundary.public.list": "<li>Architecture and module map</li><li>Runtime and dependency footprint</li><li>Risk controls, workflow, dashboard, journal</li>",
+        "case.smtbot.boundary.private": "Private in SMTbot",
+        "case.smtbot.boundary.private.list": "<li>Research core implementation</li><li>Production parameters and ranking rules</li><li>Account records and internal reports</li>",
+        "case.smtbot.stack.tag": "03 · Stack",
+        "case.smtbot.stack.h": "What the public surface can safely show.",
+        "case.smtbot.stack.lead": "Lean runtime, exchange-native IO, SQLite memory, read-only dashboard, and tests around the private core.",
+        "case.smtbot.stack.data": "Data Plane",
+        "case.smtbot.stack.data.list": "<li><strong>Bybit V5 WS</strong> <span>closed-candle market data</span></li><li><strong>KlineBuffer + cache</strong> <span>rolling windows, reconnect recovery</span></li><li><strong>MarketStateBuilder</strong> <span>state from raw exchange rows</span></li>",
+        "case.smtbot.stack.risk": "Risk &amp; Portfolio",
+        "case.smtbot.stack.risk.list": "<li><strong>RR system</strong> <span>standardized reward/risk math</span></li><li><strong>Position sizing</strong> <span>equity-aware exposure control</span></li><li><strong>Circuit breakers</strong> <span>loss, streak, drawdown, cooldown</span></li>",
         "case.smtbot.stack.execution": "Execution",
-        "case.smtbot.stack.tooling": "Tuning &amp; Tests",
-        "case.smtbot.stack.streams.list": "<li><strong>Bybit V5 WebSocket</strong> <span>kline.{1,3,5,15}.SYMBOL subscriptions via <em>pybit</em></span></li><li><strong>BybitWSClient</strong> <span>async subscribe + auto-reconnect, no GUI dependency</span></li><li><strong>KlineBuffer</strong> <span>per-symbol deque with gap-fill on reconnect</span></li><li><strong>CycleScheduler</strong> <span>1m closed-bar dispatch + heartbeat — event-driven, never polling</span></li>",
-        "case.smtbot.stack.brain.list": "<li><strong>Python 3.11+</strong> <span>fully async (<em>asyncio</em>), event-driven from bar boundary to order</span></li><li><strong>Pine v6 emulator</strong> <span>HA · WaveTrend · MFI · EMA200 · VWAP — bit-perfect parity, in-process</span></li><li><strong>evaluate_entry()</strong> <span>cascade dispatch: cross_based → pre_cross → ha_reversal</span></li><li><strong>Exit doctrine</strong> <span>position-attached SL, post-only reduce-only TP, idempotent BE lock</span></li><li><strong>pydantic · pyyaml</strong> <span>typed config + env overrides, schema validation at boot</span></li><li><strong>FastAPI + uvicorn</strong> <span>read-only journal viewer, 5 s poll, live PnL ledger</span></li>",
-        "case.smtbot.stack.execution.list": "<li><strong>Bybit V5 REST</strong> <span>futures trading via <em>pybit</em> (V5 endpoints, hedge-aware)</span></li><li><strong>Order Router</strong> <span>routes only on TAKE — NO_SETUP and REJECT short-circuit before the wire</span></li><li><strong>UTA + hedge mode</strong> <span>Unified Trading Account, cross-margin USDT/USDC</span></li><li><strong>Limit + SL doctrine</strong> <span>no market entries, ever — risk bounded by the stop, maker rebate by design</span></li>",
-        "case.smtbot.stack.tooling.list": "<li><strong>aiosqlite</strong> <span>append-only async journal — trades, decision log, position snapshots</span></li><li><strong>pytest</strong> <span>~640 cases pinning strategy, data pipeline, journal, execution</span></li><li><strong>Optuna (TPE + CMA-ES)</strong> <span>two-stage walk-forward tune — TPE for wide search, CMA-ES for refinement</span></li><li><strong>Claude Code</strong> <span>pair-programming AI — codes, audits diffs (decisions stay in Python)</span></li><li><strong>stable-baselines3</strong> <span>RL roadmap (Phase 6) — current bot is rule-based VMC</span></li>",
-        "case.smtbot.problems.tag": "03 · Problems",
-        "case.smtbot.problems.h": "Three hard problems.",
-        "case.smtbot.p1.h": "The cutover — and what survives it.",
-        "case.smtbot.p1.body": "The first data layer was a chain of indirection: TradingView Desktop → Electron CDP → Node.js MCP daemon → Python bridge → cell-by-cell signal-table parser. It worked, but pinned the bot to a Windows machine with TV open, serial-swept 15 symbols in <em>~160 seconds</em>, and forced the strategy to think in 5-minute cadence. A two-day rewrite replaced the entire chain with a Bybit V5 WebSocket + Python-native Pine v6 emulator. The hard part wasn't speed — it was parity. A single off-by-one in the HA streak counter or a wrong sign in WaveTrend would silently change every entry decision. A diagnostic diffed every signal cell between the old and new pipelines: <em>10/10 bit-perfect on the first clean build.</em> Post-cutover backtest cohort matched the pre-cutover cohort within <em>±0.01R per trade.</em> No regression.",
-        "case.smtbot.p2.h": "Three cascade entry paths, one scoring engine.",
-        "case.smtbot.p2.body": "A mean-reversion entry that fires at the moment a trend exhausts: WaveTrend cross + Heikin Ashi color flip + a multi-timeframe soft factor stack. If the primary path (<em>cross_based</em>) doesn't fire, the bot falls through to a slope-based <em>pre_cross</em> detector, then to a fast <em>ha_reversal</em> detector. Each path feeds the <em>same</em> scoring engine against direction-aligned signals on 5m + 15m + 3m timeframes plus a BTC/ETH composite bias. The cascade short-circuits on the first TAKE — no double-counting, no path-fighting.",
-        "case.smtbot.p3.h": "A single exit doctrine.",
-        "case.smtbot.p3.body": "One position, three exits, no Python timers. <em>Position-attached SL</em> lives on Bybit, not in the bot — it fires even if the process is dead. <em>Post-only reduce-only TP limit</em> sits in the book, so a fill collects the maker rebate instead of paying taker. An <em>idempotent break-even lock</em> moves the stop to entry the moment unrealized P&amp;L crosses a threshold — and idempotent means: if the lock has already moved the stop, calling it again is a no-op. That property survives reconnects, crashes, clock skew, and the 3am cycle that overlaps a fill.",
-        "case.smtbot.learnings.tag": "04 · What I learned",
-        "case.smtbot.learnings.h": "Three lines I'd write on a Post-it.",
-        "case.smtbot.learn1": "<em>Latency is architecture, not optimization.</em> The ~6700× speedup didn't come from tuning the chain — it came from replacing it. When the budget is two orders of magnitude, the answer is rarely a faster loop.",
-        "case.smtbot.learn2": "<em>Parity is a first-class requirement when you port a chart engine.</em> A 10/10 bit-perfect signal diff is what made the post-cutover backtest cohort credible. Without it, every divergence is a discussion instead of a fact.",
-        "case.smtbot.learn3": "<em>Publish the architecture, withhold the parameters.</em> The tuned weights — RR multiples, soft factor weights, per-symbol risk — are the edge. Publishing them turns a private signal into a crowded one. They live in the private repo, and they stay there.",
+        "case.smtbot.stack.execution.list": "<li><strong>pybit V5 client</strong> <span>orders, positions, wallet, fills</span></li><li><strong>Order router</strong> <span>single controlled execution path</span></li><li><strong>Position monitor</strong> <span>exchange state reconciliation</span></li>",
+        "case.smtbot.stack.ops": "Ops &amp; Validation",
+        "case.smtbot.stack.ops.list": "<li><strong>aiosqlite journal</strong> <span>audit trail for runtime events</span></li><li><strong>FastAPI + uvicorn</strong> <span>read-only terminal dashboard</span></li><li><strong>pytest</strong> <span>63 files, roughly 975 cases</span></li>",
+        "case.smtbot.proof.tag": "04 · Engineering Proof",
+        "case.smtbot.proof.h": "The impressive part is the operating surface.",
+        "case.smtbot.proof.data.h": "Owned data path",
+        "case.smtbot.proof.data.body": "No chart app, browser automation, or GUI dependency.",
+        "case.smtbot.proof.risk.h": "Risk before execution",
+        "case.smtbot.proof.risk.body": "RR, sizing, exposure, and breakers before execution.",
+        "case.smtbot.proof.ops.h": "Operator-grade memory",
+        "case.smtbot.proof.ops.body": "SQLite journal, dashboard, reports, and reconciliation.",
+        "case.smtbot.proof.validation.h": "Validation footprint",
+        "case.smtbot.proof.validation.body": "63 test files across runtime, risk, execution, and ops.",
+        "case.smtbot.workflow.tag": "05 · Workflow",
+        "case.smtbot.workflow.h": "Demo-first, observable, reversible.",
+        "case.smtbot.workflow.lead": "Credentials, smoke test, dry run, dashboard, then traceable operation.",
+        "case.smtbot.workflow.step1": "BYBIT API",
+        "case.smtbot.workflow.step2": "config + env",
+        "case.smtbot.workflow.step3": "connection smoke",
+        "case.smtbot.workflow.step4": "dry-run once",
+        "case.smtbot.workflow.step5": "dashboard watch",
         "case.smtbot.back": "Back to portfolio",
-        "projects.smtbot.description": "A headless event-driven trading bot on Bybit V5. A two-day rewrite replaced a brittle TradingView-Desktop scraper chain with a native WebSocket pipeline + in-process Pine v6 emulator — cutting cycle latency from ~160 s to ~24 ms (~6700×). Bit-perfect indicator parity (10/10 first build), backtest cohort within ±0.01R post-cutover, three-path entry cascade with a single exit doctrine. The tuned weights are the edge — they stay in the private repo.",
-        "projects.smtbot.metric": "~24 ms cycle · 25 pairs · ~6700× speedup",
+        "projects.smtbot.description": "A headless, event-driven private research bot on Bybit V5. The public showcase exposes the architecture, data plane, RR/risk and portfolio controls, execution layer, SQLite journal, FastAPI dashboard, and validation surface. The research core, production parameters, and account records stay private.",
+        "projects.smtbot.metric": "~24 ms cycle · 30 symbols x 6 TFs · ~975 pytest",
         "projects.finsenti.subtitle": "Financial Sentiment Analysis MLOps Pipeline",
         "projects.finsenti.description": "End-to-end MLOps pipeline for financial sentiment analysis. Fine-tunes FinBERT and distilBERT with LoRA adapters, tracks experiments with MLflow, and serves predictions via FastAPI + Next.js. FinBERT + LoRA model achieved 91.1% accuracy and 0.90 F1 score.",
         "projects.finsenti.metric": "91.1% accuracy · FinBERT + LoRA",
@@ -1891,6 +1925,93 @@ async function incrementProjectCounter(projectId, badge) {
 }
 
 // ============================================
+// CASE READ COUNTERS - Firebase Realtime Database
+// ============================================
+function getCaseReadDateKey() {
+    try {
+        return new Intl.DateTimeFormat('en-CA', {
+            timeZone: 'Europe/Istanbul',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        }).format(new Date());
+    } catch (error) {
+        return new Date().toISOString().slice(0, 10);
+    }
+}
+
+function normalizeCaseId(caseId) {
+    return String(caseId || '')
+        .toLowerCase()
+        .replace(/[^a-z0-9_-]/g, '');
+}
+
+async function initCaseReadCounters() {
+    const badges = document.querySelectorAll('[data-case-read-count]');
+    const pageCaseId = normalizeCaseId(document.body?.dataset?.caseId);
+
+    if (!database) {
+        badges.forEach((badge) => {
+            badge.textContent = '--';
+        });
+        return;
+    }
+
+    const caseIds = new Set();
+    badges.forEach((badge) => {
+        const caseId = normalizeCaseId(badge.dataset.caseReadCount);
+        if (caseId) caseIds.add(caseId);
+    });
+    if (pageCaseId) caseIds.add(pageCaseId);
+
+    caseIds.forEach((caseId) => {
+        const totalRef = database.ref(`case_reads/${caseId}/total`);
+        totalRef.on('value', (snapshot) => {
+            const count = snapshot.val() || 0;
+            document.querySelectorAll(`[data-case-read-count="${caseId}"]`).forEach((badge) => {
+                badge.textContent = count.toLocaleString();
+            });
+        });
+    });
+
+    if (pageCaseId) {
+        await trackCaseRead(pageCaseId);
+    }
+}
+
+async function trackCaseRead(caseId) {
+    const normalizedCaseId = normalizeCaseId(caseId);
+    if (!normalizedCaseId || !database) return;
+
+    const dateKey = getCaseReadDateKey();
+    const storageKey = `caseRead:${normalizedCaseId}:${dateKey}`;
+
+    try {
+        if (localStorage.getItem(storageKey) === '1') return;
+    } catch (error) {
+        // Storage can be unavailable in privacy modes; Firebase remains the source of truth.
+    }
+
+    try {
+        const totalRef = database.ref(`case_reads/${normalizedCaseId}/total`);
+        const dailyRef = database.ref(`case_reads/${normalizedCaseId}/daily/${dateKey}`);
+
+        await Promise.all([
+            totalRef.transaction((currentCount) => (currentCount || 0) + 1),
+            dailyRef.transaction((currentCount) => (currentCount || 0) + 1)
+        ]);
+
+        try {
+            localStorage.setItem(storageKey, '1');
+        } catch (error) {
+            // Non-fatal; duplicate protection is best-effort per browser.
+        }
+    } catch (error) {
+        console.error(`Case read counter error for ${normalizedCaseId}:`, error);
+    }
+}
+
+// ============================================
 // ADVANCED ANALYTICS - Track user behavior
 // ============================================
 async function trackUserBehavior() {
@@ -2212,6 +2333,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Initialize all tracking systems
     await initVisitorCounter();
     await initProjectCounters();
+    await initCaseReadCounters();
     await trackUserBehavior();
     initAdminDashboard();
 

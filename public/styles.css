@@ -6030,6 +6030,32 @@ body.light-mode .vc-num-daily{color:#0d7d72}
     border-color:rgba(251,146,60,.5);
     color:#fff;
 }
+.case-read-badge{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:8px 12px;
+    border-radius:var(--radius-pill);
+    border:1px solid rgba(251,146,60,.2);
+    background:rgba(251,146,60,.07);
+    color:var(--text-muted);
+    font-family:var(--font-mono);
+    font-size:.68rem;
+    line-height:1;
+    letter-spacing:.08em;
+    white-space:nowrap;
+}
+.case-read-badge i{
+    color:var(--accent-orange);
+    font-size:.68rem;
+    opacity:.85;
+}
+.case-read-badge .case-read-count{
+    color:var(--text-hi);
+    font-variant-numeric:tabular-nums;
+}
+.project-card:hover .case-read-badge{
+    border-color:rgba(251,146,60,.35);
+    background:rgba(251,146,60,.1);
+}
 body.light-mode .card-case-link{
     background:linear-gradient(135deg, rgba(234,88,12,.14), rgba(234,88,12,.06));
     border-color:rgba(234,88,12,.32);
@@ -6039,6 +6065,13 @@ body.light-mode .card-case-link:hover{
     background:linear-gradient(135deg, rgba(234,88,12,.22), rgba(234,88,12,.1));
     color:#9a3412;
 }
+body.light-mode .case-read-badge{
+    background:rgba(234,88,12,.06);
+    border-color:rgba(234,88,12,.2);
+    color:#78716c;
+}
+body.light-mode .case-read-badge i{color:#c2410c}
+body.light-mode .case-read-badge .case-read-count{color:#211c18}
 
 /* ── Wave 2 — custom hover cursor for project cards (now opt-in via [data-case-href]) ── */
 .see-project-cursor{
