@@ -1749,6 +1749,74 @@ window.closeCVModal = function() {
 // ============================================
 // VISITOR COUNTER - Firebase Realtime Database
 // ============================================
+const VISITOR_STATS_TIME_ZONE = 'Europe/Istanbul';
+
+function getVisitorDateKey(date = new Date()) {
+    const parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone: VISITOR_STATS_TIME_ZONE,
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    }).formatToParts(date);
+
+    const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+    return `${values.year}-${values.month}-${values.day}`;
+}
+
+function getLegacyVisitorDateKeys(dateKey) {
+    const [year, month, day] = dateKey.split('-').map(Number);
+    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    return [-1, 0, 1].map((offset) => {
+        const legacyDate = new Date(Date.UTC(year, month - 1, day + offset, 12));
+        const legacyDay = String(legacyDate.getUTCDate()).padStart(2, '0');
+        return `${dayNames[legacyDate.getUTCDay()]} ${monthNames[legacyDate.getUTCMonth()]} ${legacyDay} ${legacyDate.getUTCFullYear()}`;
+    });
+}
+
+function collectVisitorIds(data, visitorIds = new Set()) {
+    if (!data || typeof data !== 'object') return visitorIds;
+    Object.keys(data).forEach((visitorId) => visitorIds.add(visitorId));
+    return visitorIds;
+}
+
+function getVisitorDailyRefs(dateKey, visitorId) {
+    const childPath = visitorId ? `/${visitorId}` : '';
+    return [
+        database.ref(`visitors/daily/${dateKey}${childPath}`),
+        ...getLegacyVisitorDateKeys(dateKey).map((legacyKey) => database.ref(`visitors/daily/${legacyKey}${childPath}`))
+    ];
+}
+
+async function readVisitorIdsForDate(dateKey) {
+    const visitorIds = new Set();
+    const refs = getVisitorDailyRefs(dateKey);
+
+    const snapshots = await Promise.all(refs.map((ref) => ref.once('value')));
+    snapshots.forEach((snapshot) => collectVisitorIds(snapshot.val(), visitorIds));
+    return visitorIds;
+}
+
+async function hasVisitorForDate(dateKey, visitorId) {
+    const refs = getVisitorDailyRefs(dateKey, visitorId);
+
+    const snapshots = await Promise.all(refs.map((ref) => ref.once('value')));
+    return snapshots.some((snapshot) => snapshot.exists());
+}
+
+function watchVisitorIdsForDate(dateKey, onChange) {
+    const refs = getVisitorDailyRefs(dateKey);
+    const refresh = () => {
+        readVisitorIdsForDate(dateKey)
+            .then(onChange)
+            .catch((error) => console.warn('Daily visitor counter update failed:', error && error.message ? error.message : error));
+    };
+
+    refs.forEach((ref) => ref.on('value', refresh));
+    refresh();
+}
+
 async function initVisitorCounter() {
     const counterElement = document.querySelector('#visitorCount');
     const dailyCounterElement = document.querySelector('#dailyVisitorCount');
@@ -1770,33 +1838,41 @@ async function initVisitorCounter() {
             localStorage.setItem('portfolioVisitorId', visitorId);
         }
 
-        // Get current visitor count
         const countRef = database.ref('visitors/total');
         const snapshot = await countRef.once('value');
         let currentCount = snapshot.val() || 0;
 
         // Check if this visitor is new today
-        const today = new Date().toDateString();
+        const today = getVisitorDateKey();
         const dailyRef = database.ref(`visitors/daily/${today}/${visitorId}`);
-        const dailySnapshot = await dailyRef.once('value');
+        const hasVisitedToday = await hasVisitorForDate(today, visitorId);
+        const dailyVisitorData = {
+            timestamp: firebase.database.ServerValue.TIMESTAMP,
+            localTimeString: new Date().toLocaleString('tr-TR', { timeZone: VISITOR_STATS_TIME_ZONE }),
+            userAgent: navigator.userAgent,
+            language: navigator.language
+        };
 
-        if (!dailySnapshot.exists()) {
-            // New visitor for today - increment count
-            currentCount++;
-            await countRef.set(currentCount);
-            await dailyRef.set({
-                timestamp: firebase.database.ServerValue.TIMESTAMP,
-                localTimeString: new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' }), // Added readable UTC+3 timestamp
-                userAgent: navigator.userAgent,
-                language: navigator.language
+        if (!hasVisitedToday) {
+            const dailyResult = await dailyRef.transaction((currentValue) => {
+                if (currentValue) return;
+                return dailyVisitorData;
             });
+
+            if (dailyResult.committed) {
+                const result = await countRef.transaction((currentValue) => (currentValue || 0) + 1);
+                currentCount = result.snapshot.val() || currentCount + 1;
+            }
+        } else {
+            const currentDailySnapshot = await dailyRef.once('value');
+            if (!currentDailySnapshot.exists()) {
+                await dailyRef.set(dailyVisitorData);
+            }
         }
 
+        currentCount = (await countRef.once('value')).val() || currentCount;
         // Get today's visitor count
-        const todayRef = database.ref(`visitors/daily/${today}`);
-        const todaySnapshot = await todayRef.once('value');
-        const todayData = todaySnapshot.val() || {};
-        const todayCount = Object.keys(todayData).length;
+        const todayCount = (await readVisitorIdsForDate(today)).size;
 
         // Animate counters
         animateCounter(counterElement, 0, currentCount, 2000);
@@ -1809,10 +1885,8 @@ async function initVisitorCounter() {
         });
 
         // Real-time updates for daily visitors
-        todayRef.on('value', (snapshot) => {
-            const dailyData = snapshot.val() || {};
-            const dailyCount = Object.keys(dailyData).length;
-            dailyCounterElement.textContent = dailyCount.toLocaleString();
+        watchVisitorIdsForDate(today, (visitorIds) => {
+            dailyCounterElement.textContent = visitorIds.size.toLocaleString();
         });
 
     } catch (error) {
@@ -2195,13 +2269,10 @@ async function loadAdminStats() {
         });
 
         // Load today's visitors
-        const today = new Date().toDateString();
-        const todayRef = database.ref(`visitors/daily/${today}`);
-        todayRef.on('value', (snapshot) => {
-            const todayData = snapshot.val() || {};
-            const todayCount = Object.keys(todayData).length;
+        const today = getVisitorDateKey();
+        watchVisitorIdsForDate(today, (visitorIds) => {
             const el = document.getElementById('today-visitors');
-            if (el) el.textContent = todayCount;
+            if (el) el.textContent = visitorIds.size.toLocaleString();
         });
 
         // Load popular project
