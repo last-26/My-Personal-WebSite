@@ -491,7 +491,7 @@ const translations = {
         "projects.swiftlink.subtitle": "FastAPI URL shortener with live stats",
         "projects.swiftlink.description": "FastAPI URL shortener with 6-character short codes, click tracking, live stats polling every 5 seconds, and a REST API. Packaged with SQLite, Docker, pytest/ruff, and GitHub Actions CI.",
         "projects.sametei.subtitle": "LibreChat-based internal HR RAG assistant",
-        "projects.sametei.description": "LibreChat-based RAG + OCR workspace for internal HR procedures. The RAG flow uses MongoDB vector search over HR documents; the OCR path uses Qwen2.5-VL with optional OpenRouter Vision/Tesseract fallback. Exposed through a LibreChat-compatible custom endpoint.",
+        "projects.sametei.description": "LibreChat-based internal HR workspace with multi-LLM support. A React/TypeScript frontend and Node.js API use MongoDB-based vector retrieval over HR documents to deliver practical retrieval-augmented workflows.",
         "projects.hireai.subtitle": "BERT-Based CV Analysis Platform",
         "projects.hireai.description": "BERT-based CV analysis platform for resume text or file uploads. Predicts the software-role category, calculates ATS scores, and returns keyword, format, and readability feedback. Includes JWT auth, REST/Swagger API, and a React + Tailwind frontend.",
         "projects.link": "View on GitHub",
