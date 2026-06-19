@@ -41,7 +41,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=103">
+    <link rel="stylesheet" href="styles.css?v=106">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -199,11 +199,11 @@
                     <a href="#projects" class="btn-hero btn-glow" data-magnetic>
                         <i class="fas fa-rocket"></i> <span data-tr="hero.btn.projects">Projelerim</span>
                     </a>
-                    <a href="https://github.com/last-26" target="_blank" class="btn-hero btn-outline" data-magnetic>
-                        <i class="fab fa-github"></i> <span data-tr="hero.btn.github">GitHub</span>
+                    <a href="https://github.com/last-26" target="_blank" rel="noopener noreferrer" class="btn-hero btn-outline" data-magnetic>
+                        <i class="fab fa-github"></i> <span data-tr="hero.btn.github">My GitHub Profile</span>
                     </a>
                     <a href="#contact" class="btn-hero btn-outline" data-magnetic>
-                        <i class="fas fa-paper-plane"></i> <span data-tr="hero.btn.contact">İletişim</span>
+                        <i class="fas fa-paper-plane"></i> <span data-tr="hero.btn.contact">Contact</span>
                     </a>
                 </div>
                 <div class="cv-row reveal">
@@ -211,13 +211,13 @@
                         <i class="fas fa-file-lines cv-row-icon" aria-hidden="true"></i>
                         <span class="cv-row-label-text">CV</span>
                     </span>
-                    <a href="#" id="cvViewBtn" class="cv-row-link cv-row-link-primary" target="_blank" rel="noopener">
+                    <a href="#" id="cvViewBtn" class="cv-row-link cv-row-link-primary" target="_blank" rel="noopener noreferrer">
                         <i class="fas fa-eye" aria-hidden="true"></i>
-                        <span data-tr="hero.btn.cv.view">Görüntüle</span>
+                        <span data-tr="hero.btn.cv.view">View</span>
                     </a>
                     <a href="#" id="cvDownloadBtn" class="cv-row-link" download>
                         <i class="fas fa-arrow-down" aria-hidden="true"></i>
-                        <span data-tr="hero.btn.cv.download">İndir</span>
+                        <span data-tr="hero.btn.cv.download">Download</span>
                     </a>
                 </div>
             </div>
@@ -249,7 +249,7 @@
         <div class="container">
             <div class="section-header reveal">
                 <span class="section-tag" aria-hidden="true">01</span>
-                <h2 class="section-title"><span class="h2-main" data-tr="about.title.main">Hakkımda</span><em class="h2-soft" data-tr="about.title.soft"></em></h2>
+                <h2 class="section-title"><span class="h2-main" data-tr="about.title.main">About Me</span><em class="h2-soft" data-tr="about.title.soft"></em></h2>
             </div>
             <!-- Editorial story (left) + terminal-style dossier (right) -->
             <div class="about-grid">
@@ -378,7 +378,7 @@
         <div class="container">
             <div class="section-header reveal">
                 <span class="section-tag" aria-hidden="true">02</span>
-                <h2 class="section-title"><span class="h2-main" data-tr="education.title.main">Eğitim</span><em class="h2-soft" data-tr="education.title.soft"></em></h2>
+                <h2 class="section-title"><span class="h2-main" data-tr="education.title.main">Education</span><em class="h2-soft" data-tr="education.title.soft"></em></h2>
             </div>
             <div class="education-list">
                 <article class="education-card edu-bsc reveal">
@@ -388,12 +388,12 @@
                         <span class="edu-badge" data-tr="education.badge.bsc">BSc</span>
                         <span class="edu-years" aria-hidden="true">2020 — 2026</span>
                     </header>
-                    <h3 class="edu-degree" data-tr="education.degree">Bilgisayar Mühendisliği Lisans</h3>
+                    <h3 class="edu-degree" data-tr="education.degree">BSc in Computer Engineering</h3>
                     <p class="edu-school">
                         <span class="edu-school-mark" aria-hidden="true"></span>
                         <span class="edu-school-name" data-tr="education.school">Eskişehir Osmangazi Üniversitesi</span>
                     </p>
-                    <p class="edu-detail" data-tr="education.detail">Yapay Zeka, Makine Öğrenmesi ve Doğal Dil İşleme alanlarında uzmanlaşma. Mezuniyet projesi: HIREAI — AI destekli CV analiz platformu.</p>
+                    <p class="edu-detail" data-tr="education.detail">Specializing in Artificial Intelligence, Machine Learning and NLP. Capstone project: HIREAI — AI-powered CV analysis platform.</p>
                     <div class="edu-timeline" aria-hidden="true">
                         <div class="edu-timeline-track">
                             <div class="edu-timeline-fill" style="--fill-start:0%;--fill-end:100%"></div>
@@ -411,12 +411,12 @@
                         <span class="edu-badge" data-tr="education.badge.lang">LANG</span>
                         <span class="edu-years" aria-hidden="true">2022 — 2025</span>
                     </header>
-                    <h3 class="edu-degree" data-tr="education.cert.title">İngilizce Dil Okulları</h3>
+                    <h3 class="edu-degree" data-tr="education.cert.title">English Language Schools</h3>
                     <p class="edu-school">
                         <span class="edu-school-mark" aria-hidden="true"></span>
                         <span class="edu-school-name" data-tr="education.cert.school">American Cultural Language Schools</span>
                     </p>
-                    <p class="edu-detail" data-tr="education.cert.detail">Okuma, yazma, dinleme ve konuşma (Spoken Interaction & Production) alanlarında profesyonel yeterlilik eğitimi ve sertifikasyonu.</p>
+                    <p class="edu-detail" data-tr="education.cert.detail">B2-level English training and certification in reading, writing, listening, and spoken interaction/production.</p>
                     <div class="edu-timeline" aria-hidden="true">
                         <div class="edu-timeline-track">
                             <div class="edu-timeline-fill" style="--fill-start:28.5%;--fill-end:71.5%"></div>
@@ -426,13 +426,9 @@
                         </div>
                     </div>
                     <div class="edu-proofs">
-                        <button class="proof-chip" onclick="showEnglishCertModal('c1.jpg')" type="button">
-                            <i class="fas fa-check-double"></i>
-                            <span data-tr="education.cert.c1.btn">C1 Sertifikası</span>
-                        </button>
                         <button class="proof-chip" onclick="showEnglishCertModal('b2.jpg')" type="button">
                             <i class="fas fa-check-double"></i>
-                            <span data-tr="education.cert.b2.btn">B2 Sertifikası</span>
+                            <span data-tr="education.cert.b2.btn">B2 Certificate</span>
                         </button>
                     </div>
                 </article>
@@ -455,7 +451,7 @@
         <div class="container">
             <div class="section-header reveal">
                 <span class="section-tag" aria-hidden="true">03</span>
-                <h2 class="section-title"><span class="h2-main" data-tr="experience.title.main">Deneyim</span><em class="h2-soft" data-tr="experience.title.soft"></em></h2>
+                <h2 class="section-title"><span class="h2-main" data-tr="experience.title.main">Experience</span><em class="h2-soft" data-tr="experience.title.soft"></em></h2>
             </div>
             <div class="experience-roadmap">
                 <div class="experience-progress-dot" aria-hidden="true"></div>
@@ -489,7 +485,7 @@
                             Akkuyu Nükleer Santral sahasından gelen verileri analiz etmek için React.js, FastAPI ve PostgreSQL kullanarak uçtan uca İSG Takip Paneli geliştirdim. Backend tarafında Passlib ve JWT ile güvenli kimlik doğrulama sistemleri kurarken, SQLAlchemy ORM ile veritabanı yönetimini optimize ettim. Ayrıca yüksek kardinaliteli verilerde B-tree indeksleme stratejileri uygulayarak sorgu performansını artırdım ve Material UI ile yöneticiler için gerçek zamanlı analitik dashboard'lar tasarladım.
                         </div>
                         <div class="roadmap-metrics">
-                            <span class="roadmap-metric"><i class="fas fa-layer-group"></i><span data-tr="experience.icictas.metrics.1">Full-stack stack</span></span>
+                            <span class="roadmap-metric"><i class="fas fa-layer-group"></i><span data-tr="experience.icictas.metrics.1">Full-stack architecture</span></span>
                             <span class="roadmap-metric"><i class="fas fa-bolt"></i><span data-tr="experience.icictas.metrics.2">Real-time dashboard</span></span>
                             <span class="roadmap-metric"><i class="fas fa-database"></i><span data-tr="experience.icictas.metrics.3">B-tree indexed</span></span>
                         </div>
@@ -595,7 +591,7 @@
                         <div class="roadmap-metrics">
                             <span class="roadmap-metric"><i class="fas fa-plug"></i><span data-tr="experience.powintec.metrics.1">Kablosuz şarj UI</span></span>
                             <span class="roadmap-metric"><i class="fas fa-tower-broadcast"></i><span data-tr="experience.powintec.metrics.2">WebSocket stream</span></span>
-                            <span class="roadmap-metric"><i class="fas fa-gauge-high"></i><span data-tr="experience.powintec.metrics.3">&lt; ms latency</span></span>
+                            <span class="roadmap-metric"><i class="fas fa-gauge-high"></i><span data-tr="experience.powintec.metrics.3">&lt; 1 ms latency</span></span>
                         </div>
                         <div class="roadmap-extra" hidden>
                             <span class="roadmap-extra-label" data-tr="experience.achievementsLabel">ÖNEMLİ KAZANIMLAR</span>
@@ -648,13 +644,13 @@
                     </div>
                 </div>
                 <div class="cv-pdf-bar-actions">
-                    <a id="cvPdfNewtab" class="cv-pdf-action" href="#" target="_blank" rel="noopener">
+                    <a id="cvPdfNewtab" class="cv-pdf-action" href="#" target="_blank" rel="noopener noreferrer">
                         <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                        <span data-tr="cvmodal.newtab">Yeni sekmede</span>
+                        <span data-tr="cvmodal.newtab">New tab</span>
                     </a>
                     <a id="cvPdfDownload" class="cv-pdf-action cv-pdf-action-primary" href="#" download>
                         <i class="fas fa-arrow-down" aria-hidden="true"></i>
-                        <span data-tr="cvmodal.download">İndir</span>
+                        <span data-tr="cvmodal.download">Download</span>
                     </a>
                     <button class="cv-pdf-close" onclick="closeCVModal()" type="button" aria-label="Kapat">
                         <i class="fas fa-xmark" aria-hidden="true"></i>
@@ -672,7 +668,7 @@
         <div class="container">
             <div class="section-header reveal">
                 <span class="section-tag" aria-hidden="true">04</span>
-                <h2 class="section-title"><span class="h2-main" data-tr="projects.title.main">Projeler</span><em class="h2-soft" data-tr="projects.title.soft"></em></h2>
+                <h2 class="section-title"><span class="h2-main" data-tr="projects.title.main">Projects</span><em class="h2-soft" data-tr="projects.title.soft"></em></h2>
             </div>
             <div class="projects-grid projects-magazine">
                 <!-- ── Group divider: post-graduate work ── -->
@@ -691,7 +687,7 @@
                             <span class="wip-dot"></span>
                             <span data-tr="projects.wip">Currently building</span>
                         </span>
-                        <span class="card-showcase-tag" data-tr="projects.badge.rl">RL / TRADING</span>
+                        <span class="card-showcase-tag" data-tr="projects.badge.rl">BYBIT / TRADING</span>
                     </div>
                     <div class="showcase-grid">
                         <div class="showcase-left">
@@ -702,15 +698,15 @@
                                 <div class="card-icon"><i class="fas fa-chart-line"></i></div>
                                 <div class="card-title-group">
                                     <h3>SMTbot</h3>
-                                    <p class="card-tagline" data-tr="projects.smtbot.subtitle">Bybit V5-native private research system</p>
+                                    <p class="card-tagline" data-tr="projects.smtbot.subtitle">Private trading-system engineering showcase</p>
                                 </div>
                             </div>
-                            <div class="card-highlight" data-tr="projects.smtbot.metric">~24 ms cycle · 30 symbols x 6 TFs · ~975 pytest</div>
+                            <div class="card-highlight" data-tr="projects.smtbot.metric">~24 ms cycle · 10 symbols x 4 TFs · ~975 pytest</div>
                             <div class="card-content project-body">
-                                <p class="card-desc" data-tr="projects.smtbot.description">
-                                    An event-driven private research system on Bybit V5. The public showcase presents the architecture, data plane, RR/risk and portfolio controls, execution layer, SQLite records, FastAPI dashboard, and test surface. The decision core, production parameters, and account records stay private.
+                                <p class="card-desc" id="project-desc-smtbot" data-tr="projects.smtbot.description">
+                                    Public engineering showcase for a private crypto futures research system: Bybit V5 demo integration, async data flow, SQLite records, FastAPI surface, and a clear boundary around private strategy logic and account data.
                                 </p>
-                                <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
+                                <button class="card-expand-btn" type="button" aria-label="Expand project details" aria-expanded="false" aria-controls="project-desc-smtbot"><i class="fas fa-chevron-down"></i></button>
                                 <div class="card-tags">
                                     <span class="tag-backend">Python · asyncio</span><span class="tag-cloud">Bybit V5 WS</span><span class="tag-backend">pybit</span><span class="tag-ai">Risk engine</span><span class="tag-ai">RR system</span><span class="tag-backend">aiosqlite</span><span class="tag-backend">FastAPI</span><span class="tag-devops">pytest</span>
                                 </div>
@@ -796,21 +792,21 @@
                         <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
                         <div class="card-title-group">
                             <h3>FinSenti</h3>
-                            <p class="card-tagline" data-tr="projects.finsenti.subtitle">Finansal Duygu Analizi MLOps Pipeline'ı</p>
+                            <p class="card-tagline" data-tr="projects.finsenti.subtitle">Financial NLP MLOps pipeline</p>
                         </div>
                     </div>
-                    <div class="card-highlight" data-tr="projects.finsenti.metric">%91.1 doğruluk · FinBERT + LoRA</div>
+                    <div class="card-highlight" data-tr="projects.finsenti.metric">91.1% accuracy · 0.8976 macro F1</div>
                     <div class="card-content project-body">
-                        <p class="card-desc" data-tr="projects.finsenti.description">
-                            Finansal metin duygu analizi için uçtan uca MLOps pipeline'ı. FinBERT ve distilBERT modellerini LoRA adaptörleri ile fine-tune eder, deneyleri MLflow ile takip eder ve tahminleri FastAPI + Next.js ile sunar. FinBERT + LoRA modeli %91.1 doğruluk ve 0.90 F1 skoru elde etti.
+                        <p class="card-desc" id="project-desc-finsenti" data-tr="projects.finsenti.description">
+                            End-to-end MLOps pipeline for financial sentiment analysis. Fine-tunes FinBERT/distilBERT with LoRA adapters, tracks experiments with MLflow, and serves batch/single predictions through FastAPI and a Next.js dashboard.
                         </p>
-                        <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
+                        <button class="card-expand-btn" type="button" aria-label="Expand project details" aria-expanded="false" aria-controls="project-desc-finsenti"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
                             <span>FinBERT</span><span>LoRA/PEFT</span><span>MLflow</span><span>FastAPI</span><span>Next.js</span><span>Docker</span><span>Python</span>
                         </div>
                         <div class="card-footer">
-                            <a href="https://github.com/last-26/FinSenti" target="_blank" class="card-link">
-                                <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                            <a href="https://github.com/last-26/FinSenti" target="_blank" rel="noopener noreferrer" class="card-link">
+                                <i class="fab fa-github"></i> <span data-tr="projects.link">View on GitHub</span> <i class="fas fa-arrow-right card-link-arrow"></i>
                             </a>
                             <span class="card-year">2026</span>
                         </div>
@@ -820,27 +816,27 @@
                 <!-- 02 · NextHire — Featured -->
                 <article class="project-card card-featured card-theme-pink reveal">
                     <div class="card-meta">
-                        <span class="card-badge" data-tr="projects.badge.agent">AI AJAN</span>
+                        <span class="card-badge" data-tr="projects.badge.agent">AI AGENT</span>
                     </div>
                     <div class="card-top">
                         <div class="card-icon"><i class="fas fa-robot"></i></div>
                         <div class="card-title-group">
                             <h3>NextHire</h3>
-                            <p class="card-tagline" data-tr="projects.nexthire.subtitle">AI Destekli İş Başvuru Ajanı</p>
+                            <p class="card-tagline" data-tr="projects.nexthire.subtitle">LangGraph job-application agent</p>
                         </div>
                     </div>
-                    <div class="card-highlight" data-tr="projects.nexthire.metric">LangGraph · Multi-model routing</div>
+                    <div class="card-highlight" data-tr="projects.nexthire.metric">7-node LangGraph · Bedrock routing</div>
                     <div class="card-content project-body">
-                        <p class="card-desc" data-tr="projects.nexthire.description">
-                            LangGraph tabanlı çok adımlı AI agent sistemi. CV yükle, iş ilanı yapıştır — agent otomatik olarak ATS skoru hesaplar, eksik yetkinlikleri belirler, kişiselleştirilmiş ön yazı oluşturur ve başvuruyu kanban panosuna ekler. Multi-model routing ile maliyet-performans optimizasyonu sağlar.
+                        <p class="card-desc" id="project-desc-nexthire" data-tr="projects.nexthire.description">
+                            Agentic workflow for job applications: parses CVs and job posts, scores ATS compatibility, surfaces skill gaps, generates a tailored cover letter, and tracks the application through a board.
                         </p>
-                        <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
+                        <button class="card-expand-btn" type="button" aria-label="Expand project details" aria-expanded="false" aria-controls="project-desc-nexthire"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
                             <span>LangGraph</span><span>FastAPI</span><span>Next.js</span><span>AWS Bedrock</span><span>PostgreSQL</span><span>Docker</span><span>SSE</span><span>TypeScript</span>
                         </div>
                         <div class="card-footer">
-                            <a href="https://github.com/last-26/NextHire" target="_blank" class="card-link">
-                                <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                            <a href="https://github.com/last-26/NextHire" target="_blank" rel="noopener noreferrer" class="card-link">
+                                <i class="fab fa-github"></i> <span data-tr="projects.link">View on GitHub</span> <i class="fas fa-arrow-right card-link-arrow"></i>
                             </a>
                             <span class="card-year">2026</span>
                         </div>
@@ -850,26 +846,26 @@
                 <!-- 03 · AWS AI Doc QA — Mini-featured (post-graduate) -->
                 <article class="project-card card-mini-featured card-theme-blue reveal">
                     <div class="card-meta">
-                        <span class="card-badge" data-tr="projects.badge.cloud">BULUT</span>
+                        <span class="card-badge" data-tr="projects.badge.cloud">CLOUD</span>
                     </div>
                     <div class="card-top">
                         <div class="card-icon"><i class="fas fa-cloud"></i></div>
                         <div class="card-title-group">
                             <h3>AWS AI Doc QA</h3>
-                            <p class="card-tagline" data-tr="projects.awsai.subtitle">AWS ile Akıllı Doküman Soru-Cevap Sistemi</p>
+                            <p class="card-tagline" data-tr="projects.awsai.subtitle">Serverless PDF Q&A on AWS</p>
                         </div>
                     </div>
                     <div class="card-content project-body">
-                        <p class="card-desc" data-tr="projects.awsai.description">
-                            Fully serverless document Q&A — PDFs in S3, text via Textract, Claude on Bedrock answers natural-language questions. The whole stack as Infrastructure as Code (CDK), living in version control instead of a console. API Gateway + Lambda + DynamoDB + SNS.
+                        <p class="card-desc" id="project-desc-awsai" data-tr="projects.awsai.description">
+                            Serverless PDF Q&A system: S3 uploads, Lambda/Textract extraction, DynamoDB records, and Claude Haiku 4.5 on Bedrock. Infrastructure is deployed with AWS CDK; the frontend is vanilla HTML/CSS/JS.
                         </p>
-                        <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
+                        <button class="card-expand-btn" type="button" aria-label="Expand project details" aria-expanded="false" aria-controls="project-desc-awsai"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
                             <span>AWS CDK</span><span>Lambda</span><span>S3</span><span>Textract</span><span>Bedrock</span><span>Claude Haiku 4.5</span><span>DynamoDB</span><span>API Gateway</span><span>Python</span>
                         </div>
                         <div class="card-footer">
-                            <a href="https://github.com/last-26/aws-ai-project" target="_blank" class="card-link">
-                                <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                            <a href="https://github.com/last-26/aws-ai-project" target="_blank" rel="noopener noreferrer" class="card-link">
+                                <i class="fab fa-github"></i> <span data-tr="projects.link">View on GitHub</span> <i class="fas fa-arrow-right card-link-arrow"></i>
                             </a>
                             <span class="card-year">2026</span>
                         </div>
@@ -885,20 +881,23 @@
                         <div class="card-icon"><i class="fas fa-link"></i></div>
                         <div class="card-title-group">
                             <h3>SwiftLink</h3>
-                            <p class="card-tagline" data-tr="projects.swiftlink.subtitle">Hızlı & Modern URL Kısaltma Servisi</p>
+                            <p class="card-tagline" data-tr="projects.swiftlink.subtitle">FastAPI URL shortener with live stats</p>
                         </div>
                     </div>
                     <div class="card-content project-body">
-                        <p class="card-desc" data-tr="projects.swiftlink.description">
-                            End-to-end URL shortener built with FastAPI — Docker-containerized, CI-tested via GitHub Actions. Click analytics, real-time stats, custom slugs. Owned the whole stack from API to dashboard.
+                        <p class="card-desc" id="project-desc-swiftlink" data-tr="projects.swiftlink.description">
+                            FastAPI URL shortener with 6-character short codes, click tracking, live stats polling every 5 seconds, and a REST API. Packaged with SQLite, Docker, pytest/ruff, and GitHub Actions CI.
                         </p>
-                        <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
+                        <button class="card-expand-btn" type="button" aria-label="Expand project details" aria-expanded="false" aria-controls="project-desc-swiftlink"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
                             <span>FastAPI</span><span>SQLite</span><span>Docker</span><span>GitHub Actions</span><span>pytest</span><span>Python</span>
                         </div>
-                        <div class="card-footer">
-                            <a href="https://github.com/last-26/SwiftLink" target="_blank" class="card-link">
-                                <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                        <div class="card-footer card-footer-multi">
+                            <a href="https://github.com/last-26/SwiftLink" target="_blank" rel="noopener noreferrer" class="card-link">
+                                <i class="fab fa-github"></i> <span data-tr="projects.link">View on GitHub</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                            </a>
+                            <a href="https://swiftlink-9m44.onrender.com" target="_blank" rel="noopener noreferrer" class="card-link project-link">
+                                <i class="fas fa-arrow-up-right-from-square"></i> <span data-tr="projects.link.live">Live demo</span> <i class="fas fa-arrow-right card-link-arrow"></i>
                             </a>
                             <span class="card-year">2025</span>
                         </div>
@@ -917,26 +916,26 @@
                 <!-- 05 · SAMETEI — Mini-featured (internship · TEI) -->
                 <article class="project-card card-mini-featured card-theme-purple reveal">
                     <div class="card-meta">
-                        <span class="card-badge" data-tr="projects.badge.internship">STAJ · TEI</span>
+                        <span class="card-badge" data-tr="projects.badge.internship">INTERNSHIP · TEI</span>
                     </div>
                     <div class="card-top">
                         <div class="card-icon"><i class="fas fa-building"></i></div>
                         <div class="card-title-group">
                             <h3>SAMETEI</h3>
-                            <p class="card-tagline" data-tr="projects.sametei.subtitle">Kurum İçi Çalışan, RAG Tabanlı İK Asistanı</p>
+                            <p class="card-tagline" data-tr="projects.sametei.subtitle">LibreChat-based internal HR RAG assistant</p>
                         </div>
                     </div>
                     <div class="card-content project-body">
-                        <p class="card-desc" data-tr="projects.sametei.description">
-                            Dahili İK prosedürleri için LibreChat tabanlı bir asistan. MongoDB vektör arama, yerel Ollama LLM'leri ve Qwen 2.5-VL OCR'ı sunan bir FastAPI sidecar (Tesseract yedeği ile) üzerine kurulu bir RAG hattı, şirketin kendi politika ve doküman havuzundan kaynak göstererek cevap üretir — halüsinasyon yerine atıflı yanıtlar. OpenAI uyumlu katman, gerektiğinde host edilen modellere yönlendirme yapar; hassas İK verisi kurum ağının dışına çıkmaz. İK ekiplerinin doküman işleme süresini %70 azalttı.
+                        <p class="card-desc" id="project-desc-sametei" data-tr="projects.sametei.description">
+                            LibreChat-based RAG + OCR workspace for internal HR procedures. The RAG flow uses MongoDB vector search over HR documents; the OCR path uses Qwen2.5-VL with optional OpenRouter Vision/Tesseract fallback. Exposed through a LibreChat-compatible custom endpoint.
                         </p>
-                        <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
+                        <button class="card-expand-btn" type="button" aria-label="Expand project details" aria-expanded="false" aria-controls="project-desc-sametei"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
                             <span>LibreChat</span><span>RAG</span><span>MongoDB Vector Search</span><span>Multi-LLM</span><span>OCR · Qwen 2.5-VL</span><span>FastAPI</span><span>Node.js</span><span>Tesseract</span>
                         </div>
                         <div class="card-footer">
-                            <a href="https://github.com/last-26/SAMETEI" target="_blank" class="card-link">
-                                <i class="fab fa-github"></i> <span data-tr="projects.link">GitHub'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                            <a href="https://github.com/last-26/SAMETEI" target="_blank" rel="noopener noreferrer" class="card-link">
+                                <i class="fab fa-github"></i> <span data-tr="projects.link">View on GitHub</span> <i class="fas fa-arrow-right card-link-arrow"></i>
                             </a>
                             <span class="card-year">2025</span>
                         </div>
@@ -946,27 +945,26 @@
                 <!-- 06 · HIREAI — Mini-featured (graduation thesis) -->
                 <article class="project-card card-mini-featured card-theme-lavender reveal">
                     <div class="card-meta">
-                        <span class="card-badge" data-tr="projects.badge.graduation">MEZUN. PROJESİ</span>
+                        <span class="card-badge" data-tr="projects.badge.graduation">GRADUATION PROJECT</span>
                     </div>
                     <div class="card-top">
                         <div class="card-icon"><i class="fas fa-file-alt"></i></div>
                         <div class="card-title-group">
                             <h3>HIREAI</h3>
-                            <p class="card-tagline" data-tr="projects.hireai.subtitle">AI Destekli CV & Portföy Analiz Platformu</p>
+                            <p class="card-tagline" data-tr="projects.hireai.subtitle">BERT-Based CV Analysis Platform</p>
                         </div>
                     </div>
                     <div class="card-content project-body">
-                        <p class="card-desc" data-tr="projects.hireai.description">
-                            ATS tabanlı CV analiz ve optimizasyon platformu. CV'leri iş tanımlarına göre analiz eder, ATS uyumlu skorlar ve iyileştirme önerileri sunar.
-                            İK ekiplerinin ön eleme süresini %50 azalttı.
+                        <p class="card-desc" id="project-desc-hireai" data-tr="projects.hireai.description">
+                            BERT-based CV analysis platform for resume text or file uploads. Predicts the software-role category, calculates ATS scores, and returns keyword, format, and readability feedback. Includes JWT auth, REST/Swagger API, and a React + Tailwind frontend.
                         </p>
-                        <button class="card-expand-btn" aria-label="Expand"><i class="fas fa-chevron-down"></i></button>
+                        <button class="card-expand-btn" type="button" aria-label="Expand project details" aria-expanded="false" aria-controls="project-desc-hireai"><i class="fas fa-chevron-down"></i></button>
                         <div class="card-tags">
-                            <span>React.js</span><span>Flask-RESTX</span><span>PostgreSQL</span><span>Sentence Transformers</span><span>spaCy</span><span>NLTK</span><span>TF-IDF</span><span>TailwindCSS</span>
+                            <span>React.js</span><span>Flask-RESTX</span><span>PyTorch</span><span>Transformers/BERT</span><span>NLTK</span><span>Scikit-learn</span><span>SQLAlchemy</span><span>JWT</span><span>TailwindCSS</span><span>Swagger</span>
                         </div>
                         <div class="card-footer">
-                            <a href="https://gitlab.com/last-26/cv-analysis" target="_blank" class="card-link">
-                                <i class="fab fa-gitlab"></i> <span data-tr="projects.link.gitlab">GitLab'da Görüntüle</span> <i class="fas fa-arrow-right card-link-arrow"></i>
+                            <a href="https://gitlab.com/last-26/cv-analysis" target="_blank" rel="noopener noreferrer" class="card-link">
+                                <i class="fab fa-gitlab"></i> <span data-tr="projects.link.gitlab">View on GitLab</span> <i class="fas fa-arrow-right card-link-arrow"></i>
                             </a>
                             <span class="card-year">2025</span>
                         </div>
@@ -1104,15 +1102,19 @@
         <div class="container">
             <div class="section-header reveal">
                 <span class="section-tag" aria-hidden="true">06</span>
-                <h2 class="section-title" data-tr="contact.title">İletişim</h2>
+                <h2 class="section-title" data-tr="contact.title">Contact</h2>
             </div>
             <a href="#hero" class="contact-uptop reveal" aria-label="Back to top">
                 <span class="contact-uptop-icon" aria-hidden="true"><i class="fas fa-arrow-up"></i></span>
                 <span class="contact-uptop-label" data-tr="footer.uptop">Back to top</span>
             </a>
             <div class="contact-editorial">
-                <p class="contact-essay reveal reveal-fade" data-tr="about.intro">
+                <p class="contact-manifesto reveal reveal-fade" data-tr="about.intro">
                     <span class="kw">Writing code is the small part of the job now.</span> The work moved up the stack: asking the sharper question, owning the architecture, the &ldquo;how do we make this better?&rdquo; instinct, the review that catches what looks fine, the test that pins what the model missed. <span class="kw">Less typing, more thinking</span> — and where the engineer stands in the loop is the real question.
+                </p>
+                <div class="contact-divider reveal reveal-fade" aria-hidden="true"></div>
+                <p class="contact-essay reveal reveal-fade" data-tr="contact.lead">
+                    Open to new opportunities and collaborations. Drop a line — I respond within a day.
                 </p>
                 <div class="contact-email-wrap reveal reveal-scale">
                     <button type="button" id="email-card" class="contact-email" onclick="copyEmail()" aria-label="Copy email">
@@ -1123,18 +1125,18 @@
                         <span class="contact-email-text">a.sametsoysal@gmail.com</span>
                         <span class="contact-email-action">
                             <i class="fas fa-copy"></i>
-                            <span data-tr="contact.copy">kopyala</span>
+                            <span data-tr="contact.copy">copy</span>
                         </span>
                     </button>
                 </div>
                 <div class="contact-links reveal">
-                    <a href="https://www.linkedin.com/in/samet-soysal/" target="_blank" class="contact-link-mini" data-magnetic>
+                    <a href="https://www.linkedin.com/in/samet-soysal/" target="_blank" rel="noopener noreferrer" class="contact-link-mini" data-magnetic>
                         <i class="fab fa-linkedin"></i>
                         <span>LinkedIn</span>
                         <span class="contact-link-handle">/in/samet-soysal</span>
                         <i class="fas fa-arrow-up-right-from-square contact-link-arrow"></i>
                     </a>
-                    <a href="https://github.com/last-26" target="_blank" class="contact-link-mini" data-magnetic>
+                    <a href="https://github.com/last-26" target="_blank" rel="noopener noreferrer" class="contact-link-mini" data-magnetic>
                         <i class="fab fa-github"></i>
                         <span>GitHub</span>
                         <span class="contact-link-handle">@last-26</span>
@@ -1201,7 +1203,7 @@
     <!-- Toast -->
     <div class="toast" id="toastNotification">
         <i class="fas fa-check-circle"></i>
-        <span data-tr="contact.email.copied">Email kopyalandı!</span>
+        <span data-tr="contact.email.copied">Email copied!</span>
     </div>
 
     <!-- Scroll to top -->
@@ -1209,6 +1211,6 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <script src="script.js?v=94"></script>
+    <script src="script.js?v=96"></script>
 </body>
 </html>

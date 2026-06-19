@@ -26,13 +26,18 @@ const firebaseConfig = {
   measurementId: "G-NJ781YMWZV"
 };
 
-// Initialize Firebase
-try {
-    firebase.initializeApp(firebaseConfig);
-} catch (error) {
-    console.warn('Firebase initialization error:', error);
+// Initialize Firebase. Analytics must never block the static portfolio UI.
+let database = null;
+if (window.firebase?.initializeApp) {
+    try {
+        window.firebase.initializeApp(firebaseConfig);
+        database = window.firebase.database?.() || null;
+    } catch (error) {
+        console.warn('Firebase initialization error:', error);
+    }
+} else {
+    console.warn('Firebase SDK unavailable; analytics disabled.');
 }
-const database = firebase.database?.();
 
 // Translations
 const translations = {
@@ -78,7 +83,7 @@ const translations = {
         "about.dossier.focus": "Odak",
         "about.dossier.focusVal": "RAG · Çok-model · MCP · Vector Search",
         "about.dossier.lang": "Diller",
-        "about.dossier.langVal": "Türkçe · İngilizce (C1)",
+        "about.dossier.langVal": "Türkçe · İngilizce (B2)",
         "about.dossier.status": "Durum",
         "about.dossier.statusVal": "Yeni fırsatlara açık",
         "about.stats.years": "Yıl Deneyim",
@@ -93,8 +98,8 @@ const translations = {
         "education.cert.title": "İngilizce Dil Okulları",
         "education.cert.school": "American Cultural Language Schools",
         "education.cert.date": "2022 - 2024",
-        "education.cert.detail": "Okuma, yazma, dinleme ve konuşma (Spoken Interaction & Production) alanlarında profesyonel yeterlilik eğitimi ve sertifika.",
-        "education.cert.c1.btn": "C1 Sertifikası",
+        "education.cert.detail": "Okuma, yazma, dinleme ve konuşma (Spoken Interaction & Production) alanlarında B2 düzeyinde İngilizce eğitimi ve sertifika.",
+        "education.cert.c1.btn": "Dil Sertifikası",
         "education.cert.b2.btn": "B2 Sertifikası",
         "education.track.label": "DÖNEM · YIL",
         "education.cert.label": "DOĞRULANMIŞ SERTİFİKALAR",
@@ -107,7 +112,7 @@ const translations = {
         "experience.status.done": "TAMAMLANDI",
         "experience.achievementsLabel": "ÖNEMLİ KAZANIMLAR",
         "experience.icictas.title": "Yazılım Geliştirme Stajyeri",
-        "experience.icictas.company": "<a href='https://www.ictasnukleer.com.tr' target='_blank' class='company-link'>IC İçtaş Nükleer ve Endüstriyel Tesisler İnşaat A.Ş.</a>",
+        "experience.icictas.company": "<a href='https://www.ictasnukleer.com.tr' target='_blank' rel='noopener noreferrer' class='company-link'>IC İçtaş Nükleer ve Endüstriyel Tesisler İnşaat A.Ş.</a>",
         "experience.icictas.date": "Oca 2026",
         "experience.icictas.desc": "Akkuyu Nükleer Santral sahasından gelen verileri analiz etmek için React.js, FastAPI ve PostgreSQL ile uçtan uca İSG Takip Paneli geliştirdim. Backend tarafında Passlib ve JWT ile güvenli kimlik doğrulama akışı kurdum, SQLAlchemy ORM ile veritabanı yönetimini optimize ettim. Yüksek kardinaliteli verilerde B-tree indeksleme uygulayarak sorgu performansını gözle görülür şekilde artırdım; Material UI ile yöneticiler için gerçek zamanlı analitik panolar tasarladım.",
         "experience.icictas.metrics.1": "Full-stack mimari",
@@ -118,7 +123,7 @@ const translations = {
         "experience.icictas.achievements.3": "SQLAlchemy ORM ile yazılmış sorgularda B-tree indeksleme uygulayarak performansı önemli ölçüde artırdım.",
         "experience.icictas.achievements.4": "Material UI ile yöneticiler için gerçek zamanlı analitik panolar tasarladım.",
         "experience.tei.title": "Data Science & AI Stajyeri",
-        "experience.tei.company": "<a href='https://www.tei.com.tr' target='_blank' class='company-link company-tei'>TEI – TUSAŞ Motor Sanayii A.Ş. | Eskişehir</a>",
+        "experience.tei.company": "<a href='https://www.tei.com.tr' target='_blank' rel='noopener noreferrer' class='company-link company-tei'>TEI – TUSAŞ Motor Sanayii A.Ş. | Eskişehir</a>",
         "experience.tei.date": "Ağu – Eyl 2025",
         "experience.tei.desc": "TEI'de izole ağlarda güvenli veri iletimi ve sistem mimarileri üzerine Ar-Ge yaptım. İnsan Kaynakları için LLM tabanlı 'SAMETEI' yapay zeka asistanının prototipini yönettim; OpenRouter ve yerel LLM entegrasyonlarını kurdum. Ayrıca n8n ile finansal metrikleri analiz eden otonom iş akışları ve Playwright ile e-ticaret süreçlerini otomatize eden RPA çözümleri geliştirdim.",
         "experience.tei.metrics.1": "Çoklu-LLM prototipi",
@@ -151,17 +156,17 @@ const translations = {
         "projects.badge.devops": "DEVOPS",
         "projects.badge.agent": "AI AJAN",
         "projects.badge.mlops": "MLOPS",
-        "projects.badge.rl": "RL / TRADING",
+        "projects.badge.rl": "BYBIT / TRADING",
         "projects.status.live": "Canlı",
         "projects.status.archive": "Arşiv",
         "projects.status.wip": "Aktif geliştirme",
         "projects.wip": "Şu an geliştiriliyor",
-        "projects.smtbot.subtitle": "Bybit V5 tabanlı özel araştırma sistemi",
+        "projects.smtbot.subtitle": "Özel trading sistemi mühendislik vitrini",
         "projects.smtbot.casebtn": "Vakayı oku",
         "projects.smtbot.reads": "okuma",
         "case.smtbot.h1": "showcase.",
         "case.smtbot.cover.problem": "Özel trading sistemi, herkese açık mühendislik vitrini. Bu sayfa strateji detayını değil; mimariyi, risk kontrollerini, kayıt/pano katmanını ve doğrulama yüzeyini gösterir.",
-        "case.smtbot.cover.status": "Bybit V5-native · 30 sembol x 6 TF · ~975 pytest vakası",
+        "case.smtbot.cover.status": "Bybit V5-native · 10 sembol x 4 TF · ~975 pytest vakası",
         "case.smtbot.stat1.k": "Döngü süresi",
         "case.smtbot.stat1.v": "~24 ms",
         "case.smtbot.stat2.k": "Tarama kapsamı",
@@ -220,24 +225,25 @@ const translations = {
         "case.smtbot.workflow.step4": "dry-run turu",
         "case.smtbot.workflow.step5": "pano izleme",
         "case.smtbot.back": "Portföye dön",
-        "projects.smtbot.description": "Bybit V5 üzerinde event-driven çalışan private research sistemi. Public showcase; mimariyi, veri hattını, RR/risk ve portföy kontrollerini, yürütme katmanını, SQLite kayıtlarını, FastAPI panoyu ve test yüzeyini gösterir. Karar çekirdeği, üretim parametreleri ve hesap kayıtları private repoda kalır.",
-        "projects.smtbot.metric": "~24 ms döngü · 30 sembol x 6 TF · ~975 pytest",
-        "projects.finsenti.subtitle": "Finansal Duygu Analizi MLOps Pipeline'ı",
-        "projects.finsenti.description": "Finansal metinlerde duygu analizi için uçtan uca bir MLOps pipeline'ı. FinBERT ve distilBERT modellerini LoRA adaptörleriyle fine-tune ediyor, deneyleri MLflow ile takip ediyor, tahminleri FastAPI + Next.js üzerinden sunuyor. FinBERT + LoRA modeli %91.1 doğruluk ve 0.90 F1 skoruna ulaştı.",
-        "projects.finsenti.metric": "%91.1 doğruluk · FinBERT + LoRA",
-        "projects.nexthire.subtitle": "AI Destekli İş Başvuru Ajanı",
-        "projects.nexthire.description": "LangGraph tabanlı, çok adımlı bir AI ajan sistemi. CV'yi yükle, iş ilanını yapıştır — ajan otomatik olarak ATS skorunu hesaplar, eksik yetkinlikleri belirler, kişiselleştirilmiş bir ön yazı üretir ve başvuruyu kanban panosuna ekler. Çoklu-model yönlendirmesi ile maliyet-performans dengesini kurar.",
-        "projects.nexthire.metric": "LangGraph · Çoklu-model yönlendirmesi",
-        "projects.awsai.subtitle": "AWS ile Akıllı Doküman Soru-Cevap Sistemi",
-        "projects.awsai.description": "Tamamen serverless doküman soru-cevap sistemi — PDF'ler S3'te, metin Textract'tan, doğal dilde cevaplar Bedrock üzerindeki Claude'dan geliyor. Tüm yığın Infrastructure as Code (CDK) ile yazıldı; AWS konsolunda değil, sürüm kontrolünde yaşıyor. API Gateway + Lambda + DynamoDB + SNS.",
-        "projects.swiftlink.subtitle": "Hızlı & Modern URL Kısaltma Servisi",
-        "projects.swiftlink.description": "FastAPI ile uçtan uca URL kısaltıcı — Docker ile konteynerize, GitHub Actions ile CI testleri. Tıklama analitiği, gerçek zamanlı istatistikler, özel slug. API'den panoya kadar tüm yığını ben yazdım.",
-        "projects.sametei.subtitle": "Kurum İçi Çalışan, RAG Tabanlı İK Asistanı",
-        "projects.sametei.description": "Dahili İK prosedürleri için LibreChat tabanlı bir asistan. MongoDB vektör arama, yerel Ollama LLM'leri ve Qwen 2.5-VL OCR'ı sunan bir FastAPI sidecar (Tesseract yedeği ile) üzerine kurulu bir RAG hattı, şirketin kendi politika ve doküman havuzundan kaynak göstererek cevap üretir — halüsinasyon yerine atıflı yanıtlar. OpenAI uyumlu katman, gerektiğinde host edilen modellere yönlendirme yapar; hassas İK verisi kurum ağının dışına çıkmaz. İK ekiplerinin doküman işleme süresini %70 azalttı.",
-        "projects.hireai.subtitle": "AI Destekli CV & Portföy Analiz Platformu",
-        "projects.hireai.description": "ATS tabanlı CV analizi ve optimizasyon platformu. CV'leri iş tanımlarına göre değerlendirir, ATS uyumlu puanlar ve iyileştirme önerileri sunar. İK ekiplerinin ön eleme süresini %50 azalttı.",
+        "projects.smtbot.description": "Private crypto futures araştırma sistemi için public mühendislik vitrini: Bybit V5 demo entegrasyonu, async veri akışı, SQLite kayıtları, FastAPI yüzeyi ve private strateji mantığı ile hesap verileri etrafında net bir sınır.",
+        "projects.smtbot.metric": "~24 ms döngü · 10 sembol x 4 TF · ~975 pytest",
+        "projects.finsenti.subtitle": "Finansal NLP MLOps pipeline'ı",
+        "projects.finsenti.description": "Finansal duygu analizi için uçtan uca MLOps pipeline'ı. FinBERT/distilBERT modellerini LoRA adaptörleriyle fine-tune eder, deneyleri MLflow ile takip eder ve batch/tekil tahminleri FastAPI ile Next.js dashboard üzerinden sunar.",
+        "projects.finsenti.metric": "%91.1 doğruluk · 0.8976 makro F1",
+        "projects.nexthire.subtitle": "LangGraph iş başvurusu ajanı",
+        "projects.nexthire.description": "İş başvuruları için agentic workflow: CV ve iş ilanını ayrıştırır, ATS uyumluluğunu puanlar, yetkinlik boşluklarını çıkarır, kişiselleştirilmiş ön yazı üretir ve başvuruyu pano üzerinde takip eder.",
+        "projects.nexthire.metric": "7 düğümlü LangGraph · Bedrock routing",
+        "projects.awsai.subtitle": "AWS üzerinde serverless PDF Q&A",
+        "projects.awsai.description": "Serverless PDF soru-cevap sistemi: S3 yükleme, Lambda/Textract metin çıkarımı, DynamoDB kayıtları ve Bedrock üzerinde Claude Haiku 4.5. Altyapı AWS CDK ile dağıtılır; frontend vanilla HTML/CSS/JS.",
+        "projects.swiftlink.subtitle": "Canlı istatistikli FastAPI URL kısaltıcı",
+        "projects.swiftlink.description": "FastAPI ile geliştirilmiş URL kısaltıcı: 6 karakterli kısa kodlar, tıklama takibi, 5 saniyede bir canlı istatistikler ve REST API. SQLite, Docker, pytest/ruff ve GitHub Actions CI ile paketlendi.",
+        "projects.sametei.subtitle": "LibreChat tabanlı kurum içi İK RAG asistanı",
+        "projects.sametei.description": "LibreChat tabanlı, kurum içi İK prosedürleri için RAG + OCR çalışma alanı. RAG akışı HR dokümanları üzerinde MongoDB vektör arama kullanır; OCR tarafı Qwen2.5-VL ile çalışır ve isteğe bağlı OpenRouter Vision/Tesseract fallback sunar. LibreChat uyumlu özel endpoint üzerinden kullanılabilir.",
+        "projects.hireai.subtitle": "BERT Tabanlı CV Analiz Platformu",
+        "projects.hireai.description": "CV metni veya dosyası üzerinden çalışan BERT tabanlı analiz platformu. Yazılım rol kategorisini tahmin eder, ATS skoru üretir; anahtar kelime, format ve okunabilirlik geri bildirimi verir. JWT kimlik doğrulama, REST/Swagger API ve React + Tailwind arayüz içerir.",
         "projects.link": "GitHub'da Görüntüle",
         "projects.link.gitlab": "GitLab'da Görüntüle",
+        "projects.link.live": "Canlı demo",
         "contact.title": "İletişim",
         "contact.eyebrow": "İLETİŞİME GEÇ",
         "contact.status": "Yeni işlere açığım",
@@ -330,7 +336,7 @@ const translations = {
         "about.dossier.focus": "Focus",
         "about.dossier.focusVal": "RAG · Multi-LLM · MCP · Vector Search",
         "about.dossier.lang": "Languages",
-        "about.dossier.langVal": "Turkish · English (C1)",
+        "about.dossier.langVal": "Turkish · English (B2)",
         "about.dossier.status": "Status",
         "about.dossier.statusVal": "Open to opportunities",
         "about.stats.years": "Years of Experience",
@@ -345,8 +351,8 @@ const translations = {
         "education.cert.title": "English Language Schools",
         "education.cert.school": "American Cultural Language Schools",
         "education.cert.date": "2022 - 2024",
-        "education.cert.detail": "Professional proficiency training and certification in reading, writing, listening, and spoken interaction/production.",
-        "education.cert.c1.btn": "C1 Certificate",
+        "education.cert.detail": "B2-level English training and certification in reading, writing, listening, and spoken interaction/production.",
+        "education.cert.c1.btn": "Language Certificate",
         "education.cert.b2.btn": "B2 Certificate",
         "education.track.label": "PERIOD · YEARS",
         "education.cert.label": "VERIFIED CERTIFICATES",
@@ -359,10 +365,10 @@ const translations = {
         "experience.status.done": "COMPLETED",
         "experience.achievementsLabel": "KEY ACHIEVEMENTS",
         "experience.icictas.title": "Software Development Intern",
-        "experience.icictas.company": "<a href='https://www.ictasnukleer.com.tr/en/' target='_blank' class='company-link'>IC Ictas Nuclear and Industrial Facilities Construction Inc.</a>",
+        "experience.icictas.company": "<a href='https://www.ictasnukleer.com.tr/en/' target='_blank' rel='noopener noreferrer' class='company-link'>IC Ictas Nuclear and Industrial Facilities Construction Inc.</a>",
         "experience.icictas.date": "Jan 2026",
         "experience.icictas.desc": "I developed an end-to-end OHS Tracking Panel using React.js, FastAPI, and PostgreSQL to analyze data from the Akkuyu Nuclear Power Plant site. I implemented secure authentication systems using Passlib and JWT on the backend, while optimizing database management with SQLAlchemy ORM. Additionally, I improved query performance by applying B-tree indexing strategies on high-cardinality data and designed real-time analytical dashboards for managers using Material UI.",
-        "experience.icictas.metrics.1": "Full-stack stack",
+        "experience.icictas.metrics.1": "Full-stack architecture",
         "experience.icictas.metrics.2": "Real-time dashboard",
         "experience.icictas.metrics.3": "B-tree indexed",
         "experience.icictas.achievements.1": "Built an end-to-end OHS Tracking Panel for the Akkuyu Nuclear site with React + FastAPI.",
@@ -370,7 +376,7 @@ const translations = {
         "experience.icictas.achievements.3": "Optimized SQLAlchemy ORM queries with B-tree indexing for substantial perf gains.",
         "experience.icictas.achievements.4": "Designed real-time analytical dashboards for managers with Material UI.",
         "experience.tei.title": "Data Science & AI Intern",
-        "experience.tei.company": "<a href='https://www.tei.com.tr/en' target='_blank' class='company-link company-tei'>TEI – TUSAS Engine Industries Inc. | Eskişehir, Türkiye</a>",
+        "experience.tei.company": "<a href='https://www.tei.com.tr/en' target='_blank' rel='noopener noreferrer' class='company-link company-tei'>TEI – TUSAS Engine Industries Inc. | Eskişehir, Türkiye</a>",
         "experience.tei.date": "Aug – Sep 2025",
         "experience.tei.desc": "I conducted R&D on secure data transmission and system architectures in isolated networks at TEI. I managed the prototyping process of 'SAMETEI', an LLM-based AI assistant for the HR department, integrating OpenRouter and Local LLMs. Furthermore, I developed autonomous workflows for financial metric analysis using n8n and created RPA solutions using Playwright to automate e-commerce processes.",
         "experience.tei.metrics.1": "Multi-LLM prototype",
@@ -386,7 +392,7 @@ const translations = {
         "experience.powintec.desc": "I built a management dashboard based on React.js, TailwindCSS, and WebSockets to monitor alignment, temperature, and efficiency data from wireless charging systems in real-time. I optimized state management to handle intense WebSocket data streams without compromising UI performance, ensuring low-latency data processing. I also improved system stability by developing error handling mechanisms against hardware connection drops.",
         "experience.powintec.metrics.1": "Wireless-charging UI",
         "experience.powintec.metrics.2": "WebSocket stream",
-        "experience.powintec.metrics.3": "< ms latency",
+        "experience.powintec.metrics.3": "< 1 ms latency",
         "experience.powintec.achievements.1": "Shipped a React + TailwindCSS + WebSocket dashboard for live wireless-charging telemetry.",
         "experience.powintec.achievements.2": "Optimized state management on high-frequency WebSocket traffic, eliminating UI jank.",
         "experience.powintec.achievements.3": "Hardened the app with error-handling mechanisms against hardware disconnects.",
@@ -403,17 +409,17 @@ const translations = {
         "projects.badge.devops": "DEVOPS",
         "projects.badge.agent": "AI AGENT",
         "projects.badge.mlops": "MLOPS",
-        "projects.badge.rl": "RL / TRADING",
+        "projects.badge.rl": "BYBIT / TRADING",
         "projects.status.live": "Live",
         "projects.status.archive": "Archive",
         "projects.status.wip": "In active development",
         "projects.wip": "Currently building",
-        "projects.smtbot.subtitle": "Bybit V5-native private research system",
+        "projects.smtbot.subtitle": "Private trading-system engineering showcase",
         "projects.smtbot.casebtn": "Read the case",
         "projects.smtbot.reads": "reads",
         "case.smtbot.h1": "showcase.",
         "case.smtbot.cover.problem": "Private trading system. Public engineering showcase. The page shows architecture, risk controls, journal/dashboard layers, and validation without exposing the decision core.",
-        "case.smtbot.cover.status": "Bybit V5-native · 30 symbols x 6 TFs · ~975 pytest cases",
+        "case.smtbot.cover.status": "Bybit V5-native · 10 symbols x 4 TFs · ~975 pytest cases",
         "case.smtbot.stat1.k": "Cycle time",
         "case.smtbot.stat1.v": "~24 ms",
         "case.smtbot.stat2.k": "Coverage",
@@ -472,24 +478,25 @@ const translations = {
         "case.smtbot.workflow.step4": "dry-run pass",
         "case.smtbot.workflow.step5": "dashboard watch",
         "case.smtbot.back": "Back to portfolio",
-        "projects.smtbot.description": "An event-driven private research system on Bybit V5. The public showcase presents the architecture, data plane, RR/risk and portfolio controls, execution layer, SQLite records, FastAPI dashboard, and test surface. The decision core, production parameters, and account records stay private.",
-        "projects.smtbot.metric": "~24 ms cycle · 30 symbols x 6 TFs · ~975 pytest",
-        "projects.finsenti.subtitle": "Financial Sentiment Analysis MLOps Pipeline",
-        "projects.finsenti.description": "End-to-end MLOps pipeline for financial sentiment analysis. Fine-tunes FinBERT and distilBERT with LoRA adapters, tracks experiments with MLflow, and serves predictions via FastAPI + Next.js. FinBERT + LoRA model achieved 91.1% accuracy and 0.90 F1 score.",
-        "projects.finsenti.metric": "91.1% accuracy · FinBERT + LoRA",
-        "projects.nexthire.subtitle": "AI-Powered Job Application Agent",
-        "projects.nexthire.description": "Multi-step AI agent system built with LangGraph. Upload your CV, paste a job posting — the agent automatically calculates ATS score, identifies skill gaps, generates a personalized cover letter, and adds the application to a kanban board. Optimizes cost-performance with multi-model routing.",
-        "projects.nexthire.metric": "LangGraph · Multi-model routing",
-        "projects.awsai.subtitle": "Intelligent Document Q&A System on AWS",
-        "projects.awsai.description": "Fully serverless document Q&A — PDFs in S3, text via Textract, Claude on Bedrock answers natural-language questions. The whole stack as Infrastructure as Code (CDK), living in version control instead of a console. API Gateway + Lambda + DynamoDB + SNS.",
-        "projects.swiftlink.subtitle": "Fast & Modern URL Shortener Service",
-        "projects.swiftlink.description": "End-to-end URL shortener built with FastAPI — Docker-containerized, CI-tested via GitHub Actions. Click analytics, real-time stats, custom slugs. Owned the whole stack from API to dashboard.",
-        "projects.sametei.subtitle": "On-Prem RAG Assistant for Enterprise HR",
-        "projects.sametei.description": "A LibreChat-based assistant for internal HR procedures. A RAG pipeline — MongoDB vector search, local Ollama LLMs, and a FastAPI sidecar serving Qwen 2.5-VL OCR with a Tesseract fallback — answers from the company's own policy and document corpus and returns cited sources instead of hallucinations. An OpenAI-compatible layer routes to hosted models when latency or quality calls for it; sensitive HR data never leaves the network. Cut HR teams' document handling time by 70%.",
-        "projects.hireai.subtitle": "AI-Powered CV & Portfolio Analysis Platform",
-        "projects.hireai.description": "ATS-based CV analysis and optimization platform. Analyzes CVs according to job descriptions and provides ATS-compliant scores and improvement suggestions. Reduced HR teams' pre-screening time by 50%.",
+        "projects.smtbot.description": "Public engineering showcase for a private crypto futures research system: Bybit V5 demo integration, async data flow, SQLite records, FastAPI surface, and a clear boundary around private strategy logic and account data.",
+        "projects.smtbot.metric": "~24 ms cycle · 10 symbols x 4 TFs · ~975 pytest",
+        "projects.finsenti.subtitle": "Financial NLP MLOps pipeline",
+        "projects.finsenti.description": "End-to-end MLOps pipeline for financial sentiment analysis. Fine-tunes FinBERT/distilBERT with LoRA adapters, tracks experiments with MLflow, and serves batch/single predictions through FastAPI and a Next.js dashboard.",
+        "projects.finsenti.metric": "91.1% accuracy · 0.8976 macro F1",
+        "projects.nexthire.subtitle": "LangGraph job-application agent",
+        "projects.nexthire.description": "Agentic workflow for job applications: parses CVs and job posts, scores ATS compatibility, surfaces skill gaps, generates a tailored cover letter, and tracks the application through a board.",
+        "projects.nexthire.metric": "7-node LangGraph · Bedrock routing",
+        "projects.awsai.subtitle": "Serverless PDF Q&A on AWS",
+        "projects.awsai.description": "Serverless PDF Q&A system: S3 uploads, Lambda/Textract extraction, DynamoDB records, and Claude Haiku 4.5 on Bedrock. Infrastructure is deployed with AWS CDK; the frontend is vanilla HTML/CSS/JS.",
+        "projects.swiftlink.subtitle": "FastAPI URL shortener with live stats",
+        "projects.swiftlink.description": "FastAPI URL shortener with 6-character short codes, click tracking, live stats polling every 5 seconds, and a REST API. Packaged with SQLite, Docker, pytest/ruff, and GitHub Actions CI.",
+        "projects.sametei.subtitle": "LibreChat-based internal HR RAG assistant",
+        "projects.sametei.description": "LibreChat-based RAG + OCR workspace for internal HR procedures. The RAG flow uses MongoDB vector search over HR documents; the OCR path uses Qwen2.5-VL with optional OpenRouter Vision/Tesseract fallback. Exposed through a LibreChat-compatible custom endpoint.",
+        "projects.hireai.subtitle": "BERT-Based CV Analysis Platform",
+        "projects.hireai.description": "BERT-based CV analysis platform for resume text or file uploads. Predicts the software-role category, calculates ATS scores, and returns keyword, format, and readability feedback. Includes JWT auth, REST/Swagger API, and a React + Tailwind frontend.",
         "projects.link": "View on GitHub",
         "projects.link.gitlab": "View on GitLab",
+        "projects.link.live": "Live demo",
         "contact.title": "Contact",
         "contact.eyebrow": "GET IN TOUCH",
         "contact.status": "Available for new work",
@@ -656,9 +663,15 @@ function updateLanguage(lang) {
     const swap = () => {
         document.querySelectorAll('[data-tr]').forEach(element => {
             const key = element.getAttribute('data-tr');
-            if (translations[lang] && translations[lang][key]) {
+            if (translations[lang] && Object.prototype.hasOwnProperty.call(translations[lang], key)) {
                 element.innerHTML = translations[lang][key];
             }
+        });
+        document.querySelectorAll('.card-expand-btn[aria-controls]').forEach(btn => {
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-label', expanded
+                ? (lang === 'tr' ? 'Proje detaylarını kapat' : 'Collapse project details')
+                : (lang === 'tr' ? 'Proje detaylarını aç' : 'Expand project details'));
         });
     };
     if (reduced){
@@ -725,6 +738,7 @@ const navScrollFn = () => {
 // Scroll progress bar
 const scrollProgressBar = document.getElementById('scrollProgress');
 const updateScrollProgress = () => {
+    if (!scrollProgressBar) return;
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     if (docHeight > 0) {
@@ -797,6 +811,18 @@ navScrollFn();
     document.querySelectorAll('.card-expand-btn').forEach(btn => {
         const desc = btn.parentElement.querySelector('.card-desc');
         if (!desc) return;
+        if (!desc.id) desc.id = `project-desc-${Math.random().toString(36).slice(2, 9)}`;
+        btn.setAttribute('aria-controls', desc.id);
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', currentLang === 'tr' ? 'Proje detaylarını aç' : 'Expand project details');
+        const setExpanded = (expanded) => {
+            desc.classList.toggle('expanded', expanded);
+            btn.classList.toggle('active', expanded);
+            btn.setAttribute('aria-expanded', String(expanded));
+            btn.setAttribute('aria-label', expanded
+                ? (currentLang === 'tr' ? 'Proje detaylarını kapat' : 'Collapse project details')
+                : (currentLang === 'tr' ? 'Proje detaylarını aç' : 'Expand project details'));
+        };
         // Hide button if text isn't clamped
         requestAnimationFrame(() => {
             if (desc.scrollHeight <= desc.clientHeight + 2) {
@@ -805,8 +831,7 @@ navScrollFn();
         });
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
-            const expanded = desc.classList.toggle('expanded');
-            btn.classList.toggle('active', expanded);
+            setExpanded(!desc.classList.contains('expanded'));
         });
     });
 })();
@@ -825,6 +850,12 @@ navScrollFn();
     const rCtx = rCanvas ? rCanvas.getContext('2d') : null;
     const isMobile = window.innerWidth < 768;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) {
+        cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
+        lCtx.clearRect(0, 0, lCanvas.width, lCanvas.height);
+        if (rCanvas && rCtx) rCtx.clearRect(0, 0, rCanvas.width, rCanvas.height);
+        return;
+    }
 
     // --- Shared Config ---
     const COLORS_DARK = [
@@ -1484,11 +1515,12 @@ navScrollFn();
         window.addEventListener('resize', seedAllDrops);
 
         function drawRain(){
+            const light = isLight();
             if (!rCanvas.width || !rCanvas.height) {
                 requestAnimationFrame(drawRain); return;
             }
             // Light mode is the calm theme — clear the canvas and skip the storm
-            if (isLight()) {
+            if (light) {
                 rCtx.clearRect(0, 0, rCanvas.width, rCanvas.height);
                 requestAnimationFrame(drawRain);
                 return;
@@ -1606,9 +1638,8 @@ if (particlesContainer) {
 function initCVTracking() {
     const cvViewBtn = document.getElementById('cvViewBtn');
     const cvDownloadBtn = document.getElementById('cvDownloadBtn');
-    
+
     if (!cvViewBtn || !cvDownloadBtn) {
-        console.warn('❌ CV buttons not found');
         return;
     }
     
@@ -1619,8 +1650,10 @@ function initCVTracking() {
 
         console.log('🔵 CV View button clicked, language:', currentLang);
 
-        await trackCVAction('view', currentLang);
         openCVModal(cvFile, currentLang);
+        trackCVAction('view', currentLang).catch((error) => {
+            console.warn('CV view tracking failed:', error);
+        });
     });
     
     cvDownloadBtn.addEventListener('click', async (e) => {
@@ -1630,16 +1663,17 @@ function initCVTracking() {
         
         console.log('🔵 CV Download button clicked, language:', currentLang);
         
-        // Track the action
-        await trackCVAction('download', currentLang);
-        
-        // Trigger download after tracking
+        // Trigger download immediately; analytics runs best-effort.
         const link = document.createElement('a');
         link.href = cvFile;
         link.download = downloadName;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+
+        trackCVAction('download', currentLang).catch((error) => {
+            console.warn('CV download tracking failed:', error);
+        });
     });
     
     console.log('✅ CV tracking initialized successfully');
@@ -1650,7 +1684,7 @@ async function trackCVAction(action, language) {
     
     // Check if Firebase is available
     if (!database) {
-        console.error('❌ Firebase database not available, CV action not tracked');
+        console.warn('Firebase database not available, CV action not tracked');
         return;
     }
     console.log('✅ Firebase database is available');
@@ -1683,7 +1717,7 @@ async function trackCVAction(action, language) {
         console.log('📝 Writing user action to: cv_analytics/users/' + visitorId + '/' + cvKey);
         const userActionRef = database.ref(`cv_analytics/users/${visitorId}/${cvKey}`);
         const actionData = {
-            timestamp: firebase.database.ServerValue.TIMESTAMP,
+            timestamp: window.firebase.database.ServerValue.TIMESTAMP,
             localTimeString: new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' }), // Added readable UTC+3 timestamp
             action: action,
             language: language,
@@ -1726,6 +1760,7 @@ window.openCVModal = function(cvFile, lang) {
     modal.classList.add('show');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    if (typeof modalA11y !== 'undefined') modalA11y.activate(modal);
     if (!_cvModalEscBound) {
         document.addEventListener('keydown', _cvModalEscHandler);
         _cvModalEscBound = true;
@@ -1738,6 +1773,7 @@ window.closeCVModal = function() {
     modal.classList.remove('show');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    if (typeof modalA11y !== 'undefined' && modalA11y.isActive()) modalA11y.deactivate(modal);
     // Stop loading the PDF when closed (releases memory)
     if (frame) frame.src = 'about:blank';
     if (_cvModalEscBound) {
@@ -1847,7 +1883,7 @@ async function initVisitorCounter() {
         const dailyRef = database.ref(`visitors/daily/${today}/${visitorId}`);
         const hasVisitedToday = await hasVisitorForDate(today, visitorId);
         const dailyVisitorData = {
-            timestamp: firebase.database.ServerValue.TIMESTAMP,
+            timestamp: window.firebase.database.ServerValue.TIMESTAMP,
             localTimeString: new Date().toLocaleString('tr-TR', { timeZone: VISITOR_STATS_TIME_ZONE }),
             userAgent: navigator.userAgent,
             language: navigator.language
@@ -1912,7 +1948,8 @@ function markVisitorChipOffline(){
 // ============================================
 async function initProjectCounters() {
     const projectCards = document.querySelectorAll('.project-card');
-    
+    const analyticsAvailable = !!database;
+
     projectCards.forEach((card, index) => {
         const titleElement = card.querySelector('h3');
         if (!titleElement) return;
@@ -1931,14 +1968,19 @@ async function initProjectCounters() {
         badge.className = 'project-click-badge';
         badge.innerHTML = '<i class="fas fa-eye"></i> <span class="click-count">0</span>';
         badgeHost.appendChild(badge);
-        
-        // Initialize project counter in Firebase
-        initProjectCounter(projectId, badge);
-        
+
+        if (analyticsAvailable) {
+            initProjectCounter(projectId, badge);
+        } else {
+            const countSpan = badge.querySelector('.click-count');
+            if (countSpan) countSpan.textContent = '--';
+        }
+
         // Track clicks on project links
         const projectLinks = card.querySelectorAll('.project-link, a[href*="github"], a[href*="gitlab"]');
         projectLinks.forEach(link => {
             link.addEventListener('click', async (e) => {
+                if (!analyticsAvailable) return;
                 await incrementProjectCounter(projectId, badge);
             });
         });
@@ -1949,7 +1991,7 @@ async function initProjectCounter(projectId, badge) {
     try {
         // Check if Firebase is available
         if (!database) {
-            console.error('Firebase not available');
+            console.warn('Firebase not available');
             const countSpan = badge.querySelector('.click-count');
             countSpan.textContent = '--';
             return;
@@ -1978,7 +2020,7 @@ async function incrementProjectCounter(projectId, badge) {
     try {
         // Check if Firebase is available
         if (!database) {
-            console.error('Firebase not available');
+            console.warn('Firebase not available');
             return;
         }
 
@@ -2119,7 +2161,7 @@ async function trackUserBehavior() {
 
         const behaviorData = {
             firstVisit: firstVisitTime,
-            lastVisit: firebase.database.ServerValue.TIMESTAMP,
+            lastVisit: window.firebase.database.ServerValue.TIMESTAMP,
             lastVisitReadable: new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' }), // Added readable UTC+3 timestamp
             pageViews: (parseInt(localStorage.getItem('pageViews')) || 0) + 1,
             screenResolution: `${screen.width}x${screen.height}`,
@@ -2164,7 +2206,7 @@ async function trackSectionView(sectionName) {
 
         const sectionRef = database.ref(`analytics/sections/${sectionName}/${visitorId}`);
         await sectionRef.set({
-            timestamp: firebase.database.ServerValue.TIMESTAMP,
+            timestamp: window.firebase.database.ServerValue.TIMESTAMP,
             duration: 0
         });
 
@@ -2255,7 +2297,7 @@ function showAdminDashboard() {
 
 async function loadAdminStats() {
     if (!database) {
-        console.error('Firebase not available');
+        console.warn('Firebase not available');
         return;
     }
 
@@ -2325,13 +2367,7 @@ function hideAdminDashboard() {
 // ============================================
 window.copyEmail = function() {
     const email = 'a.sametsoysal@gmail.com';
-    
-    // Copy to clipboard
-    navigator.clipboard.writeText(email).then(() => {
-        showToast();
-    }).catch(err => {
-        console.error('Email kopyalanamadı:', err);
-        // Fallback for older browsers
+    const fallbackCopy = () => {
         const textArea = document.createElement('textarea');
         textArea.value = email;
         textArea.style.position = 'fixed';
@@ -2345,6 +2381,19 @@ window.copyEmail = function() {
             console.error('Fallback copy failed:', err);
         }
         document.body.removeChild(textArea);
+    };
+
+    if (!navigator.clipboard?.writeText) {
+        fallbackCopy();
+        return;
+    }
+
+    // Copy to clipboard
+    navigator.clipboard.writeText(email).then(() => {
+        showToast();
+    }).catch(err => {
+        console.error('Email kopyalanamadı:', err);
+        fallbackCopy();
     });
 }
 
@@ -2387,6 +2436,7 @@ let lastScroll = 0;
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     const nav = document.querySelector('nav');
+    if (!nav) return;
     
     if (currentScroll > lastScroll && currentScroll > 100) {
         nav.style.transform = 'translateY(-100%)';
@@ -2399,22 +2449,33 @@ window.addEventListener('scroll', () => {
 // ============================================
 // INITIALIZE ON DOM READY
 // ============================================
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
     // Kick off page-load stagger on next frame
     requestAnimationFrame(() => document.body.classList.add('is-loaded'));
-
-    // Initialize all tracking systems
-    await initVisitorCounter();
-    await initProjectCounters();
-    await initCaseReadCounters();
-    await trackUserBehavior();
-    initAdminDashboard();
 
     // Initialize certificate button
     initCertificateButton();
 
     // Initialize CV tracking buttons
     initCVTracking();
+
+    initAdminDashboard();
+
+    // Initialize tracking without delaying UI handlers.
+    const analyticsTasks = [
+        initVisitorCounter,
+        initProjectCounters,
+        initCaseReadCounters,
+        trackUserBehavior
+    ].map((task) => Promise.resolve().then(task));
+
+    Promise.allSettled(analyticsTasks).then((results) => {
+        results.forEach((result) => {
+            if (result.status === 'rejected') {
+                console.warn('Analytics task failed:', result.reason);
+            }
+        });
+    });
 });
 
 // Add pulse animation to CSS if not exists
@@ -2901,10 +2962,33 @@ window.closeCertificate = closeCertificateModal;
         } catch (e) { /* silent */ }
     }
 
-    drawChart();
-    drawTicker();
-    setInterval(drawChart, 20_000);
-    setInterval(drawTicker, 5_000);
+    let chartTimer = null;
+    let tickerTimer = null;
+
+    function stopPolling(){
+        if (chartTimer) clearInterval(chartTimer);
+        if (tickerTimer) clearInterval(tickerTimer);
+        chartTimer = null;
+        tickerTimer = null;
+    }
+
+    function startPolling(){
+        if (document.hidden || chartTimer || tickerTimer) return;
+        drawChart();
+        drawTicker();
+        chartTimer = setInterval(drawChart, 20_000);
+        tickerTimer = setInterval(drawTicker, 5_000);
+    }
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            stopPolling();
+        } else {
+            startPolling();
+        }
+    });
+
+    startPolling();
 })();
 
 /* Profile photo — block drag, right-click and selection (best-effort copy protection) */
